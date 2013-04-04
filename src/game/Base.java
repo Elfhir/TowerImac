@@ -1,5 +1,7 @@
 package game;
 
+import java.util.LinkedList;
+
 import javax.vecmath.Vector2f;
 
 public class Base implements situable{
@@ -9,6 +11,8 @@ public class Base implements situable{
 	private int mDiameter;
 	private Player mPlayer;
 	private Vector2f mPosition;
+	
+	private LinkedList<Agent> agents;
 	
 	public int getSize() {
 		return mSize;
@@ -47,6 +51,14 @@ public class Base implements situable{
 		mPosition.y = y;
 	}
 	
+	public LinkedList<Agent> getAgents() {
+		return agents;
+	}
+
+	public void setAgents(LinkedList<Agent> agents) {
+		this.agents = agents;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("");
