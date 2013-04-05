@@ -6,25 +6,25 @@ import java.util.LinkedList;
 
 public class Game {
 	
-	private ArrayList<Player> mPlayers;
-	private ArrayList<Base> mBases;
+	private ArrayList<Player> players;
+	private ArrayList<Base> bases;
 	//private Map map;
-	//private LinkedList<Tower> mTowers;
-	private LinkedList<Agent> mAgents;
+	//private LinkedList<Tower> towers;
+	private LinkedList<Agent> agents;
 	
 	
 	public Game() {
 		super();
-		mPlayers = new ArrayList<Player>();
-		mBases = new ArrayList<Base>();
-		mAgents = new LinkedList<Agent>();
+		this.players = new ArrayList<Player>();
+		this.bases = new ArrayList<Base>();
+		this.agents = new LinkedList<Agent>();
 	}
 	
-	public Game(ArrayList<Player> mPlayers, ArrayList<Base> mBases, LinkedList<Agent> mAgents) {
+	public Game(ArrayList<Player> players, ArrayList<Base> bases, LinkedList<Agent> agents) {
 		super();
-		this.mPlayers = mPlayers;
-		this.mBases = mBases;
-		this.mAgents = mAgents;
+		this.players = players;
+		this.bases = bases;
+		this.agents = agents;
 	}
 
 	// Constructor from a file
