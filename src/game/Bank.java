@@ -2,23 +2,23 @@ package game;
 
 public class Bank {
 	
-	private int mMoney;
+	private int money;
 	
 
 	public int getMoney() {
-		return mMoney;
+		return money;
 	}
 
 	public void setMoney(int money) {
-		this.mMoney = money;
+		this.money = money;
 	}
 
 	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("");
-		sb.append("mMoney ");
-		sb.append(this.mMoney);
+		sb.append("money ");
+		sb.append(this.money);
 		sb.append("\n");
 		return sb.toString();
 	}
@@ -26,7 +26,7 @@ public class Bank {
 	// ---------------------------------------ctor--------------------------
 	public Bank(int money) {
 		super();
-		mMoney = money;
+		this.money = money;
 	}
 
 	public static void main(String[] args) {

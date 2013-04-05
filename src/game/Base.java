@@ -6,25 +6,25 @@ import javax.vecmath.Vector2f;
 
 public class Base implements situable{
 	
-	private int mSize;
+	private int size;
 	private static int MAX_SIZE;
-	private int mDiameter;
-	private Player mPlayer;
-	private Vector2f mPosition;
+	private int diameter;
+	private Player player;
+	private Vector2f position;
 	
 	private LinkedList<Agent> agents;
 	
 	public int getSize() {
-		return mSize;
+		return size;
 	}
 	
 	public int getDiameter() {
-		return mDiameter;
+		return diameter;
 	}
 	
 	public Player getPlayer() {
 		if(hasPlayer()) {
-			return mPlayer;
+			return player;
 		}
 		else return null;
 	}
@@ -34,7 +34,7 @@ public class Base implements situable{
 	}
 	
 	public boolean hasPlayer() {
-		if (mPlayer != null) {
+		if (player != null) {
 			return true;
 		}
 		else return false;
@@ -42,13 +42,13 @@ public class Base implements situable{
 	
 	@Override
 	public Vector2f getPosition() {
-		return mPosition;
+		return position;
 	}
 
 	@Override
 	public void setPosition(float x, float y) {
-		mPosition.x = x;
-		mPosition.y = y;
+		position.x = x;
+		position.y = y;
 	}
 	
 	public LinkedList<Agent> getAgents() {
@@ -58,24 +58,39 @@ public class Base implements situable{
 	public void setAgents(LinkedList<Agent> agents) {
 		this.agents = agents;
 	}
+	
+	
+	public void attackBase(Base enemy){
+		System.out.println("Attack !\n");
+		for(Agent it : this.agents) {
+			for(Agent jt : enemy.agents) {
+				it.attackAgent(jt);
+				System.out.println("enemy "+ String.valueOf(jt) +" last PV : "+jt.getPV()+"\n");
+				if(jt.getPV() == 0) break;
+			}
+		}
+	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("");
-		sb.append("mSize ");
-		sb.append(this.mSize);
+		sb.append("size ");
+		sb.append(this.size);
 		sb.append("\n");
 		sb.append("MAX_SIZE: ");
 		sb.append(Base.MAX_SIZE);
 		sb.append("\n");
-		sb.append("mDiameter: ");
-		sb.append(this.mDiameter);
+		sb.append("diameter: ");
+		sb.append(this.diameter);
 		sb.append("\n");
-		sb.append("mPlayer: ");
-		sb.append(this.mPlayer);
+		sb.append("player: ");
+		sb.append(this.player);
 		sb.append("\n");
-		sb.append("mPosition: ");
-		sb.append(this.mPosition);
+		sb.append("position: ");
+		sb.append(this.position);
+		sb.append("\n");
+		sb.append("agents: ");
+		sb.append(this.agents.size());
 		sb.append("\n");
 		return sb.toString();
 	}
@@ -83,29 +98,56 @@ public class Base implements situable{
 	
 	public Base(int size, int diameter){
 		super();
-		mSize = size;
-		mDiameter = diameter;
-		mPlayer = null;
+		this.size = size;
+		this.diameter = diameter;
+		player = null;
 	}
 	
 	public Base(int size, int diameter, Player player){
 		super();
-		mSize = size;
-		mDiameter = diameter;
-		mPlayer = player;
+		this.size = size;
+		this.diameter = diameter;
+		this.player = player;
 	}
 	
 	public Base(int size, int diameter, Player player, Vector2f position){
 		super();
-		mSize = size;
-		mDiameter = diameter;
-		mPlayer = player;
-		mPosition = position;
+		this.size = size;
+		this.diameter = diameter;
+		this.player = player;
+		this.position = position;
+	}
+	
+	public Base(int size, int diameter, Player player, Vector2f position, Agent agent, int nbAgent){
+		super();
+		this.size = size;
+		this.diameter = diameter;
+		this.player = player;
+		this.position = position;
+		this.agents = new LinkedList<Agent>();
+		
+		// No ctor LinkedList with a number of entities WTF? So this it :
+		for(int i = 0; i<nbAgent; ++i){
+			agents.add(agent);
+		}
+		
 	}
 	
 	public static void main(String[] args) {
-		//Base base = new Base(5, 5, null, new Vector2f(0.5f, 0.5f));
-		//System.out.println(base);
+		
+		Agent strongAgent = new Agent(10, 10, 10, 10, null, null);
+		Agent weakAgent = new Agent(5, 5, 5, 5, null, null);
+		
+		Base base1 = new Base(5, 5, null, new Vector2f(0.5f, 0.5f), strongAgent, 5);
+		System.out.println(base1);
+		
+		Base base2 = new Base(5, 5, null, new Vector2f(-0.5f, -0.5f), weakAgent, 5);
+		
+		
+		
+		
+		base2.attackBase(base1);
+		
 
 	}
 
