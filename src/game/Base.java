@@ -1,10 +1,10 @@
 package game;
 
+import java.util.Iterator;
 import java.util.LinkedList;
-
 import javax.vecmath.Vector2f;
 
-public class Base implements situable{
+public class Base implements situable, Iterable<Agent>{
 	
 	private int size;
 	private static int MAX_SIZE;
@@ -32,7 +32,7 @@ public class Base implements situable{
 	public int getMaxSize() {
 		return Base.MAX_SIZE;
 	}
-	
+		
 	public boolean hasPlayer() {
 		if (player != null) {
 			return true;
@@ -51,26 +51,48 @@ public class Base implements situable{
 		position.y = y;
 	}
 	
-	public LinkedList<Agent> getAgents() {
-		return agents;
-	}
-
 	public void setAgents(LinkedList<Agent> agents) {
 		this.agents = agents;
 	}
 	
+	public LinkedList<Agent> getAgents() {
+		return this.agents;
+	}
+	
+	public Agent getAgent(int index) {
+		return agents.get(index);
+	}
+	
+	@Override
+	public Iterator<Agent> iterator() {
+		return agents.iterator();
+	}
 	
 	public void attackBase(Base enemy){
 		System.out.println("Attack !\n");
+		
 		for(Agent it : this.agents) {
+			if(it.getPV() == 0) continue;
 			for(Agent jt : enemy.agents) {
+				if(it.getPV() == 0 || jt.getPV() == 0) break;
 				it.attackAgent(jt);
-				System.out.println("enemy "+ String.valueOf(jt) +" last PV : "+jt.getPV()+"\n");
-				if(jt.getPV() == 0) break;
+				jt.attackAgent(it);
 			}
 		}
 	}
-
+	
+	public boolean generateAgent(Agent e) {
+		if(this.hasPlayer()) {
+			
+			// timer, timertask ?
+			// need to use also size of Base
+			this.getAgents().add(e);
+			
+			return true;
+		}
+		else return false;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("");
@@ -136,21 +158,18 @@ public class Base implements situable{
 	public static void main(String[] args) {
 		
 		Agent strongAgent = new Agent(10, 10, 10, 10, null, null);
-		Agent weakAgent = new Agent(5, 5, 5, 5, null, null);
+		Agent weakAgent = new Agent(5, 7, 5, 5, null, null);
 		
 		Base base1 = new Base(5, 5, null, new Vector2f(0.5f, 0.5f), strongAgent, 5);
-		System.out.println(base1);
+		//System.out.println(base1);
 		
 		Base base2 = new Base(5, 5, null, new Vector2f(-0.5f, -0.5f), weakAgent, 5);
+		//System.out.println(base2);
 		
 		
-		
-		
+		// If one attacks, the other defences also !
 		base2.attackBase(base1);
 		
-
 	}
-
-
 
 }

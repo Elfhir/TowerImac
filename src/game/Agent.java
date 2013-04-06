@@ -62,18 +62,48 @@ public class Agent implements situable{
 	}
 	
 	public void attackAgent(Agent enemy) {
-		// PV > 0 and it should be strength > stamina to make damage
+		// If strength > stamina just a diff, else only 1 damage.
 		int damage;
 		if(!(enemy.stamina > this.strength)) damage = Math.abs(this.strength - enemy.stamina);
 		else damage = 1;
 		
-		if(!(enemy.PV < 0)) {
+		// Compute damages inflicted to PV only if agents last PV.
+		if(enemy.PV <= 0) {
+			System.out.println("enemy agent is dead");
+		}
+		if(this.PV <= 0) {
+			System.out.println("our agent is dead");
+		}
+		
+		if(!((enemy.PV <= 0) || (this.PV <= 0)) ){	
 			enemy.PV = enemy.PV - damage;
 			if(enemy.PV < 0) enemy.PV = 0;
-			
+			System.out.println("fight");
 		}
 	}
 	
+	public String printPV () {
+		StringBuilder sb = new StringBuilder("");
+		sb.append("has "+this.PV+" PV");
+		return sb.toString();
+	}
+	
+	public void moveTo(Vector2f dest) {
+		this.setPosition(dest.x, dest.y);
+	}
+	
+	public boolean move(Vector2f from, Vector2f to, String how) {
+		if(how == "straight") {
+			
+			//float distance = (float) Math.sqrt((to.x-from.x)*(to.x-from.x) + (to.y - from.y)*(to.y-from.y));
+			
+			//timer, timertask ?
+			
+			this.moveTo(to);
+			return true;
+		}
+		else return false;
+	}
 	
 	@Override
 	public String toString() {
