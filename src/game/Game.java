@@ -5,25 +5,53 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import manager.AgentManager;
+import manager.BaseManager;
+import manager.PlayerManager;
+import manager.TowerManager;
+
 /*
- *  SINGLETON : technique du Holder, fonctionne en environnement multithreadé, sans nécessiter de synchronisation explicite.
+ *  SINGLETON : Holder technical, Singleton pattern implementation in a multithreaded environment (without explicit synchronization)
  *  cf http://thecodersbreakfast.net/index.php?post/2008/02/25/26-de-la-bonne-implementation-du-singleton-en-java 
  */
 
 public class Game {
 	
-	private ArrayList<Player> players;
-	private ArrayList<Base> bases;
+	private PlayerManager playerManager;
+	private BaseManager baseManager;
+	private AgentManager agentManager;
+	private TowerManager towerManager;
 	//private Map map;
-	//private LinkedList<Tower> towers;
-	private LinkedList<Agent> agents;
 	
-	// Constructeur : privé !
+	
+	/*
+	 *   Getters
+	 */
+	public ArrayList<Player> getPlayers() {
+		return this.playerManager.getPlayers();
+	}
+	
+	public ArrayList<Base> getBases() {
+		return this.baseManager.getBases();
+	}
+	
+	public LinkedList<Agent> getAgents() {
+		return this.agentManager.getAgents();
+	}
+	
+	public LinkedList<Tower> getTowers() {
+		return this.towerManager.getTowers();
+	}
+	
+	/*
+	 *   Private constructor (Singleton)
+	 */
 	private Game() {
 		super();
-		this.players = new ArrayList<Player>();
-		this.bases = new ArrayList<Base>();
-		this.agents = new LinkedList<Agent>();
+		this.playerManager = new PlayerManager();
+		this.baseManager = new BaseManager();
+		this.agentManager = new AgentManager();
+		this.towerManager = new TowerManager();
 	}
 	
 	public void initGame(InputStream input) {
@@ -34,14 +62,16 @@ public class Game {
 //		this.agents = 
 	}
 	
-	/** Holder */
+	/* 
+	 * Holder class : for the Singleton pattern implementation
+	 */
 	private static class GameHolder
 	{		
-		/** Instance unique non préinitialisée */
+		// unique instance, not preinitialized
 		private final static Game instance = new Game();
 	}
  
-	/** Point d'accès pour l'instance unique du singleton */
+	// Getter for the unique instance of the Singleton
 	public static Game getInstance()
 	{
 		return GameHolder.instance;
