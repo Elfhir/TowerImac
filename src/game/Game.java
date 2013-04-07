@@ -43,6 +43,40 @@ public class Game {
 		return this.towerManager.getTowers();
 	}
 	
+	
+	
+	public PlayerManager getPlayerManager() {
+		return playerManager;
+	}
+
+	public void setPlayerManager(PlayerManager playerManager) {
+		this.playerManager = playerManager;
+	}
+
+	public BaseManager getBaseManager() {
+		return baseManager;
+	}
+
+	public void setBaseManager(BaseManager baseManager) {
+		this.baseManager = baseManager;
+	}
+
+	public AgentManager getAgentManager() {
+		return agentManager;
+	}
+
+	public void setAgentManager(AgentManager agentManager) {
+		this.agentManager = agentManager;
+	}
+
+	public TowerManager getTowerManager() {
+		return towerManager;
+	}
+
+	public void setTowerManager(TowerManager towerManager) {
+		this.towerManager = towerManager;
+	}
+
 	/*
 	 *   Private constructor (Singleton)
 	 */
@@ -77,8 +111,34 @@ public class Game {
 		return GameHolder.instance;
 	}
 		
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder("");
+		sb.append("Game : \n");
+		sb.append(playerManager);
+		sb.append("\n");
+		sb.append(baseManager);
+		sb.append("\n");
+		sb.append(agentManager);
+		sb.append("\n");
+		sb.append(towerManager);
+		sb.append("\n");
+		return sb.toString();
+	}
+
 	public static void main(String[] args) {
+		Game game = Game.getInstance();
 		
+		Bank bank1 = new Bank(10);
+		Player p1 = new Player("Jean-Marc", bank1);
+		
+		Bank bank2 = new Bank(12);
+		Player p2 = new Player("Jean-Gui", bank2);
+		
+		game.getPlayerManager().addPlayer(p1);
+		game.getPlayerManager().addPlayer(p2);
+		
+		System.out.println(game);
 	}
 	
 	

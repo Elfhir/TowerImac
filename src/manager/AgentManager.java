@@ -1,7 +1,9 @@
 package manager;
 
 import game.Agent;
+import game.Player;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class AgentManager {
@@ -11,5 +13,13 @@ public class AgentManager {
 		return agents;
 	}
 
+	@Override
+	public String toString() {
+		return "agents=" + agents;
+	}
+	
+	public AgentManager() {
+		this.agents = new LinkedList<Agent>();
+	}
 
 }
