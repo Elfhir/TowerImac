@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class AppliWindow extends JFrame {
 	
+	JButton bouton1;
+	JButton bouton2;
 	
 	public AppliWindow(String title){
 		super();
@@ -39,7 +41,7 @@ public class AppliWindow extends JFrame {
 		JLabel label = new JLabel("-- Sprint 1 : Mini-NanoWar --");
 		panel.add(label);
 		
-		JButton bouton1 = new JButton("Base 1");
+		bouton1 = new JButton("Base 1");
 		bouton1.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -49,7 +51,7 @@ public class AppliWindow extends JFrame {
 		panel.add(bouton1);
 		
 		
-		JButton bouton2 = new JButton("Base 2");
+		bouton2 = new JButton("Base 2");
 		bouton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Base 2 Selectionnée !\n");
