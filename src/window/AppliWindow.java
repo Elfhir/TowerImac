@@ -4,7 +4,12 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -42,23 +47,38 @@ public class AppliWindow extends JFrame {
 		panel.add(label);
 		
 		bouton1 = new JButton("Base 1");
+		bouton1.setBorder(BorderFactory.createEmptyBorder());
+		bouton1.setContentAreaFilled(false);
+		try
+	    {
+	        bouton1.setIcon(new ImageIcon(ImageIO.read(new File("src/window/cercle2.png"))));
+	    }
+		catch (IOException e1)
+	    {
+	    }
 		bouton1.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Base 1 Selectionnée !\n");
 			}
 		});
 		panel.add(bouton1);
 		
-		
 		bouton2 = new JButton("Base 2");
+		bouton2.setBorder(BorderFactory.createEmptyBorder());
+		bouton2.setContentAreaFilled(false);
+		try
+	    {
+	        bouton2.setIcon(new ImageIcon(ImageIO.read(new File("src/window/cercle2.png"))));
+	    }
+		catch (IOException e2)
+	    {
+	    }
 		bouton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Base 2 Selectionnée !\n");
 			}
 		});
 		panel.add(bouton2);
-		
 		
 		return panel;
 	}
