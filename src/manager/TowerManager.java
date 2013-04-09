@@ -1,9 +1,7 @@
 package manager;
 
-import game.Player;
 import game.Tower;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class TowerManager {

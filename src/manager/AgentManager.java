@@ -1,9 +1,7 @@
 package manager;
 
 import game.Agent;
-import game.Player;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class AgentManager {

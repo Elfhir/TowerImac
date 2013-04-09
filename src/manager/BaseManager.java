@@ -1,7 +1,6 @@
 package manager;
 
 import game.Base;
-import game.Player;
 
 import java.util.ArrayList;
 
