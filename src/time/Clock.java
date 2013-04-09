@@ -39,7 +39,12 @@ public class Clock implements Timerable {
 	// -------------------------------------------- clock running ---------------
 	
 	public void timeChange() {
-		
+		this.integrityTime();
+		this.setSeconds(this.getSeconds()+1);
+		this.integrityTime();
+	}
+	
+	public void integrityTime() {
 		if(this.getHour() == 24) {
 			this.setHour(0);
 		}
@@ -51,9 +56,6 @@ public class Clock implements Timerable {
 			this.setSeconds(0);
 			this.setMinutes(this.getMinutes()+1);
 		}
-		
-		this.setSeconds(this.getSeconds()+1);
-
 	}
 
 	//---------------------------------------------------------ctor-------------
@@ -85,11 +87,16 @@ public class Clock implements Timerable {
 		System.out.println(this);
 	}
 	
-	/**
-	 * @param args
-	 */
+
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		Clock test = new Clock(0,0,0);
+		
+		for(int i = 0; i<65; ++i) {
+			test.timeChange();
+			System.out.println(test);
+		}
+		
 
 	}
 }
