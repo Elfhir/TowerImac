@@ -90,6 +90,9 @@ public class Clock implements Timerable {
 
 	public static void main(String[] args) {
 		
+		/* Calling timeChange() on an instance of Clock emulate a clock. 
+		 * Using a Timer from Swing in TimerGame for instance
+		 */
 		Clock test = new Clock(0,0,0);
 		
 		for(int i = 0; i<65; ++i) {

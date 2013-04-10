@@ -106,11 +106,14 @@ public class TimerGame extends JFrame {
 		timer.start();
 
 	}
-
+	
+	@SuppressWarnings("unused")
 	public static void main(String[] args)
 	{	  
-		new TimerGame(1000);
-
+		Clock clock = new Clock(0, 0, 0);
+		
+		TimerGame tg = new TimerGame(1000, 0, 0, 0, clock);
+		
 	}
 
 }

@@ -2,12 +2,17 @@ package game;
 
 import javax.vecmath.Vector2f;
 
-public class Agent implements situable{
+import time.Clock;
+import time.TimerGame;
+import time.Timerable;
+
+public class Agent implements situable, Timerable{
 	
 	private int PV;
 	private int speed;
 	private int strength;
 	private int stamina;
+	private boolean mouving;
 	private Vector2f position;
 	private Player player;
 	
@@ -61,8 +66,28 @@ public class Agent implements situable{
 		position.y = y;
 	}
 	
+	public int getStrength() {
+		return strength;
+	}
+
+	public void setStrength(int strength) {
+		this.strength = strength;
+	}
+
+	public boolean isMouving() {
+		return mouving;
+	}
+
+	public void setMouving(boolean mouving) {
+		this.mouving = mouving;
+	}
+
+	public void setPosition(Vector2f position) {
+		this.position = position;
+	}
+
 	public void attackAgent(Agent enemy) {
-		// If strength > stamina just a diff, else only 1 damage.
+		// If strength > stamina just a difference, else only 1 damage.
 		int damage;
 		if(!(enemy.stamina > this.strength)) damage = Math.abs(this.strength - enemy.stamina);
 		else damage = 1;
@@ -88,21 +113,32 @@ public class Agent implements situable{
 		return sb.toString();
 	}
 	
-	public void moveTo(Vector2f dest) {
-		this.setPosition(dest.x, dest.y);
-	}
-	
-	public boolean move(Vector2f from, Vector2f to, String how) {
+	public boolean move(Vector2f to, String how) {
 		if(how == "straight") {
 			
-			//float distance = (float) Math.sqrt((to.x-from.x)*(to.x-from.x) + (to.y - from.y)*(to.y-from.y));
+			// sqrt(x²+y²)
+			float distance = (float) Math.sqrt((to.getX()-this.getPosition().getX())*(to.getX()-this.getPosition().getX()) +
+												(to.getY() - this.getPosition().getY())*(to.getY()-this.getPosition().getY()));
+			float increment = (float) (0.1*distance);
 			
-			//timer, timertask ?
+			// slope and y-intercept
+			float a = ( to.getY()-this.getPosition().getY() ) / ( to.getX()-this.getPosition().getX() );
+			float b = this.getPosition().getY() - a*this.getPosition().getX();
+			// parametric equation
+			float X = (float) (increment*this.getPosition().getX() + a);
+			float Y = (float) (increment*this.getPosition().getY() + b);
 			
-			this.moveTo(to);
+			Vector2f newPosition = new Vector2f(X, Y);
+			
+			this.setPosition(newPosition);
 			return true;
 		}
 		else return false;
+	}
+	
+	@Override
+	public void runTimer() {
+		//
 	}
 	
 	@Override
@@ -142,6 +178,11 @@ public class Agent implements situable{
 	
 	public static void main(String[] args) {
 		
+		Clock clock = new Clock(0, 0, 0);
+		
+		TimerGame tg = new TimerGame(1000, 0, 0, 0, clock);
+		
 	}
+
 
 }
