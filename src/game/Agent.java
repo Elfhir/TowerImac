@@ -120,16 +120,18 @@ public class Agent implements situable, Timerable{
 		if(how == "straight") {
 			
 			// sqrt(x²+y²)
-			float distance = (float) Math.sqrt((to.getX()-this.getPosition().getX())*(to.getX()-this.getPosition().getX()) +
-												(to.getY() - this.getPosition().getY())*(to.getY()-this.getPosition().getY()));
-			float increment = (float) (0.1*distance);
+			//float distance = (float) Math.sqrt((to.getX()-this.getPosition().getX())*(to.getX()-this.getPosition().getX()) +
+			//									(to.getY() - this.getPosition().getY())*(to.getY()-this.getPosition().getY()));
+			//float increment = (float) (0.1*distance);
+			
+			float increment = 0.2f;
 			
 			// slope and y-intercept
-			float a = ( to.getY()-this.getPosition().getY() ) / ( to.getX()-this.getPosition().getX() );
-			float b = this.getPosition().getY() - a*this.getPosition().getX();
+			//float a = ( to.getY()-this.getPosition().getY() ) / ( to.getX()-this.getPosition().getX() );
+			//float b = this.getPosition().getY() - a*this.getPosition().getX();
 			// parametric equation
-			float X = (float) (increment*this.getPosition().getX() + a);
-			float Y = (float) (increment*this.getPosition().getY() + b);
+			float X = (float) (this.getPosition().getX() + increment*(to.getX() - this.getPosition().getX()));
+			float Y = (float) (this.getPosition().getY() + increment*(to.getY() - this.getPosition().getY()));
 			
 			Vector2f newPosition = new Vector2f(X, Y);
 			
@@ -155,7 +157,12 @@ public class Agent implements situable, Timerable{
 	@Override
 	public void runTimer(Vector2f v) {
 		System.out.println(this.getPosition());
-		this.move(v, "straight");
+		if(this.getPosition().equals(v)) {
+			return;
+		}
+		else {
+			this.move(v, "straight");
+		}
 	}
 	
 	@Override
@@ -199,11 +206,11 @@ public class Agent implements situable, Timerable{
 		Agent a1 = new Agent(true, 10, 5, 0, 0, new Vector2f(0.0f, 0.0f), null);
 		Agent a2 = new Agent(true, 6, 5, 0, 0, new Vector2f(2.0f, 2.0f), null);
 		
-		Vector2f dest = new Vector2f(2.0f, 2.0f);
+		Vector2f dest = new Vector2f(2.0f, 3.0f);
 		TimerGame tg = new TimerGame(1000, 0, 0, 0, a1, dest);
 		
 		
-		a1.move(dest, "straight");
+		
 		
 	}
 
