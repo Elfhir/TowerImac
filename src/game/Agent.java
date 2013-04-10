@@ -113,6 +113,9 @@ public class Agent implements situable, Timerable{
 		return sb.toString();
 	}
 	
+	/* Agent move straightly with by increment on an parametric line joining its former position to the destination
+	 * We will have to manage non-linear move in a bulk
+	 */
 	public boolean move(Vector2f to, String how) {
 		if(how == "straight") {
 			
@@ -136,9 +139,23 @@ public class Agent implements situable, Timerable{
 		else return false;
 	}
 	
+
 	@Override
 	public void runTimer() {
-		//
+		// example
+		//System.out.println(this);
+	}
+	
+	@Override
+	public void runTimer(Timerable t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void runTimer(Vector2f v) {
+		System.out.println(this.getPosition());
+		this.move(v, "straight");
 	}
 	
 	@Override
@@ -166,21 +183,27 @@ public class Agent implements situable, Timerable{
 	}
 
 	//--------------------------------------------------ctor-----------------------
-	public Agent(int PV, int speed, int stamina, int strength, Vector2f position, Player player) {
+	public Agent(boolean mouving, int PV, int speed, int stamina, int strength, Vector2f position, Player player) {
+		this.mouving = mouving;
 		this.PV = PV;
 		this.speed = speed;
 		this.stamina = stamina;
 		this.strength = strength;
 		this.position = position;
 		this.player = player;
-		
 	}
 	
 	public static void main(String[] args) {
 		
-		Clock clock = new Clock(0, 0, 0);
 		
-		TimerGame tg = new TimerGame(1000, 0, 0, 0, clock);
+		Agent a1 = new Agent(true, 10, 5, 0, 0, new Vector2f(0.0f, 0.0f), null);
+		Agent a2 = new Agent(true, 6, 5, 0, 0, new Vector2f(2.0f, 2.0f), null);
+		
+		Vector2f dest = new Vector2f(2.0f, 2.0f);
+		TimerGame tg = new TimerGame(1000, 0, 0, 0, a1, dest);
+		
+		
+		a1.move(dest, "straight");
 		
 	}
 

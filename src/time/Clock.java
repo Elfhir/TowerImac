@@ -1,5 +1,7 @@
 package time;
 
+import javax.vecmath.Vector2f;
+
 public class Clock implements Timerable {
 	
 	int seconds;
@@ -87,6 +89,17 @@ public class Clock implements Timerable {
 		System.out.println(this);
 	}
 	
+	@Override
+	public void runTimer(Timerable t) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void runTimer(Vector2f v) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	public static void main(String[] args) {
 		
@@ -102,4 +115,7 @@ public class Clock implements Timerable {
 		
 
 	}
+
+
+
 }

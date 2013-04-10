@@ -84,7 +84,7 @@ public class Base implements situable, Iterable<Agent>{
 	public boolean generateAgent(Agent e) {
 		if(this.hasPlayer()) {
 			
-			// timer, timertask ?
+			// timer, timerTask ?
 			// need to use also size of Base
 			this.getAgents().add(e);
 			
@@ -116,7 +116,7 @@ public class Base implements situable, Iterable<Agent>{
 		sb.append("\n");
 		return sb.toString();
 	}
-	// ----------------------------------------------------ctor-------------
+	// ----------------------------------------------------constructor-------------
 	
 	public Base(int size, int diameter){
 		super();
@@ -148,7 +148,7 @@ public class Base implements situable, Iterable<Agent>{
 		this.position = position;
 		this.agents = new LinkedList<Agent>();
 		
-		// No ctor LinkedList with a number of entities WTF? So this it :
+		// No constructor LinkedList with a number of entities WTF? So this it :
 		for(int i = 0; i<nbAgent; ++i){
 			agents.add(agent);
 		}
@@ -157,8 +157,8 @@ public class Base implements situable, Iterable<Agent>{
 	
 	public static void main(String[] args) {
 		
-		Agent strongAgent = new Agent(10, 10, 10, 10, null, null);
-		Agent weakAgent = new Agent(5, 7, 5, 5, null, null);
+		Agent strongAgent = new Agent(true, 10, 10, 10, 10, null, null);
+		Agent weakAgent = new Agent(true, 5, 7, 5, 5, null, null);
 		
 		Base base1 = new Base(5, 5, null, new Vector2f(0.5f, 0.5f), strongAgent, 5);
 		//System.out.println(base1);
@@ -167,7 +167,7 @@ public class Base implements situable, Iterable<Agent>{
 		//System.out.println(base2);
 		
 		
-		// If one attacks, the other defences also !
+		// If one attacks, the other defenses also !
 		base2.attackBase(base1);
 		
 	}

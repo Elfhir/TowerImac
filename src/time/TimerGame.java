@@ -1,13 +1,16 @@
 package time;
+import game.Agent;
+
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.vecmath.Vector2f;
 
 
 // Not sure if extending JFrame is useful, useless, or an error, or don't matter
 // Needed for setDefaultCloser, title and maybe ActionListener
-// See ctor line 82
+// See constructor line 82
 public class TimerGame extends JFrame {
 	private static final long serialVersionUID = 4728920536811198811L;
 
@@ -96,10 +99,35 @@ public class TimerGame extends JFrame {
 				
 				t.runTimer();   
 				
+			}
+		};
+		// JFrame method ; then a timer is created, executing the task every delay milliseconds. At the instantiation timer
+		// is started. There is method for handle timer.
+		setVisible(true); 
+		timer = new Timer(delay, task);
+		timer.start();
+
+	}
+	
+	// With a Timerable class implementing, for executing code from other classes, other stuff
+	public TimerGame(int delay, int s, int m, int h, final Agent a, final Vector2f v) throws HeadlessException{
+		super();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Pinage");
+
+		clock = new Clock(s,m,h);
+		
+		ActionListener task = new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				
+				// do whatever you want with a Class implementing Timerable
+				// in its compulsory void method runTimer()
+				
+				a.runTimer(v);   
 				
 			}
 		};
-		// JFrame method ; then a timer is created, executing the task every delay milliseconds. At the instanciation timer
+		// JFrame method ; then a timer is created, executing the task every delay milliseconds. At the instantiation timer
 		// is started. There is method for handle timer.
 		setVisible(true); 
 		timer = new Timer(delay, task);
