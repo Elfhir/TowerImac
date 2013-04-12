@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import javax.vecmath.Vector2f;
 
-public class Base implements situable, Iterable<Agent>{
+public class Base implements Situable, Iterable<Agent>{
 	
 	private int size;
 	private static int MAX_SIZE;

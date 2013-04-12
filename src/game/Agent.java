@@ -2,11 +2,11 @@ package game;
 
 import javax.vecmath.Vector2f;
 
-import time.Clock;
+
 import time.TimerGame;
 import time.Timerable;
 
-public class Agent implements situable, Timerable{
+public class Agent implements Situable, Timerable{
 	
 	private int PV;
 	private int speed;
@@ -204,9 +204,10 @@ public class Agent implements situable, Timerable{
 		
 		
 		Agent a1 = new Agent(true, 10, 5, 0, 0, new Vector2f(0.0f, 0.0f), null);
-		Agent a2 = new Agent(true, 6, 5, 0, 0, new Vector2f(2.0f, 2.0f), null);
+		//Agent a2 = new Agent(true, 6, 5, 0, 0, new Vector2f(2.0f, 2.0f), null);
 		
 		Vector2f dest = new Vector2f(2.0f, 3.0f);
+		
 		TimerGame tg = new TimerGame(1000, 0, 0, 0, a1, dest);
 		
 		
