@@ -87,29 +87,21 @@ public class Agent implements Situable, Timerable{
 	}
 
 	public void attackAgent(Agent enemy) {
-		// If strength > stamina just a difference, else only 1 damage.
-		int damage;
-		if(!(enemy.stamina > this.strength)) damage = Math.abs(this.strength - enemy.stamina);
-		else damage = 1;
-		
-		// Compute damages inflicted to PV only if agents last PV.
-		if(enemy.PV <= 0) {
+
+		if(enemy.getPV() <= 0) {
 			System.out.println("enemy agent is dead");
 		}
-		if(this.PV <= 0) {
+		if(this.getPV() <= 0) {
 			System.out.println("our agent is dead");
 		}
-		
-		if(!((enemy.PV <= 0) || (this.PV <= 0)) ){	
-			enemy.PV = enemy.PV - damage;
-			if(enemy.PV < 0) enemy.PV = 0;
-			System.out.println("fight");
-		}
+		System.out.println("fight");
+		enemy.setPV(0);
+		this.setPV(0);
 	}
 	
 	public String printPV () {
 		StringBuilder sb = new StringBuilder("");
-		sb.append("has "+this.PV+" PV");
+		sb.append("has "+this.getPV()+" PV");
 		return sb.toString();
 	}
 	
