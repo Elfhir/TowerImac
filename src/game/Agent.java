@@ -95,16 +95,16 @@ public class Agent implements situable, Timerable{
 		// Compute damages inflicted to PV only if agents last PV.
 		if(enemy.PV <= 0) {
 			System.out.println("enemy agent is dead");
+			return;
 		}
 		if(this.PV <= 0) {
 			System.out.println("our agent is dead");
+			return;
 		}
 		
-		if(!((enemy.PV <= 0) || (this.PV <= 0)) ){	
 			enemy.PV = enemy.PV - damage;
 			if(enemy.PV < 0) enemy.PV = 0;
 			System.out.println("fight");
-		}
 	}
 	
 	public String printPV () {
