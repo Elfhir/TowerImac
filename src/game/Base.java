@@ -1,18 +1,15 @@
 package game;
 
-import java.util.Iterator;
-import java.util.LinkedList;
 import javax.vecmath.Vector2f;
 
-public class Base implements situable, Iterable<Agent>{
+public class Base implements Situable{
 	
 	private int size;
 	private static int MAX_SIZE;
 	private int diameter;
 	private Player player;
-	private Vector2f position;
-	
-	private LinkedList<Agent> agents;
+	private Vector2f position;	
+	private int agents;
 	
 	public int getSize() {
 		return size;
@@ -51,47 +48,26 @@ public class Base implements situable, Iterable<Agent>{
 		position.y = y;
 	}
 	
-	public void setAgents(LinkedList<Agent> agents) {
+	public void setAgents(int agents) {
+		agents = agents <= 0 ? -agents : agents;
 		this.agents = agents;
 	}
 	
-	public LinkedList<Agent> getAgents() {
+	public int getAgents() {
 		return this.agents;
-	}
-	
-	public Agent getAgent(int index) {
-		return agents.get(index);
-	}
-	
-	@Override
-	public Iterator<Agent> iterator() {
-		return agents.iterator();
 	}
 	
 	public void attackBase(Base enemy){
 		System.out.println("Attack !\n");
 		
-		for(Agent it : this.agents) {
-			if(it.getPV() == 0) continue;
-			for(Agent jt : enemy.agents) {
-				if(it.getPV() == 0 || jt.getPV() == 0) break;
-				it.attackAgent(jt);
-				jt.attackAgent(it);
-			}
+		int maxAgent = this.getAgents() <= enemy.getAgents() ? this.getAgents() : enemy.getAgents();
+		for(int i = 0; i < maxAgent; ++i) {
+			// whoever had a LinkedList<Agent> should use attackAgent() here.
 		}
+		return;
 	}
 	
-	public boolean generateAgent(Agent e) {
-		if(this.hasPlayer()) {
-			
-			// timer, timerTask ?
-			// need to use also size of Base
-			this.getAgents().add(e);
-			
-			return true;
-		}
-		else return false;
-	}
+	//generateAgent()
 	
 	@Override
 	public String toString() {
@@ -112,7 +88,7 @@ public class Base implements situable, Iterable<Agent>{
 		sb.append(this.position);
 		sb.append("\n");
 		sb.append("agents: ");
-		sb.append(this.agents.size());
+		sb.append(this.getAgents());
 		sb.append("\n");
 		return sb.toString();
 	}
@@ -140,30 +116,24 @@ public class Base implements situable, Iterable<Agent>{
 		this.position = position;
 	}
 	
-	public Base(int size, int diameter, Player player, Vector2f position, Agent agent, int nbAgent){
+	public Base(int size, int diameter, Player player, Vector2f position, int agents){
 		super();
 		this.size = size;
 		this.diameter = diameter;
 		this.player = player;
 		this.position = position;
-		this.agents = new LinkedList<Agent>();
-		
-		// No constructor LinkedList with a number of entities WTF? So this it :
-		for(int i = 0; i<nbAgent; ++i){
-			agents.add(agent);
-		}
-		
+		this.agents = agents;		
 	}
 	
 	public static void main(String[] args) {
 		
-		Agent strongAgent = new Agent(true, 10, 10, 10, 10, null, null);
-		Agent weakAgent = new Agent(true, 5, 7, 5, 5, null, null);
+		//Agent strongAgent = new Agent(true, 10, 10, 10, 10, null, null);
+		//Agent weakAgent = new Agent(true, 5, 7, 5, 5, null, null);
 		
-		Base base1 = new Base(5, 5, null, new Vector2f(0.5f, 0.5f), strongAgent, 5);
+		Base base1 = new Base(5, 5, null, new Vector2f(0.5f, 0.5f), 5);
 		//System.out.println(base1);
 		
-		Base base2 = new Base(5, 5, null, new Vector2f(-0.5f, -0.5f), weakAgent, 5);
+		Base base2 = new Base(5, 5, null, new Vector2f(-0.5f, -0.5f), 5);
 		//System.out.println(base2);
 		
 		
@@ -171,5 +141,6 @@ public class Base implements situable, Iterable<Agent>{
 		base2.attackBase(base1);
 		
 	}
+
 
 }
