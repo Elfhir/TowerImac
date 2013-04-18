@@ -1,5 +1,6 @@
 package time;
 import game.Agent;
+import game.Base;
 
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
@@ -134,6 +135,32 @@ public class TimerGame extends JFrame {
 		timer.start();
 
 	}
+	
+	// With a Timerable class implementing, for executing code from other classes, other stuff
+		public TimerGame(int delay, int s, int m, int h, final Base base) throws HeadlessException{
+			super();
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			setTitle("Pinage");
+
+			clock = new Clock(s,m,h);
+			
+			ActionListener task = new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					
+					// do whatever you want with a Class implementing Timerable
+					// in its compulsory void method runTimer()
+					
+					base.runTimer();   
+					
+				}
+			};
+			// JFrame method ; then a timer is created, executing the task every delay milliseconds. At the instantiation timer
+			// is started. There is method for handle timer.
+			setVisible(true); 
+			timer = new Timer(delay, task);
+			timer.start();
+
+		}
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] args)

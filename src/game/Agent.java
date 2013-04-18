@@ -193,6 +193,7 @@ public class Agent implements Situable, Timerable{
 		this.player = player;
 	}
 	
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
 		

@@ -2,7 +2,10 @@ package game;
 
 import javax.vecmath.Vector2f;
 
-public class Base implements Situable{
+import time.TimerGame;
+import time.Timerable;
+
+public class Base implements Situable, Timerable{
 	
 	private int size;
 	private static int MAX_SIZE;
@@ -67,7 +70,9 @@ public class Base implements Situable{
 		return;
 	}
 	
-	//generateAgent()
+	public void generateAgent() {
+		this.setAgents(this.getAgents() + 1);
+	}
 	
 	@Override
 	public String toString() {
@@ -92,6 +97,26 @@ public class Base implements Situable{
 		sb.append("\n");
 		return sb.toString();
 	}
+	// -------------------------------------------------- Timerable ---------------
+	
+	@Override
+	public void runTimer() {
+		System.out.println(this.getAgents());
+		this.generateAgent();
+	}
+
+	@Override
+	public void runTimer(Timerable t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void runTimer(Vector2f v) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	// ----------------------------------------------------constructor-------------
 	
 	public Base(int size, int diameter){
@@ -125,6 +150,7 @@ public class Base implements Situable{
 		this.agents = agents;		
 	}
 	
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
 		//Agent strongAgent = new Agent(true, 10, 10, 10, 10, null, null);
@@ -140,7 +166,11 @@ public class Base implements Situable{
 		// If one attacks, the other defenses also !
 		base2.attackBase(base1);
 		
+		TimerGame tg = new TimerGame(1000/base1.getSize(), 0, 0, 0, base1);
+		
 	}
+
+
 
 
 }
