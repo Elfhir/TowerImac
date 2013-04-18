@@ -74,6 +74,11 @@ public class Base implements Situable, Timerable{
 		this.setAgents(this.getAgents() + 1);
 	}
 	
+	public void deleteAgent() {
+		if(this.getAgents() <= 0) return;
+		this.setAgents(this.getAgents() - 1);
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("");
@@ -116,6 +121,16 @@ public class Base implements Situable, Timerable{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void runTimer(boolean b) {
+		System.out.println(this.getAgents());
+		if(b == true)
+			this.generateAgent();
+		else
+			this.deleteAgent();
+	}
+
 	
 	// ----------------------------------------------------constructor-------------
 	
@@ -166,7 +181,7 @@ public class Base implements Situable, Timerable{
 		// If one attacks, the other defenses also !
 		base2.attackBase(base1);
 		
-		TimerGame tg = new TimerGame(1000/base1.getSize(), 0, 0, 0, base1);
+		TimerGame tg = new TimerGame(1000/base1.getSize(), 0, 0, 0, base1, false);
 		
 	}
 

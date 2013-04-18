@@ -146,6 +146,12 @@ public class Agent implements Situable, Timerable{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void runTimer(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void runTimer(Vector2f v) {

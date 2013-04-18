@@ -137,7 +137,7 @@ public class TimerGame extends JFrame {
 	}
 	
 	// With a Timerable class implementing, for executing code from other classes, other stuff
-		public TimerGame(int delay, int s, int m, int h, final Base base) throws HeadlessException{
+		public TimerGame(int delay, int s, int m, int h, final Base base, final boolean b) throws HeadlessException{
 			super();
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setTitle("Pinage");
@@ -149,8 +149,10 @@ public class TimerGame extends JFrame {
 					
 					// do whatever you want with a Class implementing Timerable
 					// in its compulsory void method runTimer()
-					
-					base.runTimer();   
+					if(b == true) 
+						base.runTimer(true);   
+					else
+						base.runTimer(false);
 					
 				}
 			};

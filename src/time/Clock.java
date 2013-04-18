@@ -100,6 +100,13 @@ public class Clock implements Timerable {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void runTimer(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	public static void main(String[] args) {
 		
@@ -115,6 +122,7 @@ public class Clock implements Timerable {
 		
 
 	}
+
 
 
 
