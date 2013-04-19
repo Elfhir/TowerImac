@@ -13,13 +13,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class AppliWindow extends JFrame {
 	
-	JButton bouton1;
-	JButton bouton2;
+	private Panel panel;
+	
+	private JButton bouton1;
+	private JButton bouton2;
 	
 	public AppliWindow(String title, int width, int height, boolean resize){
 		super();
@@ -27,6 +28,14 @@ public class AppliWindow extends JFrame {
 		build(title, width, height, resize); // On initialise notre fenetre
 	}
 	
+	public Panel getPane() {
+		return panel;
+	}
+
+	public void setPane(Panel pane) {
+		this.panel = pane;
+	}
+
 	// Utiliser cette méthode pour construire la fenêtre de l'application
 	private void build(String title, int width, int height, boolean resize) {
 		setTitle(title);
@@ -37,11 +46,11 @@ public class AppliWindow extends JFrame {
 		setContentPane(buildContentPane());
 	}
 	
-	private JPanel buildContentPane() {
+	private Panel buildContentPane() {
 		
-		JPanel panel = new JPanel();
+		Panel panel = new Panel();
 		panel.setLayout(new FlowLayout());
-		panel.setBackground(Color.GRAY);
+		panel.setBackground(Color.ORANGE);
 		
 		JLabel label = new JLabel("-- Sprint 1 : Mini-NanoWar --");
 		panel.add(label);
@@ -69,9 +78,12 @@ public class AppliWindow extends JFrame {
 		try
 	    {
 	        bouton2.setIcon(new ImageIcon(ImageIO.read(new File("src/window/cercle2.png"))));
+	        System.out.println(bouton2);
 	    }
 		catch (IOException e2)
 	    {
+			//bouton2.getGraphics().drawOval(100, 100, 30, 30);
+			System.out.println(bouton2);
 	    }
 		bouton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
