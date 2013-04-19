@@ -10,15 +10,15 @@ public class Application {
 
 	public static void main(String[] args) {
 		
-		Game game = Game.getInstance();
-		
-		Player michel = new Player("Michel");
-		Base base1 = new Base(10, 10, michel);
-		Base base2 = new Base(0, 10, michel);
-		
-		game.getPlayerManager().addPlayer(michel);
-		game.getBaseManager().addBase(base1);
-		game.getBaseManager().addBase(base2);
+	Game game = Game.getInstance();
+	
+	Player michel = new Player("Michel");
+	Base base1 = new Base(10, 10, michel);
+	Base base2 = new Base(0, 10, michel);
+	
+	game.getPlayerManager().addPlayer(michel);
+	game.getBaseManager().addBase(base1);
+	game.getBaseManager().addBase(base2);
 		
 		
 		
@@ -51,7 +51,7 @@ public class Application {
 			}
 		});*/
 		
-// Une JFrame
+		// Une JFrame
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				// On crée la nouvelle instance de la JFrame
