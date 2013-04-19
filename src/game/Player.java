@@ -1,9 +1,13 @@
 package game;
 
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+
 public class Player implements Runnable {
 	
 	private Bank bank;
 	private String name;
+	private LinkedHashSet<Base> selectedBases;
 
 	public Bank getBank() {
 		return bank;
@@ -20,7 +24,19 @@ public class Player implements Runnable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public LinkedHashSet<Base> getSelectedBases() {
+		return selectedBases;
+	}
 
+	public void setSelectedBases(LinkedHashSet<Base> selectedBases) {
+		this.selectedBases = selectedBases;
+	}
+	
+	public void addSelectedBase(Base b) {
+		this.selectedBases.add(b);
+	}
+	
 
 	@Override
 	public String toString() {
@@ -41,8 +57,9 @@ public class Player implements Runnable {
 		
 		@Override
 		public void run() {
-			while (true) {
-				System.out.println("Checking the actions of the player");
+			while (Game.getInstance().isRunning()) {
+				
+				
 				try {
 					Thread.sleep(100);
 				}
@@ -59,6 +76,14 @@ public class Player implements Runnable {
 		this.bank = bank;
 	}
 	
+	public Player(String name) {
+		this(name, new Bank(50));
+	}
+	
+	public Player() {
+		this("unknown");
+	}
+	
 	/*
 	 *  
 	 ********************* MAIN ********************
@@ -71,6 +96,5 @@ public class Player implements Runnable {
 		
 		michel.start();
 	}
-	
 	
 }

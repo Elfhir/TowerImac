@@ -17,6 +17,8 @@ import manager.TowerManager;
 
 public class Game {
 	
+	private boolean running;  // Indicates if the game is currently running or not
+
 	private PlayerManager playerManager;
 	private BaseManager baseManager;
 	private AgentManager agentManager;
@@ -27,22 +29,14 @@ public class Game {
 	/*
 	 *   Getters
 	 */
-	public ArrayList<Player> getPlayers() {
-		return this.playerManager.getPlayers();
-	}
 	
-	public ArrayList<Base> getBases() {
-		return this.baseManager.getBases();
+	public boolean isRunning() {
+		return running;
 	}
-	
-	public LinkedList<Agent> getAgents() {
-		return this.agentManager.getAgents();
+
+	public void setRunning(boolean running) {
+		this.running = running;
 	}
-	
-	public LinkedList<Tower> getTowers() {
-		return this.towerManager.getTowers();
-	}
-	
 	
 	
 	public PlayerManager getPlayerManager() {
@@ -97,8 +91,10 @@ public class Game {
 	}
 	
 	/* 
-	 * Holder class : for the Singleton pattern implementation
+	 * 
+	 ************    Holder class : for the Singleton pattern implementation   ******************
 	 */
+	
 	private static class GameHolder
 	{		
 		// unique instance, not preinitialized
