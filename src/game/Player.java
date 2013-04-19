@@ -1,9 +1,8 @@
 package game;
 
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 
-public class Player implements Runnable {
+public abstract class Player implements Runnable {
 	
 	private Bank bank;
 	private String name;
@@ -51,24 +50,10 @@ public class Player implements Runnable {
 	}
 	
 	// Starts the thread of the player
-		public void start(){
-			new Thread(this).start();
-	    }
+	public void start(){
+		new Thread(this).start();
+    }
 		
-		@Override
-		public void run() {
-			while (Game.getInstance().isRunning()) {
-				
-				
-				try {
-					Thread.sleep(100);
-				}
-				catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
 		
 	//----------------------------------------------ctor----------------
 	public Player(String name, Bank bank) {
@@ -84,17 +69,6 @@ public class Player implements Runnable {
 		this("unknown");
 	}
 	
-	/*
-	 *  
-	 ********************* MAIN ********************
-	 * 
-	 */
-	public static void main(String[] args) {
-		Bank bank = new Bank(50);
-		Player michel = new Player("Michel", bank);
-		System.out.println(michel);
-		
-		michel.start();
-	}
+	
 	
 }

@@ -2,9 +2,6 @@ package game;
 
 import java.io.InputStream;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-
 import manager.AgentManager;
 import manager.BaseManager;
 import manager.PlayerManager;
@@ -80,6 +77,7 @@ public class Game {
 		this.baseManager = new BaseManager();
 		this.agentManager = new AgentManager();
 		this.towerManager = new TowerManager();
+		this.running = true;
 	}
 	
 	public void initGame(InputStream input) {
@@ -126,10 +124,10 @@ public class Game {
 		Game game = Game.getInstance();
 		
 		Bank bank1 = new Bank(10);
-		Player p1 = new Player("Jean-Marc", bank1);
+		Player p1 = new RealPlayer("Jean-Marc", bank1);
 		
 		Bank bank2 = new Bank(12);
-		Player p2 = new Player("Jean-Gui", bank2);
+		Player p2 = new IAPlayer("Jean-Gui", bank2);
 		
 		game.getPlayerManager().addPlayer(p1);
 		game.getPlayerManager().addPlayer(p2);
