@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 public class Panel extends JPanel{
 
 	/**
-	 * 
+	 * Il le faut à chaque fois
 	 */
 	private static final long serialVersionUID = -1788677938220552169L;
 
@@ -13,6 +13,7 @@ public class Panel extends JPanel{
 		super();
 		
 	}
+	
 
 	/**
 	 * @param args
