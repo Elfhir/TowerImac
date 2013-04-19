@@ -21,18 +21,18 @@ public class AppliWindow extends JFrame {
 	JButton bouton1;
 	JButton bouton2;
 	
-	public AppliWindow(String title){
+	public AppliWindow(String title, int width, int height, boolean resize){
 		super();
 		
-		build(title); // On initialise notre fenetre
+		build(title, width, height, resize); // On initialise notre fenetre
 	}
 	
 	// Utiliser cette méthode pour construire la fenêtre de l'application
-	private void build(String title) {
+	private void build(String title, int width, int height, boolean resize) {
 		setTitle(title);
-		setSize(280, 260);
+		setSize(width, height);
 		setLocationRelativeTo(null); // On centre la fenetre sur l'écran (en indiquant null)
-		setResizable(true); // On interdit le redimensionnement
+		setResizable(resize); // On autorise avec true le redimensionnement
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // On dit à l'application de se fermer au clic sur la croix.
 		setContentPane(buildContentPane());
 	}

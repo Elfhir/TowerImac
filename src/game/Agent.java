@@ -2,12 +2,17 @@ package game;
 
 import javax.vecmath.Vector2f;
 
-public class Agent implements situable{
+
+import time.TimerGame;
+import time.Timerable;
+
+public class Agent implements Situable, Timerable{
 	
 	private int PV;
 	private int speed;
 	private int strength;
 	private int stamina;
+	private boolean mouving;
 	private Vector2f position;
 	private Player player;
 	
@@ -61,48 +66,102 @@ public class Agent implements situable{
 		position.y = y;
 	}
 	
+	public int getStrength() {
+		return strength;
+	}
+
+	public void setStrength(int strength) {
+		this.strength = strength;
+	}
+
+	public boolean isMouving() {
+		return mouving;
+	}
+
+	public void setMouving(boolean mouving) {
+		this.mouving = mouving;
+	}
+
+	public void setPosition(Vector2f position) {
+		this.position = position;
+	}
+
 	public void attackAgent(Agent enemy) {
-		// If strength > stamina just a diff, else only 1 damage.
-		int damage;
-		if(!(enemy.stamina > this.strength)) damage = Math.abs(this.strength - enemy.stamina);
-		else damage = 1;
-		
-		// Compute damages inflicted to PV only if agents last PV.
-		if(enemy.PV <= 0) {
+
+		if(enemy.getPV() <= 0) {
 			System.out.println("enemy agent is dead");
 		}
-		if(this.PV <= 0) {
+		if(this.getPV() <= 0) {
 			System.out.println("our agent is dead");
 		}
-		
-		if(!((enemy.PV <= 0) || (this.PV <= 0)) ){	
-			enemy.PV = enemy.PV - damage;
-			if(enemy.PV < 0) enemy.PV = 0;
-			System.out.println("fight");
-		}
+
+		System.out.println("fight");
+		enemy.setPV(0);
+		this.setPV(0);
 	}
 	
 	public String printPV () {
 		StringBuilder sb = new StringBuilder("");
-		sb.append("has "+this.PV+" PV");
+		sb.append("has "+this.getPV()+" PV");
 		return sb.toString();
 	}
 	
-	public void moveTo(Vector2f dest) {
-		this.setPosition(dest.x, dest.y);
-	}
-	
-	public boolean move(Vector2f from, Vector2f to, String how) {
+	/* Agent move straightly with by increment on an parametric line joining its former position to the destination
+	 * We will have to manage non-linear move in a bulk
+	 */
+	public boolean move(Vector2f to, String how) {
 		if(how == "straight") {
 			
-			//float distance = (float) Math.sqrt((to.x-from.x)*(to.x-from.x) + (to.y - from.y)*(to.y-from.y));
+			// sqrt(x²+y²)
+			//float distance = (float) Math.sqrt((to.getX()-this.getPosition().getX())*(to.getX()-this.getPosition().getX()) +
+			//									(to.getY() - this.getPosition().getY())*(to.getY()-this.getPosition().getY()));
+			//float increment = (float) (0.1*distance);
 			
-			//timer, timertask ?
+			float increment = 0.2f;
 			
-			this.moveTo(to);
+			// slope and y-intercept
+			//float a = ( to.getY()-this.getPosition().getY() ) / ( to.getX()-this.getPosition().getX() );
+			//float b = this.getPosition().getY() - a*this.getPosition().getX();
+			// parametric equation
+			float X = (float) (this.getPosition().getX() + increment*(to.getX() - this.getPosition().getX()));
+			float Y = (float) (this.getPosition().getY() + increment*(to.getY() - this.getPosition().getY()));
+			
+			Vector2f newPosition = new Vector2f(X, Y);
+			
+			this.setPosition(newPosition);
 			return true;
 		}
 		else return false;
+	}
+	
+
+	@Override
+	public void runTimer() {
+		// example
+		//System.out.println(this);
+	}
+	
+	@Override
+	public void runTimer(Timerable t) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void runTimer(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void runTimer(Vector2f v) {
+		System.out.println(this.getPosition());
+		if(this.getPosition().equals(v)) {
+			return;
+		}
+		else {
+			this.move(v, "straight");
+		}
 	}
 	
 	@Override
@@ -130,18 +189,31 @@ public class Agent implements situable{
 	}
 
 	//--------------------------------------------------ctor-----------------------
-	public Agent(int PV, int speed, int stamina, int strength, Vector2f position, Player player) {
+	public Agent(boolean mouving, int PV, int speed, int stamina, int strength, Vector2f position, Player player) {
+		this.mouving = mouving;
 		this.PV = PV;
 		this.speed = speed;
 		this.stamina = stamina;
 		this.strength = strength;
 		this.position = position;
 		this.player = player;
-		
 	}
 	
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
+		
+		Agent a1 = new Agent(true, 10, 5, 0, 0, new Vector2f(0.0f, 0.0f), null);
+		//Agent a2 = new Agent(true, 6, 5, 0, 0, new Vector2f(2.0f, 2.0f), null);
+		
+		Vector2f dest = new Vector2f(2.0f, 3.0f);
+		
+		TimerGame tg = new TimerGame(1000, 0, 0, 0, a1, dest);
+		
+		
+		
+		
 	}
+
 
 }
