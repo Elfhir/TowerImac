@@ -1,7 +1,8 @@
 package window;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -12,48 +13,83 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
 public class AppliWindow extends JFrame {
 	
-	private Panel panel;
-	
+	private int width;
+	private int height;
+	private Panel content;
 	private JButton bouton1;
 	private JButton bouton2;
 	
+	
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public Panel getContent() {
+		return content;
+	}
+
+	
+	
 	public AppliWindow(String title, int width, int height, boolean resize){
 		super();
-		
-		build(title, width, height, resize); // On initialise notre fenetre
+		this.width = width;
+		this.height = height;
+		build(title, resize); // On initialise notre fenetre
 	}
 	
 	public Panel getPane() {
-		return panel;
+		return content;
 	}
 
 	public void setPane(Panel pane) {
-		this.panel = pane;
+		this.content = pane;
 	}
-
-	// Utiliser cette méthode pour construire la fenêtre de l'application
-	private void build(String title, int width, int height, boolean resize) {
+	/**
+	 * 
+	 * @param title
+	 * @param width
+	 * @param height
+	 * @param resize
+	 * 
+	 * Utiliser cette méthode pour construire la fenêtre de l'application
+	 */ 
+	private void build(String title, boolean resize) {
 		setTitle(title);
-		setSize(width, height);
+		setSize(this.width, this.height);
 		setLocationRelativeTo(null); // On centre la fenetre sur l'écran (en indiquant null)
 		setResizable(resize); // On autorise avec true le redimensionnement
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // On dit à l'application de se fermer au clic sur la croix.
-		setContentPane(buildContentPane());
+		setContentPane(buildContentPane(width, height));
 	}
 	
-	private Panel buildContentPane() {
+	private Panel buildContentPane(int width, int height) {
 		
-		Panel panel = new Panel();
-		panel.setLayout(new FlowLayout());
-		panel.setBackground(Color.ORANGE);
+		this.content = new Panel();
+		GridBagLayout grille = new GridBagLayout();
+		content.setLayout(grille);
+		GridBagConstraints c = new GridBagConstraints();
+		//On crée nos différents conteneurs de couleur différente
 		
-		JLabel label = new JLabel("-- Sprint 1 : Mini-NanoWar --");
-		panel.add(label);
+		content.setBackground(Color.ORANGE);
+		
+		//JLabel label = new JLabel("-- Sprint 1 : Mini-NanoWar --");
+		//content.add(label);
 		
 		bouton1 = new JButton("Base 1");
 		bouton1.setBorder(BorderFactory.createEmptyBorder());
@@ -70,7 +106,12 @@ public class AppliWindow extends JFrame {
 				System.out.println("Base 1 Selectionnée !\n");
 			}
 		});
-		panel.add(bouton1);
+		c.gridheight = 1;
+		c.gridwidth = 1;
+		c.gridx = 0;
+		c.gridy = 0;
+		grille.setConstraints(bouton1, c);
+		content.add(bouton1, c);
 		
 		bouton2 = new JButton("Base 2");
 		bouton2.setBorder(BorderFactory.createEmptyBorder());
@@ -90,8 +131,14 @@ public class AppliWindow extends JFrame {
 				System.out.println("Base 2 Selectionnée !\n");
 			}
 		});
-		panel.add(bouton2);
 		
-		return panel;
+		c.gridx = 10;
+		c.gridy = 10;
+		c.gridheight = 1;
+		c.gridwidth = 1;
+		grille.setConstraints(bouton2, c);
+		content.add(bouton2,c);
+		
+		return content;
 	}
 }
