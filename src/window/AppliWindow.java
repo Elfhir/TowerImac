@@ -1,6 +1,8 @@
 package window;
 
+
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -76,24 +78,62 @@ public class AppliWindow extends JFrame {
 		setResizable(resize); // On autorise avec true le redimensionnement
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // On dit à l'application de se fermer au clic sur la croix.
 		setContentPane(buildContentPane(width, height));
+		
 	}
+	
 	
 	private Panel buildContentPane(int width, int height) {
 		
 		this.content = new Panel();
+		
 		GridBagLayout grille = new GridBagLayout();
 		content.setLayout(grille);
 		GridBagConstraints c = new GridBagConstraints();
 		//On crée nos différents conteneurs de couleur différente
 		
-		content.setBackground(Color.ORANGE);
+		content.setBackground(Color.WHITE);
+		c.gridheight = 1;
+		c.gridwidth = 1;
 		
-		//JLabel label = new JLabel("-- Sprint 1 : Mini-NanoWar --");
-		//content.add(label);
+		
+		Panel cell1 = new Panel();
+	    cell1.setBackground(Color.YELLOW);
+	    cell1.setPreferredSize(new Dimension(width/3, height/2));
+		c.gridx = 0;
+		c.gridy = 0;
+		grille.setConstraints(cell1, c);
+		content.add(cell1, c);
+	    
+		Panel cell2 = new Panel();
+	    cell2.setBackground(Color.BLUE);
+	    cell2.setPreferredSize(new Dimension(width/3, height/2));  
+		c.gridx = 1;
+		c.gridy = 0;
+		grille.setConstraints(cell2, c);
+		content.add(cell2, c);
+	    
+		Panel cell3 = new Panel();
+	    cell3.setBackground(Color.GREEN);
+	    cell3.setPreferredSize(new Dimension(width/3, height/2));  
+		c.gridx = 2;
+		c.gridy = 0;
+		grille.setConstraints(cell3, c);
+		content.add(cell3, c);
+	    
+		Panel cell4 = new Panel();
+	    cell4.setBackground(Color.PINK);
+	    cell4.setPreferredSize(new Dimension(width/3, height/2));  
+		c.gridx = 1;
+		c.gridy = 0;
+		grille.setConstraints(cell4, c);
+		content.add(cell4, c);
+
+		
 		
 		bouton1 = new JButton("Base 1");
-		bouton1.setBorder(BorderFactory.createEmptyBorder());
+		bouton1.setBorder(BorderFactory.createLineBorder(Color.black));
 		bouton1.setContentAreaFilled(false);
+		bouton1.setBounds(0, 0, width/3, height/3);
 		try
 	    {
 	        bouton1.setIcon(new ImageIcon(ImageIO.read(new File("src/window/cercle2.png"))));
@@ -106,15 +146,16 @@ public class AppliWindow extends JFrame {
 				System.out.println("Base 1 Selectionnée !\n");
 			}
 		});
-		c.gridheight = 1;
-		c.gridwidth = 1;
-		c.gridx = 0;
-		c.gridy = 0;
+		c.gridx = 1;
+		c.gridy = 1;
+
 		grille.setConstraints(bouton1, c);
 		content.add(bouton1, c);
 		
+		// --------------------------------- - - - - - - - - - - - - - - - - ----------------------------
+		
 		bouton2 = new JButton("Base 2");
-		bouton2.setBorder(BorderFactory.createEmptyBorder());
+		bouton2.setBorder(BorderFactory.createLineBorder(Color.black));
 		bouton2.setContentAreaFilled(false);
 		try
 	    {
@@ -132,10 +173,8 @@ public class AppliWindow extends JFrame {
 			}
 		});
 		
-		c.gridx = 10;
-		c.gridy = 10;
-		c.gridheight = 1;
-		c.gridwidth = 1;
+		c.gridx = 1;
+		c.gridy = 2;
 		grille.setConstraints(bouton2, c);
 		content.add(bouton2,c);
 		
