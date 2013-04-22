@@ -85,7 +85,15 @@ public class Agent implements Situable, Timerable{
 	public void setPosition(Vector2f position) {
 		this.position = position;
 	}
-
+	
+	/**
+	* Instantly do the fight of two agents - 2 setPV(0) + control
+	*
+	*@param	enemy	Agent enemy to attack
+	*
+	*@return void
+	*
+	*/
 	public void attackAgent(Agent enemy) {
 
 		if(enemy.getPV() <= 0) {
@@ -106,9 +114,16 @@ public class Agent implements Situable, Timerable{
 		return sb.toString();
 	}
 	
-	/* Agent move straightly with by increment on an parametric line joining its former position to the destination
-	 * We will have to manage non-linear move in a bulk
-	 */
+	/**
+	* move in a linear mode. Not pathfinding yet
+	*
+	*@param	to	Vector2f of destination
+	*@param	how	String of how to move
+	*
+	*
+	*@return	boolean		if the guy is moving or not.
+	*
+	*/
 	public boolean move(Vector2f to, String how) {
 		if(how == "straight") {
 			
@@ -152,7 +167,15 @@ public class Agent implements Situable, Timerable{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	/**
+	* If agent not arrived at the destination, he moves
+	*
+	*@param	v	Vector2f of destination
+	*
+	*@return	void
+	*
+	*/
 	@Override
 	public void runTimer(Vector2f v) {
 		System.out.println(this.getPosition());
@@ -188,7 +211,7 @@ public class Agent implements Situable, Timerable{
 		return sb.toString();
 	}
 
-	//--------------------------------------------------ctor-----------------------
+	//--------------------------------------------------constructor-----------------------
 	public Agent(boolean mouving, int PV, int speed, int stamina, int strength, Vector2f position, Player player) {
 		this.mouving = mouving;
 		this.PV = PV;
