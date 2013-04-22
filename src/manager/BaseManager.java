@@ -1,6 +1,7 @@
 package manager;
 
 import game.Base;
+import game.Player;
 
 import java.util.ArrayList;
 
@@ -9,6 +10,10 @@ public class BaseManager {
 
 	public ArrayList<Base> getBases() {
 		return bases;
+	}
+	
+	public void addBase(Base b) {
+		this.bases.add(b);
 	}
 
 	@Override

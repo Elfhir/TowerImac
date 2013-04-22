@@ -1,9 +1,12 @@
 package game;
 
-public class Player implements Runnable {
+import java.util.LinkedHashSet;
+
+public abstract class Player implements Runnable {
 	
 	private Bank bank;
 	private String name;
+	private LinkedHashSet<Base> selectedBases;
 
 	public Bank getBank() {
 		return bank;
@@ -20,7 +23,19 @@ public class Player implements Runnable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public LinkedHashSet<Base> getSelectedBases() {
+		return selectedBases;
+	}
 
+	public void setSelectedBases(LinkedHashSet<Base> selectedBases) {
+		this.selectedBases = selectedBases;
+	}
+	
+	public void addSelectedBase(Base b) {
+		this.selectedBases.add(b);
+	}
+	
 
 	@Override
 	public String toString() {
@@ -35,23 +50,10 @@ public class Player implements Runnable {
 	}
 	
 	// Starts the thread of the player
-		public void start(){
-			new Thread(this).start();
-	    }
+	public void start(){
+		new Thread(this).start();
+    }
 		
-		@Override
-		public void run() {
-			while (true) {
-				System.out.println("Checking the actions of the player");
-				try {
-					Thread.sleep(100);
-				}
-				catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
 		
 	//----------------------------------------------ctor----------------
 	public Player(String name, Bank bank) {
@@ -59,18 +61,14 @@ public class Player implements Runnable {
 		this.bank = bank;
 	}
 	
-	/*
-	 *  
-	 ********************* MAIN ********************
-	 * 
-	 */
-	public static void main(String[] args) {
-		Bank bank = new Bank(50);
-		Player michel = new Player("Michel", bank);
-		System.out.println(michel);
-		
-		michel.start();
+	public Player(String name) {
+		this(name, new Bank(50));
 	}
+	
+	public Player() {
+		this("unknown");
+	}
+	
 	
 	
 }

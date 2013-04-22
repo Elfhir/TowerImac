@@ -1,13 +1,31 @@
 
 public class test {
-	private boolean patata;
+
+	private boolean patattte;
+	private int frigo;
 
 	public boolean isPatate() {
-		return patata;
+		return patattte;
 	}
 
 	public void setPatate(boolean patate) {
-		this.patata = patate;
+		this.patattte = patate;
+	}
+
+	public int getFrigo() {
+		return frigo;
+	}
+
+	public void setFrigo(int frigo) {
+		this.frigo = frigo;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "test [patate=" + patattte + ", frigo=" + frigo + "]";
 	}
 	
 }

@@ -2,9 +2,6 @@ package game;
 
 import java.io.InputStream;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-
 import manager.AgentManager;
 import manager.BaseManager;
 import manager.PlayerManager;
@@ -17,6 +14,8 @@ import manager.TowerManager;
 
 public class Game {
 	
+	private boolean running;  // Indicates if the game is currently running or not
+
 	private PlayerManager playerManager;
 	private BaseManager baseManager;
 	private AgentManager agentManager;
@@ -27,22 +26,14 @@ public class Game {
 	/*
 	 *   Getters
 	 */
-	public ArrayList<Player> getPlayers() {
-		return this.playerManager.getPlayers();
-	}
 	
-	public ArrayList<Base> getBases() {
-		return this.baseManager.getBases();
+	public boolean isRunning() {
+		return running;
 	}
-	
-	public LinkedList<Agent> getAgents() {
-		return this.agentManager.getAgents();
+
+	public void setRunning(boolean running) {
+		this.running = running;
 	}
-	
-	public LinkedList<Tower> getTowers() {
-		return this.towerManager.getTowers();
-	}
-	
 	
 	
 	public PlayerManager getPlayerManager() {
@@ -86,6 +77,7 @@ public class Game {
 		this.baseManager = new BaseManager();
 		this.agentManager = new AgentManager();
 		this.towerManager = new TowerManager();
+		this.running = true;
 	}
 	
 	public void initGame(InputStream input) {
@@ -97,8 +89,10 @@ public class Game {
 	}
 	
 	/* 
-	 * Holder class : for the Singleton pattern implementation
+	 * 
+	 ************    Holder class : for the Singleton pattern implementation   ******************
 	 */
+	
 	private static class GameHolder
 	{		
 		// unique instance, not preinitialized
@@ -130,10 +124,10 @@ public class Game {
 		Game game = Game.getInstance();
 		
 		Bank bank1 = new Bank(10);
-		Player p1 = new Player("Jean-Marc", bank1);
+		Player p1 = new RealPlayer("Jean-Marc", bank1);
 		
 		Bank bank2 = new Bank(12);
-		Player p2 = new Player("Jean-Gui", bank2);
+		Player p2 = new IAPlayer("Jean-Gui", bank2);
 		
 		game.getPlayerManager().addPlayer(p1);
 		game.getPlayerManager().addPlayer(p2);
