@@ -1,13 +1,13 @@
 
 public class test {
-	private boolean patate;
+	private boolean patattte;
 
 	public boolean isPatate() {
-		return patate;
+		return patattte;
 	}
 
 	public void setPatate(boolean patate) {
-		this.patate = patate;
+		this.patattte = patate;
 	}
 	
 }
