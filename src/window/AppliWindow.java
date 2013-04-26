@@ -1,6 +1,8 @@
 package window;
 
 
+import game.Base;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -9,12 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
@@ -23,8 +23,8 @@ public class AppliWindow extends JFrame {
 	private int width;
 	private int height;
 	private Panel content;
-	private JButton bouton1;
-	private JButton bouton2;
+	private Base base1;
+	private Base base2;
 	
 	
 	public int getWidth() {
@@ -143,44 +143,48 @@ public class AppliWindow extends JFrame {
 		
 		
 		
-		bouton1 = new JButton("");
-		bouton1.setBorder(BorderFactory.createLineBorder(Color.black));
-		bouton1.setContentAreaFilled(false);
-		bouton1.setBounds(0, 0, width, height);
+		base1 = new Base(10, 10, null);
+		base1.setBorder(BorderFactory.createLineBorder(Color.black));
+		base1.setContentAreaFilled(false);
+		base1.setBounds(0, 0, width, height);
 		try
 	    {
-	        bouton1.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
+	        base1.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
 	    }
 		catch (IOException e1)
 	    {
 	    }
-		bouton1.addActionListener(new ActionListener() {
+		base1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Base 1 Selectionnée !\n");
+				base1.setAgents(base1.getAgents()-base1.getAgents());
+				base2.setAgents(Math.abs(base1.getAgents()-base2.getAgents()));
+				System.out.println(base1);
+				System.out.println(base2);
 			}
 		});
 		c.gridx = 3;
 		c.gridy = 0;
 
-		grille.setConstraints(bouton1, c);
-		content.add(bouton1, c);
+		grille.setConstraints(base1, c);
+		content.add(base1, c);
 		
 		// --------------------------------- - - - - - - - - - - - - - - - - ----------------------------
 		
-		bouton2 = new JButton("");
-		bouton2.setBorder(BorderFactory.createLineBorder(Color.black));
-		bouton2.setContentAreaFilled(false);
+		base2 = new Base(0, 10, null);
+		base2.setBorder(BorderFactory.createLineBorder(Color.black));
+		base2.setContentAreaFilled(false);
 		try
 	    {
-	        bouton2.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
-	        System.out.println(bouton2);
+	        base2.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
+	        System.out.println(base2);
 	    }
 		catch (IOException e2)
 	    {
 			//bouton2.getGraphics().drawOval(100, 100, 30, 30);
-			System.out.println(bouton2);
+			System.out.println(base2);
 	    }
-		bouton2.addActionListener(new ActionListener() {
+		base2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Base 2 Selectionnée !\n");
 			}
@@ -188,8 +192,8 @@ public class AppliWindow extends JFrame {
 		
 		c.gridx = 3;
 		c.gridy = 1;
-		grille.setConstraints(bouton2, c);
-		content.add(bouton2,c);
+		grille.setConstraints(base2, c);
+		content.add(base2,c);
 		
 		return content;
 	}

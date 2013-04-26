@@ -6,7 +6,7 @@ public abstract class Player implements Runnable {
 	
 	private Bank bank;
 	private String name;
-	private LinkedHashSet<Base> selectedBases;
+	private Base selectedBases;
 
 	public Bank getBank() {
 		return bank;
@@ -24,11 +24,11 @@ public abstract class Player implements Runnable {
 		this.name = name;
 	}
 	
-	public LinkedHashSet<Base> getSelectedBases() {
+	public Base getSelectedBases() {
 		return selectedBases;
 	}
 
-	public void setSelectedBases(LinkedHashSet<Base> selectedBases) {
+	public void setSelectedBases(Base selectedBases) {
 		this.selectedBases = selectedBases;
 	}
 	
