@@ -146,6 +146,7 @@ public class Base implements Situable, Timerable{
 		this.size = size;
 		this.diameter = diameter;
 		this.player = player;
+		this.position = new Vector2f(0, 0);
 	}
 	
 	public Base(int size, int diameter, Player player, Vector2f position){
