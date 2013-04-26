@@ -169,7 +169,7 @@ public class AppliWindow extends JFrame {
 		grille.setConstraints(base1, c);
 		content.add(base1, c);
 		
-		// --------------------------------- - - - - - - - - - - - - - - - - ----------------------------
+		// -------------------------------- - -  -   -    -     -      -       -        -         - -
 		
 		base2 = new Base(0, 10, null);
 		base2.setBorder(BorderFactory.createLineBorder(Color.black));
