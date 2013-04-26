@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -37,21 +38,26 @@ public class Panel extends JPanel{
 	 * 
 	 * @return	an ArrayList of ArrayList of Panel, a 2-D Tab. 
 	 */
-	public ArrayList<ArrayList<Panel>> newGrid(int numOfTileWidth, int numOfTileHeight, int sizeOfTile, GridBagConstraints c) {
+	public ArrayList<ArrayList<Panel>> newGrid(int numOfTileWidth, int numOfTileHeight, int sizeOfTile, Panel content, GridBagLayout grille, GridBagConstraints c) {
+		
 		ArrayList<ArrayList<Panel>> cells = null;
 		
 		c.gridheight = 1;
 		c.gridwidth = 1;
 		
-		for(int i = 0; i<cells.get(0).size(); ++i) {
-			for(int j = 0; j<cells.get(0).size(); ++j) {
-				Panel cell = new Panel();
-				cell.setBackground(Color.red);
+		Panel cell = new Panel();
+		
+		for(int i = 0; i<numOfTileHeight; ++i) {
+			for(int j = 0; j<numOfTileWidth; ++j) {
+				cell.setBackground(new Color(50,i*10,j*10));
 				cell.setPreferredSize(new Dimension(sizeOfTile, sizeOfTile));
 				c.gridx = i;
 				c.gridy = j;
-				
+				grille.setConstraints(cell, c);
+				content.add(cell, c);
+				System.out.println("i: "+i+" -- j: "+j);
 			}
+				c.gridwidth = GridBagConstraints.REMAINDER;
 		}
 			
 		return cells;
