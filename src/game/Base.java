@@ -1,20 +1,21 @@
 package game;
 
+import javax.swing.JButton;
 import javax.vecmath.Vector2f;
 
 import time.TimerGame;
 import time.Timerable;
 
-public class Base implements Situable, Timerable{
+public class Base extends JButton implements Situable, Timerable{
 	
 	private int size;
 	private static int MAX_SIZE;
 	private int diameter;
 	private Player player;
-	private Vector2f position;	
+	private Vector2f position;
 	private int agents;
 	
-	public int getSize() {
+	public int getSizeBase() {
 		return size;
 	}
 	
@@ -182,7 +183,9 @@ public class Base implements Situable, Timerable{
 		// If one attacks, the other defenses also !
 		base2.attackBase(base1);
 		
-		TimerGame tg = new TimerGame(1000/base1.getSize(), 0, 0, 0, base1, true);
+
+		TimerGame tg = new TimerGame(1000/base1.getSizeBase(), 0, 0, 0, base1, false);
+
 		
 	}
 
