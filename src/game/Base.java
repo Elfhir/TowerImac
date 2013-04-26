@@ -182,7 +182,7 @@ public class Base implements Situable, Timerable{
 		// If one attacks, the other defenses also !
 		base2.attackBase(base1);
 		
-		TimerGame tg = new TimerGame(1000/base1.getSize(), 0, 0, 0, base1, false);
+		TimerGame tg = new TimerGame(1000/base1.getSize(), 0, 0, 0, base1, true);
 		
 	}
 

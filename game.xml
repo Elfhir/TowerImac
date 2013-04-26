@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game>
+  <players>
+    <player name="Michel" money="50" type="RealPlayer" />
+    <player name="Jean-Luc" money="50" type="IAPlayer" />
+    <player name="Patrick" money="50" type="IAPlayer" />
+    <player name="Germaine" money="50" type="IAPlayer" />
+  </players>
+  <bases>
+    <base position="(0.0, 0.0)" player="Michel" nbAgents="0" size="10" diameter="10" />
+    <base position="(0.0, 0.0)" player="Michel" nbAgents="0" size="0" diameter="10" />
+  </bases>
+  <towers />
+  <agents />
+</game>
