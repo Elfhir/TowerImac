@@ -46,6 +46,10 @@ public class AppliWindow extends JFrame {
 	public Panel getContent() {
 		return content;
 	}
+	
+	public void setContent(Panel content) {
+		this.content = content;
+	}
 
 	public int getNumOfTile() {
 		return ((this.width/50) * (this.height/50));
@@ -66,13 +70,6 @@ public class AppliWindow extends JFrame {
 		build(title, resize); // On initialise notre fenetre
 	}
 	
-	public Panel getPane() {
-		return content;
-	}
-
-	public void setPane(Panel pane) {
-		this.content = pane;
-	}
 	/**
 	 * 
 	 * @param title
@@ -106,8 +103,10 @@ public class AppliWindow extends JFrame {
 		GridBagConstraints c = new GridBagConstraints();
 		//On crée nos différents conteneurs de couleur différente
 		
-		ArrayList<ArrayList<Panel>> cells = content.newGrid(this.getNumOfTileWidth(), this.getNumOfTileHeight(), 50, content, grille, c);
+		//It not works yet
+		//ArrayList<ArrayList<Panel>> cells = content.newGrid(numW, numH, 50, content, grille, c);
 	     
+		// One cell
 		/*
 		Panel cell1 = new Panel();
 		cell1.setBackground(Color.YELLOW);
@@ -117,7 +116,8 @@ public class AppliWindow extends JFrame {
         grille.setConstraints(cell1, c);
         */
        
-		/*
+		// 1st Button
+		
 		bouton1 = new JButton("");
 		bouton1.setBorder(BorderFactory.createLineBorder(Color.black));
 		bouton1.setContentAreaFilled(false);
@@ -141,7 +141,7 @@ public class AppliWindow extends JFrame {
 		content.add(bouton1, c);
 		
 		// --------------------------------- - - - - - - - - - - - - - - - - ----------------------------
-		
+		// 2nd button
 		bouton2 = new JButton("");
 		bouton2.setBorder(BorderFactory.createLineBorder(Color.black));
 		bouton2.setContentAreaFilled(false);
@@ -165,7 +165,7 @@ public class AppliWindow extends JFrame {
 		c.gridy = 1;
 		grille.setConstraints(bouton2, c);
 		content.add(bouton2,c);
-		*/
+		
 		
 		return content;
 	}

@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.LayoutManager;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -49,15 +50,18 @@ public class Panel extends JPanel{
 		
 		for(int i = 0; i<numOfTileHeight; ++i) {
 			for(int j = 0; j<numOfTileWidth; ++j) {
-				cell.setBackground(new Color(50,i*10,j*10));
+				cell.setBackground(new Color(0,i*20,j*0));
 				cell.setPreferredSize(new Dimension(sizeOfTile, sizeOfTile));
-				c.gridx = i;
-				c.gridy = j;
+				//c.gridx = i;
+				//c.gridy = j;
+				c.gridx = GridBagConstraints.RELATIVE;
+				c.gridy = GridBagConstraints.RELATIVE;
+				c.fill = GridBagConstraints.HORIZONTAL;
 				grille.setConstraints(cell, c);
 				content.add(cell, c);
 				System.out.println("i: "+i+" -- j: "+j);
 			}
-				c.gridwidth = GridBagConstraints.REMAINDER;
+				
 		}
 			
 		return cells;
@@ -65,7 +69,10 @@ public class Panel extends JPanel{
 	
 	public Panel() {
 		super();
-		
+	}
+	
+	public Panel(LayoutManager layout) {
+		super(layout);
 	}
 	
 	/**
