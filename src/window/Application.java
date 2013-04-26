@@ -8,6 +8,8 @@ import game.RealPlayer;
 
 import javax.swing.SwingUtilities;
 
+import writer.XmlWriter;
+
 public class Application {
 
 	public static void main(String[] args) {
@@ -29,6 +31,10 @@ public class Application {
 	
 	game.getBaseManager().addBase(base1);
 	game.getBaseManager().addBase(base2);
+	
+	XmlWriter.createXmlFile(game);
+	
+	
 	
 	michel.start();
 	jean_luc.start();
