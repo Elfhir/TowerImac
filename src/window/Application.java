@@ -21,8 +21,8 @@ public class Application {
 	Player patrick = new IAPlayer("Patrick");
 	Player germaine = new IAPlayer("Germaine");
 	
-	Base base1 = new Base(10, 10, michel);
-	Base base2 = new Base(0, 10, michel);
+	Base base1 = new Base(10, michel);
+	Base base2 = new Base(0, michel);
 	
 	game.getPlayerManager().addPlayer(michel);
 	game.getPlayerManager().addPlayer(jean_luc);

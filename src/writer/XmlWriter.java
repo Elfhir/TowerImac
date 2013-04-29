@@ -60,15 +60,13 @@ public class XmlWriter {
 			Attribute x = new Attribute("x", String.valueOf(base.getPosition().x));
 			Attribute y = new Attribute("y", String.valueOf(base.getPosition().y));
 			Attribute player = new Attribute("player", base.getPlayer().getName());
-			Attribute nbAgents = new Attribute("nbAgents", String.valueOf(base.getAgents()));
-			Attribute size = new Attribute("size", String.valueOf(base.getSizeBase()));
-			Attribute diameter = new Attribute("diameter", String.valueOf(base.getDiameter()));
+			Attribute nbAgents = new Attribute("nbAgents", String.valueOf(base.getNbAgents()));
+			Attribute might = new Attribute("might", String.valueOf(base.getMight()));
 			baseElement.setAttribute(x);
 			baseElement.setAttribute(y);
 			baseElement.setAttribute(player);
 			baseElement.setAttribute(nbAgents);
-			baseElement.setAttribute(size);
-			baseElement.setAttribute(diameter);
+			baseElement.setAttribute(might);
 			
 		}
 		

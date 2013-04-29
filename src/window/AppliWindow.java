@@ -117,7 +117,7 @@ public class AppliWindow extends JFrame {
        
 		// 1st Button
 		
-		base1 = new Base(10, 10, null);
+		base1 = new Base(10, null);
 		base1.setBorder(BorderFactory.createLineBorder(Color.black));
 		base1.setContentAreaFilled(false);
 		base1.setBounds(0, 0, width, height);
@@ -131,8 +131,8 @@ public class AppliWindow extends JFrame {
 		base1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Base 1 Selectionnée !\n");
-				base1.setAgents(base1.getAgents()-base1.getAgents());
-				base2.setAgents(Math.abs(base1.getAgents()-base2.getAgents()));
+				base1.setNbAgents(base1.getNbAgents()-base1.getNbAgents());
+				base2.setNbAgents(Math.abs(base1.getNbAgents()-base2.getNbAgents()));
 				System.out.println(base1);
 				System.out.println(base2);
 			}
@@ -145,7 +145,7 @@ public class AppliWindow extends JFrame {
 
 		// -------------------------------- - -  -   -    -     -      -       -        -         - -
 		
-		base2 = new Base(0, 10, null);
+		base2 = new Base(0, null);
 		base2.setBorder(BorderFactory.createLineBorder(Color.black));
 		base2.setContentAreaFilled(false);
 		try
