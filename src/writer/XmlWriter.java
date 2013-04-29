@@ -57,12 +57,14 @@ public class XmlWriter {
 			Element baseElement = new Element("base");
 			basesElement.addContent(baseElement);
 			// attributes 
-			Attribute position = new Attribute("position", String.valueOf(base.getPosition()));
-			Attribute player = new Attribute("player", base.getPlayer().getName()); // PROBLEME si 2 joueurs avec le même nom ! => utiliser un identifiant
+			Attribute x = new Attribute("x", String.valueOf(base.getPosition().x));
+			Attribute y = new Attribute("y", String.valueOf(base.getPosition().y));
+			Attribute player = new Attribute("player", base.getPlayer().getName());
 			Attribute nbAgents = new Attribute("nbAgents", String.valueOf(base.getAgents()));
-			Attribute size = new Attribute("size", String.valueOf(base.getSize()));
+			Attribute size = new Attribute("size", String.valueOf(base.getSizeBase()));
 			Attribute diameter = new Attribute("diameter", String.valueOf(base.getDiameter()));
-			baseElement.setAttribute(position);
+			baseElement.setAttribute(x);
+			baseElement.setAttribute(y);
 			baseElement.setAttribute(player);
 			baseElement.setAttribute(nbAgents);
 			baseElement.setAttribute(size);

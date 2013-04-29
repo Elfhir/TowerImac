@@ -1,6 +1,7 @@
 package manager;
 
 import game.Agent;
+import game.Tower;
 
 import java.util.LinkedList;
 
@@ -9,6 +10,10 @@ public class AgentManager {
 
 	public LinkedList<Agent> getAgents() {
 		return agents;
+	}
+	
+	public void addAgent(Agent a) {
+		this.agents.add(a);
 	}
 
 	@Override
