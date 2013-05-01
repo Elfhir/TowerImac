@@ -117,27 +117,20 @@ public class Base extends JButton implements Situable, Timerable{
 	
 	// ----------------------------------------------------constructor-------------
 	
+	public Base() {
+		this(0);
+	}
+	
 	public Base(int might){
-		super();
-		this.might = might;
-		this.player = null;
-		this.position = new Vector2f(0, 0);
-		this.nbAgents = 0;
+		this(might, null);
 	}
 	
 	public Base(int might, Player player){
-		super();
-		this.might = might;
-		this.player = player;
-		this.position = new Vector2f(0, 0);
+		this(might, player, new Vector2f(0, 0));
 	}
 	
 	public Base(int might, Player player, Vector2f position){
-		super();
-		this.might = might;
-		this.player = player;
-		this.position = position;
-		this.nbAgents = 0;
+		this(might, player, position, 0);
 	}
 	
 	public Base(int might, Player player, Vector2f position, int nbAgents){
