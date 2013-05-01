@@ -17,6 +17,8 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import time.BaseThread;
+
 @SuppressWarnings("serial")
 public class AppliWindow extends JFrame {
 	
@@ -64,7 +66,7 @@ public class AppliWindow extends JFrame {
 		super();
 		this.width = width;
 		this.height = height;
-		build(title, resize); // On initialise notre fenetre
+		buildWindow(title, resize); // On initialise notre fenetre
 	}
 	
 	/**
@@ -73,7 +75,7 @@ public class AppliWindow extends JFrame {
 	 * @param height	The height of the window
 	 * @param resize	indicates if the window is resizable or not
 	 */ 
-	private void build(String title, boolean resize) {
+	private void buildWindow(String title, boolean resize) {
 		setTitle(title);
 		setSize(this.width, this.height);
 		setLocationRelativeTo(null); // null => The window is centered on the screen
@@ -101,6 +103,7 @@ public class AppliWindow extends JFrame {
 		    }
 			catch (IOException e1)
 		    {
+				System.out.println("Error ! Loading base image");
 		    }
 			base.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -125,6 +128,13 @@ public class AppliWindow extends JFrame {
 		Game game = Game.getInstance();
 		game.initGame(fileName);
 		buildBases();
+		
+		// We create the Runnable
+		BaseThread generation1 = new BaseThread();
+		// We create the Thread for the generation of agents
+		Thread threadBase = new Thread(generation1);
+		threadBase.start();
+		
 //		buildAgents();
 //		buildTowers();
 //		//...
