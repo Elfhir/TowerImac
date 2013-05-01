@@ -1,5 +1,6 @@
 package manager;
 
+import game.Player;
 import game.Tower;
 
 import java.util.LinkedList;
@@ -9,6 +10,10 @@ public class TowerManager {
 	
 	public LinkedList<Tower> getTowers() {
 		return towers;
+	}
+	
+	public void addTower(Tower t) {
+		this.towers.add(t);
 	}
 	
 	@Override

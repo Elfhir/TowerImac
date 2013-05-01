@@ -12,7 +12,7 @@ public class Agent implements Situable, Timerable{
 	private int speed;
 	private int strength;
 	private int stamina;
-	private boolean mouving;
+	private boolean moving;
 	private Vector2f position;
 	private Player player;
 	
@@ -74,12 +74,12 @@ public class Agent implements Situable, Timerable{
 		this.strength = strength;
 	}
 
-	public boolean isMouving() {
-		return mouving;
+	public boolean isMoving() {
+		return moving;
 	}
 
-	public void setMouving(boolean mouving) {
-		this.mouving = mouving;
+	public void setMoving(boolean moving) {
+		this.moving = moving;
 	}
 
 	public void setPosition(Vector2f position) {
@@ -212,14 +212,18 @@ public class Agent implements Situable, Timerable{
 	}
 
 	//--------------------------------------------------constructor-----------------------
-	public Agent(boolean mouving, int PV, int speed, int stamina, int strength, Vector2f position, Player player) {
-		this.mouving = mouving;
+	public Agent(boolean moving, int PV, int speed, int stamina, int strength, Vector2f position, Player player) {
+		this.moving = moving;
 		this.PV = PV;
 		this.speed = speed;
 		this.stamina = stamina;
 		this.strength = strength;
 		this.position = position;
 		this.player = player;
+	}
+	
+	public Agent() {
+		this(false, 0, 0, 0, 0, new Vector2f(0,0), null);
 	}
 	
 	@SuppressWarnings("unused")

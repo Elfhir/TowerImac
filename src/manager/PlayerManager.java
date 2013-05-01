@@ -10,6 +10,15 @@ public class PlayerManager {
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}
+	
+	public Player getPlayer(String playerName) {
+		for(Player p:getPlayers()) {
+			if (p.getName().equals(playerName)) {
+				return p;
+			}
+		}
+		return null;
+	}
 
 	public void addPlayer(Player p) {
 		this.players.add(p);

@@ -2,6 +2,7 @@ package window;
 
 
 import game.Base;
+import game.Game;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -16,15 +17,14 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import time.BaseThread;
+
 @SuppressWarnings("serial")
 public class AppliWindow extends JFrame {
 	
 	private int width;
 	private int height;
 	private Panel content;
-	private Base base1;
-	private Base base2;
-	
 	
 	public int getWidth() {
 		return width;
@@ -66,29 +66,86 @@ public class AppliWindow extends JFrame {
 		super();
 		this.width = width;
 		this.height = height;
-		build(title, resize); // On initialise notre fenetre
+		buildWindow(title, resize); // On initialise notre fenetre
 	}
 	
 	/**
-	 * 
-	 * @param title
-	 * @param width
-	 * @param height
-	 * @param resize
-	 * 
-	 * Utiliser cette méthode pour construire la fenêtre de l'application
+	 * Builds the window of the application
+	 * @param width		The width of the window
+	 * @param height	The height of the window
+	 * @param resize	indicates if the window is resizable or not
 	 */ 
-	private void build(String title, boolean resize) {
+	private void buildWindow(String title, boolean resize) {
 		setTitle(title);
 		setSize(this.width, this.height);
-		setLocationRelativeTo(null); // On centre la fenetre sur l'écran (en indiquant null)
-		setResizable(resize); // On autorise avec true le redimensionnement
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // On dit à l'application de se fermer au clic sur la croix.
+		setLocationRelativeTo(null); // null => The window is centered on the screen
+		setResizable(resize); // Resizable window
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // The application musts close when we click on the cross
 		setContentPane(buildContentPane(width, height));
 		
 	}
 	
+	/**
+	 * Builds the elements of the window corresponding to the bases
+	 */
+	private void buildBases() {
+		
+		GridBagLayout grill = (GridBagLayout) content.getLayout();
+		Game game = Game.getInstance();
+		
+		for(final Base base: game.getBaseManager().getBases()) {
+			base.setBorder(BorderFactory.createLineBorder(Color.black));
+			base.setContentAreaFilled(false);
+			base.setBounds(0, 0, 1, 1);
+			try
+		    {
+		        base.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
+		    }
+			catch (IOException e1)
+		    {
+				System.out.println("Error ! Loading base image");
+		    }
+			base.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					base.clicked();
+				}
+			});
+			
+			// Am I doing it right ?? (I guess not)
+			GridBagConstraints c = new GridBagConstraints();
+			c.gridx = (int) base.getPosition().x;
+			c.gridy = (int) base.getPosition().y;
+			grill.setConstraints(base, c);
+			content.add(base, c);
+		}
+	}
 	
+	/**
+	 * Build the game : creates the informations from a XML file and build all corresponding elements in the window.
+	 * @param fileName	The name of the XML file needed to create the game
+	 */
+	private void buildGame(String fileName) {
+		Game game = Game.getInstance();
+		game.initGame(fileName);
+		buildBases();
+		
+		// We create the Runnable
+		BaseThread generation1 = new BaseThread();
+		// We create the Thread for the generation of agents
+		Thread threadBase = new Thread(generation1);
+		threadBase.start();
+		
+//		buildAgents();
+//		buildTowers();
+//		//...
+	}
+	
+	/**
+	 * Builds the window ????????????????????????????????
+	 * @param width		The width of the window ?????????
+	 * @param height	The height of the window ????????
+	 * @return			The panel ???????????????????????
+	 */
 	private Panel buildContentPane(int width, int height) {
 		
 		int numW = this.getNumOfTileWidth();
@@ -96,10 +153,10 @@ public class AppliWindow extends JFrame {
 		
 		this.content = new Panel();
 		
-		GridBagLayout grille = new GridBagLayout();
-		content.setLayout(grille);
+		GridBagLayout grill = new GridBagLayout();
+		content.setLayout(grill);
 		content.setBackground(Color.WHITE);
-		GridBagConstraints c = new GridBagConstraints();
+//		GridBagConstraints c = new GridBagConstraints();
 		//On crée nos différents conteneurs de couleur différente
 		
 		//It not works yet
@@ -115,61 +172,8 @@ public class AppliWindow extends JFrame {
         grille.setConstraints(cell1, c);
         */
        
-		// 1st Button
-		
-		base1 = new Base(10, 10, null);
-		base1.setBorder(BorderFactory.createLineBorder(Color.black));
-		base1.setContentAreaFilled(false);
-		base1.setBounds(0, 0, width, height);
-		try
-	    {
-	        base1.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
-	    }
-		catch (IOException e1)
-	    {
-	    }
-		base1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Base 1 Selectionnée !\n");
-				base1.setAgents(base1.getAgents()-base1.getAgents());
-				base2.setAgents(Math.abs(base1.getAgents()-base2.getAgents()));
-				System.out.println(base1);
-				System.out.println(base2);
-			}
-		});
-		c.gridx = 3;
-		c.gridy = 0;
+		buildGame("game.xml");
 
-		grille.setConstraints(base1, c);
-		content.add(base1, c);
-
-		// -------------------------------- - -  -   -    -     -      -       -        -         - -
-		
-		base2 = new Base(0, 10, null);
-		base2.setBorder(BorderFactory.createLineBorder(Color.black));
-		base2.setContentAreaFilled(false);
-		try
-	    {
-	        base2.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
-	        System.out.println(base2);
-	    }
-		catch (IOException e2)
-	    {
-			//bouton2.getGraphics().drawOval(100, 100, 30, 30);
-			System.out.println(base2);
-	    }
-		base2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Base 2 Selectionnée !\n");
-			}
-		});
-		
-		c.gridx = 3;
-		c.gridy = 1;
-		grille.setConstraints(base2, c);
-		content.add(base2,c);
-		
-		
 		return content;
 	}
 }

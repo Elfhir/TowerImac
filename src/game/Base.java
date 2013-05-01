@@ -8,31 +8,19 @@ import time.Timerable;
 
 public class Base extends JButton implements Situable, Timerable{
 	
-	private int size;
-	private static int MAX_SIZE;
-	private int diameter;
+	private int might;
 	private Player player;
 	private Vector2f position;
-	private int agents;
+	private int nbAgents;
 	
-	public int getSizeBase() {
-		return size;
-	}
-	
-	public int getDiameter() {
-		return diameter;
+	public int getMight() {
+		return might;
 	}
 	
 	public Player getPlayer() {
-		if(hasPlayer()) {
-			return player;
-		}
-		else return null;
+		return player;
 	}
 	
-	public int getMaxSize() {
-		return Base.MAX_SIZE;
-	}
 		
 	public boolean hasPlayer() {
 		if (player != null) {
@@ -52,19 +40,19 @@ public class Base extends JButton implements Situable, Timerable{
 		position.y = y;
 	}
 	
-	public void setAgents(int agents) {
-		agents = agents <= 0 ? -agents : agents;
-		this.agents = agents;
+	public void setNbAgents(int agents) {
+		agents = (agents <= 0) ? 0 : agents;
+		this.nbAgents = agents;
 	}
 	
-	public int getAgents() {
-		return this.agents;
+	public int getNbAgents() {
+		return this.nbAgents;
 	}
 	
 	public void attackBase(Base enemy){
 		System.out.println("Attack !\n");
 		
-		int maxAgent = this.getAgents() <= enemy.getAgents() ? this.getAgents() : enemy.getAgents();
+		int maxAgent = Math.max(this.getNbAgents(), enemy.getNbAgents());
 		for(int i = 0; i < maxAgent; ++i) {
 			// whoever had a LinkedList<Agent> should use attackAgent() here.
 		}
@@ -72,25 +60,23 @@ public class Base extends JButton implements Situable, Timerable{
 	}
 	
 	public void generateAgent() {
-		this.setAgents(this.getAgents() + 1);
+		this.setNbAgents(this.getNbAgents() + 1);
 	}
 	
 	public void deleteAgent() {
-		if(this.getAgents() <= 0) return;
-		this.setAgents(this.getAgents() - 1);
+		if(this.getNbAgents() <= 0) return;
+		this.setNbAgents(this.getNbAgents() - 1);
+	}
+	
+	public void clicked(){
+		System.out.println("Base clicked !\n" + this);
 	}
 	
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder("");
-		sb.append("size ");
-		sb.append(this.size);
-		sb.append("\n");
-		sb.append("MAX_SIZE: ");
-		sb.append(Base.MAX_SIZE);
-		sb.append("\n");
-		sb.append("diameter: ");
-		sb.append(this.diameter);
+		StringBuilder sb = new StringBuilder("Base :\n");
+		sb.append("might ");
+		sb.append(this.might);
 		sb.append("\n");
 		sb.append("player: ");
 		sb.append(this.player);
@@ -98,8 +84,8 @@ public class Base extends JButton implements Situable, Timerable{
 		sb.append("position: ");
 		sb.append(this.position);
 		sb.append("\n");
-		sb.append("agents: ");
-		sb.append(this.getAgents());
+		sb.append("nbAgents: ");
+		sb.append(this.getNbAgents());
 		sb.append("\n");
 		return sb.toString();
 	}
@@ -107,7 +93,7 @@ public class Base extends JButton implements Situable, Timerable{
 	
 	@Override
 	public void runTimer() {
-		System.out.println(this.getAgents());
+		System.out.println(this.getNbAgents());
 		this.generateAgent();
 	}
 
@@ -125,7 +111,7 @@ public class Base extends JButton implements Situable, Timerable{
 	
 	@Override
 	public void runTimer(boolean b) {
-		System.out.println(this.getAgents());
+		System.out.println(this.getNbAgents());
 		if(b == true)
 			this.generateAgent();
 		else
@@ -135,36 +121,28 @@ public class Base extends JButton implements Situable, Timerable{
 	
 	// ----------------------------------------------------constructor-------------
 	
-	public Base(int size, int diameter){
-		super();
-		this.size = size;
-		this.diameter = diameter;
-		player = null;
+	public Base() {
+		this(0);
 	}
 	
-	public Base(int size, int diameter, Player player){
-		super();
-		this.size = size;
-		this.diameter = diameter;
-		this.player = player;
-		this.position = new Vector2f(0, 0);
+	public Base(int might){
+		this(might, null);
 	}
 	
-	public Base(int size, int diameter, Player player, Vector2f position){
-		super();
-		this.size = size;
-		this.diameter = diameter;
-		this.player = player;
-		this.position = position;
+	public Base(int might, Player player){
+		this(might, player, new Vector2f(0, 0));
 	}
 	
-	public Base(int size, int diameter, Player player, Vector2f position, int agents){
+	public Base(int might, Player player, Vector2f position){
+		this(might, player, position, 0);
+	}
+	
+	public Base(int might, Player player, Vector2f position, int nbAgents){
 		super();
-		this.size = size;
-		this.diameter = diameter;
+		this.might = might;
 		this.player = player;
 		this.position = position;
-		this.agents = agents;		
+		this.nbAgents = nbAgents;		
 	}
 	
 	@SuppressWarnings("unused")
@@ -173,10 +151,10 @@ public class Base extends JButton implements Situable, Timerable{
 		//Agent strongAgent = new Agent(true, 10, 10, 10, 10, null, null);
 		//Agent weakAgent = new Agent(true, 5, 7, 5, 5, null, null);
 		
-		Base base1 = new Base(5, 5, null, new Vector2f(0.5f, 0.5f), 5);
+		Base base1 = new Base(5, null, new Vector2f(0.5f, 0.5f), 5);
 		//System.out.println(base1);
 		
-		Base base2 = new Base(5, 5, null, new Vector2f(-0.5f, -0.5f), 5);
+		Base base2 = new Base(5, null, new Vector2f(-0.5f, -0.5f), 5);
 		//System.out.println(base2);
 		
 		
@@ -184,7 +162,7 @@ public class Base extends JButton implements Situable, Timerable{
 		base2.attackBase(base1);
 		
 
-		TimerGame tg = new TimerGame(1000/base1.getSizeBase(), 0, 0, 0, base1, false);
+		TimerGame tg = new TimerGame(1000/base1.getMight(), 0, 0, 0, base1, false);
 
 		
 	}
