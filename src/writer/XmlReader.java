@@ -179,10 +179,10 @@ public class XmlReader {
 		try {
 			createGame(game, "game.xml");
 		} catch (JDOMException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error ! the game.xml is corrupted !");
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error ! the game.xml file doesn't exist !");
 			e.printStackTrace();
 		}
 		

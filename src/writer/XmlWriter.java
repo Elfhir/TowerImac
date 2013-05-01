@@ -170,6 +170,7 @@ public class XmlWriter {
 	
 	public static void main(String[] args) {
 		
+		//Create THE game and all datas
 		Game game = Game.getInstance();
 		
 		Player michel = new RealPlayer("Michel");
