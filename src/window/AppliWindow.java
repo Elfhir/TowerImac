@@ -68,24 +68,24 @@ public class AppliWindow extends JFrame {
 	}
 	
 	/**
-	 * 
-	 * @param title
-	 * @param width
-	 * @param height
-	 * @param resize
-	 * 
-	 * Utiliser cette méthode pour construire la fenêtre de l'application
+	 * Builds the window of the application
+	 * @param width		The width of the window
+	 * @param height	The height of the window
+	 * @param resize	indicates if the window is resizable or not
 	 */ 
 	private void build(String title, boolean resize) {
 		setTitle(title);
 		setSize(this.width, this.height);
-		setLocationRelativeTo(null); // On centre la fenetre sur l'écran (en indiquant null)
-		setResizable(resize); // On autorise avec true le redimensionnement
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // On dit à l'application de se fermer au clic sur la croix.
+		setLocationRelativeTo(null); // null => The window is centered on the screen
+		setResizable(resize); // Resizable window
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // The application musts close when we click on the cross
 		setContentPane(buildContentPane(width, height));
 		
 	}
 	
+	/**
+	 * Builds the elements of the window corresponding to the bases
+	 */
 	private void buildBases() {
 		
 		GridBagLayout grill = (GridBagLayout) content.getLayout();
@@ -119,16 +119,25 @@ public class AppliWindow extends JFrame {
 		}
 	}
 	
-	private void buildGame() {
+	/**
+	 * Build the game : creates the informations from a XML file and build all corresponding elements in the window.
+	 * @param fileName	The name of the XML file needed to create the game
+	 */
+	private void buildGame(String fileName) {
 		Game game = Game.getInstance();
-		game.initGame("game.xml");
+		game.initGame(fileName);
 		buildBases();
 //		buildAgents();
 //		buildTowers();
 //		//...
 	}
 	
-	
+	/**
+	 * Builds the window ????????????????????????????????
+	 * @param width		The width of the window ?????????
+	 * @param height	The height of the window ????????
+	 * @return			The panel ???????????????????????
+	 */
 	private Panel buildContentPane(int width, int height) {
 		
 		int numW = this.getNumOfTileWidth();
@@ -155,7 +164,7 @@ public class AppliWindow extends JFrame {
         grille.setConstraints(cell1, c);
         */
        
-		buildGame();
+		buildGame("game.xml");
 
 		return content;
 	}

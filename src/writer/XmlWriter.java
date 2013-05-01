@@ -20,18 +20,35 @@ import org.jdom2.output.XMLOutputter;
 
 public class XmlWriter {
 	
+	/**
+	 * Creates a XML file from all informations known. All informations needed are accessible from the class Game, so it's the only parameter.
+	 * 
+	 * @param game	the instance of the Game singleton
+	 * @see	Game
+	 * @see	XmlReader
+	 */
 	public static void createXmlFile(Game game) {
 		Element gameElement = new Element("game");
 		Document document = new Document(gameElement);
-		
-		gameElement.addContent(getPlayersElement(game));
-		gameElement.addContent(getBasesElement(game));
-		gameElement.addContent(getTowersElement(game));
-		gameElement.addContent(getAgentsElement(game));
-		
+		if(game != null){
+			gameElement.addContent(getPlayersElement(game));
+			gameElement.addContent(getBasesElement(game));
+			gameElement.addContent(getTowersElement(game));
+			gameElement.addContent(getAgentsElement(game));
+		}
 		saveFile("game.xml", document);
 	}
 	
+	/**
+	 * Returns the XML element corresponding to the players informations.
+	 * @param game the instance of the Game singleton
+	 * @return an XML Element
+	 * @see Element
+	 * @see Document
+	 * @see #getAgentsElement(Game)
+	 * @see #getBasesElement(Game)
+	 * @see #getTowersElement(Game)
+	 */
 	public static Element getPlayersElement(Game game) {
 		/* Players */
 		Element playersElement = new Element("players");
@@ -51,6 +68,16 @@ public class XmlWriter {
 		return playersElement;
 	}
 	
+	/**
+	 * Returns the XML element corresponding to the bases informations.
+	 * @param game the instance of the Game singleton
+	 * @return an XML Element
+	 * @see Element
+	 * @see Document
+	 * @see #getAgentsElement(Game)
+	 * @see #getPlayersElement(Game)
+	 * @see #getTowersElement(Game)
+	 */
 	public static Element getBasesElement(Game game) {
 		/* Players */
 		Element basesElement = new Element("bases");
@@ -75,6 +102,16 @@ public class XmlWriter {
 		return basesElement;
 	}
 	
+	/**
+	 * Returns the XML element corresponding to the agents informations.
+	 * @param game the instance of the Game singleton
+	 * @return an XML Element
+	 * @see Element
+	 * @see Document
+	 * @see #getPlayersElement(Game)
+	 * @see #getBasesElement(Game)
+	 * @see #getTowersElement(Game)
+	 */
 	public static Element getAgentsElement(Game game) {
 		/* Players */
 		Element agentsElement = new Element("agents");
@@ -90,6 +127,16 @@ public class XmlWriter {
 		return agentsElement;
 	}
 	
+	/**
+	 * Returns the XML element corresponding to the towers informations.
+	 * @param game the instance of the Game singleton
+	 * @return an XML Element
+	 * @see Element
+	 * @see Document
+	 * @see #getAgentsElement(Game)
+	 * @see #getBasesElement(Game)
+	 * @see #getPlayersElement(Game)
+	 */
 	public static Element getTowersElement(Game game) {
 		/* Players */
 		Element towersElement = new Element("towers");
@@ -105,6 +152,12 @@ public class XmlWriter {
 		return towersElement;
 	}
 	
+	/**
+	 * Saves the document created by {@link #createXmlFile(Game)}
+	 * @param fileName	The name of the XML file created
+	 * @param document	The document to write
+	 * @see Document
+	 */
 	public static void saveFile(String fileName, Document document) {
 		
 		try {
@@ -136,8 +189,6 @@ public class XmlWriter {
 		game.getBaseManager().addBase(base2);
 		
 		XmlWriter.createXmlFile(game);
-		
-		game.start();
 		
 	}
 
