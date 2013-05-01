@@ -68,9 +68,13 @@ public class Base extends JButton implements Situable, Timerable{
 		this.setNbAgents(this.getNbAgents() - 1);
 	}
 	
+	public void clicked(){
+		System.out.println("Base clicked !\n" + this);
+	}
+	
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder("");
+		StringBuilder sb = new StringBuilder("Base :\n");
 		sb.append("might ");
 		sb.append(this.might);
 		sb.append("\n");

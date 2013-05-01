@@ -91,10 +91,10 @@ public class AppliWindow extends JFrame {
 		GridBagLayout grill = (GridBagLayout) content.getLayout();
 		Game game = Game.getInstance();
 		
-		for(Base base: game.getBaseManager().getBases()) {
+		for(final Base base: game.getBaseManager().getBases()) {
 			base.setBorder(BorderFactory.createLineBorder(Color.black));
 			base.setContentAreaFilled(false);
-			base.setBounds(0, 0, width, height);
+			base.setBounds(0, 0, 1, 1);
 			try
 		    {
 		        base.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
@@ -104,9 +104,7 @@ public class AppliWindow extends JFrame {
 		    }
 			base.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("clicked!");
-					// to do
-					// base.clicked(...)
+					base.clicked();
 				}
 			});
 			
