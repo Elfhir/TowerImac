@@ -1,6 +1,11 @@
 package game;
 
+import java.io.IOException;
 import java.io.InputStream;
+
+import org.jdom2.JDOMException;
+
+import writer.XmlReader;
 
 import manager.AgentManager;
 import manager.BaseManager;
@@ -80,12 +85,24 @@ public class Game {
 		this.running = true;
 	}
 	
-	public void initGame(InputStream input) {
+	public void initGame(String fileName) {
  		
- 		// read xml file
-//		this.players = 
-//		this.bases = 
-//		this.agents = 
+ 		try {
+			XmlReader.createGame(this, fileName);
+		} catch (JDOMException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+ 		
+	}
+	
+	public void start() {
+		for(Player p: getPlayerManager().getPlayers()) {
+			p.start();
+		}
 	}
 	
 	/* 

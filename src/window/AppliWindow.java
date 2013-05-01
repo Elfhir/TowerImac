@@ -2,6 +2,7 @@ package window;
 
 
 import game.Base;
+import game.Game;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -22,9 +23,6 @@ public class AppliWindow extends JFrame {
 	private int width;
 	private int height;
 	private Panel content;
-	private Base base1;
-	private Base base2;
-	
 	
 	public int getWidth() {
 		return width;
@@ -88,6 +86,48 @@ public class AppliWindow extends JFrame {
 		
 	}
 	
+	private void buildBases() {
+		
+		GridBagLayout grill = (GridBagLayout) content.getLayout();
+		Game game = Game.getInstance();
+		
+		for(Base base: game.getBaseManager().getBases()) {
+			base.setBorder(BorderFactory.createLineBorder(Color.black));
+			base.setContentAreaFilled(false);
+			base.setBounds(0, 0, width, height);
+			try
+		    {
+		        base.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
+		    }
+			catch (IOException e1)
+		    {
+		    }
+			base.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					System.out.println("clicked!");
+					// to do
+					// base.clicked(...)
+				}
+			});
+			
+			// Am I doing it right ?? (I guess not)
+			GridBagConstraints c = new GridBagConstraints();
+			c.gridx = (int) base.getPosition().x;
+			c.gridy = (int) base.getPosition().y;
+			grill.setConstraints(base, c);
+			content.add(base, c);
+		}
+	}
+	
+	private void buildGame() {
+		Game game = Game.getInstance();
+		game.initGame("game.xml");
+		buildBases();
+//		buildAgents();
+//		buildTowers();
+//		//...
+	}
+	
 	
 	private Panel buildContentPane(int width, int height) {
 		
@@ -96,10 +136,10 @@ public class AppliWindow extends JFrame {
 		
 		this.content = new Panel();
 		
-		GridBagLayout grille = new GridBagLayout();
-		content.setLayout(grille);
+		GridBagLayout grill = new GridBagLayout();
+		content.setLayout(grill);
 		content.setBackground(Color.WHITE);
-		GridBagConstraints c = new GridBagConstraints();
+//		GridBagConstraints c = new GridBagConstraints();
 		//On crée nos différents conteneurs de couleur différente
 		
 		//It not works yet
@@ -115,61 +155,8 @@ public class AppliWindow extends JFrame {
         grille.setConstraints(cell1, c);
         */
        
-		// 1st Button
-		
-		base1 = new Base(10, null);
-		base1.setBorder(BorderFactory.createLineBorder(Color.black));
-		base1.setContentAreaFilled(false);
-		base1.setBounds(0, 0, width, height);
-		try
-	    {
-	        base1.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
-	    }
-		catch (IOException e1)
-	    {
-	    }
-		base1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Base 1 Selectionnée !\n");
-				base1.setNbAgents(base1.getNbAgents()-base1.getNbAgents());
-				base2.setNbAgents(Math.abs(base1.getNbAgents()-base2.getNbAgents()));
-				System.out.println(base1);
-				System.out.println(base2);
-			}
-		});
-		c.gridx = 3;
-		c.gridy = 0;
+		buildGame();
 
-		grille.setConstraints(base1, c);
-		content.add(base1, c);
-
-		// -------------------------------- - -  -   -    -     -      -       -        -         - -
-		
-		base2 = new Base(0, null);
-		base2.setBorder(BorderFactory.createLineBorder(Color.black));
-		base2.setContentAreaFilled(false);
-		try
-	    {
-	        base2.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
-	        System.out.println(base2);
-	    }
-		catch (IOException e2)
-	    {
-			//bouton2.getGraphics().drawOval(100, 100, 30, 30);
-			System.out.println(base2);
-	    }
-		base2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Base 2 Selectionnée !\n");
-			}
-		});
-		
-		c.gridx = 3;
-		c.gridy = 1;
-		grille.setConstraints(base2, c);
-		content.add(base2,c);
-		
-		
 		return content;
 	}
 }

@@ -10,6 +10,8 @@ import game.Tower;
 
 import java.io.FileOutputStream;
 
+import javax.vecmath.Vector2f;
+
 import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -114,9 +116,28 @@ public class XmlWriter {
 	
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
+		Game game = Game.getInstance();
 		
+		Player michel = new RealPlayer("Michel");
+		Player jean_luc = new IAPlayer("Jean-Luc");
+		Player patrick = new IAPlayer("Patrick");
+		Player germaine = new IAPlayer("Germaine");
+		
+		game.getPlayerManager().addPlayer(michel);
+		game.getPlayerManager().addPlayer(jean_luc);
+		game.getPlayerManager().addPlayer(patrick);
+		game.getPlayerManager().addPlayer(germaine);
+		
+		Base base1 = new Base(5, michel, new Vector2f(0, 1), 5);
+		Base base2 = new Base(5, jean_luc, new Vector2f(0, 3), 5);
+		
+		game.getBaseManager().addBase(base1);
+		game.getBaseManager().addBase(base2);
+		
+		XmlWriter.createXmlFile(game);
+		
+		game.start();
 		
 	}
 
