@@ -1,12 +1,16 @@
 package time;
 
 import game.Base;
-import game.Game;
 
 public class BaseThread implements Runnable{
+	
+	Base baseCurrent;
+	float periodOfGeneration;
 
-	public BaseThread() {
-		// TODO Auto-generated constructor stub
+	public BaseThread(Base base) {
+		super();
+		this.baseCurrent = base;
+		this.periodOfGeneration = 10000/(base.getMight()); // on peut modifier, c'est empirique...
 	}
 
 	/**
@@ -35,11 +39,17 @@ public class BaseThread implements Runnable{
 	@Override
 	public void run() {
 		while(true) {
-			for(Base b : Game.getInstance().getBaseManager().getBases()) {
+			/*for(Base b : Game.getInstance().getBaseManager().getBases()) {
 				b.generateAgent();
 			}
 			try {
 				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}*/
+			baseCurrent.generateAgent();
+			try {
+				Thread.sleep((long)periodOfGeneration);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

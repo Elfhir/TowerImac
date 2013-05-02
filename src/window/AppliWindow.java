@@ -129,11 +129,15 @@ public class AppliWindow extends JFrame {
 		game.initGame(fileName);
 		buildBases();
 		
-		// We create the Runnable
-		BaseThread generation1 = new BaseThread();
-		// We create the Thread for the generation of agents
-		Thread threadBase = new Thread(generation1);
-		threadBase.start();
+		ThreadGroup threadGroupBase = new ThreadGroup("groupe bases");
+		
+		for(Base b : Game.getInstance().getBaseManager().getBases()) {
+			// We create the Runnable which correspond for each base
+			BaseThread generation1 = new BaseThread(b);
+			// We create the Thread for the generation of agents with the Runnable
+			Thread threadBase = new Thread(threadGroupBase, generation1, "generation d'agents");
+			threadBase.start();
+		}
 		
 //		buildAgents();
 //		buildTowers();
