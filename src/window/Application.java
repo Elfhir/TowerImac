@@ -48,7 +48,7 @@ public class Application {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				// On crée la nouvelle instance de la JFrame
-				AppliWindow window = new AppliWindow("Tower-IMAC-Nano Prout !", 800, 600, true);
+				AppliWindow window = new AppliWindow("Tower-IMAC-Nano Prout !", 800, 600, true, "design/nicolascage800-600.jpg");
 				window.setVisible(true); // Et on la rend visible.
 				
 			}
