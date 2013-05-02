@@ -20,8 +20,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.text.AttributeSet.ColorAttribute;
 import javax.vecmath.Color4b;
 
@@ -86,8 +88,9 @@ public class AppliWindow extends JFrame {
 		this.width = width;
 		this.height = height;
 		
-		buildWindow(title, resize, pathImage); // On initialise notre fenetre
+		buildWindow(title, resize, pathImage); // On initialise notre fenetre (We initiate the window)
 		
+		// This try/catch is used for trying to set a background !
 		try {
 			this.image =  new JLabel(new ImageIcon(ImageIO.read(new File(pathImage))), JLabel.CENTER);
 		} catch (IOException e) {
@@ -120,6 +123,8 @@ public class AppliWindow extends JFrame {
 
 		GridBagLayout grill = (GridBagLayout) content.getLayout();
 		Game game = Game.getInstance();
+		
+		game.getBaseManager().getBases().size();
 
 		for(final Base base: game.getBaseManager().getBases()) {
 			base.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -147,6 +152,42 @@ public class AppliWindow extends JFrame {
 			content.add(base, c);
 		}
 	}
+	
+	/**
+	 * Add JPanel Tiles where there is nothing else.
+	 * In a bulk, it adds square, the same as Base, but with nothing to do on it.
+	 * Just as a map, a game map.
+	 */
+	public void buildTiles() {
+		
+		GridBagLayout grill = (GridBagLayout) content.getLayout();
+		
+		Game game = Game.getInstance();
+		
+		int TilesToBuild = this.getNumOfTile() - game.getBaseManager().getBases().size();
+		
+		for(int i = 0; i < TilesToBuild; ++i) {
+			JButton pan = new JButton();
+			pan.setBorder(BorderFactory.createLineBorder(Color.black));
+			pan.setContentAreaFilled(false);
+			pan.setBounds(0, 0, 1, 1);
+			try
+			{
+				pan.setIcon(new ImageIcon(ImageIO.read(new File("design/grass-tile.png"))));
+			}
+			catch (IOException e1)
+			{
+				System.err.println("Failed to load Tiles image!");
+			}
+			
+			GridBagConstraints c = new GridBagConstraints();
+			c.gridx = i;
+			c.gridy = 0;
+			grill.setConstraints(pan, c);
+			content.add(pan, c);
+		}
+		
+	}
 
 	/**
 	 * Launch the intern incrementation of agents with a thread group. Each base generate, one by one, agents and the
@@ -172,7 +213,8 @@ public class AppliWindow extends JFrame {
 		Game game = Game.getInstance();
 		game.initGame(fileName);
 		buildBases();
-
+		//buildTiles();
+		
 		launchGeneration();
 		
 //		buildAgents();
