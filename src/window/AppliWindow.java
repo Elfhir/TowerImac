@@ -149,6 +149,22 @@ public class AppliWindow extends JFrame {
 	}
 
 	/**
+	 * Launch the intern incrementation of agents with a thread group. Each base generate, one by one, agents and the
+	 * period of generation depends of the base might.
+	 */
+	private void launchGeneration() {
+		ThreadGroup threadGroupBase = new ThreadGroup("groupe bases");
+		
+		for(Base b : Game.getInstance().getBaseManager().getBases()) {
+			// We create the Runnable which correspond for each base
+			BaseThread generation1 = new BaseThread(b);
+			// We create the Thread for the generation of agents with the Runnable
+			Thread threadBase = new Thread(threadGroupBase, generation1, "generation d'agents");
+			threadBase.start();
+		}
+	}
+	
+	/**
 	 * Build the game : creates the informations from a XML file and build all corresponding elements in the window.
 	 * @param fileName	The name of the XML file needed to create the game
 	 */
@@ -157,15 +173,12 @@ public class AppliWindow extends JFrame {
 		game.initGame(fileName);
 		buildBases();
 
-		// We create the Runnable
-		BaseThread generation1 = new BaseThread();
-		// We create the Thread for the generation of agents
-		Thread threadBase = new Thread(generation1);
-		threadBase.start();
+		launchGeneration();
+		
+//		buildAgents();
+//		buildTowers();
+//		//...
 
-		//		buildAgents();
-		//		buildTowers();
-		//		//...
 	}
 
 	/**
