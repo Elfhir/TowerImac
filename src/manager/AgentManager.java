@@ -1,7 +1,6 @@
 package manager;
 
 import game.Agent;
-import game.Tower;
 
 import java.util.LinkedList;
 

@@ -8,10 +8,10 @@
 *.jar
 *.war
 *.ear
-
+*~
 
 .classpath
 .project
 .gitignore~
 
-game.xml
+/game.xml

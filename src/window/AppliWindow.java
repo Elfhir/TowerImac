@@ -134,6 +134,9 @@ public class AppliWindow extends JFrame {
 			base.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					base.clicked();
+					if(Game.getInstance().getPlayerManager().getPlayer("Michel").getSelectedBases() == null) {
+						Game.getInstance().getPlayerManager().getPlayer("Michel").setSelectedBases(base);
+					}
 				}
 			});
 
@@ -223,7 +226,7 @@ public class AppliWindow extends JFrame {
 		buildTiles();
 		
 		game.getBaseManager().launchGeneration();
-		
+		game.getPlayerManager().launchIA();
 //		buildAgents();
 //		buildTowers();
 //		//...

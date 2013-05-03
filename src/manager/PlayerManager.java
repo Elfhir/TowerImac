@@ -32,4 +32,11 @@ public class PlayerManager {
 	public PlayerManager() {
 		this.players = new ArrayList<Player>();
 	}
+	
+	public void launchIA() {
+		for(Player p : players) {
+			p.start();
+		}
+	}
+	
 }
