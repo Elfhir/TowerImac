@@ -14,4 +14,4 @@
 .project
 .gitignore~
 
-game.xml
+/game.xml
