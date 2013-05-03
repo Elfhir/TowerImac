@@ -150,6 +150,8 @@ public class AppliWindow extends JFrame {
 	 * Add JPanel Tiles where there is nothing else.
 	 * In a bulk, it adds square, the same as Base, but with nothing to do on it.
 	 * Just as a map, a game map.
+	 * 
+	 * Still need a more random disposition of Tiles.
 	 */
 	public void buildTiles() {
 		
@@ -157,34 +159,34 @@ public class AppliWindow extends JFrame {
 		
 		Game game = Game.getInstance();
 		
+		// How many tiles
 		int tilesToBuild = this.getNumOfTile() - game.getBaseManager().getBases().size();
 		
-		// Tab of Vector2f where not to build tiles, i.e where there are Base
-		ArrayList<Vector2f> tabOfWhereNotToBuild = new ArrayList<Vector2f>(game.getBaseManager().getBases().size()); 
-
-		for(final Base base: game.getBaseManager().getBases()) {
-			tabOfWhereNotToBuild.add(new Vector2f((int)base.getPosition().x,(int) base.getPosition().y));
+		// Tab of the Base coords where to not draw tiles (2D integers)
+		int tab[][] = new int[game.getBaseManager().getBases().size()][game.getBaseManager().getBases().size()];
+		
+		// Initialize the tav with the good coordinates
+		for(int k = 0; k<tab.length; ++k) {
+			tab[k][0] = (int) game.getBaseManager().getBases().get(k).getPosition().x;
+			tab[k][1] = (int) game.getBaseManager().getBases().get(k).getPosition().y;
 		}
 		
+		// ArrayList of Vector2f where to build.
 		ArrayList<Vector2f> tabOfWhereToBuild = new ArrayList<Vector2f>(tilesToBuild);
 		
+		// Creating all the ArrayList of Vector2f for Tiles, even the no bad one
 		for(int i = 0; i<getNumOfTileWidth(); ++i) {
 			for(int j = 0; j<getNumOfTileHeight(); ++j) {
-				for(Vector2f current: tabOfWhereNotToBuild) {
-					if((i == current.getX()) && (j == current.getY())) {
-						break;
-					}
-					System.out.println("");
-					tabOfWhereToBuild.add(new Vector2f(i, j));
-					break;
-				}
-			}
+				tabOfWhereToBuild.add(new Vector2f(i, j));
+			}	
 		}
 		
-		System.out.println(tabOfWhereNotToBuild.size());
-		System.out.println(tilesToBuild);
-		System.out.println(tabOfWhereToBuild.size());
-		
+		// Remove the bad one and add what we wanted. That's the better way I find after 4h of trying it, deal with it =D
+		for(int k=0; k<tab.length; ++k) {
+			tabOfWhereToBuild.remove(  tab[k][0]*(getNumOfTileHeight()) +  tab[k][1] -k);
+			tabOfWhereToBuild.add(new Vector2f(tab[k][0], tab[k][1]));
+		}		
+
 		for(int k = 0; k < tilesToBuild; ++k) {
 			JButton pan = new JButton();
 			pan.setBorder(BorderFactory.createLineBorder(Color.black));
