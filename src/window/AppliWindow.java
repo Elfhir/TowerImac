@@ -4,14 +4,9 @@ package window;
 import game.Base;
 import game.Game;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -23,11 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.text.AttributeSet.ColorAttribute;
-import javax.vecmath.Color4b;
 
-import time.BaseThread;
 
 @SuppressWarnings("serial")
 public class AppliWindow extends JFrame {
@@ -189,21 +180,6 @@ public class AppliWindow extends JFrame {
 		
 	}
 
-	/**
-	 * Launch the intern incrementation of agents with a thread group. Each base generate, one by one, agents and the
-	 * period of generation depends of the base might.
-	 */
-	private void launchGeneration() {
-		ThreadGroup threadGroupBase = new ThreadGroup("groupe bases");
-		
-		for(Base b : Game.getInstance().getBaseManager().getBases()) {
-			// We create the Runnable which correspond for each base
-			BaseThread generation1 = new BaseThread(b);
-			// We create the Thread for the generation of agents with the Runnable
-			Thread threadBase = new Thread(threadGroupBase, generation1, "generation d'agents");
-			threadBase.start();
-		}
-	}
 	
 	/**
 	 * Build the game : creates the informations from a XML file and build all corresponding elements in the window.
@@ -215,7 +191,7 @@ public class AppliWindow extends JFrame {
 		buildBases();
 		//buildTiles();
 		
-		launchGeneration();
+		game.getBaseManager().launchGeneration();
 		
 //		buildAgents();
 //		buildTowers();
