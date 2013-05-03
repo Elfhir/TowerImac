@@ -8,7 +8,7 @@
 *.jar
 *.war
 *.ear
-
+*~
 
 .classpath
 .project
