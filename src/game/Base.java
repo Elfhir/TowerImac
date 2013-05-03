@@ -52,9 +52,10 @@ public class Base extends JButton implements Situable, Timerable{
 	public void attackBase(Base enemy){
 		System.out.println("Attack !\n");
 		
-		int maxAgent = Math.max(this.getNbAgents(), enemy.getNbAgents());
+		int maxAgent = (int) Math.max(this.getNbAgents()*0.5f, enemy.getNbAgents());
 		for(int i = 0; i < maxAgent; ++i) {
 			// whoever had a LinkedList<Agent> should use attackAgent() here.
+			
 		}
 		return;
 	}

@@ -1,11 +1,5 @@
 package window;
 
-import game.Base;
-import game.Game;
-import game.IAPlayer;
-import game.Player;
-import game.RealPlayer;
-
 import javax.swing.SwingUtilities;
 
 import writer.XmlWriter;
@@ -30,18 +24,6 @@ public class Application {
 		} catch (InterruptedException e) {}
 		
 		System.exit(0);*/
-		
-// Une JDialog :
-		
-		/*SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				//On crée une nouvelle instance de notre JWindow
-				JDialog dialog = new JDialog();
-				dialog.setSize(350, 220); // On lui donne une taille pour la voir
-				dialog.setTitle("Tower-IMAC-Nano Pooowaaaa !"); // On lui donne un titre
-				dialog.setVisible(true); // On la rend visible
-			}
-		});*/
 		
 		// Une JFrame
 		
