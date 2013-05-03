@@ -140,9 +140,9 @@ public class XmlReader {
 		while (i.hasNext()) {
 			Element towerElement = (Element)i.next();
 			
-			Tower tower = new Tower();
+			/*Tower tower = new Tower();
 			
-			game.getTowerManager().addTower(tower);
+			game.getTowerManager().addTower(tower);*/
 		}
 	}
 	
