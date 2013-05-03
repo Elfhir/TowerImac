@@ -47,7 +47,11 @@ public class BaseThread implements Runnable{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}*/
-			baseCurrent.generateAgent();
+			if(baseCurrent.hasPlayer()) {
+				// Neutral bases don't generate agents until they are taken
+				baseCurrent.generateAgent();
+			} else {
+			}
 			try {
 				Thread.sleep((long)periodOfGeneration);
 			} catch (InterruptedException e) {
