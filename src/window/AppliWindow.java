@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -26,6 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.text.AttributeSet.ColorAttribute;
 import javax.vecmath.Color4b;
+import javax.vecmath.Vector2f;
 
 import time.BaseThread;
 
@@ -124,8 +126,6 @@ public class AppliWindow extends JFrame {
 		GridBagLayout grill = (GridBagLayout) content.getLayout();
 		Game game = Game.getInstance();
 		
-		game.getBaseManager().getBases().size();
-
 		for(final Base base: game.getBaseManager().getBases()) {
 			base.setBorder(BorderFactory.createLineBorder(Color.black));
 			base.setContentAreaFilled(false);
@@ -164,9 +164,35 @@ public class AppliWindow extends JFrame {
 		
 		Game game = Game.getInstance();
 		
-		int TilesToBuild = this.getNumOfTile() - game.getBaseManager().getBases().size();
+		int tilesToBuild = this.getNumOfTile() - game.getBaseManager().getBases().size();
 		
-		for(int i = 0; i < TilesToBuild; ++i) {
+		// Tab of Vector2f where not to build tiles, i.e where there are Base
+		ArrayList<Vector2f> tabOfWhereNotToBuild = new ArrayList<Vector2f>(game.getBaseManager().getBases().size()); 
+
+		for(final Base base: game.getBaseManager().getBases()) {
+			tabOfWhereNotToBuild.add(new Vector2f((int)base.getPosition().x,(int) base.getPosition().y));
+		}
+		
+		ArrayList<Vector2f> tabOfWhereToBuild = new ArrayList<Vector2f>(tilesToBuild);
+		
+		for(int i = 0; i<getNumOfTileWidth(); ++i) {
+			for(int j = 0; j<getNumOfTileHeight(); ++j) {
+				for(Vector2f current: tabOfWhereNotToBuild) {
+					if((i == current.getX()) && (j == current.getY())) {
+						break;
+					}
+					System.out.println("");
+					tabOfWhereToBuild.add(new Vector2f(i, j));
+					break;
+				}
+			}
+		}
+		
+		System.out.println(tabOfWhereNotToBuild.size());
+		System.out.println(tilesToBuild);
+		System.out.println(tabOfWhereToBuild.size());
+		
+		for(int k = 0; k < tilesToBuild; ++k) {
 			JButton pan = new JButton();
 			pan.setBorder(BorderFactory.createLineBorder(Color.black));
 			pan.setContentAreaFilled(false);
@@ -181,8 +207,9 @@ public class AppliWindow extends JFrame {
 			}
 			
 			GridBagConstraints c = new GridBagConstraints();
-			c.gridx = i;
-			c.gridy = 0;
+
+			c.gridx = (int)tabOfWhereToBuild.get(k).getX();
+			c.gridy = (int)tabOfWhereToBuild.get(k).getY();
 			grill.setConstraints(pan, c);
 			content.add(pan, c);
 		}
@@ -213,7 +240,7 @@ public class AppliWindow extends JFrame {
 		Game game = Game.getInstance();
 		game.initGame(fileName);
 		buildBases();
-		//buildTiles();
+		buildTiles();
 		
 		launchGeneration();
 		
