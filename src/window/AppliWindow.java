@@ -133,10 +133,7 @@ public class AppliWindow extends JFrame {
 			}
 			base.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					base.clicked();
-					if(Game.getInstance().getPlayerManager().getPlayer("Michel").getSelectedBases() == null) {
-						Game.getInstance().getPlayerManager().getPlayer("Michel").setSelectedBases(base);
-					}
+					base.clicked(); // all actions are managed by the base
 				}
 			});
 

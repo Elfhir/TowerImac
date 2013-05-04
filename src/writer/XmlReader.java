@@ -85,7 +85,7 @@ public class XmlReader {
 			int money = Integer.parseInt(playerElement.getAttributeValue("money"));
 			
 			// RealPlayer or IAPlayer ?
-			Player player = (type == "RealPlayer") ? 
+			Player player = (type.equals("RealPlayer")) ? 
 					new RealPlayer(name, new Bank(money)) : new IAPlayer(name, new Bank(money)); 
 			
 			// finally we add the Player

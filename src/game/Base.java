@@ -20,7 +20,6 @@ public class Base extends JButton implements Situable, Timerable{
 	public Player getPlayer() {
 		return player;
 	}
-	
 		
 	public boolean hasPlayer() {
 		if (player != null) {
@@ -69,8 +68,66 @@ public class Base extends JButton implements Situable, Timerable{
 		this.setNbAgents(this.getNbAgents() - 1);
 	}
 	
+	/**
+	 * Deletes a specific number of agents in the base.
+	 * @param nbSentAgents	The number of agents to delete
+	 */
+	public void deleteAgents(int nbComingAgents) {
+		if(nbComingAgents >= this.nbAgents) {
+			this.nbAgents = 0;
+			// It will need to be improved : when the coming agents are superior than the current agents, then the base change of player (and some agents stay).
+		}
+		else {
+			this.nbAgents -= nbComingAgents; 
+		}
+	}
+	
+	/**
+	 *  Manages the click on a Base.
+	 *  A click is obviously an action from the RealPlayer. 
+	 *  So we manage what to do according to the data of this unique realPlayer : if he has a selected base or not.
+	 */
 	public void clicked(){
-		System.out.println("Base clicked !\n" + this);
+		Player realPlayer = Game.getInstance().getPlayerManager().getRealPlayer();
+		Base selectedBases = realPlayer.getSelectedBases();
+		
+		if(realPlayer== null) {
+			// exception
+			System.out.println("Error : no RealPlayer found !");
+			return;
+		}
+		
+		// 1st case : the player doesn't have any selected base, so this one become his selected base !
+		if(selectedBases == null) {
+			realPlayer.setSelectedBases(this);
+			System.out.println("Base selected !");
+		}
+		// 2nd case : this base is already selected by the realPlayer : nothing is done
+		else if (selectedBases.equals(this)) {
+			System.out.println("Base already selected.");
+		}
+		
+		// 3rd case : the realPlayer has an other base selected : agents can go from the selected base to this one ! (and we deselect the base)
+		else {
+			System.out.println("Go go !!");
+			
+			
+			/*
+			 * Will be managed by Engine (FIFO of commands) 
+			 */
+			int nbSentAgents = selectedBases.getNbAgents() / 2;
+			// the selected base send the agents
+			selectedBases.deleteAgents(nbSentAgents);
+			// and the agents of this base are killed !
+			this.deleteAgents(nbSentAgents);
+			
+			
+			realPlayer.setSelectedBases(null);
+		}
+		
+		/*
+		 * Also need to verify if the base belongs to the player etc...
+		 */
 	}
 	
 	@Override
