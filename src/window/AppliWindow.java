@@ -168,7 +168,7 @@ public class AppliWindow extends JFrame {
 		// Tab of the Base coords where to not draw tiles (2D integers)
 		int tab[][] = new int[game.getBaseManager().getBases().size()][game.getBaseManager().getBases().size()];
 		
-		// Initialize the tav with the good coordinates
+		// Initialize the tab with the good coordinates
 		for(int k = 0; k<tab.length; ++k) {
 			tab[k][0] = (int) game.getBaseManager().getBases().get(k).getPosition().x;
 			tab[k][1] = (int) game.getBaseManager().getBases().get(k).getPosition().y;
@@ -196,8 +196,14 @@ public class AppliWindow extends JFrame {
 			pan.setContentAreaFilled(false);
 			pan.setBounds(0, 0, 1, 1);
 			try
-			{
-				pan.setIcon(new ImageIcon(ImageIO.read(new File("design/grass-tile.png"))));
+			{	
+				//Stupid random =D
+				if(k%2 == 0)
+					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
+				else if(k == 57)
+					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/pit1-tile.png"))));
+				else
+					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock1-tile.png"))));
 			}
 			catch (IOException e1)
 			{
