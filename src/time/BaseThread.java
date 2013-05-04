@@ -1,5 +1,7 @@
 package time;
 
+import javax.swing.SwingConstants;
+
 import game.Base;
 
 public class BaseThread implements Runnable{
@@ -47,6 +49,9 @@ public class BaseThread implements Runnable{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}*/
+			baseCurrent.setText(""+baseCurrent.getNbAgents()+"");
+			baseCurrent.setVerticalTextPosition(SwingConstants.CENTER);
+			baseCurrent.setHorizontalTextPosition(SwingConstants.CENTER);
 			if(baseCurrent.hasPlayer()) {
 				// Neutral bases don't generate agents until they are taken
 				baseCurrent.generateAgent();
