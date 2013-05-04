@@ -61,6 +61,7 @@ public class AppliWindow extends JFrame {
 		return ((this.width/50) * (this.height/50));
 	}
 
+	// How many tiles on the width : for 800px it's 16, because 16x50=800
 	public int getNumOfTileWidth() {
 		return (this.width/50);
 	}
@@ -68,7 +69,6 @@ public class AppliWindow extends JFrame {
 	public int getNumOfTileHeight() {
 		return (this.height/50);
 	}
-
 
 	public JLabel getImage() {
 		return image;
@@ -177,19 +177,26 @@ public class AppliWindow extends JFrame {
 		// ArrayList of Vector2f where to build.
 		ArrayList<Vector2f> tabOfWhereToBuild = new ArrayList<Vector2f>(tilesToBuild);
 		
-		// Creating all the ArrayList of Vector2f for Tiles, even the no bad one
+		// Creating all the ArrayList of Vector2f for Tiles, even the bad one
 		for(int i = 0; i<getNumOfTileWidth(); ++i) {
-			for(int j = 0; j<getNumOfTileHeight(); ++j) {
+			for(int j = 0; j<getNumOfTileHeight(); ++j) {	
 				tabOfWhereToBuild.add(new Vector2f(i, j));
 			}	
 		}
 		
+		// DEBUG : tous les vecteurs dans l'ordre.
+		for(int i = 0; i<this.getNumOfTile(); ++i) {
+			System.out.println(tabOfWhereToBuild.get(i));
+		}
+		
 		// Remove the bad one and add what we wanted. That's the better way I find after 4h of trying it, deal with it =D
 		for(int k=0; k<tab.length; ++k) {
-			tabOfWhereToBuild.remove(  tab[k][0]*(getNumOfTileHeight()) +  tab[k][1] -k);
+			tabOfWhereToBuild.remove( ( tab[k][1] +  tab[k][0]*(getNumOfTileHeight()) ) -k );
 			tabOfWhereToBuild.add(new Vector2f(tab[k][0], tab[k][1]));
-		}		
-
+			System.out.println("Current index of the Tiles : "+ ( tab[k][1] +  tab[k][0]*(getNumOfTileHeight()) -k ) );
+			System.out.println("Tiles'coordinates : ("+tab[k][0]+"; "+tab[k][1]+") ");
+		}	
+		
 		for(int k = 0; k < tilesToBuild; ++k) {
 			JButton pan = new JButton();
 			pan.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -198,10 +205,12 @@ public class AppliWindow extends JFrame {
 			try
 			{	
 				//Stupid random =D
-				if(k%2 == 0)
+				if(k==5 || k==6 || k==7 || k==8 || k==16 || k==17 || k==18 || k==3 || k==4 || k == 165 || k == 166 || k == 167 || k == 178 || k == 179)
 					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
-				else if(k == 57)
+				else if(k == 57 || k == 78)
 					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/pit1-tile.png"))));
+				else if(k == 90 || k == 91 || k == 92 || k == 93 || k == 81 || k == 82 || k == 83)
+					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/gravel-tile.png"))));
 				else
 					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock1-tile.png"))));
 			}
@@ -211,7 +220,7 @@ public class AppliWindow extends JFrame {
 			}
 			
 			GridBagConstraints c = new GridBagConstraints();
-
+			
 			c.gridx = (int)tabOfWhereToBuild.get(k).getX();
 			c.gridy = (int)tabOfWhereToBuild.get(k).getY();
 			grill.setConstraints(pan, c);
