@@ -24,7 +24,9 @@ public class Engine implements Runnable {
 	@Override
 	public void run() {
 		while (Game.getInstance().isRunning()) {
-			for(Command command:commands) {
+			
+			while(!commands.isEmpty()) {
+				Command command = commands.remove();
 				command.doCommand();
 			}
 			
