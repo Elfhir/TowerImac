@@ -1,6 +1,7 @@
 package window;
 
 
+import exceptions.RealPlayerException;
 import game.Base;
 import game.Game;
 
@@ -133,7 +134,12 @@ public class AppliWindow extends JFrame {
 			}
 			base.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					base.clicked(); // all actions are managed by the base
+					// all actions are managed by the base
+					try {
+						base.clicked();
+					} catch (RealPlayerException e1) {
+						System.out.println("Error with RealPlayer : can't manage the click.");
+					} 
 				}
 			});
 

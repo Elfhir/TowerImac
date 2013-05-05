@@ -1,5 +1,6 @@
 package manager;
 
+import exceptions.RealPlayerException;
 import game.Player;
 import game.RealPlayer;
 
@@ -27,16 +28,16 @@ public class PlayerManager {
 	}
 	
 	/**
-	 * Return the only instance of RealPlayer in {@link #players}
-	 * @return the only RealPlayer
+	 * Returns the only instance of RealPlayer in {@link #players}
+	 * @return the unique RealPlayer
+	 * @throws RealPlayerException 
 	 */
-	public Player getRealPlayer() {
+	public Player getRealPlayer() throws RealPlayerException {
 		Player playerFound = null;
 		for (Player p:players) {
 			if (p instanceof RealPlayer) {
 				if(playerFound != null) {
-					// Use Exception
-					System.out.println("Error : there are several RealPlayers !!");
+					throw new RealPlayerException("there are several RealPlayers !");
 				}
 				else {
 					playerFound = p;
@@ -44,8 +45,7 @@ public class PlayerManager {
 			}
 		}
 		if (playerFound == null) {
-			// Use Exception
-			System.out.println("Error : no RealPlayer found !");
+			throw new RealPlayerException("no RealPlayer found !");
 		}
 		return playerFound;
 	}

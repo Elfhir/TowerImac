@@ -3,6 +3,8 @@ package game;
 import javax.swing.JButton;
 import javax.vecmath.Vector2f;
 
+import exceptions.RealPlayerException;
+
 import time.TimerGame;
 import time.Timerable;
 
@@ -86,16 +88,11 @@ public class Base extends JButton implements Situable, Timerable{
 	 *  Manages the click on a Base.
 	 *  A click is obviously an action from the RealPlayer. 
 	 *  So we manage what to do according to the data of this unique realPlayer : if he has a selected base or not.
+	 * @throws RealPlayerException  
 	 */
-	public void clicked(){
+	public void clicked() throws RealPlayerException {
 		Player realPlayer = Game.getInstance().getPlayerManager().getRealPlayer();
 		Base selectedBases = realPlayer.getSelectedBases();
-		
-		if(realPlayer== null) {
-			// exception
-			System.out.println("Error : no RealPlayer found !");
-			return;
-		}
 		
 		// 1st case : the player doesn't have any selected base, so this one become his selected base !
 		if(selectedBases == null) {
