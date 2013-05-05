@@ -5,6 +5,8 @@ import java.io.InputStream;
 
 import org.jdom2.JDOMException;
 
+import engine.Engine;
+
 import writer.XmlReader;
 
 import manager.AgentManager;
@@ -100,6 +102,9 @@ public class Game {
 	}
 	
 	public void start() {
+
+		Engine.getInstance().start();
+		
 		for(Player p: getPlayerManager().getPlayers()) {
 			p.start();
 		}

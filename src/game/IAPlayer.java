@@ -1,5 +1,12 @@
 package game;
 
+import javax.vecmath.Vector2f;
+
+import commands.PlaceTower;
+import commands.DoRandomAction;
+
+import engine.Engine;
+
 
 public class IAPlayer extends Player {
 	
@@ -7,37 +14,29 @@ public class IAPlayer extends Player {
 	public void run() {
 		while (Game.getInstance().isRunning()) {
 			
-
 			int value = (int)(Math.random() * 10);
-			String action;
 			
 			switch(value) {
 			case 0:
-				action = " attaque son voisin !";
+				doRandomAction("attaque son voisin !");
 				break;
 			case 1:
-				action = " pose une tour.";
+				placeTower("TourEiffel", new Vector2f(2, 5));
 				break;
 			case 2:
-				action = " se brosse les dents.";
+				doRandomAction("se brosse les dents !");
 				break;
 			case 3:
-				action = " se dirige vers une autre base.";
+				upgradeTower(null);
 				break;
 			default:
-				action = "";
 				break;
-			}
-			
-			if(action != "") {
-				System.out.println(this.getName() + action);
 			}
 			
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(500);
 			}
 			catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

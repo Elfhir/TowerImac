@@ -1,13 +1,21 @@
 package game;
 
-import java.util.LinkedHashSet;
+import javax.vecmath.Vector2f;
+
+import commands.DoRandomAction;
+import commands.PlaceTower;
+import commands.UpgradeTower;
+
+import engine.Engine;
 
 public abstract class Player implements Runnable {
 	
 	private Bank bank;
 	private String name;
 	private Base selectedBases;
-
+	
+	//----------------------------------------------accessors----------------
+	
 	public Bank getBank() {
 		return bank;
 	}
@@ -36,7 +44,25 @@ public abstract class Player implements Runnable {
 		this.selectedBases.add(b);
 	}
 	
-
+	//----------------------------------------------actions (tests)----------------
+	
+	public void placeTower(String type, Vector2f position) {
+		PlaceTower command = new PlaceTower(this, type, position);
+		Engine.getInstance().getCommands().add(command);
+	}
+	
+	public void upgradeTower(Tower tower) {
+		UpgradeTower command = new UpgradeTower(this, tower);
+		Engine.getInstance().getCommands().add(command);
+	}
+	
+	public void doRandomAction(String text) {
+		DoRandomAction command = new DoRandomAction(this, text);
+		Engine.getInstance().getCommands().add(command);
+	}
+	
+	
+	//----------------------------------------------usefull----------------
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("Player : \n");

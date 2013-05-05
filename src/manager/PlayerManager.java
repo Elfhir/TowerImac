@@ -63,10 +63,10 @@ public class PlayerManager {
 		this.players = new ArrayList<Player>();
 	}
 	
-	public void launchIA() {
-		for(Player p : players) {
-			p.start();
-		}
-	}
+//	public void launchIA() {
+//		for(Player p : players) {
+//			p.start();
+//		}
+//	}
 	
 }
