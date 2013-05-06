@@ -4,8 +4,6 @@ import game.Base;
 
 import java.util.ArrayList;
 
-import time.BaseThread;
-
 public class BaseManager {
 	private ArrayList<Base> bases;
 
@@ -29,7 +27,7 @@ public class BaseManager {
 	/**
 	 * Launch the intern incrementation of agents with a thread group. Each base generate, one by one, agents and the
 	 * period of generation depends of the base might.
-	 */
+	 *
 	public void launchGeneration() {
 		ThreadGroup threadGroupBase = new ThreadGroup("groupe bases");
 		
@@ -41,5 +39,6 @@ public class BaseManager {
 			threadBase.start();
 		}
 	}
+	*/
 
 }
