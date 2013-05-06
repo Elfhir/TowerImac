@@ -2,9 +2,9 @@ package game;
 
 import javax.vecmath.Vector2f;
 
-import commands.DoRandomAction;
-import commands.PlaceTower;
-import commands.UpgradeTower;
+import commands.player.DoRandomAction;
+import commands.player.PlaceTower;
+import commands.player.UpgradeTower;
 
 import engine.Engine;
 

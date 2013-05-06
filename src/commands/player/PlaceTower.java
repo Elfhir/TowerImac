@@ -1,6 +1,8 @@
-package commands;
+package commands.player;
 
 import javax.vecmath.Vector2f;
+
+import commands.Command;
 
 import game.Player;
 

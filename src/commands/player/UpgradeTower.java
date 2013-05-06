@@ -1,4 +1,6 @@
-package commands;
+package commands.player;
+
+import commands.Command;
 
 import game.Player;
 import game.Tower;
