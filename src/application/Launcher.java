@@ -1,10 +1,11 @@
-package window;
+package application;
 
 import javax.swing.SwingUtilities;
 
+import window.AppliWindow;
 import writer.XmlWriter;
 
-public class Application {
+public class Launcher {
 
 	public static void main(String[] args) {
 		
