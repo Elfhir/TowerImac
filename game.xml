@@ -7,8 +7,11 @@
     <player name="Germaine" money="50" type="IAPlayer" />
   </players>
   <bases>
-    <base x="0.0" y="1.0" player="Michel" nbAgents="5" might="5" />
+    <base x="0.0" y="1.0" player="Michel" nbAgents="10" might="2" />
     <base x="2.0" y="2.0" player="Jean-Luc" nbAgents="5" might="5" />
+    <base x="1.0" y="8.0" player="Jean-Luc" nbAgents="4" might="3" />
+    <base x="4.0" y="4.0" player="Germaine" nbAgents="4" might="4" />
+    <base x="8.0" y="7.0" nbAgents="2" might="6" />
   </bases>
   <towers />
   <agents />
