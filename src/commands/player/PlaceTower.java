@@ -4,19 +4,27 @@ import javax.vecmath.Vector2f;
 
 import commands.Command;
 
-public class PlaceTower extends Command {
+import game.Player;
 
+
+public class PlaceTower extends Command {
+	
+	Player player;
 	String type;
 	Vector2f position;
-		
-	public PlaceTower(String type, Vector2f position) {
-		this.type = type;
-		this.position = position;
-	}
-
+	
 	@Override
 	public void doCommand() {
-		System.out.println(this+" do something");	
+		// new Tower + add tower
+		System.out.println(player.getName() + " pose une tour de type " + type + " en " + position + " !");
+		
 	}
-
+	
+	public PlaceTower(Player player, String type, Vector2f position) {
+		super();
+		this.player = player;
+		this.position = position;
+		this.type = type;
+	}
+	
 }

@@ -3,7 +3,7 @@ package game;
 import javax.vecmath.Vector2f;
 
 import commands.player.DoRandomAction;
-import commands.tower.PlaceTower;
+import commands.player.PlaceTower;
 
 import engine.Engine;
 
