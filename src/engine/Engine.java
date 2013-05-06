@@ -30,7 +30,7 @@ public class Engine implements Runnable {
 	public void run() {
 		while (Game.getInstance().isRunning()) {
 			// We get the current time at the beginning of the main loop
-			long currentTime = Calendar.getInstance().getTimeInMillis() - initialTime;
+			long currentTime1 = Calendar.getInstance().getTimeInMillis() - initialTime;
 			
 			while(!commands.isEmpty()) {
 				//This is the defilage
@@ -39,7 +39,7 @@ public class Engine implements Runnable {
 				
 			}
 			// We get again the current time at the end of the defilage
-			currentTime = Calendar.getInstance().getTimeInMillis() - initialTime;
+			long currentTime2 = Calendar.getInstance().getTimeInMillis() - initialTime;
 			
 			// We run through all the Collection of Bases
 			for(Base baseCurrent : Game.getInstance().getBaseManager().getBases()) {
@@ -52,7 +52,7 @@ public class Engine implements Runnable {
 				
 				//Test for generation
 				float periodOfGeneration = 10000/(baseCurrent.getMight()); // on peut modifier, c'est empirique...
-				if((currentTime - baseCurrent.getMomentOfTheLastGeneration()) < periodOfGeneration) {
+				if((currentTime2 - baseCurrent.getMomentOfTheLastGeneration()) < periodOfGeneration) {
 					// if the ellapsed time between the moment of the last generation and the current time is inferior
 					// to the period of generation, we do nothing for the bases
 				}
@@ -70,8 +70,12 @@ public class Engine implements Runnable {
 			}
 			
 			// Le Thread se relance toutes les 30 fois par seconde.
+			long waiting = 1000/30 - (Calendar.getInstance().getTimeInMillis() - currentTime1);
+			if(waiting < 0) {
+				waiting = 0;
+			}
 			try {
-				Thread.sleep(33);
+				Thread.sleep(waiting);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
