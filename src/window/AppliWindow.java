@@ -208,12 +208,32 @@ public class AppliWindow extends JFrame {
 			try
 			{	
 				//Stupid random =D
-				if(k==5 || k==6 || k==7 || k==8 || k==16 || k==17 || k==18 || k==3 || k==4 || k == 165 || k == 166 || k == 167 || k == 178 || k == 179)
+				if(k==5 || k==6 || k==7 || k==8 || k==9 )
 					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
-				else if(k == 57 || k == 78)
+				else if(k==18 || k==19 || k==20 || k==30)
+					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
+				else if(k==180 || k==181 || k==182 || k==183 || k==184 )
+					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
+				else if(k==170 || k==171 || k==172 || k==160 )
+					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
+				else if(k==46 || k==58 || k==70 || k==82 || k==94 || k==106 )
+					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
+				else if(k==59 || k==71 || k==72 || k==83 || k==84 || k==85 || k==95 )
+					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
+				else if(k==69 || k==83 || k==93 || k==105 || k==117 || k==129 )
+					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
+				else if(k==79 ||k==80 ||k==81 ||k==92||k==104 ||k==116|| k==105 ||k==91 ||k==90)
+					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
+				
+				
+				else if(k==39 || k==51 || k == 120|| k == 125)
 					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/pit1-tile.png"))));
-				else if(k == 90 || k == 91 || k == 92 || k == 93 || k == 81 || k == 82 || k == 83)
+				
+				else if(k==45 || k==57 || k==69 || k==81 || k==93 || k==105 )
 					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/gravel-tile.png"))));
+				else if(k==20 || k==21 || k==17|| k==16 || k==4|| k==169 || k==179 || k==173 || k==155 || k==156 || k==161)
+					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/gravel-tile.png"))));
+				
 				else
 					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock1-tile.png"))));
 			}
