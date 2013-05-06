@@ -262,8 +262,7 @@ public class AppliWindow extends JFrame {
 		game.initGame(fileName);
 		buildBases();
 		buildTiles();
-		
-		game.getBaseManager().launchGeneration();
+
 		game.start();
 //		buildAgents();
 //		buildTowers();

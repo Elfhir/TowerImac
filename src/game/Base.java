@@ -14,6 +14,7 @@ public class Base extends JButton implements Situable, Timerable{
 	private Player player;
 	private Vector2f position;
 	private int nbAgents;
+	private float momentOfTheLastGeneration;
 	
 	public int getMight() {
 		return might;
@@ -50,6 +51,14 @@ public class Base extends JButton implements Situable, Timerable{
 		return this.nbAgents;
 	}
 	
+	public float getMomentOfTheLastGeneration() {
+		return momentOfTheLastGeneration;
+	}
+
+	public void setMomentOfTheLastGeneration(float momentOfTheLastGeneration) {
+		this.momentOfTheLastGeneration = momentOfTheLastGeneration;
+	}
+
 	public void attackBase(Base enemy){
 		System.out.println("Attack !\n");
 		
@@ -197,7 +206,8 @@ public class Base extends JButton implements Situable, Timerable{
 		this.might = might;
 		this.player = player;
 		this.position = position;
-		this.nbAgents = nbAgents;		
+		this.nbAgents = nbAgents;
+		this.momentOfTheLastGeneration = 0.0f;
 	}
 	
 	@SuppressWarnings("unused")
