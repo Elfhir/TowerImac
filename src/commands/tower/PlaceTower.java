@@ -1,6 +1,8 @@
-package commands;
+package commands.tower;
 
 import javax.vecmath.Vector2f;
+
+import commands.Command;
 
 import game.Player;
 
