@@ -3,8 +3,8 @@ package game;
 import javax.vecmath.Vector2f;
 
 import commands.player.DoRandomAction;
+import commands.player.UpgradeTower;
 import commands.tower.PlaceTower;
-import commands.tower.UpgradeTower;
 
 import engine.Engine;
 

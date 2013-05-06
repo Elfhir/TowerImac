@@ -1,4 +1,4 @@
-package commands.tower;
+package commands.player;
 
 import commands.Command;
 
