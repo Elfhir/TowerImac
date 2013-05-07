@@ -57,18 +57,22 @@ public class AppliWindow extends JFrame {
 	public void setContent(Panel content) {
 		this.content = content;
 	}
+	
+	public int getTilesSize() {
+		return 50;
+	}
 
 	public int getNumOfTile() {
-		return ((this.width/50) * (this.height/50));
+		return ((this.width/getTilesSize()) * (this.height/getTilesSize()));
 	}
 
 	// How many tiles on the width : for 800px it's 16, because 16x50=800
 	public int getNumOfTileWidth() {
-		return (this.width/50);
+		return (this.width/getTilesSize());
 	}
 
 	public int getNumOfTileHeight() {
-		return (this.height/50);
+		return (this.height/getTilesSize());
 	}
 
 	public JLabel getImage() {
@@ -94,7 +98,7 @@ public class AppliWindow extends JFrame {
 			e.printStackTrace();
 		}
 
-		//this.content.add(getImage());
+		this.content.add(getImage());
 	}
 
 	/**
@@ -117,13 +121,12 @@ public class AppliWindow extends JFrame {
 	 */
 	private void buildBases() {
 
-		GridBagLayout grill = (GridBagLayout) content.getLayout();
 		Game game = Game.getInstance();
 		
 		for(final Base base: game.getBaseManager().getBases()) {
 			base.setBorder(BorderFactory.createLineBorder(Color.black));
 			base.setContentAreaFilled(false);
-			base.setBounds(0, 0, 1, 1);
+			base.setBounds((int)base.getPosition().x, (int)base.getPosition().y, getTilesSize(), getTilesSize());
 			try
 			{
 				base.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
@@ -138,17 +141,19 @@ public class AppliWindow extends JFrame {
 					try {
 						base.clicked();
 					} catch (RealPlayerException e1) {
-						System.out.println("Error with RealPlayer : can't manage the click.");
+						System.err.println("Error with RealPlayer : can't manage the click.");
 					} 
 				}
 			});
-
+			
+			/*
 			// Am I doing it right ?? (I guess not)
 			GridBagConstraints c = new GridBagConstraints();
 			c.gridx = (int) base.getPosition().x;
 			c.gridy = (int) base.getPosition().y;
-			grill.setConstraints(base, c);
-			content.add(base, c);
+			*/
+			content.add(base);
+			
 		}
 	}
 	
@@ -160,9 +165,7 @@ public class AppliWindow extends JFrame {
 	 * Still need a more random disposition of Tiles.
 	 */
 	public void buildTiles() {
-		
-		GridBagLayout grill = (GridBagLayout) content.getLayout();
-		
+	
 		Game game = Game.getInstance();
 		
 		// How many tiles
@@ -241,13 +244,10 @@ public class AppliWindow extends JFrame {
 			{
 				System.err.println("Failed to load Tiles image!");
 			}
-			
-			GridBagConstraints c = new GridBagConstraints();
-			
+			/*
 			c.gridx = (int)tabOfWhereToBuild.get(k).getX();
 			c.gridy = (int)tabOfWhereToBuild.get(k).getY();
-			grill.setConstraints(pan, c);
-			content.add(pan, c);
+			*/
 		}
 		
 	}
@@ -261,7 +261,7 @@ public class AppliWindow extends JFrame {
 		Game game = Game.getInstance();
 		game.initGame(fileName);
 		buildBases();
-		buildTiles();
+		//buildTiles();
 
 		game.start();
 //		buildAgents();
@@ -278,29 +278,10 @@ public class AppliWindow extends JFrame {
 	 */
 	private Panel buildContentPane(int width, int height) {
 
-		int numW = this.getNumOfTileWidth();
-		int numH = this.getNumOfTileHeight();
-
 		this.content = new Panel();
 
-		GridBagLayout grill = new GridBagLayout();
-		content.setLayout(grill);
+		content.setLayout(null);
 		content.setBackground(Color.GRAY);
-		//		GridBagConstraints c = new GridBagConstraints();
-		//On crée nos différents conteneurs de couleur différente
-
-		//It not works yet
-		//ArrayList<ArrayList<Panel>> cells = content.newGrid(numW, numH, 50, content, grille, c);
-
-		// One cell
-		/*
-		Panel cell1 = new Panel();
-		cell1.setBackground(Color.YELLOW);
-		cell1.setPreferredSize(new Dimension(50, 50));
-        c.gridx = 0;
-        c.gridy = 0;
-        grille.setConstraints(cell1, c);
-		 */
 
 		buildGame("game.xml");
 
