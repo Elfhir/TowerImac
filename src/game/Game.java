@@ -143,18 +143,7 @@ public class Game {
 	}
 
 	public static void main(String[] args) {
-		Game game = Game.getInstance();
 		
-		Bank bank1 = new Bank(10);
-		Player p1 = new RealPlayer("Jean-Marc", bank1);
-		
-		Bank bank2 = new Bank(12);
-		Player p2 = new IAPlayer("Jean-Gui", bank2);
-		
-		game.getPlayerManager().addPlayer(p1);
-		game.getPlayerManager().addPlayer(p2);
-		
-		System.out.println(game);
 	}
 	
 	
