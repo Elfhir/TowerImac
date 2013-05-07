@@ -8,10 +8,10 @@
   </players>
   <bases>
     <base x="60.0" y="60.0" player="Michel" nbAgents="5" might="5" />
-    <base x="720.0" y="60.0" player="Patrick" nbAgents="8" might="10" />
+    <base x="620.0" y="60.0" player="Patrick" nbAgents="8" might="10" />
     <base x="400.0" y="300.0" nbAgents="22" might="10" />
-    <base x="60.0" y="540.0" player="Jean-Luc" nbAgents="5" might="5" />
-    <base x="720.0" y="540.0" player="Germaine" nbAgents="15" might="15" />
+    <base x="60.0" y="440.0" player="Jean-Luc" nbAgents="5" might="5" />
+    <base x="620.0" y="440.0" player="Germaine" nbAgents="15" might="15" />
   </bases>
   <towers />
   <agents />

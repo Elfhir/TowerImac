@@ -114,6 +114,7 @@ public class Base extends JButton implements Situable, Timerable{
 	public void clicked() throws RealPlayerException {
 		Player realPlayer = Game.getInstance().getPlayerManager().getRealPlayer();
 		Base selectedBases = realPlayer.getSelectedBases();
+		System.out.println(this);
 		
 		// 1st case : the player doesn't have any selected base, so this one become his selected base !
 		if(selectedBases == null) {
@@ -137,7 +138,7 @@ public class Base extends JButton implements Situable, Timerable{
 				/*
 				 * Will be managed by Engine (FIFO of commands) 
 				 */
-				selectedBases.deleteAgents(nbSentAgents);
+				this.deleteAgents(nbSentAgents);
 				if(this.getNbAgents() == 0) {
 					this.setPlayer(selectedBases.getPlayer());
 				}
@@ -146,10 +147,12 @@ public class Base extends JButton implements Situable, Timerable{
 				/*
 				 * Will be managed by Engine (FIFO of commands) 
 				 */
-				selectedBases.addAgents(nbSentAgents);
+				if(!selectedBases.equals(this)) {
+					this.addAgents(nbSentAgents);
+				}
 			}
 			// and the agents of this base are killed !
-			this.deleteAgents(nbSentAgents);
+			selectedBases.deleteAgents(nbSentAgents);
 			realPlayer.setSelectedBases(null);
 		}
 	}
