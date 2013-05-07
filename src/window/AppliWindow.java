@@ -6,8 +6,6 @@ import game.Base;
 import game.Game;
 
 import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -23,8 +21,6 @@ import javax.swing.JLabel;
 
 import javax.vecmath.Vector2f;
 
-
-
 @SuppressWarnings("serial")
 public class AppliWindow extends JFrame {
 
@@ -32,7 +28,6 @@ public class AppliWindow extends JFrame {
 	private int height;
 	private Panel content;
 	private JLabel image;
-	
 
 	public int getWidth() {
 		return width;
@@ -90,15 +85,7 @@ public class AppliWindow extends JFrame {
 		
 		buildWindow(title, resize, pathImage); // On initialise notre fenetre (We initiate the window)
 		
-		// This try/catch is used for trying to set a background !
-		try {
-			this.image =  new JLabel(new ImageIcon(ImageIO.read(new File(pathImage))), JLabel.CENTER);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
-		this.content.add(getImage());
 	}
 
 	/**
@@ -113,7 +100,8 @@ public class AppliWindow extends JFrame {
 		setLocationRelativeTo(null); // null => The window is centered on the screen
 		setResizable(resize); // Resizable window
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // The application musts close when we click on the cross
-		setContentPane(buildContentPane(width, height));
+		setContentPane(buildContentPane(width, height, pathImage));
+
 	}
 
 	/**
@@ -276,13 +264,24 @@ public class AppliWindow extends JFrame {
 	 * @param height	The height of the window ????????
 	 * @return			The panel ???????????????????????
 	 */
-	private Panel buildContentPane(int width, int height) {
+	private Panel buildContentPane(int width, int height, String pathImage) {
 
 		this.content = new Panel();
 
 		content.setLayout(null);
-		content.setBackground(Color.GRAY);
-
+		//content.setBackground(Color.GRAY);
+		// This try/catch is used for trying to set a background !
+		try {
+			this.image =  new JLabel(new ImageIcon(ImageIO.read(new File(pathImage))), JLabel.CENTER);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//this.getImage().setBounds(0, 0, getWidth()-200, getHeight()-200);
+		
+		//this.content.add(this.image);
+		
 		buildGame("game.xml");
 
 		return content;
