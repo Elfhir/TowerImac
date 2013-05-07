@@ -10,7 +10,7 @@ public class Clicked extends Command{
 
 	@Override
 	public void doCommand() {
-		System.out.println(this+" do something");	
+		System.out.println(this+" do something");
 	}
 
 }
