@@ -83,8 +83,10 @@ public class AppliWindow extends JFrame {
 		this.width = width;
 		this.height = height;
 		
-		buildWindow(title, resize, pathImage); // On initialise notre fenetre (We initiate the window)
+		buildWindow(title, resize); // On initialise notre fenetre (We initiate the window)
 		
+		// Add a background, providing the path
+		buildBackground(pathImage);
 
 	}
 
@@ -94,14 +96,14 @@ public class AppliWindow extends JFrame {
 	 * @param height	The height of the window
 	 * @param resize	indicates if the window is resizable or not
 	 */ 
-	private void buildWindow(String title, boolean resize, String pathImage) {
+	private void buildWindow(String title, boolean resize) {
 		setTitle(title);
 		setSize(this.width, this.height);
 		setLocationRelativeTo(null); // null => The window is centered on the screen
 		setResizable(resize); // Resizable window
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // The application musts close when we click on the cross
-		setContentPane(buildContentPane(width, height, pathImage));
-
+		setContentPane(buildContentPane(width, height));
+		
 	}
 
 	/**
@@ -115,6 +117,7 @@ public class AppliWindow extends JFrame {
 			base.setBorder(BorderFactory.createLineBorder(Color.black));
 			base.setContentAreaFilled(false);
 			base.setBounds((int)base.getPosition().x, (int)base.getPosition().y, getTilesSize(), getTilesSize());
+			base.setOpaque(false);
 			try
 			{
 				base.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
@@ -151,7 +154,9 @@ public class AppliWindow extends JFrame {
 	 * Just as a map, a game map.
 	 * 
 	 * Still need a more random disposition of Tiles.
+	 * @deprecated The map is no more built with Tiles
 	 */
+	@Deprecated
 	public void buildTiles() {
 	
 		Game game = Game.getInstance();
@@ -249,8 +254,7 @@ public class AppliWindow extends JFrame {
 		Game game = Game.getInstance();
 		game.initGame(fileName);
 		buildBases();
-		//buildTiles();
-
+		
 		game.start();
 //		buildAgents();
 //		buildTowers();
@@ -264,12 +268,23 @@ public class AppliWindow extends JFrame {
 	 * @param height	The height of the window ????????
 	 * @return			The panel ???????????????????????
 	 */
-	private Panel buildContentPane(int width, int height, String pathImage) {
+	private Panel buildContentPane(int width, int height) {
 
 		this.content = new Panel();
 
 		content.setLayout(null);
-		//content.setBackground(Color.GRAY);
+		content.setBackground(Color.GRAY);
+		
+		buildGame("game.xml");
+
+		return content;
+	}
+
+	/**
+	 * Add a background image, which will fit all the window.
+	 * @param pathImage		A String for the image path
+	 */
+	private void buildBackground(String pathImage) {
 		// This try/catch is used for trying to set a background !
 		try {
 			this.image =  new JLabel(new ImageIcon(ImageIO.read(new File(pathImage))), JLabel.CENTER);
@@ -278,15 +293,8 @@ public class AppliWindow extends JFrame {
 			e.printStackTrace();
 		}
 		
-		//this.getImage().setBounds(0, 0, getWidth()-200, getHeight()-200);
-		
-		//this.content.add(this.image);
-		
-		buildGame("game.xml");
-
-		return content;
+		this.getImage().setBounds(0, 0, getWidth(), getHeight());
+		this.content.add(this.image);
 	}
-
-
 
 }
