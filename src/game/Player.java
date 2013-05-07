@@ -2,9 +2,11 @@ package game;
 
 import javax.vecmath.Vector2f;
 
-import commands.player.DoRandomAction;
-import commands.player.PlaceTower;
-import commands.player.UpgradeTower;
+import commands.market.BuyTower;
+import commands.market.SellTower;
+import commands.market.UpgradeTower;
+import commands.attack.DoRandomAction;
+import commands.selection.PlaceTower;
 
 import engine.Engine;
 
@@ -51,6 +53,28 @@ public abstract class Player implements Runnable {
 		Engine.getInstance().getCommands().add(command);
 	}
 	
+	/**
+	 *  Buy the given tower (how to know which one ?)
+	 * 
+	 */
+	public void buyTower(String type, Tower tower) {
+		BuyTower command = new BuyTower(this, tower);
+		Engine.getInstance().getCommands().add(command);
+	}
+	
+	/**
+	 *  Sell the given tower (how to know which one ?)
+	 * 	Sold = money !
+	 */
+	public void sellTower(String type, Tower tower) {
+		SellTower command = new SellTower(this, tower);
+		Engine.getInstance().getCommands().add(command);
+	}
+	
+	/**
+	 * 	The tower improves its skills !
+	 *  upgrade = less money !
+	 */
 	public void upgradeTower(Tower tower) {
 		UpgradeTower command = new UpgradeTower(this, tower);
 		Engine.getInstance().getCommands().add(command);

@@ -1,4 +1,4 @@
-package commands.player;
+package commands.selection;
 
 import javax.vecmath.Vector2f;
 

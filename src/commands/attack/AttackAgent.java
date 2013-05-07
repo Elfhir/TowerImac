@@ -1,4 +1,4 @@
-package commands.agent;
+package commands.attack;
 
 import game.Agent;
 import commands.Command;

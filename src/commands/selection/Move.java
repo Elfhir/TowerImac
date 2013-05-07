@@ -1,4 +1,4 @@
-package commands.agent;
+package commands.selection;
 
 import javax.vecmath.Vector2f;
 

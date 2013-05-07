@@ -1,4 +1,4 @@
-package commands.player;
+package commands.market;
 
 import commands.Command;
 

@@ -2,8 +2,8 @@ package game;
 
 import javax.vecmath.Vector2f;
 
-import commands.player.DoRandomAction;
-import commands.player.PlaceTower;
+import commands.attack.DoRandomAction;
+import commands.selection.PlaceTower;
 
 import engine.Engine;
 

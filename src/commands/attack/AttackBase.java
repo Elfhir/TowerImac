@@ -1,4 +1,4 @@
-package commands.base;
+package commands.attack;
 
 import commands.Command;
 
