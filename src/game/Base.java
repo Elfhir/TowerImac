@@ -94,6 +94,14 @@ public class Base extends JButton implements Situable, Timerable{
 	}
 	
 	/**
+	 * Add a specific number of agents in the base.
+	 * @param nbSentAgents	The number of agents to delete
+	 */
+	public void addAgents(int nbComingAgents) {
+		this.nbAgents += nbComingAgents; 
+	}
+	
+	/**
 	 *  Manages the click on a Base.
 	 *  A click is obviously an action from the RealPlayer. 
 	 *  So we manage what to do according to the data of this unique realPlayer : if he has a selected base or not.
@@ -117,23 +125,26 @@ public class Base extends JButton implements Situable, Timerable{
 		else {
 			System.out.println("Go go !!");
 			
-			
-			/*
-			 * Will be managed by Engine (FIFO of commands) 
-			 */
 			int nbSentAgents = selectedBases.getNbAgents() / 2;
 			// the selected base send the agents
-			selectedBases.deleteAgents(nbSentAgents);
+			
+			if(this.getPlayer() != selectedBases.getPlayer()) {
+				// It's an attack !
+				/*
+				 * Will be managed by Engine (FIFO of commands) 
+				 */
+				selectedBases.deleteAgents(nbSentAgents);
+			} else {
+				// It's only a move !
+				/*
+				 * Will be managed by Engine (FIFO of commands) 
+				 */
+				selectedBases.addAgents(nbSentAgents);
+			}
 			// and the agents of this base are killed !
 			this.deleteAgents(nbSentAgents);
-			
-			
 			realPlayer.setSelectedBases(null);
 		}
-		
-		/*
-		 * Also need to verify if the base belongs to the player etc...
-		 */
 	}
 	
 	@Override
