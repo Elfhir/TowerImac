@@ -24,6 +24,10 @@ public class Base extends JButton implements Situable, Timerable{
 		return player;
 	}
 		
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
 	public boolean hasPlayer() {
 		if (player != null) {
 			return true;
@@ -95,7 +99,7 @@ public class Base extends JButton implements Situable, Timerable{
 	
 	/**
 	 * Add a specific number of agents in the base.
-	 * @param nbSentAgents	The number of agents to delete
+	 * @param nbSentAgents The number of agents to add to the base
 	 */
 	public void addAgents(int nbComingAgents) {
 		this.nbAgents += nbComingAgents; 
@@ -134,6 +138,9 @@ public class Base extends JButton implements Situable, Timerable{
 				 * Will be managed by Engine (FIFO of commands) 
 				 */
 				selectedBases.deleteAgents(nbSentAgents);
+				if(this.getNbAgents() == 0) {
+					this.setPlayer(selectedBases.getPlayer());
+				}
 			} else {
 				// It's only a move !
 				/*
