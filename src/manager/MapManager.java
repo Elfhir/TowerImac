@@ -197,27 +197,23 @@ public class MapManager {
 		RealPlayer p1 = new RealPlayer("michel");
 		Game.getInstance().getPlayerManager().addPlayer(p1);
 		
-		Base b1 = new Base(10, p1, new Vector2f(300, 300));
-		Base b2 = new Base(10, p1, new Vector2f(500, 800));
-		Base b3 = new Base(10, p1, new Vector2f(100, 600));
-		Game.getInstance().getBaseManager().addBase(b1);
-		Game.getInstance().getBaseManager().addBase(b2);
-		Game.getInstance().getBaseManager().addBase(b3);
-		
 		int widthWindow = 1000;
 		int heightWindow = 1000;
 		
-		MapManager mapManager = new MapManager();
-		System.out.println(mapManager);
-		
-		mapManager.setMapFromFile("map");
-		System.out.println(mapManager);
+		// Test with a map 100*100 and 6 bases !
+		MapManager mapManager = new MapManager(100, 100);
+		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(300, 300)));
+		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(500, 800)));
+		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(100, 600)));
+		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(10, 50)));
+		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(500, 500)));
+		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(1000, 1000)));
 		
 		// area calculation
 		mapManager.calculateAreas(widthWindow, heightWindow);
 		System.out.println(mapManager);
 		
-		
+		// AAAAAAAAAAWWWWWWWW YYYYYYYYEEEEEEEEAAAAAAAAAAA !!!!!!!!!!!!!!!!
 		
 		
 
