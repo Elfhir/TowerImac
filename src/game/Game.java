@@ -1,16 +1,19 @@
 package game;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
 import org.jdom2.JDOMException;
 
 import engine.Engine;
+import exceptions.MapFileException;
 
 import writer.XmlReader;
 
 import manager.AgentManager;
 import manager.BaseManager;
+import manager.MapManager;
 import manager.PlayerManager;
 import manager.TowerManager;
 
@@ -27,7 +30,7 @@ public class Game {
 	private BaseManager baseManager;
 	private AgentManager agentManager;
 	private TowerManager towerManager;
-	//private Map map;
+	private MapManager mapManager;
 	
 	
 	/*
@@ -70,9 +73,17 @@ public class Game {
 	public TowerManager getTowerManager() {
 		return towerManager;
 	}
-
+	
 	public void setTowerManager(TowerManager towerManager) {
 		this.towerManager = towerManager;
+	}
+
+	public void setMapManager(MapManager mapManager) {
+		this.mapManager = mapManager;
+	}
+	
+	public MapManager getMapManager() {
+		return mapManager;
 	}
 
 	/*
@@ -84,21 +95,26 @@ public class Game {
 		this.baseManager = new BaseManager();
 		this.agentManager = new AgentManager();
 		this.towerManager = new TowerManager();
+		this.mapManager = new MapManager();
 		this.running = true;
 	}
 	
-	public void initGame(String fileName) {
+	public void initGame(String xmlFileName, String mapFileName) throws MapFileException, JDOMException, IOException {
  		
- 		try {
-			XmlReader.createGame(this, fileName);
-		} catch (JDOMException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// we create the game from the XML file
+ 		XmlReader.createGame(this, xmlFileName);
  		
+ 		// we set the map grill from the mapFile
+ 		Game.getInstance().getMapManager().setMapFromFile(mapFileName);
+ 		
+ 		System.out.println("initial map :");
+ 		System.out.println(Game.getInstance().getMapManager());
+ 		
+ 		// we calculate the areas of each base
+ 		Game.getInstance().getMapManager().calculateAreas(800, 600); // need to be improved
+ 		
+ 		System.out.println("calculated map :");
+ 		System.out.println(Game.getInstance().getMapManager());
 	}
 	
 	public void start() {

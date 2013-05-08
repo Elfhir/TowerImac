@@ -183,12 +183,12 @@ public class XmlWriter {
 		game.getPlayerManager().addPlayer(patrick);
 		game.getPlayerManager().addPlayer(germaine);
 		
-		Base base1 = new Base(5, michel, new Vector2f(50, 150), 5);
-		Base base2 = new Base(5, jean_luc, new Vector2f(500, 400), 5);
-		
-		game.getBaseManager().addBase(base1);
-		game.getBaseManager().addBase(base2);
-		
+		game.getBaseManager().addBase(new Base(5, michel, new Vector2f(50, 100), 5));
+		game.getBaseManager().addBase(new Base(5, jean_luc, new Vector2f(500, 450), 5));
+		game.getBaseManager().addBase(new Base(5, jean_luc, new Vector2f(30, 380), 5));
+		game.getBaseManager().addBase(new Base(5, jean_luc, new Vector2f(30, 380), 5));
+		game.getBaseManager().addBase(new Base(5, jean_luc, new Vector2f(430, 180), 5));
+		game.getBaseManager().addBase(new Base(5, jean_luc, new Vector2f(750, 185), 5));
 		XmlWriter.createXmlFile(game);
 		
 	}
