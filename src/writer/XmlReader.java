@@ -41,7 +41,7 @@ public class XmlReader {
 		SAXBuilder sxb = new SAXBuilder();
 		
 		// Extraction of the root (normally named "game")
-		Document document = sxb.build(new File(fileName));
+		Document document = sxb.build(new File("files/"+fileName));
 		Element root = document.getRootElement();
 		
 		// Creation of the players from the Element "players"

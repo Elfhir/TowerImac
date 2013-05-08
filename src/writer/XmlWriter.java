@@ -36,7 +36,7 @@ public class XmlWriter {
 			gameElement.addContent(getTowersElement(game));
 			gameElement.addContent(getAgentsElement(game));
 		}
-		saveFile("game.xml", document);
+		saveFile("files/game.xml", document);
 	}
 	
 	/**
@@ -183,8 +183,8 @@ public class XmlWriter {
 		game.getPlayerManager().addPlayer(patrick);
 		game.getPlayerManager().addPlayer(germaine);
 		
-		Base base1 = new Base(5, michel, new Vector2f(0, 1), 5);
-		Base base2 = new Base(5, jean_luc, new Vector2f(2, 2), 5);
+		Base base1 = new Base(5, michel, new Vector2f(50, 150), 5);
+		Base base2 = new Base(5, jean_luc, new Vector2f(500, 400), 5);
 		
 		game.getBaseManager().addBase(base1);
 		game.getBaseManager().addBase(base2);
