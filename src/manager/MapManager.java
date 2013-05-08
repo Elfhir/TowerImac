@@ -4,7 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import javax.vecmath.Vector2f;
+
 import exceptions.MapFileException;
+import game.Base;
+import game.Game;
+import game.Player;
+import game.RealPlayer;
 
 public class MapManager {
 	
@@ -77,9 +83,10 @@ public class MapManager {
 	/**
 	 * Sets the informations of the map, from a file.
 	 * The file must contain integers : width, height of the map and then all the integers for the map :
-	 * 0 => lowland
-	 * 1 => constructing area of the base n°1
-	 * 2=>  constructing area of the base n°2
+	 * -1 => lowland
+	 * 0 => constructing area of the base which index is 0
+	 * 1 => constructing area of the base which index is 1
+	 * 2 => constructing area of the base which index is 2
 	 * etc...
 	 * @param fileName
 	 * @throws FileNotFoundException
@@ -132,14 +139,87 @@ public class MapManager {
 		}
 	}
 	
+	/**
+	 * (Re)calculates all the building areas of the hills = (re)calculates the map.
+	 * The map (int[][]) will be filled with the index of the nearest base.
+	 * This function must be called each time a base change of player.
+	 * @param widthWindow
+	 * @param heightWindow
+	 */
+	public void calculateAreas(int widthWindow, int heightWindow) {
+		
+		// for each cell of the map
+		for(int i=0; i<this.widthMap; ++i) {
+			for(int j=0; j<this.heightMap; ++j) {
+				
+				// we look for the nearest base : at the beginning we don't know which one
+				int nearestBase = -1;
+				double smallerDistance = Double.MAX_VALUE;
+				
+				// we loop over all bases because we need to compare the distance separating all the bases
+				int currentNumBase = -1;
+				for(Base b:Game.getInstance().getBaseManager().getBases()) {
+					
+					// the influential bases are only the non-neutral
+					if(b.getPlayer() != null) {
+						++currentNumBase;
+						
+						// coordinates of the cell of the map in the window
+						float xa = i*(widthWindow/this.widthMap);
+						float ya = j*(heightWindow/this.heightMap);	
+						// coordinates of the base
+						float xb = b.getPosition().x;
+						float yb = b.getPosition().y;
+						// distance between the base and the cell
+						double distance = Math.sqrt((xb-xa)*(xb-xa) + (yb-ya)*(yb-ya));
+
+						// if this base are nearest than the old one, we keep it in memory
+						if(distance < smallerDistance) {
+							nearestBase = currentNumBase;
+							smallerDistance = distance;
+						}
+					}
+				}
+				
+				// if we've found the nearest base, we can fill the cell !
+				if(nearestBase != -1) {
+					this.map[i][j] = nearestBase;
+				}
+			}
+		}
+		
+		
+		
+	}
+	
 	public static void main(String[] args) throws MapFileException, FileNotFoundException {
 		
-		MapManager mm = new MapManager();
-		System.out.println(mm);
+		RealPlayer p1 = new RealPlayer("michel");
+		Game.getInstance().getPlayerManager().addPlayer(p1);
 		
-		mm.setMapFromFile("map");
+		Base b1 = new Base(10, p1, new Vector2f(300, 300));
+		Base b2 = new Base(10, p1, new Vector2f(500, 800));
+		Base b3 = new Base(10, p1, new Vector2f(100, 600));
+		Game.getInstance().getBaseManager().addBase(b1);
+		Game.getInstance().getBaseManager().addBase(b2);
+		Game.getInstance().getBaseManager().addBase(b3);
 		
-		System.out.println(mm);
+		int widthWindow = 1000;
+		int heightWindow = 1000;
+		
+		MapManager mapManager = new MapManager();
+		System.out.println(mapManager);
+		
+		mapManager.setMapFromFile("map");
+		System.out.println(mapManager);
+		
+		// area calculation
+		mapManager.calculateAreas(widthWindow, heightWindow);
+		System.out.println(mapManager);
+		
+		
+		
+		
 
 	}
 
