@@ -1,5 +1,6 @@
 package manager;
 
+import exceptions.IAPlayerException;
 import exceptions.RealPlayerException;
 import game.Player;
 import game.RealPlayer;
@@ -48,6 +49,23 @@ public class PlayerManager {
 			throw new RealPlayerException("no RealPlayer found !");
 		}
 		return playerFound;
+	}
+	/**
+	 * Provide an IAPlayer, based on its index in the players array of the PlayerManager.
+	 * If it's a RealPlayer, another one is getting
+	 * @param index
+	 * @return IAPlayer
+	 * @throws IAPlayerException
+	 */
+	public Player getIAPlayer(int index) throws IAPlayerException {
+		Player IA = players.get(index);
+		if(IA instanceof RealPlayer) {
+			if((index+1) < players.size()) 
+				IA = players.get(index+1);
+			else
+				IA = players.get(index-1);
+		}
+		return IA;
 	}
 
 	public void addPlayer(Player p) {
