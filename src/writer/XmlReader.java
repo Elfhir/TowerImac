@@ -109,6 +109,7 @@ public class XmlReader {
 	public static void createBases(Game game, Element basesElement) {
 		List<Element> bases = basesElement.getChildren("base");
 		Iterator<Element> i = bases.iterator();
+		int index = 0;
 		while (i.hasNext()) {
 			Element baseElement = (Element)i.next();
 			
@@ -122,7 +123,11 @@ public class XmlReader {
 			Vector2f position = new Vector2f(x, y);
 			Player player = game.getPlayerManager().getPlayer(playerName);
 			
-			Base base = new Base(id, might, player, position, nbAgents);
+			
+			//Base base = new Base(id, might, player, position, nbAgents);
+			Base base = new Base(might, player, position, nbAgents);
+			base.setId(index);	
+			++index;
 			game.getBaseManager().addBase(base);
 			
 		}
