@@ -71,10 +71,15 @@ public class MapManager {
 		sb.append(", ");
 		sb.append(heightMap);
 		sb.append(")\n");
-		for(int i=0; i<this.widthMap; ++i) {
-			for(int j=0; j<this.heightMap; ++j) {
+		for(int j=0; j<this.heightMap; ++j) {
+			for(int i=0; i<this.widthMap; ++i) {
+				if(this.map[i][j]==-1) {
+					sb.append(" ");
+				}
+				else {
+					sb.append("  ");
+				}
 				sb.append(this.map[i][j]);
-				sb.append(" ");
 			}
 			sb.append("\n");
 		}
@@ -128,8 +133,9 @@ public class MapManager {
 		// all int from map
 		this.map = new int[this.widthMap][this.heightMap];
 		
-		for(int i=0; i<this.widthMap; ++i) {
-			for(int j=0; j<this.heightMap; ++j) {
+		for(int j=0; j<this.heightMap; ++j) {
+			for(int i=0; i<this.widthMap; ++i) {
+			
 				if (scanner.hasNextInt()) {
 					this.map[i][j] = scanner.nextInt();
 				}
@@ -150,42 +156,47 @@ public class MapManager {
 	public void calculateAreas(int widthWindow, int heightWindow) {
 		
 		// for each cell of the map
-		for(int i=0; i<this.widthMap; ++i) {
-			for(int j=0; j<this.heightMap; ++j) {
+		for(int j=0; j<this.heightMap; ++j) {
+			for(int i=0; i<this.widthMap; ++i) {
+			
 				
-				// we look for the nearest base : at the beginning we don't know which one
-				int nearestBase = -1;
-				double smallerDistance = Double.MAX_VALUE;
-				
-				// we loop over all bases because we need to compare the distance separating all the bases
-				int currentNumBase = -1;
-				for(Base b:Game.getInstance().getBaseManager().getBases()) {
+				// we calculate only the hill cells (i.e. the cells that are not = -1)
+				if(this.map[i][j] != -1) {
+					// we look for the nearest base : at the beginning we don't know which one
+					int nearestBase = -1;
+					double smallerDistance = Double.MAX_VALUE;
 					
-					// the influential bases are only the non-neutral
-					if(b.getPlayer() != null) {
-						++currentNumBase;
+					// we loop over all bases because we need to compare the distance separating all the bases
+					int currentNumBase = -1;
+					for(Base b:Game.getInstance().getBaseManager().getBases()) {
 						
-						// coordinates of the cell of the map in the window
-						float xa = i*(widthWindow/this.widthMap);
-						float ya = j*(heightWindow/this.heightMap);	
-						// coordinates of the base
-						float xb = b.getPosition().x;
-						float yb = b.getPosition().y;
-						// distance between the base and the cell
-						double distance = Math.sqrt((xb-xa)*(xb-xa) + (yb-ya)*(yb-ya));
+						// the influential bases are only the non-neutral
+						if(b.getPlayer() != null) {
+							++currentNumBase;
+							
+							// coordinates of the cell of the map in the window
+							float xa = i*((float)widthWindow/this.widthMap);
+							float ya = j*((float)heightWindow/this.heightMap);	
+							// coordinates of the base
+							float xb = b.getPosition().x;
+							float yb = b.getPosition().y;
+							// distance between the base and the cell
+							double distance = Math.sqrt((xb-xa)*(xb-xa) + (yb-ya)*(yb-ya));
 
-						// if this base are nearest than the old one, we keep it in memory
-						if(distance < smallerDistance) {
-							nearestBase = currentNumBase;
-							smallerDistance = distance;
+							// if this base are nearest than the old one, we keep it in memory
+							if(distance < smallerDistance) {
+								nearestBase = currentNumBase;
+								smallerDistance = distance;
+							}
 						}
+					}
+					
+					// if we've found the nearest base, we can fill the cell !
+					if(nearestBase != -1) {
+						this.map[i][j] = nearestBase;
 					}
 				}
 				
-				// if we've found the nearest base, we can fill the cell !
-				if(nearestBase != -1) {
-					this.map[i][j] = nearestBase;
-				}
 			}
 		}
 		
@@ -201,14 +212,17 @@ public class MapManager {
 		int widthWindow = 1000;
 		int heightWindow = 1000;
 		
-		// Test with a map 100*100 and 6 bases !
-		MapManager mapManager = new MapManager(100, 100);
 		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(300, 300)));
 		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(500, 800)));
 		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(100, 600)));
 		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(10, 50)));
 		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(500, 500)));
 		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(1000, 1000)));
+		
+		
+		MapManager mapManager = new MapManager();
+		mapManager.setMapFromFile("testMap");
+		System.out.println(mapManager);
 		
 		// area calculation
 		mapManager.calculateAreas(widthWindow, heightWindow);
