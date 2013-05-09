@@ -114,16 +114,33 @@ public class Base extends JButton implements Situable, Timerable{
 	public void clicked() throws RealPlayerException {
 		Player realPlayer = Game.getInstance().getPlayerManager().getRealPlayer();
 		Base selectedBases = realPlayer.getSelectedBases();
-		System.out.println(this);
-		
+
 		// 1st case : the player doesn't have any selected base, so this one become his selected base !
 		if(selectedBases == null) {
+			
 			realPlayer.setSelectedBases(this);
-			System.out.println("Base selected !");
+			realPlayer.getSelectedBases().setName(realPlayer.getName());
+			
+			// Check if the current base selected is a base the player owned
+			for(int i = 0; i<Game.getInstance().getBaseManager().getBases().size(); ++i) {
+				if(realPlayer.getSelectedBases().getName() == Game.getInstance().getBaseManager().getBases().get(i).getName()){
+					break;
+				}
+				else 
+					System.out.println("C'est pas à toi !");
+					
+					realPlayer.getSelectedBases().setName(null);
+					realPlayer.setSelectedBases(null);	
+					return;
+			}
+			
+			
+			System.out.println("Base from : "+realPlayer.getSelectedBases().getName()+" selected!");
 		}
 		// 2nd case : this base is already selected by the realPlayer : nothing is done
 		else if (selectedBases.equals(this)) {
-			System.out.println("Base already selected.");
+			System.out.println(selectedBases);
+			System.out.println("Base from : "+realPlayer.getSelectedBases().getName()+" already selected.");
 		}
 		
 		// 3rd case : the realPlayer has an other base selected : agents can go from the selected base to this one ! (and we deselect the base)
@@ -154,6 +171,7 @@ public class Base extends JButton implements Situable, Timerable{
 			}
 			// and the agents of this base are killed !
 			selectedBases.deleteAgents(nbSentAgents);
+			realPlayer.getSelectedBases().setName(null);
 			realPlayer.setSelectedBases(null);
 		}
 	}

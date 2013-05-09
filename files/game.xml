@@ -10,7 +10,6 @@
     <base x="50.0" y="100.0" player="Michel" nbAgents="2" might="6" />
     <base x="500.0" y="450.0" player="Jean-Luc" nbAgents="5" might="2" />
     <base x="30.0" y="380.0" player="Jean-Luc" nbAgents="2" might="3" />
-    <base x="30.0" y="380.0" player="Jean-Luc" nbAgents="5" might="2" />
     <base x="80.0" y="280.0" nbAgents="15" might="5" />
     <base x="430.0" y="180.0" player="Germaine" nbAgents="5" might="3" />
     <base x="750.0" y="185.0" player="Germaine" nbAgents="5" might="3" />
