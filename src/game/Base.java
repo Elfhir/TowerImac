@@ -141,6 +141,7 @@ public class Base extends JButton implements Situable, Timerable{
 				this.deleteAgents(nbSentAgents);
 				if(this.getNbAgents() == 0) {
 					this.setPlayer(selectedBases.getPlayer());
+					this.setBackground(selectedBases.getPlayer().getColor());
 				}
 			} else {
 				// It's only a move !

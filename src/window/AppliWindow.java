@@ -1,6 +1,7 @@
 package window;
 
 
+import exceptions.MapFileException;
 import exceptions.RealPlayerException;
 import game.Base;
 import game.Game;
@@ -20,6 +21,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import javax.vecmath.Vector2f;
+
+import org.jdom2.JDOMException;
 
 @SuppressWarnings("serial")
 public class AppliWindow extends JFrame {
@@ -78,7 +81,7 @@ public class AppliWindow extends JFrame {
 		this.image = image;
 	}
 
-	public AppliWindow(String title, int width, int height, boolean resize, String pathImage){
+	public AppliWindow(String title, int width, int height, boolean resize, String pathImage) throws MapFileException, JDOMException, IOException{
 		super();
 		this.width = width;
 		this.height = height;
@@ -95,8 +98,11 @@ public class AppliWindow extends JFrame {
 	 * @param width		The width of the window
 	 * @param height	The height of the window
 	 * @param resize	indicates if the window is resizable or not
+	 * @throws IOException 
+	 * @throws JDOMException 
+	 * @throws MapFileException 
 	 */ 
-	private void buildWindow(String title, boolean resize) {
+	private void buildWindow(String title, boolean resize) throws MapFileException, JDOMException, IOException {
 		setTitle(title);
 		setSize(this.width, this.height);
 		setLocationRelativeTo(null); // null => The window is centered on the screen
@@ -117,10 +123,16 @@ public class AppliWindow extends JFrame {
 			base.setBorder(BorderFactory.createLineBorder(Color.black));
 			base.setContentAreaFilled(false);
 			base.setBounds((int)base.getPosition().x, (int)base.getPosition().y, getTilesSize(), getTilesSize());
-			base.setOpaque(false);
+			base.setOpaque(true);
 			try
 			{
 				base.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
+				if(base.hasPlayer()) {
+					base.setBackground(base.getPlayer().getColor());
+				}
+				else {
+					base.setBackground(Color.GRAY);
+				}
 			}
 			catch (IOException e1)
 			{
@@ -249,16 +261,20 @@ public class AppliWindow extends JFrame {
 	/**
 	 * Build the game : creates the informations from a XML file and build all corresponding elements in the window.
 	 * @param fileName	The name of the XML file needed to create the game
+	 * @throws IOException 
+	 * @throws JDOMException 
+	 * @throws MapFileException 
 	 */
-	private void buildGame(String fileName) {
+	private void buildGame(String xmlFileName, String mapFileName) throws MapFileException, JDOMException, IOException {
 		Game game = Game.getInstance();
-		game.initGame(fileName);
+		game.initGame(xmlFileName, mapFileName);
 		buildBases();
-		
-		game.start();
 //		buildAgents();
 //		buildTowers();
 //		//...
+		
+		game.start();
+
 
 	}
 
@@ -267,15 +283,18 @@ public class AppliWindow extends JFrame {
 	 * @param width		The width of the window ?????????
 	 * @param height	The height of the window ????????
 	 * @return			The panel ???????????????????????
+	 * @throws IOException 
+	 * @throws JDOMException 
+	 * @throws MapFileException 
 	 */
-	private Panel buildContentPane(int width, int height) {
+	private Panel buildContentPane(int width, int height) throws MapFileException, JDOMException, IOException {
 
 		this.content = new Panel();
 
 		content.setLayout(null);
 		content.setBackground(Color.GRAY);
 		
-		buildGame("game.xml");
+		buildGame("game.xml", "testMap");
 
 		return content;
 	}

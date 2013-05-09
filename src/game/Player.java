@@ -1,5 +1,7 @@
 package game;
 
+import java.awt.Color;
+
 import javax.vecmath.Vector2f;
 
 import commands.market.BuyTower;
@@ -15,6 +17,7 @@ public abstract class Player implements Runnable {
 	private Bank bank;
 	private String name;
 	private Base selectedBases;
+	private Color teamColor;
 	
 	//----------------------------------------------accessors----------------
 	
@@ -32,6 +35,14 @@ public abstract class Player implements Runnable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getColorString() {
+		return Integer.toString(this.teamColor.getRGB());
+	}
+	
+	public Color getColor() {
+		return this.teamColor;
 	}
 	
 	public Base getSelectedBases() {
@@ -106,17 +117,18 @@ public abstract class Player implements Runnable {
 		
 		
 	//----------------------------------------------ctor----------------
-	public Player(String name, Bank bank) {
+	public Player(String name, Bank bank, Color color) {
 		this.name = name;
 		this.bank = bank;
+		this.teamColor = color;
 	}
 	
-	public Player(String name) {
-		this(name, new Bank(50));
+	public Player(String name, Color color) {
+		this(name, new Bank(50), color);
 	}
 	
 	public Player() {
-		this("unknown");
+		this("unknown", Color.WHITE);
 	}
 	
 	
