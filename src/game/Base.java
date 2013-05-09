@@ -3,6 +3,7 @@ package game;
 import javax.swing.JButton;
 import javax.vecmath.Vector2f;
 
+import exceptions.IAPlayerException;
 import exceptions.RealPlayerException;
 
 import time.TimerGame;
@@ -10,6 +11,7 @@ import time.Timerable;
 
 public class Base extends JButton implements Situable, Timerable{
 	
+	private int id;
 	private int might;
 	private Player player;
 	private Vector2f position;
@@ -20,6 +22,14 @@ public class Base extends JButton implements Situable, Timerable{
 		return might;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public Player getPlayer() {
 		return player;
 	}
@@ -111,7 +121,7 @@ public class Base extends JButton implements Situable, Timerable{
 	 *  So we manage what to do according to the data of this unique realPlayer : if he has a selected base or not.
 	 * @throws RealPlayerException  
 	 */
-	public void clicked() throws RealPlayerException {
+	public void clickedByRealPlayer() throws RealPlayerException {
 		Player realPlayer = Game.getInstance().getPlayerManager().getRealPlayer();
 		Base selectedBases = realPlayer.getSelectedBases();
 
@@ -159,6 +169,20 @@ public class Base extends JButton implements Situable, Timerable{
 				if(this.getNbAgents() == 0) {
 					this.setPlayer(selectedBases.getPlayer());
 					this.setBackground(selectedBases.getPlayer().getColor());
+					
+					System.out.println("MAJ BaseManager : list of player-base");
+					// MAJ of the BaseManager
+					for(int i = 0; i<Game.getInstance().getBaseManager().getBases().size(); ++i) {
+						if(Game.getInstance().getBaseManager().getBases().get(i).getId() != this.getId()){
+							System.out.println(Game.getInstance().getBaseManager().getBases().get(i).getPlayer());
+							continue;
+						}
+						else {
+							Game.getInstance().getBaseManager().getBases().get(i).setPlayer(realPlayer);
+						}
+						
+					}
+					
 				}
 			} else {
 				// It's only a move !
@@ -173,6 +197,89 @@ public class Base extends JButton implements Situable, Timerable{
 			selectedBases.deleteAgents(nbSentAgents);
 			realPlayer.getSelectedBases().setName(null);
 			realPlayer.setSelectedBases(null);
+		}
+	}
+	
+	/**
+	 *  Manages a random click from IA on the bases.
+	 *  
+	 *  
+	 * @throws IAPlayerException  
+	 */
+	public void clickedByIAPlayer() throws IAPlayerException {
+		
+		// Select a random IA player
+		int lower = 0;
+		int higher = Game.getInstance().getPlayerManager().getPlayers().size();
+		int random = (int)(Math.random() * (higher-lower)) + lower;
+		
+		Player IAPlayer = null;
+		try {
+			IAPlayer = Game.getInstance().getPlayerManager().getIAPlayer(random);
+		} catch (IAPlayerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Base selectedBases = IAPlayer.getSelectedBases();
+
+		// 1st case : the IA player doesn't have any selected base, so this one become his selected base !
+		if(selectedBases == null) {
+			
+			IAPlayer.setSelectedBases(this);
+			IAPlayer.getSelectedBases().setName(IAPlayer.getName());
+			
+			// Check if the current base selected is a base the IA player owned
+			for(int i = 0; i<Game.getInstance().getBaseManager().getBases().size(); ++i) {
+				if(IAPlayer.getSelectedBases().getName() == Game.getInstance().getBaseManager().getBases().get(i).getName()){
+					break;
+				}
+				else 
+					System.out.println("C'est pas à toi !");
+					
+					IAPlayer.getSelectedBases().setName(null);
+					IAPlayer.setSelectedBases(null);	
+					return;
+			}
+			
+			
+			System.out.println("Base from : "+IAPlayer.getSelectedBases().getName()+" selected!");
+		}
+		// 2nd case : this base is already selected by the IAPlayer : nothing is done
+		else if (selectedBases.equals(this)) {
+			System.out.println(selectedBases);
+			System.out.println("Base from : "+IAPlayer.getSelectedBases().getName()+" already selected.");
+		}
+		
+		// 3rd case : the IA Player has an other base selected : agents can go from the selected base to this one ! (and we deselect the base)
+		else {
+			System.out.println("Go go !!");
+			
+			int nbSentAgents = selectedBases.getNbAgents() / 2;
+			// the selected base send the agents
+			
+			if(this.getPlayer() != selectedBases.getPlayer()) {
+				// It's an attack !
+				/*
+				 * Will be managed by Engine (FIFO of commands) 
+				 */
+				this.deleteAgents(nbSentAgents);
+				if(this.getNbAgents() == 0) {
+					this.setPlayer(selectedBases.getPlayer());
+					this.setBackground(selectedBases.getPlayer().getColor());
+				}
+			} else {
+				// It's only a move !
+				/*
+				 * Will be managed by Engine (FIFO of commands) 
+				 */
+				if(!selectedBases.equals(this)) {
+					this.addAgents(nbSentAgents);
+				}
+			}
+			// and the agents of this base are killed !
+			selectedBases.deleteAgents(nbSentAgents);
+			IAPlayer.getSelectedBases().setName(null);
+			IAPlayer.setSelectedBases(null);
 		}
 	}
 	
@@ -243,6 +350,16 @@ public class Base extends JButton implements Situable, Timerable{
 	
 	public Base(int might, Player player, Vector2f position, int nbAgents){
 		super();
+		this.might = might;
+		this.player = player;
+		this.position = position;
+		this.nbAgents = nbAgents;
+		this.momentOfTheLastGeneration = 0.0f;
+	}
+	
+	public Base(int id, int might, Player player, Vector2f position, int nbAgents){
+		super();
+		this.setId(id);
 		this.might = might;
 		this.player = player;
 		this.position = position;
