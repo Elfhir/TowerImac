@@ -8,6 +8,7 @@ import game.Player;
 import game.RealPlayer;
 import game.Tower;
 
+import java.awt.Color;
 import java.io.FileOutputStream;
 
 import javax.vecmath.Vector2f;
@@ -60,9 +61,11 @@ public class XmlWriter {
 			Attribute name = new Attribute("name", player.getName());
 			Attribute money = new Attribute("money", String.valueOf(player.getBank().getMoney()));
 			Attribute type = new Attribute("type", (player instanceof IAPlayer) ? "IAPlayer" : "RealPlayer");
+			Attribute color = new Attribute("color", player.getColorString());
 			playerElement.setAttribute(name);
 			playerElement.setAttribute(money);
 			playerElement.setAttribute(type);
+			playerElement.setAttribute(color);
 		}
 		
 		return playersElement;
@@ -173,10 +176,10 @@ public class XmlWriter {
 		//Create THE game and all datas
 		Game game = Game.getInstance();
 		
-		Player michel = new RealPlayer("Michel");
-		Player jean_luc = new IAPlayer("Jean-Luc");
-		Player patrick = new IAPlayer("Patrick");
-		Player germaine = new IAPlayer("Germaine");
+		Player michel = new RealPlayer("Michel", Color.MAGENTA);
+		Player jean_luc = new IAPlayer("Jean-Luc", Color.BLACK);
+		Player patrick = new IAPlayer("Patrick", Color.GREEN);
+		Player germaine = new IAPlayer("Germaine", Color.ORANGE);
 		
 		game.getPlayerManager().addPlayer(michel);
 		game.getPlayerManager().addPlayer(jean_luc);

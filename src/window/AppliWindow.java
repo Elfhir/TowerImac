@@ -117,10 +117,16 @@ public class AppliWindow extends JFrame {
 			base.setBorder(BorderFactory.createLineBorder(Color.black));
 			base.setContentAreaFilled(false);
 			base.setBounds((int)base.getPosition().x, (int)base.getPosition().y, getTilesSize(), getTilesSize());
-			base.setOpaque(false);
+			base.setOpaque(true);
 			try
 			{
 				base.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
+				if(base.hasPlayer()) {
+					base.setBackground(base.getPlayer().getColor());
+				}
+				else {
+					base.setBackground(Color.GRAY);
+				}
 			}
 			catch (IOException e1)
 			{

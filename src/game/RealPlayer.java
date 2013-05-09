@@ -1,5 +1,7 @@
 package game;
 
+import java.awt.Color;
+
 
 public class RealPlayer extends Player {
 	
@@ -19,16 +21,16 @@ public class RealPlayer extends Player {
 	}
 	
 	
-	public RealPlayer(String name, Bank bank) {
-		super(name, bank);
+	public RealPlayer(String name, Bank bank, Color color) {
+		super(name, bank, color);
 	}
 	
-	public RealPlayer(String name) {
-		super(name);
+	public RealPlayer(String name, Color color) {
+		super(name, color);
 	}
 	
 	public RealPlayer() {
-		super("unknown");
+		super("unknown", Color.WHITE);
 	}
 	
 	
@@ -39,7 +41,7 @@ public class RealPlayer extends Player {
 	 */
 	public static void main(String[] args) {
 		Bank bank = new Bank(50);
-		Player michel = new RealPlayer("Michel", bank);
+		Player michel = new RealPlayer("Michel", bank, Color.MAGENTA);
 		System.out.println(michel);
 		
 		michel.start();

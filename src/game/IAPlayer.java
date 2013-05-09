@@ -1,5 +1,7 @@
 package game;
 
+import java.awt.Color;
+
 import javax.vecmath.Vector2f;
 
 import commands.attack.DoRandomAction;
@@ -42,16 +44,16 @@ public class IAPlayer extends Player {
 		}
 	}
 	
-	public IAPlayer(String name, Bank bank) {
-		super(name, bank);
+	public IAPlayer(String name, Bank bank, Color color) {
+		super(name, bank, color);
 	}
 	
-	public IAPlayer(String name) {
-		super(name);
+	public IAPlayer(String name, Color color) {
+		super(name, color);
 	}
 	
 	public IAPlayer() {
-		super("unknown");
+		super("unknown", Color.WHITE);
 	}
 	
 	

@@ -1,5 +1,6 @@
 package manager;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -194,7 +195,7 @@ public class MapManager {
 	
 	public static void main(String[] args) throws MapFileException, FileNotFoundException {
 		
-		RealPlayer p1 = new RealPlayer("michel");
+		RealPlayer p1 = new RealPlayer("michel", Color.MAGENTA);
 		Game.getInstance().getPlayerManager().addPlayer(p1);
 		
 		int widthWindow = 1000;

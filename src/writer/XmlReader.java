@@ -9,6 +9,7 @@ import game.Player;
 import game.RealPlayer;
 import game.Tower;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
@@ -83,10 +84,12 @@ public class XmlReader {
 			String name = playerElement.getAttributeValue("name");
 			String type = playerElement.getAttributeValue("type");
 			int money = Integer.parseInt(playerElement.getAttributeValue("money"));
+			String color = playerElement.getAttributeValue("color");
+			Color c = new Color(Integer.parseInt(color));
 			
 			// RealPlayer or IAPlayer ?
 			Player player = (type.equals("RealPlayer")) ? 
-					new RealPlayer(name, new Bank(money)) : new IAPlayer(name, new Bank(money)); 
+					new RealPlayer(name, new Bank(money), c) : new IAPlayer(name, new Bank(money), c); 
 			
 			// finally we add the Player
 			game.getPlayerManager().addPlayer(player);
