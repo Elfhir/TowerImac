@@ -112,6 +112,7 @@ public class XmlReader {
 		while (i.hasNext()) {
 			Element baseElement = (Element)i.next();
 			
+			int id = Integer.parseInt(baseElement.getAttributeValue("id"));
 			float x = Float.parseFloat(baseElement.getAttributeValue("x"));
 			float y = Float.parseFloat(baseElement.getAttributeValue("y"));
 			String playerName = baseElement.getAttributeValue("player");
@@ -121,7 +122,7 @@ public class XmlReader {
 			Vector2f position = new Vector2f(x, y);
 			Player player = game.getPlayerManager().getPlayer(playerName);
 			
-			Base base = new Base(might, player, position, nbAgents);
+			Base base = new Base(id, might, player, position, nbAgents);
 			game.getBaseManager().addBase(base);
 			
 		}

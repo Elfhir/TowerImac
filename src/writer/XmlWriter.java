@@ -89,11 +89,13 @@ public class XmlWriter {
 			Element baseElement = new Element("base");
 			basesElement.addContent(baseElement);
 			// attributes 
+			Attribute id = new Attribute("id", String.valueOf(base.getId()));
 			Attribute x = new Attribute("x", String.valueOf(base.getPosition().x));
 			Attribute y = new Attribute("y", String.valueOf(base.getPosition().y));
 			Attribute player = new Attribute("player", base.getPlayer().getName());
 			Attribute nbAgents = new Attribute("nbAgents", String.valueOf(base.getNbAgents()));
 			Attribute might = new Attribute("might", String.valueOf(base.getMight()));
+			baseElement.setAttribute(id);
 			baseElement.setAttribute(x);
 			baseElement.setAttribute(y);
 			baseElement.setAttribute(player);
@@ -186,12 +188,12 @@ public class XmlWriter {
 		game.getPlayerManager().addPlayer(patrick);
 		game.getPlayerManager().addPlayer(germaine);
 		
-		game.getBaseManager().addBase(new Base(5, michel, new Vector2f(50, 100), 5));
-		game.getBaseManager().addBase(new Base(5, jean_luc, new Vector2f(500, 450), 5));
-		game.getBaseManager().addBase(new Base(5, jean_luc, new Vector2f(30, 380), 5));
-		game.getBaseManager().addBase(new Base(5, jean_luc, new Vector2f(30, 380), 5));
-		game.getBaseManager().addBase(new Base(5, jean_luc, new Vector2f(430, 180), 5));
-		game.getBaseManager().addBase(new Base(5, jean_luc, new Vector2f(750, 185), 5));
+		game.getBaseManager().addBase(new Base(0, 5, michel, new Vector2f(50, 100), 5));
+		game.getBaseManager().addBase(new Base(1, 5, jean_luc, new Vector2f(500, 450), 5));
+		game.getBaseManager().addBase(new Base(2, 5, jean_luc, new Vector2f(30, 380), 5));
+		game.getBaseManager().addBase(new Base(3, 5, jean_luc, new Vector2f(30, 380), 5));
+		game.getBaseManager().addBase(new Base(4, 5, jean_luc, new Vector2f(430, 180), 5));
+		game.getBaseManager().addBase(new Base(5, 5, jean_luc, new Vector2f(750, 185), 5));
 		XmlWriter.createXmlFile(game);
 		
 	}
