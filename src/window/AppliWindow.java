@@ -1,6 +1,7 @@
 package window;
 
 
+import exceptions.IAPlayerException;
 import exceptions.MapFileException;
 import exceptions.RealPlayerException;
 import game.Base;
@@ -142,10 +143,17 @@ public class AppliWindow extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					// all actions are managed by the base
 					try {
-						base.clicked();
+						base.clickedByRealPlayer();
 					} catch (RealPlayerException e1) {
 						System.err.println("Error with RealPlayer : can't manage the click.");
 					} 
+					
+					try {
+						base.clickedByIAPlayer();
+					} catch (IAPlayerException e2) {
+						System.err.println("Error with IAPlayer : can't manage the IA click.");
+					}
+					
 				}
 			});
 			
