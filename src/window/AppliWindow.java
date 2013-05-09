@@ -6,6 +6,7 @@ import exceptions.MapFileException;
 import exceptions.RealPlayerException;
 import game.Base;
 import game.Game;
+import game.Player;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -31,7 +32,7 @@ public class AppliWindow extends JFrame {
 	private int width;
 	private int height;
 	private Panel content;
-	private JLabel image;
+	private Label image;
 
 	public int getWidth() {
 		return width;
@@ -74,11 +75,11 @@ public class AppliWindow extends JFrame {
 		return (this.height/getTilesSize());
 	}
 
-	public JLabel getImage() {
+	public Label getImage() {
 		return image;
 	}
 
-	public void setImage(JLabel image) {
+	public void setImage(Label image) {
 		this.image = image;
 	}
 
@@ -141,7 +142,7 @@ public class AppliWindow extends JFrame {
 			}
 			base.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					// all actions are managed by the base
+					// all actions are managed by the base				
 					try {
 						base.clickedByRealPlayer();
 					} catch (RealPlayerException e1) {
@@ -314,14 +315,14 @@ public class AppliWindow extends JFrame {
 	private void buildBackground(String pathImage) {
 		// This try/catch is used for trying to set a background !
 		try {
-			this.image =  new JLabel(new ImageIcon(ImageIO.read(new File(pathImage))), JLabel.CENTER);
+			this.image =  new Label(new ImageIcon(ImageIO.read(new File(pathImage))), JLabel.CENTER);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		this.getImage().setBounds(0, 0, getWidth(), getHeight());
 		this.content.add(this.image);
+		
 	}
 
 }
