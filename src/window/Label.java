@@ -34,10 +34,9 @@ public class Label extends JLabel implements Accessible, MouseListener{
 		try {
 			realPlayer = Game.getInstance().getPlayerManager().getRealPlayer();
 		} catch (RealPlayerException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
-		//realPlayer.getSelectedBases().setName(null);
 		realPlayer.setSelectedBases(null);
 	}
 
