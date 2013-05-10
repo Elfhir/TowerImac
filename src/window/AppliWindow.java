@@ -6,7 +6,6 @@ import exceptions.MapFileException;
 import exceptions.RealPlayerException;
 import game.Base;
 import game.Game;
-import game.Player;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -147,7 +146,7 @@ public class AppliWindow extends JFrame {
 						base.clickedByRealPlayer();
 					} catch (RealPlayerException e1) {
 						System.err.println("Error with RealPlayer : can't manage the click.");
-					} 
+					}
 					
 					try {
 						base.clickedByIAPlayer();
