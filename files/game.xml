@@ -7,7 +7,7 @@
     <player name="Germaine" money="50" type="IAPlayer" color="-14336" />
   </players>
   <bases>
-    <base id="0" x="50.0" y="100.0" player="Michel" nbAgents="42" might="6" />
+    <base id="0" x="50.0" y="100.0" player="Michel" nbAgents="402" might="6" />
     <base id="1" x="500.0" y="450.0" player="Jean-Luc" nbAgents="5" might="2" />
     <base id="2" x="30.0" y="380.0" player="Jean-Luc" nbAgents="2" might="3" />
     <base id="3" x="80.0" y="280.0" nbAgents="15" might="5" />

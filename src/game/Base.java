@@ -120,7 +120,9 @@ public class Base extends JButton implements Situable, Timerable{
 	 *  A click is obviously an action from the RealPlayer. 
 	 *  So we manage what to do according to the data of this unique realPlayer : if he has a selected base or not.
 	 * @throws RealPlayerException  
+	 * @deprecated Use the Commands now see in commands.selection and try in AppliWindow
 	 */
+	@Deprecated
 	public void clickedByRealPlayer() throws RealPlayerException {
 		Player realPlayer = Game.getInstance().getPlayerManager().getRealPlayer();
 		Base selectedBases = realPlayer.getSelectedBases();

@@ -1,6 +1,8 @@
 package window;
 
 
+import engine.Engine;
+import exceptions.ClickedByRealPlayerException;
 import exceptions.IAPlayerException;
 import exceptions.MapFileException;
 import exceptions.RealPlayerException;
@@ -24,6 +26,8 @@ import javax.swing.JLabel;
 import javax.vecmath.Vector2f;
 
 import org.jdom2.JDOMException;
+
+import commands.selection.ClickedByRealPlayer;
 
 @SuppressWarnings("serial")
 public class AppliWindow extends JFrame {
@@ -141,12 +145,21 @@ public class AppliWindow extends JFrame {
 			}
 			base.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					// all actions are managed by the base				
+					// all actions are managed by the base
+					try {
+						ClickedByRealPlayer click = new ClickedByRealPlayer(base);
+						Engine.getInstance().getCommands().add(click);
+					}catch (ClickedByRealPlayerException e1) {
+						System.err.println("Error with ClickedByRealPlayer : ");
+					}
+					
+					/*
 					try {
 						base.clickedByRealPlayer();
 					} catch (RealPlayerException e1) {
 						System.err.println("Error with RealPlayer : can't manage the click.");
 					}
+					*/
 					
 					// deprecated 
 					/*
