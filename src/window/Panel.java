@@ -6,11 +6,13 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.LayoutManager;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-public class Panel extends JPanel{
+public class Panel extends JPanel implements KeyListener{
 
 	// LList of Base extends JButton ?
 	
@@ -75,9 +77,24 @@ public class Panel extends JPanel{
 		super(layout);
 	}
 	
-	/**
-	 * @param args
-	 */
+	//---------------------------------------- KeyListener
+	@Override
+	public void keyPressed(KeyEvent e) {
+		System.out.println("Key : "+e.getKeyChar());
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

@@ -114,7 +114,7 @@ public class AppliWindow extends JFrame {
 		setResizable(resize); // Resizable window
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // The application musts close when we click on the cross
 		setContentPane(buildContentPane(width, height));
-		
+		this.addKeyListener();
 	}
 
 	/**
@@ -337,6 +337,16 @@ public class AppliWindow extends JFrame {
 		this.getImage().setBounds(0, 0, getWidth(), getHeight());
 		this.content.add(this.image);
 		
+	}
+	
+	/**
+	 * Add KeyListener to the Panel content, and set it Focusable
+	 * Called in buildwindow.
+	 * For more infos see <a>ahttp://docs.oracle.com/javase/tutorial/uiswing/events/keylistener.html<a>
+	 */
+	private void addKeyListener() {
+		this.getContent().addKeyListener(this.getContent());
+		this.getContent().setFocusable(true);
 	}
 
 }
