@@ -148,12 +148,14 @@ public class AppliWindow extends JFrame {
 						System.err.println("Error with RealPlayer : can't manage the click.");
 					}
 					
+					// deprecated 
+					/*
 					try {
 						base.clickedByIAPlayer();
 					} catch (IAPlayerException e2) {
 						System.err.println("Error with IAPlayer : can't manage the IA click.");
 					}
-					
+					*/
 				}
 			});
 			
