@@ -6,6 +6,8 @@ import game.Player;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -13,14 +15,14 @@ import javax.accessibility.Accessible;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 
-public class Label extends JLabel implements Accessible, MouseListener{
+public class Label extends JLabel implements Accessible, MouseListener, KeyListener{
 
 	
 	private static final long serialVersionUID = 2250314127870259478L;
 	
 	protected ActionListener action;
 	
-	// ----------------------------------------- ActionListener ----------------------
+	// ----------------------------------------- MouseListener ----------------------
 
 	public void addMouseListener(ActionListener actionListener) {
 		action = actionListener;
@@ -63,6 +65,24 @@ public class Label extends JLabel implements Accessible, MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+	// ----------------------------------------- KeyListener--------------------------
+	@Override
+	public void keyPressed(KeyEvent e) {
+		System.out.println("Key : "+e.getKeyChar());
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 
 	// ----------------------------------------- Accessor -----------------------------
 	
