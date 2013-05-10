@@ -70,7 +70,7 @@ public class Engine implements Runnable {
 			}
 			
 			// Le Thread se relance toutes les 30 fois par seconde.
-			long waiting = 1000/30 - (Calendar.getInstance().getTimeInMillis() - currentTime1);
+			long waiting = 1000/30 - ((Calendar.getInstance().getTimeInMillis()-initialTime) - currentTime1);
 			if(waiting < 0) {
 				waiting = 0;
 			}

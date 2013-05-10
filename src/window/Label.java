@@ -37,6 +37,9 @@ public class Label extends JLabel implements Accessible, MouseListener{
 			
 			e.printStackTrace();
 		}
+		if(realPlayer.getSelectedBases() != null) {
+			realPlayer.getSelectedBases().setBackground(realPlayer.getColor().brighter());
+		}
 		realPlayer.setSelectedBases(null);
 	}
 

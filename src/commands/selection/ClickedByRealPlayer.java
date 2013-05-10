@@ -33,6 +33,7 @@ public class ClickedByRealPlayer extends Command {
 			//select one of his bases
 			else if((current.getPlayer().getName() == realPlayer.getName()) && (current.getPlayer() != null)) {
 				realPlayer.setSelectedBases(current);
+				current.setBackground(realPlayer.getColor().darker());
 				System.out.println("1st case : Base from "+current.getPlayer().getName()+" selected!");
 			}
 			//select an other player's base
@@ -49,6 +50,7 @@ public class ClickedByRealPlayer extends Command {
 		
 		// 3rd case : the realPlayer has an other base selected : agents can go from the selected base to current one ! (and we deselect the base)
 		else {
+			selectedBases.setBackground(realPlayer.getColor().brighter());
 			int nbSentAgents = selectedBases.getNbAgents() / 2;
 			// the selected base send the agents
 			
@@ -86,6 +88,7 @@ public class ClickedByRealPlayer extends Command {
 			// The number of Agents in our selected Base decrease !
 			selectedBases.deleteAgents(nbSentAgents);
 			realPlayer.setSelectedBases(null);
+			current.setBackground(realPlayer.getColor().brighter());
 			
 			// Now that we have moved or attacked, we deselect !
 			selectedBases = null;
