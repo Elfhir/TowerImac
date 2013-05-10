@@ -122,7 +122,7 @@ public class Game {
 		Engine.getInstance().start();
 		
 		for(Player p: getPlayerManager().getPlayers()) {
-			//p.start();
+			p.start();
 		}
 	}
 	
