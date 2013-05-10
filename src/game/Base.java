@@ -124,88 +124,89 @@ public class Base extends JButton implements Situable, Timerable{
 	public void clickedByRealPlayer() throws RealPlayerException {
 		Player realPlayer = Game.getInstance().getPlayerManager().getRealPlayer();
 		Base selectedBases = realPlayer.getSelectedBases();
-
+		
 		// 1st case : the player doesn't have any selected base, so this one become his selected base !
 		if(selectedBases == null) {
-			
-			realPlayer.setSelectedBases(this);
-			realPlayer.getSelectedBases().setName(realPlayer.getName());
-			
-			// Check if the current base selected is a base the player owned
-			for(int i = 0; i<Game.getInstance().getBaseManager().getBases().size(); ++i) {
-				if(realPlayer.getSelectedBases().getName() == Game.getInstance().getBaseManager().getBases().get(i).getName()){
-					break;
-				}
-				else 
-					System.out.println("C'est pas à toi !");
-					
-					realPlayer.getSelectedBases().setName(null);
-					realPlayer.setSelectedBases(null);	
-					return;
+			//select a neutral base
+	
+			if(this.getPlayer() == null){
+				realPlayer.setSelectedBases(null);
+				System.out.println("1st case : it's a neutral base !");
 			}
-			
-			
-			System.out.println("Base from : "+realPlayer.getSelectedBases().getName()+" selected!");
+			//select one of his bases
+			else if((this.getPlayer().getName() == realPlayer.getName()) && (this.getPlayer() != null)) {
+				realPlayer.setSelectedBases(this);
+				System.out.println("1st case : Base from "+this.getPlayer().getName()+" selected!");
+			}
+			//select an other player's base
+			else if((this.getPlayer().getName() != realPlayer.getName()) && (this.getPlayer() != null)){
+				realPlayer.setSelectedBases(null);
+				System.out.println("1st case : it's not your base !");
+			}
+
 		}
 		// 2nd case : this base is already selected by the realPlayer : nothing is done
 		else if (selectedBases.equals(this)) {
-			System.out.println(selectedBases);
-			System.out.println("Base from : "+realPlayer.getSelectedBases().getName()+" already selected.");
+			System.out.println("2nd case : Base from : "+realPlayer.getSelectedBases().getName()+" already selected.");
 		}
 		
 		// 3rd case : the realPlayer has an other base selected : agents can go from the selected base to this one ! (and we deselect the base)
 		else {
-			System.out.println("Go go !!");
-			
 			int nbSentAgents = selectedBases.getNbAgents() / 2;
 			// the selected base send the agents
 			
+			// 3rd case : Attack
 			if(this.getPlayer() != selectedBases.getPlayer()) {
-				// It's an attack !
+				System.out.println("3rd case : Attack !!");
 				/*
 				 * Will be managed by Engine (FIFO of commands) 
 				 */
+				
+				// The number of agents in the Base attacked decrease !
 				this.deleteAgents(nbSentAgents);
+				
+				// Enemy Base is taken !!
 				if(this.getNbAgents() == 0) {
 					this.setPlayer(selectedBases.getPlayer());
 					this.setBackground(selectedBases.getPlayer().getColor());
-					
-					System.out.println("MAJ BaseManager : list of player-base");
-					// MAJ of the BaseManager
-					for(int i = 0; i<Game.getInstance().getBaseManager().getBases().size(); ++i) {
-						if(Game.getInstance().getBaseManager().getBases().get(i).getId() != this.getId()){
-							System.out.println(Game.getInstance().getBaseManager().getBases().get(i).getPlayer());
-							continue;
-						}
-						else {
-							Game.getInstance().getBaseManager().getBases().get(i).setPlayer(realPlayer);
-						}
-						
-					}
-					
 				}
-			} else {
-				// It's only a move !
+			} 
+			
+			// 3rd case : Move
+			else {
+				
+				System.out.println("3rd case : Move !!");
 				/*
 				 * Will be managed by Engine (FIFO of commands) 
 				 */
 				if(!selectedBases.equals(this)) {
+					//The number of Agent in the base where we move increase !
 					this.addAgents(nbSentAgents);
 				}
 			}
-			// and the agents of this base are killed !
+			// The number of Agents in our selected Base decrease !
 			selectedBases.deleteAgents(nbSentAgents);
-			realPlayer.getSelectedBases().setName(null);
 			realPlayer.setSelectedBases(null);
+			
+			// Now that we have moved or attacked, we deselect !
+			selectedBases = null;
+		}
+		
+		System.out.println("J'ai cliqué sur la base numéro "+this.getId());
+		if(selectedBases == null) {
+			System.out.println("Pas de base selected !");
+		}else{
+			System.out.println("Ma base selected est celle de : "+selectedBases.getPlayer().getName());
 		}
 	}
 	
 	/**
 	 *  Manages a random click from IA on the bases.
 	 *  
-	 *  
+	 * @deprecated 
 	 * @throws IAPlayerException  
 	 */
+	@Deprecated
 	public void clickedByIAPlayer() throws IAPlayerException {
 		
 		// Select a random IA player
