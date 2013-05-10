@@ -60,10 +60,12 @@ public class ClickedByRealPlayer extends Command {
 				 */
 				
 				// The number of agents in the Base attacked decrease !
+				int lastSurvivor = current.getNbAgents();
 				current.deleteAgents(nbSentAgents);
 				
-				// Enemy Base is taken !!
+				// Enemy Base is taken !! Add the Agents not dead to the taken Base too !
 				if(current.getNbAgents() == 0) {
+					current.addAgents(nbSentAgents - lastSurvivor);
 					current.setPlayer(selectedBases.getPlayer());
 					current.setBackground(selectedBases.getPlayer().getColor());
 				}

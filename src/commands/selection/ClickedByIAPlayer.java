@@ -52,10 +52,12 @@ public class ClickedByIAPlayer extends Command{
 				 */
 				
 				// The number of agents in the Base attacked decrease !
+				int lastSurvivor = baseCurrent.getNbAgents();
 				baseCurrent.deleteAgents(nbSentAgents);
 				
-				// Enemy Base is taken !!
+				// Enemy Base is taken !! Add the Agents not dead to the taken Base too !
 				if(baseCurrent.getNbAgents() == 0) {
+					baseCurrent.addAgents(nbSentAgents - lastSurvivor);
 					baseCurrent.setPlayer(selectedBases.getPlayer());
 					baseCurrent.setBackground(selectedBases.getPlayer().getColor());
 				}
