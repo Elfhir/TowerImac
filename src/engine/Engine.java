@@ -25,6 +25,14 @@ public class Engine implements Runnable {
 	public void start(){
 		new Thread(this).start();
     }
+	
+	/**
+	 * Start a new Thread, like start() method in Engine.
+	 * Not sure if very good to do it like this, but it seems to work.
+	 */
+	public void restart(){
+		new Thread(this).start();
+    }
 		
 	@Override
 	public void run() {
