@@ -1,5 +1,9 @@
 package window;
 
+import engine.Engine;
+import game.Game;
+import game.Player;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -80,7 +84,33 @@ public class Panel extends JPanel implements KeyListener{
 	//---------------------------------------- KeyListener
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println("Key : "+e.getKeyChar());
+		switch (e.getKeyChar()) {
+		case 'p':
+			
+			System.out.println("Key : "+e.getKeyChar());
+			
+			// Retour au jeu
+			if(AppliWindow.isPauseStatus()) {
+				AppliWindow.hidePause();
+				AppliWindow.showGame();
+				Game.getInstance().setRunning(true);
+				Engine.getInstance().restart();
+			}
+			// Mise en pause
+			else {
+				AppliWindow.showPause();
+				AppliWindow.hideGame();
+				Game.getInstance().setRunning(false);
+			}	
+			break;
+			
+		case 'q':
+			if(AppliWindow.isPauseStatus())
+				System.exit(0);
+		default:
+			break;
+		}
+		
 	}
 
 	@Override
