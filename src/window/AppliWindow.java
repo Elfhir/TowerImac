@@ -3,15 +3,15 @@ package window;
 
 import engine.Engine;
 import exceptions.ClickedByRealPlayerException;
-import exceptions.IAPlayerException;
 import exceptions.MapFileException;
-import exceptions.RealPlayerException;
 import game.Base;
 import game.Game;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,7 +35,11 @@ public class AppliWindow extends JFrame {
 	private int width;
 	private int height;
 	private Panel content;
-	private Label image;
+	private static Label image;
+	private static Label pause;
+	private static JButton resumeGame;
+	private static JButton exitGame;
+	private static boolean pauseStatus;
 
 	public int getWidth() {
 		return width;
@@ -83,7 +87,57 @@ public class AppliWindow extends JFrame {
 	}
 
 	public void setImage(Label image) {
-		this.image = image;
+		AppliWindow.image = image;
+	}
+
+	public Label getPause() {
+		return pause;
+	}
+
+	public void setPause(Label pause) {
+		AppliWindow.pause = pause;
+	}
+	
+	/**
+	 * @return the pauseStatus
+	 */
+	public static boolean isPauseStatus() {
+		return pauseStatus;
+	}
+
+	/**
+	 * @param pauseStatus the pauseStatus to set
+	 */
+	public static void setPauseStatus(boolean pauseStatus) {
+		AppliWindow.pauseStatus = pauseStatus;
+	}
+	
+	/**
+	 * @return the resumeGame
+	 */
+	public static JButton getResumeGame() {
+		return resumeGame;
+	}
+
+	/**
+	 * @param resumeGame the resumeGame to set
+	 */
+	public static void setResumeGame(JButton resumeGame) {
+		AppliWindow.resumeGame = resumeGame;
+	}
+
+	/**
+	 * @return the exitGame
+	 */
+	public static JButton getExitGame() {
+		return exitGame;
+	}
+
+	/**
+	 * @param exitGame the exitGame to set
+	 */
+	public static void setExitGame(JButton exitGame) {
+		AppliWindow.exitGame = exitGame;
 	}
 
 	public AppliWindow(String title, int width, int height, boolean resize, String pathImage) throws MapFileException, JDOMException, IOException{
@@ -95,6 +149,9 @@ public class AppliWindow extends JFrame {
 		
 		// Add a background, providing the path
 		buildBackground(pathImage);
+		
+		// Add a pause menu
+		buildPause(width/3, height/2);
 
 	}
 
@@ -114,7 +171,8 @@ public class AppliWindow extends JFrame {
 		setResizable(resize); // Resizable window
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // The application musts close when we click on the cross
 		setContentPane(buildContentPane(width, height));
-		this.addKeyListener();
+		this.addKeyListenerToPanel(this.getContent());
+		
 	}
 
 	/**
@@ -329,24 +387,131 @@ public class AppliWindow extends JFrame {
 	private void buildBackground(String pathImage) {
 		// This try/catch is used for trying to set a background !
 		try {
-			this.image =  new Label(new ImageIcon(ImageIO.read(new File(pathImage))), JLabel.CENTER);
+			AppliWindow.image =  new Label(new ImageIcon(ImageIO.read(new File(pathImage))), JLabel.CENTER);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		this.getImage().setBounds(0, 0, getWidth(), getHeight());
-		this.content.add(this.image);
+		this.content.add(AppliWindow.image);
 		
 	}
 	
 	/**
-	 * Add KeyListener to the Panel content, and set it Focusable
+	 * Add KeyListener to a panel and set it Focusable
 	 * Called in buildwindow.
-	 * For more infos see <a>ahttp://docs.oracle.com/javase/tutorial/uiswing/events/keylistener.html<a>
+	 * For more infos see <a>http://docs.oracle.com/javase/tutorial/uiswing/events/keylistener.html<a>
 	 */
-	private void addKeyListener() {
-		this.getContent().addKeyListener(this.getContent());
-		this.getContent().setFocusable(true);
+	private void addKeyListenerToPanel(Panel panel) {
+		panel.addKeyListener(panel);
+		panel.setFocusable(true);
+	}
+	
+	/**
+	 * Add KeyListener to a lanel and set it Focusable
+	 * Called in buildwindow.
+	 * For more infos see <a>http://docs.oracle.com/javase/tutorial/uiswing/events/keylistener.html<a>
+	 */
+	private void addKeyListenerToLabel(Label label) {
+		label.addKeyListener(label);
+		label.setFocusable(true);
+	}
+	
+	/**
+	 * Build a Label Pause, and 2 JButton (exit the game and resume the game)
+	 * Set their position, color. Add two ActionListener on the JButton, for leaving the game or resuming it.
+	 * The actions done in it are the same as in Panel image for key pressed 'p' anq 'q'.
+	 * @param width
+	 * @param height
+	 */
+	@SuppressWarnings("static-access")
+	private void buildPause(int width, int height){
+		AppliWindow.pause =  new Label("", JLabel.CENTER);
+		
+		this.addKeyListenerToLabel(this.pause);
+		pause.setLayout(null);
+		pause.setBackground(Color.lightGray);
+		pause.setBorder(BorderFactory.createLineBorder(Color.black));
+		pause.setBounds(width, height/3, width, height);
+		pause.setVisible(false);
+		pause.setOpaque(true);
+		
+		AppliWindow.resumeGame = new JButton("Resume");
+		content.setLayout(null);
+		resumeGame.setBounds(width+70, height/2, width/2, height/4);
+		resumeGame.setBackground(new Color(108,146,212));
+		resumeGame.setBorderPainted(false);
+		resumeGame.setVisible(false);
+		content.add(resumeGame);
+		
+		AppliWindow.exitGame = new JButton("Exit");
+		exitGame.setBounds(width+70, height/2 +100, width/2, height/4);
+		exitGame.setBackground(new Color(108,146,212));
+		exitGame.setBorderPainted(false);
+		exitGame.setVisible(false);
+		content.add(exitGame);
+		
+		
+		
+		resumeGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {			
+				AppliWindow.hidePause();
+				AppliWindow.showGame();
+				Game.getInstance().setRunning(true);
+				Engine.getInstance().restart();
+			}
+		});
+		
+		// The application musts close when we click
+		exitGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {			
+				System.exit(0); 
+				// Should be improve with saving in xml ?
+			}
+		}); 
+		
+		// Do not remove it!
+		content.add(pause);
+	}
+	
+	/**
+	 * Set all Components of the Pause invisible
+	 */
+	public static void hidePause() {
+		pause.setVisible(false);
+		resumeGame.setVisible(false);
+		exitGame.setVisible(false);
+		setPauseStatus(false);
+	}
+	
+	/**
+	 * Set all Components of the Pause visible
+	 */
+	public static void showPause() {
+		pause.setVisible(true);
+		resumeGame.setVisible(true);
+		exitGame.setVisible(true);
+		setPauseStatus(true);
 	}
 
+	/**
+	 * Hide the image and the Bases.
+	 */
+	public static void hideGame() {
+		image.setVisible(false);
+		for (Base b : Game.getInstance().getBaseManager().getBases()) {
+			b.setVisible(false);
+		}
+	}
+	
+	/**
+	 * Show the image and Bases.
+	 */
+	public static void showGame() {
+		image.setVisible(true);
+		for (Base b : Game.getInstance().getBaseManager().getBases()) {
+			b.setVisible(true);
+		}
+	}
+	
 }
