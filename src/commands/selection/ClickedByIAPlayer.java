@@ -25,6 +25,7 @@ public class ClickedByIAPlayer extends Command{
 			//select one of his bases
 			else if((baseCurrent.getPlayer().getName() == this.IACurrent.getName()) && (baseCurrent.getPlayer() != null)) {
 				this.IACurrent.setSelectedBases(baseCurrent);
+				baseCurrent.setBackground(this.IACurrent.getColor().darker());
 				System.out.println("1st case : Base from "+baseCurrent.getPlayer().getName()+" selected!");
 			}
 			//select an other player's base
@@ -41,6 +42,7 @@ public class ClickedByIAPlayer extends Command{
 		
 		// 3rd case : the IAPlayer has an other base selected : agents can go from the selected base to baseCurrent one ! (and we deselect the base)
 		else {
+			selectedBases.setBackground(this.IACurrent.getColor().brighter());
 			int nbSentAgents = selectedBases.getNbAgents() / 2;
 			// the selected base send the agents
 			
@@ -78,6 +80,7 @@ public class ClickedByIAPlayer extends Command{
 			// The number of Agents in our selected Base decrease !
 			selectedBases.deleteAgents(nbSentAgents);
 			this.IACurrent.setSelectedBases(null);
+			baseCurrent.setBackground(this.IACurrent.getColor().brighter());
 			
 			// Now that we have moved or attacked, we deselect !
 			selectedBases = null;
