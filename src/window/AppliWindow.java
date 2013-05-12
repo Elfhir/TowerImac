@@ -189,15 +189,22 @@ public class AppliWindow extends JFrame {
 	 */
 	public void buildInfoPlayers() {
 		
+		// info of the size of the different panels
+		final int widthPanelRealPlayer = 200;
+		final int heightPanelRealPlayer = 100;
+		final int visibleHeightPanelRealPlayer = 40;
+		int widthPanelIAPlayer = 400;
+		int heightPanelIAPlayer = 25;
+		
 		// panel for the Real Player
 		final JPanel panelRealPlayer = new JPanel();
-		panelRealPlayer.setBounds(0, 560, 200, 100);
+		panelRealPlayer.setBounds(0, height - visibleHeightPanelRealPlayer, widthPanelRealPlayer, heightPanelRealPlayer);
 		panelRealPlayer.setVisible(true);
 		panelRealPlayer.setBackground(Color.RED);
 		
 		// panel for the IA Players
 		JPanel panelIAPlayers = new JPanel();
-		panelIAPlayers.setBounds(400, 575, 400, 25);
+		panelIAPlayers.setBounds(width - widthPanelIAPlayer, height - heightPanelIAPlayer, widthPanelIAPlayer, heightPanelIAPlayer);
 		panelIAPlayers.setVisible(true);
 		panelIAPlayers.setBackground(Color.BLACK);
 		
@@ -223,13 +230,13 @@ public class AppliWindow extends JFrame {
 					
 					// shows the panel
 					public void showPanel() {
-						panelRealPlayer.setBounds(0, 500, 200, 100);
+						panelRealPlayer.setBounds(0, height - heightPanelRealPlayer, widthPanelRealPlayer, heightPanelRealPlayer);
 						setBuildToolsVisible(true);
 					}
 					
 					// hide the panel
 					public void hidePanel() {
-						panelRealPlayer.setBounds(0, 560, 200, 100);
+						panelRealPlayer.setBounds(0, height - visibleHeightPanelRealPlayer, widthPanelRealPlayer, heightPanelRealPlayer);
 						setBuildToolsVisible(false);
 					}
 				});
