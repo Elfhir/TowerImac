@@ -1,9 +1,5 @@
 package window;
 
-
-import java.awt.BorderLayout;
-import engine.Engine;
-import exceptions.ClickedByRealPlayerException;
 import exceptions.MapFileException;
 import game.Base;
 import game.Game;
@@ -26,10 +22,9 @@ import javax.vecmath.Vector2f;
 
 import org.jdom2.JDOMException;
 
-import exceptions.MapFileException;
+import window.graphic.Line;
+
 import exceptions.RealPlayerException;
-import game.Base;
-import game.Game;
 import game.Player;
 import game.RealPlayer;
 /**
@@ -49,6 +44,7 @@ public class AppliWindow extends JFrame {
 	private JPanel panelInfoIAPlayers;
 	
 	private Label image;
+	private Line line;
 	private Label pause;
 	private JButton resumeGame;
 	private JButton exitGame;
@@ -178,6 +174,13 @@ public class AppliWindow extends JFrame {
 		this.exitGame = exitGame;
 	}
 
+	public Line getLine() {
+		return line;
+	}
+
+	public void setLine(Line line) {
+		this.line = line;
+	}
 
 	/**
 	 * Builds the window of the application
@@ -556,8 +559,9 @@ public class AppliWindow extends JFrame {
 		Game game = Game.getInstance();
 		game.initGame(xmlFileName, mapFileName);
 		buildBases();
-
-		buildInfoPlayers();
+		// Add a line
+		buildLine(0, 0, getWidth(), getHeight());
+		//buildInfoPlayers();
 //		buildAgents();
 //		buildTowers();
 //		//...
@@ -680,8 +684,6 @@ public class AppliWindow extends JFrame {
 				// Should be improve with saving in xml ?
 			}
 		}); 
-
-		//pause.getGraph().drawLine(1,1,1,200);
 		
 		pause.requestFocus();
 		
@@ -729,6 +731,9 @@ public class AppliWindow extends JFrame {
 		}
 	}
 	
+	/**
+	 * Give to the content the Focus (requestFocusInWindow())
+	 */
 	public void giveFocusToPanel() {
 		this.content.requestFocusInWindow();
 	}
@@ -789,11 +794,33 @@ public class AppliWindow extends JFrame {
 		
 		// Add a background, providing the path
 		buildBackground(pathImage);
-		
+
 		// Add a pause menu
 		buildPause(width/3, height/2);
 
 	}
+	
+	/**
+	 * Build a LineLabel which will ve opaque (?) except the line (?)
+	 * 
+	 * @param x1 Coordinates of first point of the line
+	 * @param y1 Coordinates of first point of the line
+	 * @param x2 Coordinates of second point of the line
+	 * @param y2 Coordinates of second point of the line
+	 */
+	public void buildLine(int x1, int y1, int x2, int y2) {
+		Line line1 = new Line(x1, y1, x2, y2);
+		
+		content.setLayout(null);
+		line1.setVisible(true);
+		line1.setBounds(x1, y1, Math.abs(x2-x1), Math.abs(y2-y1));
+		line1.setLayout(null);
+		line1.setBorder(null);
+		
+		this.setLine(line1);
+		content.add(line1);
+	}
+
 
 
 }
