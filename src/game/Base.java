@@ -277,6 +277,7 @@ public class Base extends JButton implements Situable, Timerable{
 				 */
 				if(!selectedBases.equals(this)) {
 					this.addAgents(nbSentAgents);
+	
 				}
 			}
 			// and the agents of this base are killed !
@@ -303,6 +304,15 @@ public class Base extends JButton implements Situable, Timerable{
 		sb.append("\n");
 		return sb.toString();
 	}
+	
+	public boolean equals(Base b) {
+		if(this.id == b.id) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	// -------------------------------------------------- Timerable ---------------
 	
 	@Override

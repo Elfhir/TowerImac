@@ -7,6 +7,11 @@ import commands.Command;
 import exceptions.ClickedByRealPlayerException;
 import exceptions.RealPlayerException;
 
+/**
+ * 
+ * @author Elfhir, au.gre, GuillaumeSeg
+ * @deprecated
+ */
 public class ClickedByRealPlayer extends Command {
 
 	Base current;
@@ -67,9 +72,13 @@ public class ClickedByRealPlayer extends Command {
 				
 				// Enemy Base is taken !! Add the Agents not dead to the taken Base too !
 				if(current.getNbAgents() == 0) {
-					current.addAgents(nbSentAgents - lastSurvivor);
-					current.setPlayer(selectedBases.getPlayer());
-					current.setBackground(selectedBases.getPlayer().getColor());
+					for(Base b : Game.getInstance().getBaseManager().getBases()) {
+						if(b.equals(current)) {
+							b.addAgents(nbSentAgents - lastSurvivor);
+							b.setPlayer(selectedBases.getPlayer());
+							b.setBackground(selectedBases.getPlayer().getColor());
+						}
+					}
 				}
 			} 
 			
