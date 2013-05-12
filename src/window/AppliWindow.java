@@ -34,7 +34,10 @@ import game.Base;
 import game.Game;
 import game.Player;
 import game.RealPlayer;
-
+/**
+ * Singleton
+ *
+ */
 @SuppressWarnings("serial")
 public class AppliWindow extends JFrame {
 
@@ -42,15 +45,35 @@ public class AppliWindow extends JFrame {
 	private int height;
 	private Panel content;
 	private boolean buildToolsVisible = false;
-
-	private static Label image;
-	private static Label pause;
-	private static JButton resumeGame;
-	private static JButton exitGame;
-	private static boolean pauseStatus;
 	
+	private JPanel panelInfoRealPlayer;
+	private JPanel panelInfoIAPlayers;
+	
+	private Label image;
+	private Label pause;
+	private JButton resumeGame;
+	private JButton exitGame;
+	private boolean pauseStatus;
+	
+	
+	public JPanel getPanelInfoRealPlayer() {
+		return this.panelInfoRealPlayer;
+	}
+
+	public void setPanelInfoRealPlayer(JPanel panelInfoRealPlayer) {
+		this.panelInfoRealPlayer = panelInfoRealPlayer;
+	}
+
+	public JPanel getPanelInfoIAPlayers() {
+		return this.panelInfoIAPlayers;
+	}
+
+	public void setPanelInfoIAPlayers(JPanel panelInfoIAPlayers) {
+		this.panelInfoIAPlayers = panelInfoIAPlayers;
+	}
+
 	public boolean isBuildToolsVisible() {
-		return buildToolsVisible;
+		return this.buildToolsVisible;
 	}
 	
 	public void setBuildToolsVisible(boolean buildToolsVisible) {
@@ -58,7 +81,7 @@ public class AppliWindow extends JFrame {
 	}
 
 	public int getWidth() {
-		return width;
+		return this.width;
 	}
 
 	public void setWidth(int width) {
@@ -66,7 +89,7 @@ public class AppliWindow extends JFrame {
 	}
 
 	public int getHeight() {
-		return height;
+		return this.height;
 	}
 
 	public void setHeight(int height) {
@@ -74,7 +97,7 @@ public class AppliWindow extends JFrame {
 	}
 
 	public Panel getContent() {
-		return content;
+		return this.content;
 	}
 
 	public void setContent(Panel content) {
@@ -99,76 +122,61 @@ public class AppliWindow extends JFrame {
 	}
 
 	public Label getImage() {
-		return image;
+		return this.image;
 	}
 
 	public void setImage(Label image) {
-		AppliWindow.image = image;
+		this.image = image;
 	}
 
 	public Label getPause() {
-		return pause;
+		return this.pause;
 	}
 
 	public void setPause(Label pause) {
-		AppliWindow.pause = pause;
+		this.pause = pause;
 	}
 	
 	/**
 	 * @return the pauseStatus
 	 */
-	public static boolean isPauseStatus() {
-		return pauseStatus;
+	public boolean isPauseStatus() {
+		return this.pauseStatus;
 	}
 
 	/**
 	 * @param pauseStatus the pauseStatus to set
 	 */
-	public static void setPauseStatus(boolean pauseStatus) {
-		AppliWindow.pauseStatus = pauseStatus;
+	public void setPauseStatus(boolean pauseStatus) {
+		this.pauseStatus = pauseStatus;
 	}
 	
 	/**
 	 * @return the resumeGame
 	 */
-	public static JButton getResumeGame() {
-		return resumeGame;
+	public JButton getResumeGame() {
+		return this.resumeGame;
 	}
 
 	/**
 	 * @param resumeGame the resumeGame to set
 	 */
-	public static void setResumeGame(JButton resumeGame) {
-		AppliWindow.resumeGame = resumeGame;
+	public void setResumeGame(JButton resumeGame) {
+		this.resumeGame = resumeGame;
 	}
 
 	/**
 	 * @return the exitGame
 	 */
-	public static JButton getExitGame() {
-		return exitGame;
+	public JButton getExitGame() {
+		return this.exitGame;
 	}
 
 	/**
 	 * @param exitGame the exitGame to set
 	 */
-	public static void setExitGame(JButton exitGame) {
-		AppliWindow.exitGame = exitGame;
-	}
-
-	public AppliWindow(String title, int width, int height, boolean resize, String pathImage) throws MapFileException, JDOMException, IOException{
-		super();
-		this.width = width;
-		this.height = height;
-		
-		buildWindow(title, resize); // On initialise notre fenetre (We initiate the window)
-		
-		// Add a background, providing the path
-		buildBackground(pathImage);
-		
-		// Add a pause menu
-		buildPause(width/3, height/2);
-
+	public void setExitGame(JButton exitGame) {
+		this.exitGame = exitGame;
 	}
 
 	/**
@@ -353,8 +361,12 @@ public class AppliWindow extends JFrame {
 		}
 		
 		// finally we add the two panels (panelRealPlayer and panelIAPlayers) to the window
+		setPanelInfoRealPlayer(panelRealPlayer);
 		content.add(panelRealPlayer);
+		
+		setPanelInfoIAPlayers(panelIAPlayers);
 		content.add(panelIAPlayers);
+		
 	}
 	
 	/**
@@ -504,13 +516,13 @@ public class AppliWindow extends JFrame {
 	private void buildBackground(String pathImage) {
 		// This try/catch is used for trying to set a background !
 		try {
-			AppliWindow.image =  new Label(new ImageIcon(ImageIO.read(new File(pathImage))), JLabel.CENTER);
+			this.image =  new Label(new ImageIcon(ImageIO.read(new File(pathImage))), JLabel.CENTER);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		this.getImage().setBounds(0, 0, getWidth(), getHeight());
-		this.content.add(AppliWindow.image);
+		this.content.add(this.image);
 		
 	}
 	
@@ -541,9 +553,8 @@ public class AppliWindow extends JFrame {
 	 * @param width
 	 * @param height
 	 */
-	@SuppressWarnings("static-access")
 	private void buildPause(int width, int height){
-		AppliWindow.pause =  new Label("", JLabel.CENTER);
+		this.pause =  new Label("", JLabel.CENTER);
 		
 		this.addKeyListenerToLabel(this.pause);
 		pause.setLayout(null);
@@ -553,7 +564,7 @@ public class AppliWindow extends JFrame {
 		pause.setVisible(false);
 		pause.setOpaque(true);
 		
-		AppliWindow.resumeGame = new JButton("Resume");
+		this.resumeGame = new JButton("Resume");
 		content.setLayout(null);
 		resumeGame.setBounds(width+70, height/2, width/2, height/4);
 		resumeGame.setBackground(new Color(108,146,212));
@@ -561,7 +572,7 @@ public class AppliWindow extends JFrame {
 		resumeGame.setVisible(false);
 		content.add(resumeGame);
 		
-		AppliWindow.exitGame = new JButton("Exit");
+		this.exitGame = new JButton("Exit");
 		exitGame.setBounds(width+70, height/2 +100, width/2, height/4);
 		exitGame.setBackground(new Color(108,146,212));
 		exitGame.setBorderPainted(false);
@@ -572,8 +583,8 @@ public class AppliWindow extends JFrame {
 		
 		resumeGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {			
-				AppliWindow.hidePause();
-				AppliWindow.showGame();
+				hidePause();
+				showGame();
 				Game.getInstance().setRunning(true);
 				Engine.getInstance().restart();
 			}
@@ -594,7 +605,7 @@ public class AppliWindow extends JFrame {
 	/**
 	 * Set all Components of the Pause invisible
 	 */
-	public static void hidePause() {
+	public void hidePause() {
 		pause.setVisible(false);
 		resumeGame.setVisible(false);
 		exitGame.setVisible(false);
@@ -604,7 +615,7 @@ public class AppliWindow extends JFrame {
 	/**
 	 * Set all Components of the Pause visible
 	 */
-	public static void showPause() {
+	public void showPause() {
 		pause.setVisible(true);
 		resumeGame.setVisible(true);
 		exitGame.setVisible(true);
@@ -614,7 +625,7 @@ public class AppliWindow extends JFrame {
 	/**
 	 * Hide the image and the Bases.
 	 */
-	public static void hideGame() {
+	public void hideGame() {
 		image.setVisible(false);
 		for (Base b : Game.getInstance().getBaseManager().getBases()) {
 			b.setVisible(false);
@@ -624,11 +635,69 @@ public class AppliWindow extends JFrame {
 	/**
 	 * Show the image and Bases.
 	 */
-	public static void showGame() {
+	public void showGame() {
 		image.setVisible(true);
 		for (Base b : Game.getInstance().getBaseManager().getBases()) {
 			b.setVisible(true);
 		}
 	}
 	
+	/* 
+	 * 
+	 ************    Holder class : for the Singleton pattern implementation   ******************
+	 */
+	private AppliWindow() {
+		super();
+		this.width = 0;
+//		private int height;
+//		private Panel content;
+//		private boolean buildToolsVisible = false;
+//		
+//		private JPanel panelInfoRealPlayer;
+//		private JPanel panelInfoIAPlayers;
+//		
+//		private Label image;
+//		private Label pause;
+//		private JButton resumeGame;
+//		private JButton exitGame;
+//		private boolean pauseStatus;
+	}
+	
+	
+	private static class AppliWindowHolder
+	{		
+		// unique instance, not preinitialized
+		private final static AppliWindow instance = new AppliWindow();
+	}
+ 
+	// Getter for the unique instance of the Singleton
+	public static AppliWindow getInstance()
+	{
+		return AppliWindowHolder.instance;
+	}
+	
+	/**
+	 * Initializes the AppliWindow the first time
+	 * @param title		The title of the window
+	 * @param width		The width of the window
+	 * @param height	The height of the window
+	 * @param resize	Indicates if the window is resizable or not
+	 * @param pathImage		The path of the background image (String)
+	 * @throws MapFileException
+	 * @throws JDOMException
+	 * @throws IOException
+	 */
+	public void init(String title, int width, int height, boolean resize, String pathImage) throws MapFileException, JDOMException, IOException{
+		this.width = width;
+		this.height = height;
+		
+		buildWindow(title, resize); // On initialise notre fenetre (We initiate the window)
+		
+		// Add a background, providing the path
+		buildBackground(pathImage);
+		
+		// Add a pause menu
+		buildPause(width/3, height/2);
+
+	}
 }
