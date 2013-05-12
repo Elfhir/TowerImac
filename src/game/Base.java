@@ -93,7 +93,7 @@ public class Base extends JButton implements Situable, Timerable{
 		this.addAgents(nbAgentsToAdd);
 		this.setPlayer(newPlayer);
 		this.setBackground(newPlayer.getColor());
-		AppliWindow.getInstance().buildInfoPlayers();
+		AppliWindow.getInstance().updateInfoPlayers();
 	}
 	
 	public void generateAgent() {

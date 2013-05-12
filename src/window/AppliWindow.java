@@ -263,7 +263,7 @@ public class AppliWindow extends JFrame {
 
 	/**
 	 * 
-	 * Add to the window the panels corresponding to the players' informations : money and number of bases
+	 * Constructs and adds to the window the panels corresponding to the players' informations : money and number of bases
 	 * For the RealPlayer, the panel can be enlarged to provide tools to buy towers.
 	 * 
 	 */
@@ -279,20 +279,24 @@ public class AppliWindow extends JFrame {
 		int nbTotalBases = Game.getInstance().getBaseManager().getBases().size();
 		
 		// panel for the Real Player
-		final JPanel panelRealPlayer = new JPanel();
+		JPanel panelRealPlayer = this.panelInfoRealPlayer;
 		panelRealPlayer.setBounds(0, height - visibleHeightPanelRealPlayer, widthPanelRealPlayer, heightPanelRealPlayer);
 		panelRealPlayer.setVisible(true);
 		panelRealPlayer.setBackground(Color.RED);
 		
 		// panel for the IA Players
-		JPanel panelIAPlayers = new JPanel();
+		JPanel panelIAPlayers = this.panelInfoIAPlayers;
 		panelIAPlayers.setBounds(width - widthPanelIAPlayer, height - heightPanelIAPlayer, widthPanelIAPlayer, heightPanelIAPlayer);
 		panelIAPlayers.setVisible(true);
 		panelIAPlayers.setBackground(Color.BLACK);
 		
+		panelRealPlayer.removeAll();
+		panelIAPlayers.removeAll();
+		
 		// we loop on each player
 		for(Player p: Game.getInstance().getPlayerManager().getPlayers()) {
 			
+			// how many bases does the player have ?
 			int nbBasesPlayer = 0;
 			for(Base b: Game.getInstance().getBaseManager().getBases()) {
 				if (b.getPlayer()!=null && b.getPlayer().equals(p)) {
@@ -328,13 +332,13 @@ public class AppliWindow extends JFrame {
 					
 					// shows the panel
 					public void showPanel() {
-						panelRealPlayer.setBounds(0, height - heightPanelRealPlayer, widthPanelRealPlayer, heightPanelRealPlayer);
+						AppliWindow.getInstance().getPanelInfoRealPlayer().setBounds(0, height - heightPanelRealPlayer, widthPanelRealPlayer, heightPanelRealPlayer);
 						setBuildToolsVisible(true);
 					}
 					
 					// hide the panel
 					public void hidePanel() {
-						panelRealPlayer.setBounds(0, height - visibleHeightPanelRealPlayer, widthPanelRealPlayer, heightPanelRealPlayer);
+						AppliWindow.getInstance().getPanelInfoRealPlayer().setBounds(0, height - visibleHeightPanelRealPlayer, widthPanelRealPlayer, heightPanelRealPlayer);
 						setBuildToolsVisible(false);
 					}
 				});
@@ -343,7 +347,7 @@ public class AppliWindow extends JFrame {
 
 			}
 			
-			// else if it is an IA Player we fill the panelIAPlayers
+			// else if it is an IA JPlayer we fill the panelIAPlayers with a new JPanel for each IAPlayer
 			else {
 				JPanel panel = new JPanel();
 				
@@ -366,12 +370,84 @@ public class AppliWindow extends JFrame {
 		}
 		
 		// finally we add the two panels (panelRealPlayer and panelIAPlayers) to the window
-		setPanelInfoRealPlayer(panelRealPlayer);
-		content.add(panelRealPlayer);
 		
-		setPanelInfoIAPlayers(panelIAPlayers);
+//		content.removeAll();
+//		
+//		setPanelInfoRealPlayer(panelRealPlayer);
+		content.add(panelRealPlayer);
+//		
+//		setPanelInfoIAPlayers(panelIAPlayers);
 		content.add(panelIAPlayers);
 		
+	}
+	
+	/**
+	 * Updates the infos of the players in the corresponding panels.
+	 * This function must be called each time a base is taken or a player earn money.
+	 * 
+	 */
+	public void updateInfoPlayers() {
+
+		int nbTotalBases = Game.getInstance().getBaseManager().getBases().size();
+		
+		// panel for the Real Player
+		JPanel panelRealPlayer = this.panelInfoRealPlayer;
+		
+		// panel for the IA Players
+		JPanel panelIAPlayers = this.panelInfoIAPlayers;
+		
+		// we loop on each player
+		int indexIAPlayer = 0;
+		for(Player p: Game.getInstance().getPlayerManager().getPlayers()) {
+			
+			// how many bases does the player have ?
+			int nbBasesPlayer = 0;
+			for(Base b: Game.getInstance().getBaseManager().getBases()) {
+				if (b.getPlayer()!=null && b.getPlayer().equals(p)) {
+					++nbBasesPlayer;
+				}
+			}
+			
+			// if it is the RealPlayer, we update the text of the button of the panelRealPlayer
+			if(p instanceof RealPlayer) {
+				
+				StringBuilder sb = new StringBuilder(p.getName());
+				sb.append(" : $");
+				sb.append(p.getBank().getMoney());
+				sb.append(" | ");
+				sb.append(nbBasesPlayer);
+				sb.append("/");
+				sb.append(nbTotalBases);
+				
+				// The button is the first Component in the pannel
+				JButton buttonRealPlayer = (JButton)panelRealPlayer.getComponent(0);
+				// we can update the text of the button
+				buttonRealPlayer.setText(sb.toString());
+			}
+			
+			// else if it is an IA Player we change the text of the label in each panel of panelIAPlayers (= corresponding to each IAPlayer)
+			else {
+				// the panel of the player
+				JPanel panel = (JPanel) panelIAPlayers.getComponent(indexIAPlayer);
+				// the label of the player = it's the first element
+				JLabel label = (JLabel) panel.getComponent(0);
+				
+				StringBuilder sb = new StringBuilder("<html>");
+				sb.append(p.getName());
+				sb.append("<br /> $");
+				sb.append(p.getBank().getMoney());
+				sb.append(" | ");
+				sb.append(nbBasesPlayer);
+				sb.append("/");
+				sb.append(nbTotalBases);
+				sb.append("</html>");
+				
+				// we change the text of the label
+				label.setText(sb.toString());	
+				
+				++indexIAPlayer;
+			}
+		}
 	}
 	
 	/**
@@ -708,6 +784,9 @@ public class AppliWindow extends JFrame {
 	public void init(String title, int width, int height, boolean resize, String pathImage) throws MapFileException, JDOMException, IOException{
 		this.width = width;
 		this.height = height;
+		
+		this.panelInfoIAPlayers =  new JPanel();
+		this.panelInfoRealPlayer = new JPanel();
 		
 		buildWindow(title, resize); // On initialise notre fenetre (We initiate the window)
 		
