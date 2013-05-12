@@ -1,9 +1,5 @@
 package window;
 
-
-import java.awt.BorderLayout;
-import engine.Engine;
-import exceptions.ClickedByRealPlayerException;
 import exceptions.MapFileException;
 import game.Base;
 import game.Game;
@@ -28,11 +24,7 @@ import org.jdom2.JDOMException;
 
 import window.graphic.Line;
 
-
-import exceptions.MapFileException;
 import exceptions.RealPlayerException;
-import game.Base;
-import game.Game;
 import game.Player;
 import game.RealPlayer;
 /**
@@ -493,7 +485,7 @@ public class AppliWindow extends JFrame {
 		game.initGame(xmlFileName, mapFileName);
 		buildBases();
 		// Add a line
-		buildLine(0,0,800,600);
+		buildLine(0, 0, getWidth(), getHeight());
 		//buildInfoPlayers();
 //		buildAgents();
 //		buildTowers();
@@ -742,7 +734,7 @@ public class AppliWindow extends JFrame {
 		Line line1 = new Line(x1, y1, x2, y2);
 		
 		content.setLayout(null);
-		line1.setVisible(false);
+		line1.setVisible(true);
 		line1.setBounds(x1, y1, Math.abs(x2-x1), Math.abs(y2-y1));
 		line1.setLayout(null);
 		line1.setBorder(null);
@@ -750,6 +742,7 @@ public class AppliWindow extends JFrame {
 		this.setLine(line1);
 		content.add(line1);
 	}
+
 
 
 }
