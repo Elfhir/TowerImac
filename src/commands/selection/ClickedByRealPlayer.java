@@ -76,10 +76,7 @@ public class ClickedByRealPlayer extends Command {
 				if(current.getNbAgents() == 0) {
 					for(Base b : Game.getInstance().getBaseManager().getBases()) {
 						if(b.equals(current)) {
-							b.addAgents(nbSentAgents - lastSurvivor);
-							b.setPlayer(selectedBases.getPlayer());
-							b.setBackground(selectedBases.getPlayer().getColor());
-							AppliWindow.getInstance().buildInfoPlayers();
+							b.changePlayer(selectedBases.getPlayer(), nbSentAgents - lastSurvivor);
 						}
 					}
 				}

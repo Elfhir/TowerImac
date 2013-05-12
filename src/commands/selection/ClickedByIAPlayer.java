@@ -58,12 +58,10 @@ public class ClickedByIAPlayer extends Command{
 				int lastSurvivor = baseCurrent.getNbAgents();
 				baseCurrent.deleteAgents(nbSentAgents);
 				
+				
 				// Enemy Base is taken !! Add the Agents not dead to the taken Base too !
 				if(baseCurrent.getNbAgents() == 0) {
-					baseCurrent.addAgents(nbSentAgents - lastSurvivor);
-					baseCurrent.setPlayer(selectedBases.getPlayer());
-					baseCurrent.setBackground(selectedBases.getPlayer().getColor());
-					AppliWindow.getInstance().buildInfoPlayers();
+					baseCurrent.changePlayer(selectedBases.getPlayer(), nbSentAgents - lastSurvivor);
 				}
 			} 
 			
