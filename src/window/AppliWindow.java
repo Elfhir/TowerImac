@@ -170,7 +170,7 @@ public class AppliWindow extends JFrame {
 		setResizable(resize); // Resizable window
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // The application musts close when we click on the cross
 		setContentPane(buildContentPane(width, height));
-		this.addKeyListenerToPanel(this.getContent());
+		this.addKeyListenerToPanel(AppliWindow.getContent());
 
 	}
 
@@ -458,7 +458,7 @@ public class AppliWindow extends JFrame {
 				AppliWindow.hidePause();
 				AppliWindow.showGame();
 				Game.getInstance().setRunning(true);
-				Engine.getInstance().restart();
+				Game.getInstance().start();
 			}
 		});
 

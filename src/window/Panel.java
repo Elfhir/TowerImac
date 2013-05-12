@@ -46,7 +46,8 @@ public class Panel extends JPanel implements KeyListener{
 				AppliWindow.hidePause();
 				AppliWindow.showGame();
 				Game.getInstance().setRunning(true);
-				Engine.getInstance().restart();
+				Game.getInstance().start();
+				
 			}
 			// Mise en pause
 			else {
