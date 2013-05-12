@@ -235,6 +235,8 @@ public class AppliWindow extends JFrame {
 						base.clickedByRealPlayer();
 					} catch (RealPlayerException e1) {
 						System.err.println("Error with RealPlayer : can't manage the click.");
+					} catch (ClickedByRealPlayerException e2) {
+						e2.printStackTrace();
 					}
 
 					// deprecated 

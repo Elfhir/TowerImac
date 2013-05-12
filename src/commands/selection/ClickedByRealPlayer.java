@@ -13,7 +13,6 @@ import exceptions.RealPlayerException;
 /**
  * 
  * @author Elfhir, au.gre, GuillaumeSeg
- * @deprecated
  */
 public class ClickedByRealPlayer extends Command {
 
@@ -80,6 +79,7 @@ public class ClickedByRealPlayer extends Command {
 							b.addAgents(nbSentAgents - lastSurvivor);
 							b.setPlayer(selectedBases.getPlayer());
 							b.setBackground(selectedBases.getPlayer().getColor());
+							AppliWindow.getInstance().buildInfoPlayers();
 						}
 					}
 				}

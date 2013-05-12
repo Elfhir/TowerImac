@@ -1,5 +1,6 @@
 package commands.selection;
 
+import window.AppliWindow;
 import game.Base;
 import game.IAPlayer;
 import commands.Command;
@@ -62,6 +63,7 @@ public class ClickedByIAPlayer extends Command{
 					baseCurrent.addAgents(nbSentAgents - lastSurvivor);
 					baseCurrent.setPlayer(selectedBases.getPlayer());
 					baseCurrent.setBackground(selectedBases.getPlayer().getColor());
+					AppliWindow.getInstance().buildInfoPlayers();
 				}
 			} 
 			
