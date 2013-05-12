@@ -193,7 +193,7 @@ public class AppliWindow extends JFrame {
 		final int widthPanelRealPlayer = 200;
 		final int heightPanelRealPlayer = 100;
 		final int visibleHeightPanelRealPlayer = 40;
-		int widthPanelIAPlayer = 400;
+		int widthPanelIAPlayer = 250;
 		int heightPanelIAPlayer = 40;
 		
 		int nbTotalBases = Game.getInstance().getBaseManager().getBases().size();
