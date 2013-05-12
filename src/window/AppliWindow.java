@@ -26,6 +26,8 @@ import javax.vecmath.Vector2f;
 
 import org.jdom2.JDOMException;
 
+import window.graphic.LineLabel;
+
 import exceptions.MapFileException;
 import exceptions.RealPlayerException;
 import game.Base;
@@ -43,6 +45,7 @@ public class AppliWindow extends JFrame {
 	private boolean buildToolsVisible = false;
 	private static Label image;
 	private static Label pause;
+	private static LineLabel line;
 	private static JButton resumeGame;
 	private static JButton exitGame;
 	private static boolean pauseStatus;
@@ -152,6 +155,14 @@ public class AppliWindow extends JFrame {
 	 */
 	public static void setExitGame(JButton exitGame) {
 		AppliWindow.exitGame = exitGame;
+	}
+
+	public static LineLabel getLine() {
+		return line;
+	}
+
+	public static void setLine(LineLabel line) {
+		AppliWindow.line = line;
 	}
 
 	public AppliWindow(String title, int width, int height, boolean resize, String pathImage) throws MapFileException, JDOMException, IOException{
@@ -638,9 +649,29 @@ public class AppliWindow extends JFrame {
 			b.setVisible(true);
 		}
 	}
-
+	
+	/**
+	 * Give to the content the Focus (requestFocusInWindow())
+	 */
 	public void giveFocusToPanel() {
 		AppliWindow.content.requestFocusInWindow();
+	}
+	
+	/**
+	 * Build a LineLabel which will ve opaque (?) except the line (?)
+	 * 
+	 * @param x1 Coordinates of first point of the line
+	 * @param y1 Coordinates of first point of the line
+	 * @param x2 Coordinates of second point of the line
+	 * @param y2 Coordinates of second point of the line
+	 */
+	public void buildLine(int x1, int y1, int x2, int y2) {
+		line = new LineLabel();
+		line.setLayout(null);
+		line.setBackground(Color.red);
+		line.setBounds(x1, y1, x2-x1, y2-y1);
+		
+		content.add(line);
 	}
 
 }
