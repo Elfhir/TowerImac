@@ -56,6 +56,9 @@ public class Panel extends JPanel implements KeyListener{
 			if(window.isPauseStatus())
 				System.exit(0);
 		default:
+			
+			// any other key, let the Focus to the Panel
+			window.giveFocusToPanel();
 			break;
 		}
 		
