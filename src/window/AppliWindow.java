@@ -194,7 +194,9 @@ public class AppliWindow extends JFrame {
 		final int heightPanelRealPlayer = 100;
 		final int visibleHeightPanelRealPlayer = 40;
 		int widthPanelIAPlayer = 400;
-		int heightPanelIAPlayer = 25;
+		int heightPanelIAPlayer = 40;
+		
+		int nbTotalBases = Game.getInstance().getBaseManager().getBases().size();
 		
 		// panel for the Real Player
 		final JPanel panelRealPlayer = new JPanel();
@@ -211,14 +213,30 @@ public class AppliWindow extends JFrame {
 		// we loop on each player
 		for(Player p: Game.getInstance().getPlayerManager().getPlayers()) {
 			
+			int nbBasesPlayer = 0;
+			for(Base b: Game.getInstance().getBaseManager().getBases()) {
+				if (b.getPlayer()!=null && b.getPlayer().equals(p)) {
+					++nbBasesPlayer;
+				}
+			}
+			
 			// if it is the RealPlayer, we fill the panelRealPlayer
 			if(p instanceof RealPlayer) {
-				JButton buttonRealPlayer = new JButton(p.getName() + " : $" + p.getBank().getMoney());
+				
+				StringBuilder sb = new StringBuilder(p.getName());
+				sb.append(" : $");
+				sb.append(p.getBank().getMoney());
+				sb.append(" | ");
+				sb.append(nbBasesPlayer);
+				sb.append("/");
+				sb.append(nbTotalBases);
+				
+				JButton buttonRealPlayer = new JButton(sb.toString());
 				
 				// add actionListener to show or hide the panel
 				buttonRealPlayer.addActionListener(new ActionListener() {
 					
-					// action on click : showw or hides the panel
+					// action on click : shows or hides the panel
 					public void actionPerformed(ActionEvent e) {
 						if(isBuildToolsVisible() ==  true) {
 							hidePanel();
@@ -248,7 +266,18 @@ public class AppliWindow extends JFrame {
 			// else if it is an IA Player we fill the panelIAPlayers
 			else {
 				JPanel panel = new JPanel();
-				JLabel label = new JLabel(p.getName() + " : $" + p.getBank().getMoney());
+				
+				StringBuilder sb = new StringBuilder("<html>");
+				sb.append(p.getName());
+				sb.append("<br /> $");
+				sb.append(p.getBank().getMoney());
+				sb.append(" | ");
+				sb.append(nbBasesPlayer);
+				sb.append("/");
+				sb.append(nbTotalBases);
+				sb.append("</html>");
+				
+				JLabel label = new JLabel(sb.toString());
 				label.setForeground(p.getColor());
 				panel.add(label);
 				panel.setBackground(null);
