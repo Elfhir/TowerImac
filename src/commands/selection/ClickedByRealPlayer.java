@@ -13,7 +13,6 @@ import exceptions.RealPlayerException;
 /**
  * 
  * @author Elfhir, au.gre, GuillaumeSeg
- * @deprecated
  */
 public class ClickedByRealPlayer extends Command {
 
@@ -77,9 +76,7 @@ public class ClickedByRealPlayer extends Command {
 				if(current.getNbAgents() == 0) {
 					for(Base b : Game.getInstance().getBaseManager().getBases()) {
 						if(b.equals(current)) {
-							b.addAgents(nbSentAgents - lastSurvivor);
-							b.setPlayer(selectedBases.getPlayer());
-							b.setBackground(selectedBases.getPlayer().getColor());
+							b.changePlayer(selectedBases.getPlayer(), nbSentAgents - lastSurvivor);
 						}
 					}
 				}

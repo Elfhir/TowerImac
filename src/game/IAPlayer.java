@@ -7,7 +7,7 @@ import java.util.Random;
 
 import commands.attack.AttackBase;
 import commands.selection.Move;
-import commands.selection.SelectHisBase;
+import commands.selection.SelectBase;
 
 import engine.Engine;
 
@@ -51,7 +51,7 @@ public class IAPlayer extends Player {
 					int nb = rand.nextInt(IAbases.size());
 					Base base1 = IAbases.get(nb);
 					//On ajoute la commande dans la file de commande
-					SelectHisBase command1 = new SelectHisBase(this, base1);
+					SelectBase command1 = new SelectBase(this, base1);
 					Engine.getInstance().getCommands().add(command1);
 				}
 				// Si j'ai déjà une base selected :
@@ -84,13 +84,13 @@ public class IAPlayer extends Player {
 				// Si j'ai déjà un base sélectionnée, je fais mon déplacement
 				if(this.getSelectedBases() != null) {
 					//On ajoute la commande Move dans la file de commande
-					Move command1 = new Move(this, base1);
+					Move command1 = new Move(this, this.getSelectedBases(), base1);
 					Engine.getInstance().getCommands().add(command1);
 				}
 				// Si je n'ai pas de base sélectionnée, je selectionne ma base
 				else {
 					//On ajoute la commande SelectHisBase dans la file de commande
-					SelectHisBase command1 = new SelectHisBase(this, base1);
+					SelectBase command1 = new SelectBase(this, base1);
 					Engine.getInstance().getCommands().add(command1);
 				}
 				break; // ------------------------------------------------------------------------------------------
@@ -116,7 +116,7 @@ public class IAPlayer extends Player {
 					nb = rand.nextInt(ennemiBases.size());
 					base1 = ennemiBases.get(nb);
 					//On ajoute la commande Attack dans la file de commande
-					AttackBase command1 = new AttackBase(this, base1);
+					AttackBase command1 = new AttackBase(this, this.getSelectedBases(), base1);
 					if(base1.getPlayer() == null) {
 						System.out.println(this.getName()+" envoie ses troupes sur une base neutre");
 					} else {
@@ -140,7 +140,7 @@ public class IAPlayer extends Player {
 					nb = rand.nextInt(IAbases.size());
 					base1 = IAbases.get(nb);
 					//On ajoute la commande dans la file de commande
-					SelectHisBase command1 = new SelectHisBase(this, base1);
+					SelectBase command1 = new SelectBase(this, base1);
 					Engine.getInstance().getCommands().add(command1);
 				}
 				break; // ------------------------------------------------------------------------------------------
