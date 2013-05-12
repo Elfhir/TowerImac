@@ -1,42 +1,43 @@
 package commands.selection;
 
 import game.Base;
-import game.IAPlayer;
+import game.Player;
 import commands.Command;
 
 public class Move extends Command {
 	
-	IAPlayer IACurrent;
-	Base baseCurrent;
+	Player player;
+	Base baseOrigin;
+	Base baseDestination;
 	
-	public Move(IAPlayer IA, Base baseCurrent) {
+	public Move(Player player, Base baseOrigin, Base baseDestination) {
 		super();
-		this.IACurrent = IA;
-		this.baseCurrent = baseCurrent;
+		this.player = player;
+		this.baseOrigin = baseOrigin;
+		this.baseDestination = baseDestination;
 	}
 
 	@Override
 	public void doCommand() {
-		Base selectedBases = this.IACurrent.getSelectedBases();
 		
-		selectedBases.setBackground(this.IACurrent.getColor().brighter());
+		baseOrigin.setBackground(this.player.getColor().brighter());
 		// Le nombre d'agent prêt à s'envoyer
-		int nbSentAgents = selectedBases.getNbAgents() / 2;
+		int nbSentAgents = baseOrigin.getNbAgents() / 2;
 		
 		System.out.println("3rd case : Move !!");
-		//managed by Engine (FIFO of commands) 
-		if(!selectedBases.equals(baseCurrent)) {
+
+		if(!baseOrigin.equals(baseDestination)) {
 			//The number of Agent in the base where we move increase !
-			baseCurrent.addAgents(nbSentAgents);
+			baseDestination.addAgents(nbSentAgents);
 		}
 		
 		// The number of Agents in our selected Base decrease !
-		selectedBases.deleteAgents(nbSentAgents);
-		this.IACurrent.setSelectedBases(null);
+		baseOrigin.deleteAgents(nbSentAgents);
+		this.player.setSelectedBases(null);
 		//baseCurrent.setBackground(this.IACurrent.getColor().brighter());
 		
 		// Now that we have moved or attacked, we deselect !
-		selectedBases = null;
+		this.player.setSelectedBases(null);
 	}
 
 }

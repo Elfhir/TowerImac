@@ -4,51 +4,52 @@ import commands.Command;
 
 import game.Base;
 import game.Game;
-import game.IAPlayer;
+import game.Player;
 
 public class AttackBase extends Command{
 	
-	IAPlayer IACurrent;
-	Base baseCurrent;
+	Player player;
+	Base baseOrigin;
+	Base baseDestination;
 	
-	public AttackBase(IAPlayer IA, Base baseCurrent) {
+	public AttackBase(Player player, Base baseOrigin, Base baseDestination) {
 		super();
-		this.IACurrent = IA;
-		this.baseCurrent = baseCurrent;
+		this.player = player;
+		this.baseOrigin = baseOrigin;
+		this.baseDestination = baseDestination;
 	}
 
 	@Override
 	public void doCommand() {
-		Base selectedBases = this.IACurrent.getSelectedBases();
 		
-		selectedBases.setBackground(this.IACurrent.getColor().brighter());
-		int nbSentAgents = selectedBases.getNbAgents() / 2;
+		baseOrigin.setBackground(this.player.getColor().brighter());
+		int nbSentAgents = baseOrigin.getNbAgents() / 2;
 		
 		System.out.println("case : Attack !!");
 		//managed by Engine (FIFO of commands) 
 		
 		// The number of agents in the Base attacked decrease !
-		int lastSurvivor = baseCurrent.getNbAgents();
-		baseCurrent.deleteAgents(nbSentAgents);
+		int lastSurvivor = baseDestination.getNbAgents();
+		baseDestination.deleteAgents(nbSentAgents);
 		
 		// Enemy Base is taken !! Add the Agents not dead to the taken Base too !
-		if(baseCurrent.getNbAgents() == 0) {
+		if(baseDestination.getNbAgents() == 0) {
 			for(Base b : Game.getInstance().getBaseManager().getBases()) {
-				if(b.equals(baseCurrent)) {
+				if(b.equals(baseDestination)) {
 					b.addAgents(nbSentAgents - lastSurvivor);
-					b.setPlayer(selectedBases.getPlayer());
-					b.setBackground(selectedBases.getPlayer().getColor());
+					b.setPlayer(baseOrigin.getPlayer());
+					b.setBackground(baseOrigin.getPlayer().getColor());
 				}
 			}
 		}
 		
 		// The number of Agents in our selected Base decrease !
-		selectedBases.deleteAgents(nbSentAgents);
-		this.IACurrent.setSelectedBases(null);
+		baseOrigin.deleteAgents(nbSentAgents);
+		this.player.setSelectedBases(null);
 		//baseCurrent.setBackground(this.IACurrent.getColor().brighter());
 		
-		// Now that we have moved or attacked, we deselect !
-		selectedBases = null;
+		// Now that we have moved or attacked, we deselect the base !
+		this.player.setSelectedBases(null);
 		
 	}
 
