@@ -26,7 +26,8 @@ import javax.vecmath.Vector2f;
 
 import org.jdom2.JDOMException;
 
-import window.graphic.LineLabel;
+import window.graphic.Line;
+
 
 import exceptions.MapFileException;
 import exceptions.RealPlayerException;
@@ -51,7 +52,7 @@ public class AppliWindow extends JFrame {
 	private JPanel panelInfoIAPlayers;
 	
 	private Label image;
-	private LineLabel line;
+	private Line line;
 	private Label pause;
 	private JButton resumeGame;
 	private JButton exitGame;
@@ -181,11 +182,11 @@ public class AppliWindow extends JFrame {
 		this.exitGame = exitGame;
 	}
 
-	public LineLabel getLine() {
+	public Line getLine() {
 		return line;
 	}
 
-	public void setLine(LineLabel line) {
+	public void setLine(Line line) {
 		this.line = line;
 	}
 
@@ -491,8 +492,9 @@ public class AppliWindow extends JFrame {
 		Game game = Game.getInstance();
 		game.initGame(xmlFileName, mapFileName);
 		buildBases();
-
-		buildInfoPlayers();
+		// Add a line
+		buildLine(0,0,800,600);
+		//buildInfoPlayers();
 //		buildAgents();
 //		buildTowers();
 //		//...
@@ -615,8 +617,6 @@ public class AppliWindow extends JFrame {
 				// Should be improve with saving in xml ?
 			}
 		}); 
-
-		//pause.getGraph().drawLine(1,1,1,200);
 		
 		pause.requestFocus();
 		
@@ -724,7 +724,7 @@ public class AppliWindow extends JFrame {
 		
 		// Add a background, providing the path
 		buildBackground(pathImage);
-		
+
 		// Add a pause menu
 		buildPause(width/3, height/2);
 
@@ -739,12 +739,16 @@ public class AppliWindow extends JFrame {
 	 * @param y2 Coordinates of second point of the line
 	 */
 	public void buildLine(int x1, int y1, int x2, int y2) {
-		line = new LineLabel();
-		line.setLayout(null);
-		line.setBackground(Color.red);
-		line.setBounds(x1, y1, x2-x1, y2-y1);
+		Line line1 = new Line(x1, y1, x2, y2);
 		
-		content.add(line);
+		content.setLayout(null);
+		line1.setVisible(false);
+		line1.setBounds(x1, y1, Math.abs(x2-x1), Math.abs(y2-y1));
+		line1.setLayout(null);
+		line1.setBorder(null);
+		
+		this.setLine(line1);
+		content.add(line1);
 	}
 
 
