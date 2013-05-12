@@ -290,9 +290,6 @@ public class AppliWindow extends JFrame {
 		panelIAPlayers.setVisible(true);
 		panelIAPlayers.setBackground(Color.BLACK);
 		
-		panelRealPlayer.removeAll();
-		panelIAPlayers.removeAll();
-		
 		// we loop on each player
 		for(Player p: Game.getInstance().getPlayerManager().getPlayers()) {
 			
