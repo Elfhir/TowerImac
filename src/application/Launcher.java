@@ -56,11 +56,13 @@ public class Launcher {
 						SwingUtilities.invokeLater(new Runnable() {
 							
 							public void run() {
-								// On crée la nouvelle instance de la JFrame pour lancer le jeu
+								// We create the new instance of the JFrame to run the game
 								AppliWindow window;
 								try {
-									window = new AppliWindow("Tower-IMAC-Nano Prout !", 800, 600, true, "design/testMapGrille.png");
-									window.setVisible(true); // Et on la rend visible.
+									// AppliWindow is a Singleton
+									window = AppliWindow.getInstance();
+									window.init("Tower-IMAC-Nano Prout !", 800, 600, true, "design/testMapGrille.png");
+									window.setVisible(true); // And we make it visible
 								} catch (MapFileException e) {
 									e.printStackTrace();
 								} catch (JDOMException e) {

@@ -115,7 +115,7 @@ public class ClickedByRealPlayer extends Command {
 		
 		// Since a Base has the focus, we give back to the content the focus
 		System.out.println("Le Panel content reprend le focus");
-		AppliWindow.getContent().requestFocusInWindow();
+		AppliWindow.getInstance().getContent().requestFocusInWindow();
 		
 	}
 

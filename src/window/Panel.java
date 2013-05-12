@@ -36,29 +36,32 @@ public class Panel extends JPanel implements KeyListener{
 	//---------------------------------------- KeyListener
 	@Override
 	public void keyPressed(KeyEvent e) {
+		
+		AppliWindow window = AppliWindow.getInstance();
+		
 		switch (e.getKeyChar()) {
 		case 'p':
 			
 			System.out.println("Key : "+e.getKeyChar());
 			
 			// Retour au jeu
-			if(AppliWindow.isPauseStatus()) {
-				AppliWindow.hidePause();
-				AppliWindow.showGame();
+			if(window.isPauseStatus()) {
+				window.hidePause();
+				window.showGame();
 				Game.getInstance().setRunning(true);
 				Game.getInstance().start();
 				
 			}
 			// Mise en pause
 			else {
-				AppliWindow.showPause();
-				AppliWindow.hideGame();
+				window.showPause();
+				window.hideGame();
 				Game.getInstance().setRunning(false);
 			}	
 			break;
 			
 		case 'q':
-			if(AppliWindow.isPauseStatus())
+			if(window.isPauseStatus())
 				System.exit(0);
 		default:
 			break;
