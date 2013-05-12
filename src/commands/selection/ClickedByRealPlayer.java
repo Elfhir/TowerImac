@@ -1,5 +1,8 @@
 package commands.selection;
 
+import javax.swing.text.AbstractDocument.Content;
+
+import window.AppliWindow;
 import game.Base;
 import game.Game;
 import game.Player;
@@ -100,6 +103,11 @@ public class ClickedByRealPlayer extends Command {
 		}else{
 			System.out.println("Ma base selected est celle de : "+selectedBases.getPlayer().getName());
 		}
+		
+		// Since a Base has the focus, we give back to the content the focus
+		System.out.println("Le Panel content reprend le focus");
+		AppliWindow.getContent().requestFocusInWindow();
+		
 	}
 
 	

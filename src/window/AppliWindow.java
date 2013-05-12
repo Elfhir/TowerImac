@@ -10,8 +10,6 @@ import game.Game;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,7 +32,7 @@ public class AppliWindow extends JFrame {
 
 	private int width;
 	private int height;
-	private Panel content;
+	private static Panel content;
 	private static Label image;
 	private static Label pause;
 	private static JButton resumeGame;
@@ -57,12 +55,12 @@ public class AppliWindow extends JFrame {
 		this.height = height;
 	}
 
-	public Panel getContent() {
+	public static Panel getContent() {
 		return content;
 	}
 
-	public void setContent(Panel content) {
-		this.content = content;
+	public static void setContent(Panel content) {
+		AppliWindow.content = content;
 	}
 
 	public int getTilesSize() {
@@ -371,7 +369,7 @@ public class AppliWindow extends JFrame {
 	 */
 	private Panel buildContentPane(int width, int height) throws MapFileException, JDOMException, IOException {
 
-		this.content = new Panel();
+		AppliWindow.content = new Panel();
 
 		content.setLayout(null);
 		content.setBackground(Color.GRAY);
@@ -395,7 +393,7 @@ public class AppliWindow extends JFrame {
 
 		this.getImage().setBounds(0, 0, getWidth(), getHeight());
 		
-		this.content.add(AppliWindow.image);
+		AppliWindow.content.add(AppliWindow.image);
 
 	}
 
@@ -474,6 +472,8 @@ public class AppliWindow extends JFrame {
 
 		//pause.getGraph().drawLine(1,1,1,200);
 		
+		pause.requestFocus();
+		
 		// Do not remove it!
 		content.add(pause);
 	}
@@ -518,6 +518,8 @@ public class AppliWindow extends JFrame {
 		}
 	}
 
-	
+	public void giveFocusToPanel() {
+		AppliWindow.content.requestFocusInWindow();
+	}
 
 }
