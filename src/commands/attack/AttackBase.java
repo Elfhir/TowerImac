@@ -36,9 +36,7 @@ public class AttackBase extends Command{
 		if(baseDestination.getNbAgents() == 0) {
 			for(Base b : Game.getInstance().getBaseManager().getBases()) {
 				if(b.equals(baseDestination)) {
-					b.addAgents(nbSentAgents - lastSurvivor);
-					b.setPlayer(baseOrigin.getPlayer());
-					b.setBackground(baseOrigin.getPlayer().getColor());
+					b.changePlayer(baseOrigin.getPlayer(), nbSentAgents - lastSurvivor);
 				}
 			}
 		}

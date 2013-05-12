@@ -232,7 +232,7 @@ public class AppliWindow extends JFrame {
 					// all actions are managed by the base				
 
 					try {
-						base.clickedByRealPlayer();
+						base.clicked();
 					} catch (RealPlayerException e1) {
 						System.err.println("Error with RealPlayer : can't manage the click.");
 					} catch (ClickedByRealPlayerException e2) {

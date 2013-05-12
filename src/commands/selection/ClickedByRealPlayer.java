@@ -1,6 +1,5 @@
 package commands.selection;
 
-import javax.swing.text.AbstractDocument.Content;
 
 import window.AppliWindow;
 import game.Base;
@@ -14,6 +13,7 @@ import exceptions.RealPlayerException;
  * 
  * @author Elfhir, au.gre, GuillaumeSeg
  */
+@Deprecated
 public class ClickedByRealPlayer extends Command {
 
 	Base current;

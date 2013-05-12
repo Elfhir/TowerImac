@@ -3,16 +3,17 @@ package game;
 import javax.swing.JButton;
 import javax.vecmath.Vector2f;
 
-import commands.selection.ClickedByRealPlayer;
-
-import engine.Engine;
-import exceptions.ClickedByRealPlayerException;
-import exceptions.IAPlayerException;
-import exceptions.RealPlayerException;
-
 import time.TimerGame;
 import time.Timerable;
 import window.AppliWindow;
+
+import commands.attack.AttackBase;
+import commands.selection.Move;
+import commands.selection.SelectBase;
+
+import engine.Engine;
+import exceptions.ClickedByRealPlayerException;
+import exceptions.RealPlayerException;
 
 public class Base extends JButton implements Situable, Timerable{
 	
@@ -134,9 +135,68 @@ public class Base extends JButton implements Situable, Timerable{
 	 * @throws RealPlayerException  
 	 * @throws ClickedByRealPlayerException 
 	 */
-	public void clickedByRealPlayer() throws RealPlayerException, ClickedByRealPlayerException {
-		ClickedByRealPlayer commandClicked = new ClickedByRealPlayer(this);
-		Engine.getInstance().getCommands().add(commandClicked);
+	public void clicked() throws RealPlayerException, ClickedByRealPlayerException {
+		
+		Player realPlayer = null;
+		try {
+			realPlayer = Game.getInstance().getPlayerManager().getRealPlayer();
+		} catch (RealPlayerException e) {
+			e.printStackTrace();
+			return;
+		}
+		Base selectedBases = realPlayer.getSelectedBases();
+		
+		// 1st case : the player doesn't have any selected base, so current one become his selected base (if it's his base) !
+		if(selectedBases == null) {
+			
+			// if he selects a neutral base : nothing is done
+			if(this.getPlayer() == null){
+				System.out.println("1st case : it's a neutral base, you can't select it !");
+			}
+			// if he selects the base of an other player : nothing is done
+			else if((this.getPlayer().getName() != realPlayer.getName())){
+				System.out.println("1st case : it's not your base, you can't select it !");
+			}
+			// if he selects one of his base : we add the command selection
+			else if((this.getPlayer().getName() == realPlayer.getName())) {
+//				realPlayer.setSelectedBases(this);
+//				this.setBackground(realPlayer.getColor().darker());
+//				System.out.println("1st case : Base from "+this.getPlayer().getName()+" selected!");
+				SelectBase selectionCommand = new SelectBase(realPlayer, this);
+				Engine.getInstance().getCommands().add(selectionCommand);
+			}
+		}
+		
+		// 2nd case : current base is already selected by the realPlayer : nothing is done
+		else if (selectedBases.equals(this)) {
+			System.out.println("2nd case : Base from : "+realPlayer.getSelectedBases().getName()+" already selected.");
+		}
+		
+		// 3rd case : the realPlayer has an other base selected : agents can go from the selected base to current one ! (and we deselect the base)
+		// This can be an attack to an enemy base or just a move to an other owned base
+		else {
+			
+			// if the players are different : it's an attack !
+			if(!selectedBases.getPlayer().equals(this.getPlayer())) {
+				AttackBase attackCommand = new AttackBase(realPlayer, selectedBases, this);
+				Engine.getInstance().getCommands().add(attackCommand);
+			} 
+			
+			// else if it's the same player : it's just a move between 2 bases of the same player
+			else {
+				Move moveCommand = new Move(realPlayer, selectedBases, this);
+				Engine.getInstance().getCommands().add(moveCommand);
+			}	
+		}
+		
+		System.out.println("J'ai cliqué sur la base numéro "+this.getId());
+		
+		// Since a Base has the focus, we give back to the content the focus
+		System.out.println("Le Panel content reprend le focus");
+		AppliWindow.getInstance().getContent().requestFocusInWindow();
+		
+		
+		
 	}
 	
 	@Override
@@ -234,23 +294,6 @@ public class Base extends JButton implements Situable, Timerable{
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-		
-		//Agent strongAgent = new Agent(true, 10, 10, 10, 10, null, null);
-		//Agent weakAgent = new Agent(true, 5, 7, 5, 5, null, null);
-		
-		Base base1 = new Base(5, null, new Vector2f(0.5f, 0.5f), 5);
-		//System.out.println(base1);
-		
-		Base base2 = new Base(5, null, new Vector2f(-0.5f, -0.5f), 5);
-		//System.out.println(base2);
-		
-		
-		// If one attacks, the other defenses also !
-		base2.attackBase(base1);
-		
-
-		TimerGame tg = new TimerGame(1000/base1.getMight(), 0, 0, 0, base1, false);
-
 		
 	}
 

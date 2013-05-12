@@ -5,6 +5,7 @@ import game.Base;
 import game.IAPlayer;
 import commands.Command;
 
+@Deprecated
 public class ClickedByIAPlayer extends Command{
 
 	IAPlayer IACurrent;
