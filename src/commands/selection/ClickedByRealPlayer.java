@@ -1,5 +1,8 @@
 package commands.selection;
 
+import javax.swing.text.AbstractDocument.Content;
+
+import window.AppliWindow;
 import game.Base;
 import game.Game;
 import game.Player;
@@ -7,6 +10,11 @@ import commands.Command;
 import exceptions.ClickedByRealPlayerException;
 import exceptions.RealPlayerException;
 
+/**
+ * 
+ * @author Elfhir, au.gre, GuillaumeSeg
+ * @deprecated
+ */
 public class ClickedByRealPlayer extends Command {
 
 	Base current;
@@ -67,9 +75,13 @@ public class ClickedByRealPlayer extends Command {
 				
 				// Enemy Base is taken !! Add the Agents not dead to the taken Base too !
 				if(current.getNbAgents() == 0) {
-					current.addAgents(nbSentAgents - lastSurvivor);
-					current.setPlayer(selectedBases.getPlayer());
-					current.setBackground(selectedBases.getPlayer().getColor());
+					for(Base b : Game.getInstance().getBaseManager().getBases()) {
+						if(b.equals(current)) {
+							b.addAgents(nbSentAgents - lastSurvivor);
+							b.setPlayer(selectedBases.getPlayer());
+							b.setBackground(selectedBases.getPlayer().getColor());
+						}
+					}
 				}
 			} 
 			
@@ -100,6 +112,11 @@ public class ClickedByRealPlayer extends Command {
 		}else{
 			System.out.println("Ma base selected est celle de : "+selectedBases.getPlayer().getName());
 		}
+		
+		// Since a Base has the focus, we give back to the content the focus
+		System.out.println("Le Panel content reprend le focus");
+		AppliWindow.getInstance().getContent().requestFocusInWindow();
+		
 	}
 
 	
