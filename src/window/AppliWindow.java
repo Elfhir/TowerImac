@@ -1,5 +1,6 @@
 package window;
 
+import exceptions.ClickedByRealPlayerException;
 import exceptions.MapFileException;
 import game.Base;
 import game.Game;

@@ -14,6 +14,12 @@ import engine.Engine;
 
 public class IAPlayer extends Player {
 	
+	private int difficulty;
+	
+	public int getDifficulty() {
+		return this.difficulty;
+	}
+	
 	@Override
 	public void run() {
 		
@@ -173,9 +179,22 @@ public class IAPlayer extends Player {
 			default:
 				break;
 			}
+			// We create 2 variables, elle corresponde aux bornes du temps de décisions des IA
+			int maxTimeDecision = 1000;
+			int minTimeDecision = 1000;
+			if(this.getDifficulty() == 1) {
+				maxTimeDecision = 4000;
+				minTimeDecision = 1700;
+			}
+			else if(this.getDifficulty() == 2) {
+				maxTimeDecision = 3000;
+				minTimeDecision = 1500;
+			}
+			
+			int waitingForNewDecision = (int) (rand.nextFloat()*(maxTimeDecision - minTimeDecision) + minTimeDecision);
 			
 			try {
-				Thread.sleep(2700);
+				Thread.sleep(waitingForNewDecision);
 			}
 			catch (InterruptedException e) {
 				e.printStackTrace();
@@ -185,14 +204,17 @@ public class IAPlayer extends Player {
 	
 	public IAPlayer(String name, Bank bank, Color color) {
 		super(name, bank, color);
+		this.difficulty = 1;
 	}
 	
 	public IAPlayer(String name, Color color) {
 		super(name, color);
+		this.difficulty = 1;
 	}
 	
 	public IAPlayer() {
 		super("unknown", Color.WHITE);
+		this.difficulty = 1;
 	}
 	
 	
