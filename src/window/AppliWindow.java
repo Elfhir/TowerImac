@@ -579,7 +579,7 @@ public class AppliWindow extends JFrame {
 		game.initGame(xmlFileName, mapFileName);
 		buildBases();
 		// Add a line
-		buildLine(0, 0, 50, 60);
+		buildLine(0, 0, getWidth(), getHeight());
 		buildInfoPlayers();
 //		buildAgents();
 //		buildTowers();
@@ -738,6 +738,7 @@ public class AppliWindow extends JFrame {
 		for (Base b : Game.getInstance().getBaseManager().getBases()) {
 			b.setVisible(false);
 		}
+		line.setVisible(false);
 	}
 
 	/**
@@ -748,6 +749,7 @@ public class AppliWindow extends JFrame {
 		for (Base b : Game.getInstance().getBaseManager().getBases()) {
 			b.setVisible(true);
 		}
+		line.setVisible(true);
 	}
 	
 	/**
@@ -835,7 +837,7 @@ public class AppliWindow extends JFrame {
 		line1.setBounds(x1, y1, Math.abs(x2-x1), Math.abs(y2-y1));
 		line1.setLayout(null);
 		line1.setBorder(null);
-		
+		line1.displayLine(0, 0, 0, 0);
 		this.setLine(line1);
 		content.add(line1);
 	}

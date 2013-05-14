@@ -164,6 +164,13 @@ public class Base extends JButton implements Situable, Timerable{
 //				System.out.println("1st case : Base from "+this.getPlayer().getName()+" selected!");
 				SelectBase selectionCommand = new SelectBase(realPlayer, this);
 				Engine.getInstance().getCommands().add(selectionCommand);
+				
+				//These line are for computing the first point of the Line between the Base
+					int xBase = (int) this.getX();
+					int yBase = (int) this.getY();
+					System.out.println("x "+xBase+" ; y "+yBase);
+					AppliWindow.getInstance().getLine().setDisplayed(true);
+					AppliWindow.getInstance().getLine().displayLine(xBase, yBase, xBase, yBase);
 			}
 		}
 		
@@ -180,6 +187,11 @@ public class Base extends JButton implements Situable, Timerable{
 			if(!selectedBases.getPlayer().equals(this.getPlayer())) {
 				AttackBase attackCommand = new AttackBase(realPlayer, selectedBases, this);
 				Engine.getInstance().getCommands().add(attackCommand);
+				int aBase = (int) this.getX();
+				int bBase = (int) this.getY();
+				System.out.println("a "+aBase+" ; b "+bBase);
+				AppliWindow.getInstance().getLine().setDisplayed(true);
+				AppliWindow.getInstance().getLine().displayLineLastPoint(aBase, bBase);
 			} 
 			
 			// else if it's the same player : it's just a move between 2 bases of the same player

@@ -86,36 +86,8 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 				return;
 			}
 		}
-
 		// If break in previous for ; the mouse is leaving the Label for Background, i.e enters a Base
-		
-		try {
-			if(Game.getInstance().getPlayerManager().getRealPlayer().getSelectedBases() != null) {
-				System.out.println("IF");
-				xBase = (int) Game.getInstance().getPlayerManager().getRealPlayer().getSelectedBases().getPosition().getX();
-				yBase = (int) Game.getInstance().getPlayerManager().getRealPlayer().getSelectedBases().getPosition().getY();
-				aBase = event.getX();
-				bBase = event.getY();
-				
-				System.out.println("xBase : "+xBase+" yBase : "+yBase);
-				
-				AppliWindow.getInstance().getLine().setDisplayed(true);
-				//AppliWindow.getInstance().getLine().displayLineFirstPoint(xM, yM);
-				AppliWindow.getInstance().getLine().displayLineLastPoint(xM, yM);
-				
-			}
-			else {
-				System.out.println("Else");
-				AppliWindow.getInstance().getLine().setDisplayed(true);
-				AppliWindow.getInstance().getLine().displayLineFirstPoint(xM, yM);
-			}
-			
-		} catch (RealPlayerException e) {
-			e.printStackTrace();
-		}
-
 		System.out.println("MOUSE ENTERS THE BASE "+xBase+" "+yBase+" "+aBase+" "+bBase);
-		
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import game.Agent;
 import game.Bank;
 import game.Base;
 import game.Game;
+import game.GroupAgent;
 import game.IAPlayer;
 import game.Player;
 import game.RealPlayer;
@@ -175,7 +176,8 @@ public class XmlReader {
 			
 			Agent agent = new Agent();
 			
-			game.getAgentManager().addAgent(agent);
+			//At commit 9b0f500 It was : game.getAgentManager().addAgent(agent); I choose to cast, but ?
+			game.getAgentManager().addAgent((GroupAgent) agent);
 		}
 	}
 	
