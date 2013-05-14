@@ -1,17 +1,17 @@
 package manager;
 
-import game.Agent;
+import game.GroupAgent;
 
 import java.util.LinkedList;
 
 public class AgentManager {
-	private LinkedList<Agent> agents;
+	private LinkedList<GroupAgent> agents;
 
-	public LinkedList<Agent> getAgents() {
+	public LinkedList<GroupAgent> getAgents() {
 		return agents;
 	}
 	
-	public void addAgent(Agent a) {
+	public void addAgent(GroupAgent a) {
 		this.agents.add(a);
 	}
 
@@ -21,7 +21,7 @@ public class AgentManager {
 	}
 	
 	public AgentManager() {
-		this.agents = new LinkedList<Agent>();
+		this.agents = new LinkedList<GroupAgent>();
 	}
 
 }

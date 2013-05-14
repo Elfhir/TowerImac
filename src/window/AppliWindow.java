@@ -4,6 +4,7 @@ import exceptions.ClickedByRealPlayerException;
 import exceptions.MapFileException;
 import game.Base;
 import game.Game;
+import game.GroupAgent;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -262,6 +263,23 @@ public class AppliWindow extends JFrame {
 			 */
 			content.add(base);
 
+		}
+	}
+	
+	private void buildGroupAgent(){
+		Game game = Game.getInstance();
+
+		for(GroupAgent groupAgent: game.getAgentManager().getAgents()){
+			JLabel groupe = new JLabel();
+			groupe.setBounds((int)groupAgent.getPosition().x, (int)groupAgent.getPosition().y, getTilesSize(), getTilesSize());
+			groupe.setOpaque(true);
+			groupe.setBackground(groupAgent.getPlayer().getColor());
+			groupe.setSize(groupAgent.GroupSize(),groupAgent.GroupSize());
+			try {
+				groupe.setIcon(new ImageIcon(ImageIO.read(new File("design/groupe.jpeg"))));
+			} catch (IOException e2) {
+				System.err.println("Error ! Loading GroupAgent image");
+			}
 		}
 	}
 
