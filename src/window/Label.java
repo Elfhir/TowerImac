@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.accessibility.Accessible;
 import javax.swing.Icon;
@@ -17,7 +18,7 @@ import javax.swing.JLabel;
 
 import window.graphic.GraphicElement;
 
-public class Label extends JLabel implements Accessible, MouseListener, KeyListener{
+public class Label extends JLabel implements Accessible, MouseListener, KeyListener, MouseMotionListener{
 
 
 	private static final long serialVersionUID = 2250314127870259478L;
@@ -43,7 +44,6 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 
 	public void addMouseListener(ActionListener actionListener) {
 		action = actionListener;
-
 	}
 
 	@Override
@@ -64,45 +64,76 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 
 	@Override
 	public void mouseEntered(MouseEvent event) {
-
+		//System.out.println("MOUSE EXITS THE BASE");
 	}
 
 	@Override
 	public void mouseExited(MouseEvent event) {
-
+		/*
 		int xBase = 0, yBase = 0;
 		int aBase = 0, bBase = 0;
+		int radiusBase = AppliWindow.getInstance().getTilesSize();
+		int xM = event.getX(), yM = event.getY();
+		int distX  = 0, distY = 0;
 
-		System.out.println("MOUSE ENTER THE BASE");
-		xBase = event.getX();
-		yBase = event.getY();
-		aBase = AppliWindow.getInstance().getLine().getX2();
-		bBase = AppliWindow.getInstance().getLine().getY2();
-		
-		// if not display, we show it
-		if(!AppliWindow.getInstance().getLine().isDisplayed()) {
-			AppliWindow.getInstance().getLine().setDisplayed(true);
-			AppliWindow.getInstance().getLine().displayLine(xBase, yBase, aBase, bBase);
-		}
-		else if(AppliWindow.getInstance().getLine().isDisplayed()) {
-			AppliWindow.getInstance().getLine().setDisplayed(false);
-			AppliWindow.getInstance().getLine().displayLine(0, 0, 0, 0);
+		for(Base b : Game.getInstance().getBaseManager().getBases()){
+			distX = (int) Math.abs(xM - b.getPosition().getX());
+			distY = (int) Math.abs(yM - b.getPosition().getY());
+			if(distX > radiusBase && distY > radiusBase) {
+				break;
+			}
+			else{
+				return;
+			}
 		}
 
+		// If break in previous for ; the mouse is leaving the Label for Background, i.e enters a Base
+		System.out.println("MOUSE ENTERS THE BASE");
 
+		try {
+			if(Game.getInstance().getPlayerManager().getRealPlayer().getSelectedBases() != null) {
+				System.out.println("IF");
+				xBase = (int) Game.getInstance().getPlayerManager().getRealPlayer().getSelectedBases().getPosition().getX();
+				yBase = (int) Game.getInstance().getPlayerManager().getRealPlayer().getSelectedBases().getPosition().getY();
+				aBase = event.getX();
+				bBase = event.getY();
+
+				AppliWindow.getInstance().getLine().setDisplayed(true);
+				AppliWindow.getInstance().getLine().displayLine(xBase, yBase, aBase, bBase);
+				
+			}
+			else {
+				System.out.println("Else");
+				AppliWindow.getInstance().getLine().setDisplayed(false);
+				AppliWindow.getInstance().getLine().displayLineLastPoint(0, 10);
+			}
+			
+		} catch (RealPlayerException e) {
+			e.printStackTrace();
+		}
+
+		*/
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
+	public void mousePressed(MouseEvent e) {
+		System.out.println("X : "+e.getX()+" Y : "+e.getY());
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
 	}
+	
+	// ----------------------------------------- MouseMotionListener -----------------
+	@Override
+	public void mouseDragged(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		System.out.println("X : "+e.getX()+" Y : "+e.getY());
+	}
+
 	// ----------------------------------------- KeyListener--------------------------
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -111,19 +142,12 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
-
-
 	// ----------------------------------------- Accessor -----------------------------
-
 
 	// ------------------------------------------ constructor -------------------------
 	public Label() {
@@ -161,5 +185,7 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 		this.graph = new GraphicElement();
 		addMouseListener(this);
 	}
+
+
 
 }

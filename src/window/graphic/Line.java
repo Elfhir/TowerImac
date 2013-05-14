@@ -83,7 +83,7 @@ public class Line extends JComponent implements MouseListener{
 	}
 	
 	/**
-	 * 
+	 * Set all new coordinates and repaint
 	 * @param x from the Base Clicked
 	 * @param y from the Base Clicked
 	 * @param xMouse where the mouse is
@@ -92,6 +92,17 @@ public class Line extends JComponent implements MouseListener{
 	public void displayLine(int x, int y, int xMouse, int yMouse) {
 		this.setX1(x);
 		this.setY1(y);
+		this.setX2(xMouse);
+		this.setY2(yMouse);
+		this.repaint();
+	}
+	
+	/**
+	 * Set only coordinates for the last point of Line and repaint
+	 * @param xMouse where the mouse is
+	 * @param yMouse where the mouse is
+	 */
+	public void displayLineLastPoint(int xMouse, int yMouse) {
 		this.setX2(xMouse);
 		this.setY2(yMouse);
 		this.repaint();

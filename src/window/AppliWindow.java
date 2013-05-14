@@ -561,8 +561,8 @@ public class AppliWindow extends JFrame {
 		game.initGame(xmlFileName, mapFileName);
 		buildBases();
 		// Add a line
-		buildLine(0, 0, getWidth(), getHeight());
-		//buildInfoPlayers();
+		buildLine(0, 0, 0, 0);
+		buildInfoPlayers();
 //		buildAgents();
 //		buildTowers();
 //		//...
