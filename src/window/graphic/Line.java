@@ -107,6 +107,17 @@ public class Line extends JComponent implements MouseListener{
 		this.setY2(yMouse);
 		this.repaint();
 	}
+	
+	/**
+	 * Set only coordinates for the first point of Line and repaint
+	 * @param x from the Base Clicked
+	 * @param y from the Base Clicked
+	 */
+	public void displayLineFirstPoint(int x, int y) {
+		this.setX1(x);
+		this.setY1(y);
+		this.repaint();
+	}
 
 	// -------------------------------------------- MouseListener ---------------
 	

@@ -69,7 +69,7 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 
 	@Override
 	public void mouseExited(MouseEvent event) {
-		/*
+		
 		int xBase = 0, yBase = 0;
 		int aBase = 0, bBase = 0;
 		int radiusBase = AppliWindow.getInstance().getTilesSize();
@@ -88,8 +88,7 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 		}
 
 		// If break in previous for ; the mouse is leaving the Label for Background, i.e enters a Base
-		System.out.println("MOUSE ENTERS THE BASE");
-
+		
 		try {
 			if(Game.getInstance().getPlayerManager().getRealPlayer().getSelectedBases() != null) {
 				System.out.println("IF");
@@ -97,22 +96,26 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 				yBase = (int) Game.getInstance().getPlayerManager().getRealPlayer().getSelectedBases().getPosition().getY();
 				aBase = event.getX();
 				bBase = event.getY();
-
+				
+				System.out.println("xBase : "+xBase+" yBase : "+yBase);
+				
 				AppliWindow.getInstance().getLine().setDisplayed(true);
-				AppliWindow.getInstance().getLine().displayLine(xBase, yBase, aBase, bBase);
+				//AppliWindow.getInstance().getLine().displayLineFirstPoint(xM, yM);
+				AppliWindow.getInstance().getLine().displayLineLastPoint(xM, yM);
 				
 			}
 			else {
 				System.out.println("Else");
-				AppliWindow.getInstance().getLine().setDisplayed(false);
-				AppliWindow.getInstance().getLine().displayLineLastPoint(0, 10);
+				AppliWindow.getInstance().getLine().setDisplayed(true);
+				AppliWindow.getInstance().getLine().displayLineFirstPoint(xM, yM);
 			}
 			
 		} catch (RealPlayerException e) {
 			e.printStackTrace();
 		}
 
-		*/
+		System.out.println("MOUSE ENTERS THE BASE "+xBase+" "+yBase+" "+aBase+" "+bBase);
+		
 	}
 
 	@Override

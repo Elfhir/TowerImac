@@ -234,7 +234,7 @@ public class AppliWindow extends JFrame {
 
 
 					// all actions are managed by the base				
-
+					
 					try {
 						base.clicked();
 					} catch (RealPlayerException e1) {
@@ -561,7 +561,7 @@ public class AppliWindow extends JFrame {
 		game.initGame(xmlFileName, mapFileName);
 		buildBases();
 		// Add a line
-		buildLine(0, 0, 0, 0);
+		buildLine(0, 0, 50, 60);
 		buildInfoPlayers();
 //		buildAgents();
 //		buildTowers();
