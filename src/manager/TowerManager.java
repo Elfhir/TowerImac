@@ -1,12 +1,18 @@
 package manager;
 
-import game.player.Player;
 import game.tower.Tower;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class TowerManager {
+	
+	private ArrayList<String> availableTowerTypes;
 	private LinkedList<Tower> towers;
+	
+	public ArrayList<String> getAvailableTowerTypes() {
+		return availableTowerTypes;
+	}
 	
 	public LinkedList<Tower> getTowers() {
 		return towers;
@@ -23,5 +29,11 @@ public class TowerManager {
 	
 	public TowerManager() {
 		this.towers = new LinkedList<Tower>();
+		this.availableTowerTypes = new ArrayList<String>();
+		this.availableTowerTypes.add("game.tower.GunTower");
 	}
+	
+	public static void main(String[] args) {
+		
+	}	
 }

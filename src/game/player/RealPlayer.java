@@ -1,6 +1,7 @@
 package game.player;
 
 import game.Game;
+import game.base.Base;
 
 import java.awt.Color;
 
@@ -33,6 +34,25 @@ public class RealPlayer extends Player {
 	
 	public RealPlayer() {
 		super("unknown", Color.WHITE);
+	}
+	
+	@Override
+	/**
+	 * Returns the String which will be displayed on the panel of the player.
+	 */
+	public String getInfosPlayer() {
+		
+		int nbTotalBases = Game.getInstance().getBaseManager().getBases().size();
+					
+		StringBuilder sb = new StringBuilder(this.getName());
+		sb.append(" : $");
+		sb.append(this.getBank().getMoney());
+		sb.append(" | ");
+		sb.append(this.getNbBases());
+		sb.append("/");
+		sb.append(nbTotalBases);
+		
+		return sb.toString();
 	}
 	
 	

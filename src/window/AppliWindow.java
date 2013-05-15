@@ -29,6 +29,7 @@ import game.agent.GroupAgent;
 import game.base.Base;
 import game.player.Player;
 import game.player.RealPlayer;
+import game.tower.Tower;
 /**
  * Singleton
  *
@@ -298,7 +299,6 @@ public class AppliWindow extends JFrame {
 		int widthPanelIAPlayer = 250;
 		int heightPanelIAPlayer = 40;
 		
-		int nbTotalBases = Game.getInstance().getBaseManager().getBases().size();
 		
 		// panel for the Real Player
 		JPanel panelRealPlayer = this.panelInfoRealPlayer;
@@ -315,30 +315,33 @@ public class AppliWindow extends JFrame {
 		// we loop on each player
 		for(Player p: Game.getInstance().getPlayerManager().getPlayers()) {
 			
-			// how many bases does the player have ?
-			int nbBasesPlayer = 0;
-			for(Base b: Game.getInstance().getBaseManager().getBases()) {
-				if (b.getPlayer()!=null && b.getPlayer().equals(p)) {
-					++nbBasesPlayer;
-				}
-			}
-			
 			// if it is the RealPlayer, we fill the panelRealPlayer
 			if(p instanceof RealPlayer) {
-				
-				StringBuilder sb = new StringBuilder(p.getName());
-				sb.append(" : $");
-				sb.append(p.getBank().getMoney());
-				sb.append(" | ");
-				sb.append(nbBasesPlayer);
-				sb.append("/");
-				sb.append(nbTotalBases);
-				
+
 				JPanel panelInfoRealPlayer = new JPanel();
-				JLabel label = new JLabel(sb.toString());
+				JLabel label = new JLabel(p.getInfosPlayer());
 				
 				panelInfoRealPlayer.add(label);
 				panelInfoRealPlayer.setBackground(null);
+				
+				JPanel panelAvailableBases = new JPanel();
+				
+//				// Doesn't work for the moment !! Need to be fixed.
+//				for (String s: Game.getInstance().getTowerManager().getAvailableTowerTypes()) {
+//					Class cls;
+//					try {
+//						cls = Class.forName(s);
+//						Tower clsInstance = (Tower) cls.newInstance();
+//						System.out.println(clsInstance);
+//					} catch (ClassNotFoundException e) {
+//						e.printStackTrace();
+//					} catch (InstantiationException e) {
+//						e.printStackTrace();
+//					} catch (IllegalAccessException e) {
+//						e.printStackTrace();
+//					}
+//				}
+//				
 				panelRealPlayer.add(panelInfoRealPlayer);
 				
 				// add actionListener to show or hide the panel
@@ -397,18 +400,7 @@ public class AppliWindow extends JFrame {
 			// else if it is an IA JPlayer we fill the panelIAPlayers with a new JPanel for each IAPlayer
 			else {
 				JPanel panel = new JPanel();
-				
-				StringBuilder sb = new StringBuilder("<html>");
-				sb.append(p.getName());
-				sb.append("<br /> $");
-				sb.append(p.getBank().getMoney());
-				sb.append(" | ");
-				sb.append(nbBasesPlayer);
-				sb.append("/");
-				sb.append(nbTotalBases);
-				sb.append("</html>");
-				
-				JLabel label = new JLabel(sb.toString());
+				JLabel label = new JLabel(p.getInfosPlayer());
 				label.setForeground(p.getColor());
 				panel.add(label);
 				panel.setBackground(null);

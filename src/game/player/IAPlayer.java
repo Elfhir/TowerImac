@@ -204,6 +204,27 @@ public class IAPlayer extends Player {
 		}
 	}
 	
+	@Override
+	/**
+	 * Returns the String which will be displayed on the panel of the player.
+	 */
+	public String getInfosPlayer() {
+		
+		int nbTotalBases = Game.getInstance().getBaseManager().getBases().size();
+				
+		StringBuilder sb = new StringBuilder("<html>");
+		sb.append(this.getName());
+		sb.append("<br /> $");
+		sb.append(this.getBank().getMoney());
+		sb.append(" | ");
+		sb.append(this.getNbBases());
+		sb.append("/");
+		sb.append(nbTotalBases);
+		sb.append("</html>");
+		
+		return sb.toString();
+	}
+	
 	public IAPlayer(String name, Bank bank, Color color) {
 		super(name, bank, color);
 		this.difficulty = 1;

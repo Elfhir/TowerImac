@@ -11,6 +11,7 @@ import commands.attack.DoRandomAction;
 import commands.selection.PlaceTower;
 
 import engine.Engine;
+import game.Game;
 import game.base.Base;
 import game.tower.Tower;
 
@@ -57,6 +58,20 @@ public abstract class Player implements Runnable {
 	
 	public void addSelectedBase(Base b) {
 		this.selectedBases.add(b);
+	}
+	
+	/**
+	 * @return the number of bases owned by the player
+	 */
+	public int getNbBases() {
+		// how many bases does the player have ?
+		int nbBasesPlayer = 0;
+		for(Base b: Game.getInstance().getBaseManager().getBases()) {
+			if (b.getPlayer()!=null && b.getPlayer().equals(this)) {
+				++nbBasesPlayer;
+			}
+		}
+		return nbBasesPlayer;
 	}
 	
 	//----------------------------------------------actions (tests)----------------
@@ -116,6 +131,8 @@ public abstract class Player implements Runnable {
 	public void start(){
 		new Thread(this).start();
     }
+	
+	public abstract String getInfosPlayer();
 		
 		
 	//----------------------------------------------ctor----------------
