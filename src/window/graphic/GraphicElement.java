@@ -30,6 +30,11 @@ public class GraphicElement extends Graphics2D {
 	public GraphicElement() {
 		super();
 	}
+	
+	public GraphicElement(Color c) {
+		super();
+		this.setColor(c);
+	}
 
 	@Override
 	public void addRenderingHints(Map<?, ?> arg0) {

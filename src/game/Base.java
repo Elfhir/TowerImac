@@ -165,12 +165,8 @@ public class Base extends JButton implements Situable, Timerable{
 				SelectBase selectionCommand = new SelectBase(realPlayer, this);
 				Engine.getInstance().getCommands().add(selectionCommand);
 				
-				//These line are for computing the first point of the Line between the Base
-					int xBase = (int) this.getX();
-					int yBase = (int) this.getY();
-					System.out.println("x "+xBase+" ; y "+yBase);
-					AppliWindow.getInstance().getLine().setDisplayed(true);
-					AppliWindow.getInstance().getLine().displayLine(xBase, yBase, xBase, yBase);
+				//it sets the first point of Line, which is the coordinate of the first Base, i.e the SelectedBase
+				AppliWindow.getInstance().getLine().displayFirstPoint(this);
 			}
 		}
 		
@@ -187,17 +183,18 @@ public class Base extends JButton implements Situable, Timerable{
 			if(!selectedBases.getPlayer().equals(this.getPlayer())) {
 				AttackBase attackCommand = new AttackBase(realPlayer, selectedBases, this);
 				Engine.getInstance().getCommands().add(attackCommand);
-				int aBase = (int) this.getX();
-				int bBase = (int) this.getY();
-				System.out.println("a "+aBase+" ; b "+bBase);
-				AppliWindow.getInstance().getLine().setDisplayed(true);
-				AppliWindow.getInstance().getLine().displayLineLastPoint(aBase, bBase);
+				
+				// Display the Line because it sets the second point of it as the Attacked Base
+				AppliWindow.getInstance().getLine().displayLastPointAttacked(this);
 			} 
 			
 			// else if it's the same player : it's just a move between 2 bases of the same player
 			else {
 				Move moveCommand = new Move(realPlayer, selectedBases, this);
 				Engine.getInstance().getCommands().add(moveCommand);
+				
+				// Display the Line because it sets the second point of it as the Attacked Base
+				AppliWindow.getInstance().getLine().displayLastPointDeplacement(this);
 			}	
 		}
 		

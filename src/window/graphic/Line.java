@@ -1,11 +1,15 @@
 package window.graphic;
 
+import game.Base;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JComponent;
+
+import window.AppliWindow;
 
 public class Line extends JComponent implements MouseListener{
 	
@@ -117,6 +121,33 @@ public class Line extends JComponent implements MouseListener{
 		this.setX1(x);
 		this.setY1(y);
 		this.repaint();
+	}
+	
+	public void displayFirstPoint(Base b) {
+		int xBase = (int) b.getX();
+		int yBase = (int) b.getY();
+		System.out.println("x "+xBase+" ; y "+yBase);
+		AppliWindow.getInstance().getLine().setDisplayed(true);
+		AppliWindow.getInstance().getLine().displayLine(xBase, yBase, xBase, yBase);
+	}
+	
+	public void displayLastPointAttacked(Base b) {
+		int aBase = (int) b.getX();
+		int bBase = (int) b.getY();
+		System.out.println("a "+aBase+" ; b "+bBase);
+		AppliWindow.getInstance().getLine().setDisplayed(true);
+		AppliWindow.getInstance().getLine().displayLineLastPoint(aBase, bBase);
+	}
+	
+	public void displayLastPointDeplacement(Base b) {
+		int aBase = (int) b.getX();
+		int bBase = (int) b.getY();
+		System.out.println("a "+aBase+" ; b "+bBase);
+		GraphicElement g = new GraphicElement(new Color(0, 50, 200, 1));
+		AppliWindow.getInstance().getLine().paintComponent(g);
+		AppliWindow.getInstance().getLine().setDisplayed(true);
+		
+		AppliWindow.getInstance().getLine().displayLineLastPoint(aBase, bBase);
 	}
 
 	// -------------------------------------------- MouseListener ---------------

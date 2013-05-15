@@ -60,6 +60,10 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 			realPlayer.getSelectedBases().setBackground(realPlayer.getColor().brighter());
 		}
 		realPlayer.setSelectedBases(null);
+		
+		// Click on the map make disappear the line
+		AppliWindow.getInstance().getLine().setDisplayed(false);
+		AppliWindow.getInstance().getLine().displayLine(0, 0, 0, 0);
 	}
 
 	@Override
