@@ -1,14 +1,10 @@
 package window;
 
-import exceptions.ClickedByRealPlayerException;
-import exceptions.MapFileException;
-import game.Base;
-import game.Game;
-import game.GroupAgent;
-
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,8 +21,12 @@ import javax.vecmath.Vector2f;
 import org.jdom2.JDOMException;
 
 import window.graphic.Line;
-
+import exceptions.ClickedByRealPlayerException;
+import exceptions.MapFileException;
 import exceptions.RealPlayerException;
+import game.Base;
+import game.Game;
+import game.GroupAgent;
 import game.Player;
 import game.RealPlayer;
 /**
@@ -334,20 +334,15 @@ public class AppliWindow extends JFrame {
 				sb.append("/");
 				sb.append(nbTotalBases);
 				
-				JButton buttonRealPlayer = new JButton(sb.toString());
+				JPanel panelInfoRealPlayer = new JPanel();
+				JLabel label = new JLabel(sb.toString());
+				
+				panelInfoRealPlayer.add(label);
+				panelInfoRealPlayer.setBackground(null);
+				panelRealPlayer.add(panelInfoRealPlayer);
 				
 				// add actionListener to show or hide the panel
-				buttonRealPlayer.addActionListener(new ActionListener() {
-					
-					// action on click : shows or hides the panel
-					public void actionPerformed(ActionEvent e) {
-						if(isBuildToolsVisible() ==  true) {
-							hidePanel();
-						}
-						else {
-							showPanel();
-						}
-					}
+				panelRealPlayer.addMouseListener(new MouseListener() {
 					
 					// shows the panel
 					public void showPanel() {
@@ -360,9 +355,42 @@ public class AppliWindow extends JFrame {
 						AppliWindow.getInstance().getPanelInfoRealPlayer().setBounds(0, height - visibleHeightPanelRealPlayer, widthPanelRealPlayer, heightPanelRealPlayer);
 						setBuildToolsVisible(false);
 					}
+
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						if(isBuildToolsVisible() ==  true) {
+							hidePanel();
+						}
+						else {
+							showPanel();
+						}
+					}
+
+					@Override
+					public void mouseEntered(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseExited(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mousePressed(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseReleased(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
 				});
-				
-				panelRealPlayer.add(buttonRealPlayer);
 
 			}
 			
@@ -427,7 +455,7 @@ public class AppliWindow extends JFrame {
 				}
 			}
 			
-			// if it is the RealPlayer, we update the text of the button of the panelRealPlayer
+			// if it is the RealPlayer, we update the text of the label of the panelRealPlayer
 			if(p instanceof RealPlayer) {
 				
 				StringBuilder sb = new StringBuilder(p.getName());
@@ -438,10 +466,11 @@ public class AppliWindow extends JFrame {
 				sb.append("/");
 				sb.append(nbTotalBases);
 				
-				// The button is the first Component in the pannel
-				JButton buttonRealPlayer = (JButton)panelRealPlayer.getComponent(0);
+				// The label is the first Component in the panel
+				JPanel panelInfoRealPlayer = (JPanel) panelRealPlayer.getComponent(0);
+				JLabel labelInfoRealPlayer = (JLabel) panelInfoRealPlayer.getComponent(0);
 				// we can update the text of the button
-				buttonRealPlayer.setText(sb.toString());
+				labelInfoRealPlayer.setText(sb.toString());
 			}
 			
 			// else if it is an IA Player we change the text of the label in each panel of panelIAPlayers (= corresponding to each IAPlayer)
