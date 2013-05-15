@@ -2,9 +2,9 @@ package commands.selection;
 
 
 import window.AppliWindow;
-import game.Base;
 import game.Game;
-import game.Player;
+import game.base.Base;
+import game.player.Player;
 import commands.Command;
 import exceptions.ClickedByRealPlayerException;
 import exceptions.RealPlayerException;

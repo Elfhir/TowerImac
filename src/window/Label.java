@@ -1,9 +1,9 @@
 package window;
 
 import exceptions.RealPlayerException;
-import game.Base;
 import game.Game;
-import game.Player;
+import game.base.Base;
+import game.player.Player;
 
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;

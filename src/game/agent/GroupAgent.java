@@ -1,4 +1,4 @@
-package game;
+package game.agent;
 
 //import javax.swing.JLabel;
 

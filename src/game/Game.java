@@ -6,6 +6,7 @@ import org.jdom2.JDOMException;
 
 import engine.Engine;
 import exceptions.MapFileException;
+import game.player.Player;
 
 import writer.XmlReader;
 

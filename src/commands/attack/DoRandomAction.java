@@ -2,7 +2,7 @@ package commands.attack;
 
 import commands.Command;
 
-import game.Player;
+import game.player.Player;
 
 public class DoRandomAction extends Command {
         

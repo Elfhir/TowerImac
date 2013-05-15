@@ -1,4 +1,4 @@
-package game;
+package game.base;
 
 import javax.swing.JButton;
 import javax.vecmath.Vector2f;
@@ -14,6 +14,9 @@ import commands.selection.SelectBase;
 import engine.Engine;
 import exceptions.ClickedByRealPlayerException;
 import exceptions.RealPlayerException;
+import game.Game;
+import game.Situable;
+import game.player.Player;
 
 public class Base extends JButton implements Situable, Timerable{
 	

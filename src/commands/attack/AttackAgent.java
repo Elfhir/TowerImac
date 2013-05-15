@@ -1,6 +1,6 @@
 package commands.attack;
 
-import game.Agent;
+import game.agent.Agent;
 import commands.Command;
 
 public class AttackAgent extends Command{

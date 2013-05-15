@@ -1,4 +1,4 @@
-package game;
+package game.player;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -10,6 +10,8 @@ import commands.selection.Move;
 import commands.selection.SelectBase;
 
 import engine.Engine;
+import game.Game;
+import game.base.Base;
 
 
 public class IAPlayer extends Player {

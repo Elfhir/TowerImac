@@ -1,6 +1,6 @@
 package time;
-import game.Agent;
-import game.Base;
+import game.agent.Agent;
+import game.base.Base;
 
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;

@@ -1,6 +1,6 @@
 package manager;
 
-import game.GroupAgent;
+import game.agent.GroupAgent;
 
 import java.util.LinkedList;
 

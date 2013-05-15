@@ -1,14 +1,14 @@
 package writer;
 
-import game.Agent;
-import game.Bank;
-import game.Base;
 import game.Game;
-import game.GroupAgent;
-import game.IAPlayer;
-import game.Player;
-import game.RealPlayer;
-import game.Tower;
+import game.agent.Agent;
+import game.agent.GroupAgent;
+import game.base.Base;
+import game.player.Bank;
+import game.player.IAPlayer;
+import game.player.Player;
+import game.player.RealPlayer;
+import game.tower.Tower;
 
 import java.awt.Color;
 import java.io.File;

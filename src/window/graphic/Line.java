@@ -1,6 +1,6 @@
 package window.graphic;
 
-import game.Base;
+import game.base.Base;
 
 import java.awt.Color;
 import java.awt.Graphics;

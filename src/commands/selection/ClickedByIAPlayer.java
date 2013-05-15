@@ -1,8 +1,8 @@
 package commands.selection;
 
 import window.AppliWindow;
-import game.Base;
-import game.IAPlayer;
+import game.base.Base;
+import game.player.IAPlayer;
 import commands.Command;
 
 @Deprecated

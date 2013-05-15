@@ -2,8 +2,8 @@ package manager;
 
 import exceptions.IAPlayerException;
 import exceptions.RealPlayerException;
-import game.Player;
-import game.RealPlayer;
+import game.player.Player;
+import game.player.RealPlayer;
 
 import java.util.ArrayList;
 

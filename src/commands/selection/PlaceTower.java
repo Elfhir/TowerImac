@@ -4,7 +4,7 @@ import javax.vecmath.Vector2f;
 
 import commands.Command;
 
-import game.Player;
+import game.player.Player;
 
 
 public class PlaceTower extends Command {

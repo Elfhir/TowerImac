@@ -8,10 +8,10 @@ import java.util.Scanner;
 import javax.vecmath.Vector2f;
 
 import exceptions.MapFileException;
-import game.Base;
 import game.Game;
-import game.Player;
-import game.RealPlayer;
+import game.base.Base;
+import game.player.Player;
+import game.player.RealPlayer;
 
 public class MapManager {
 	

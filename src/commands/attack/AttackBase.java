@@ -2,9 +2,9 @@ package commands.attack;
 
 import commands.Command;
 
-import game.Base;
 import game.Game;
-import game.Player;
+import game.base.Base;
+import game.player.Player;
 
 public class AttackBase extends Command{
 	

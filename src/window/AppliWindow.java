@@ -24,11 +24,11 @@ import window.graphic.Line;
 import exceptions.ClickedByRealPlayerException;
 import exceptions.MapFileException;
 import exceptions.RealPlayerException;
-import game.Base;
 import game.Game;
-import game.GroupAgent;
-import game.Player;
-import game.RealPlayer;
+import game.agent.GroupAgent;
+import game.base.Base;
+import game.player.Player;
+import game.player.RealPlayer;
 /**
  * Singleton
  *

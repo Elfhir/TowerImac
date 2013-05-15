@@ -1,4 +1,6 @@
-package game;
+package game.player;
+
+import game.Game;
 
 import java.awt.Color;
 

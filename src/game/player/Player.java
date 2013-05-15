@@ -1,4 +1,4 @@
-package game;
+package game.player;
 
 import java.awt.Color;
 
@@ -11,6 +11,8 @@ import commands.attack.DoRandomAction;
 import commands.selection.PlaceTower;
 
 import engine.Engine;
+import game.base.Base;
+import game.tower.Tower;
 
 public abstract class Player implements Runnable {
 	

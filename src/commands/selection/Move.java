@@ -1,7 +1,7 @@
 package commands.selection;
 
-import game.Base;
-import game.Player;
+import game.base.Base;
+import game.player.Player;
 import commands.Command;
 
 public class Move extends Command {

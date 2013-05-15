@@ -1,6 +1,6 @@
 package manager;
 
-import game.Base;
+import game.base.Base;
 
 import java.util.ArrayList;
 

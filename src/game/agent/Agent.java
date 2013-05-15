@@ -1,4 +1,7 @@
-package game;
+package game.agent;
+
+import game.Situable;
+import game.player.Player;
 
 import javax.vecmath.Vector2f;
 

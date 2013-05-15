@@ -1,7 +1,7 @@
 package manager;
 
-import game.Player;
-import game.Tower;
+import game.player.Player;
+import game.tower.Tower;
 
 import java.util.LinkedList;
 

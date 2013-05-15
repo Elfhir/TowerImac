@@ -2,8 +2,8 @@ package commands.market;
 
 import commands.Command;
 
-import game.Player;
-import game.Tower;
+import game.player.Player;
+import game.tower.Tower;
 
 
 public class SellTower extends Command {

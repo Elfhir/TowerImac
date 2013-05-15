@@ -1,7 +1,7 @@
 package engine;
 
-import game.Base;
 import game.Game;
+import game.base.Base;
 
 import java.util.Calendar;
 import java.util.concurrent.ConcurrentLinkedQueue;
