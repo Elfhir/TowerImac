@@ -267,7 +267,7 @@ public class AppliWindow extends JFrame {
 		}
 	}
 	
-	private void buildGroupAgent(){
+	private void buildGroupAgent() {
 		Game game = Game.getInstance();
 
 		for(GroupAgent groupAgent: game.getAgentManager().getAgents()){
@@ -332,7 +332,6 @@ public class AppliWindow extends JFrame {
 										
 				public void actionPerformed(ActionEvent e) {
 					((RealPlayer)p).setBuildingTower(true);
-						System.out.println("build GunTower" + ((RealPlayer)p).isBuildingTower());
 					}
 				});
 				panelAvailableBases.add(buttonGunTower);

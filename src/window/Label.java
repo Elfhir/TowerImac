@@ -53,6 +53,8 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 	@Override
 	public void mouseClicked(MouseEvent event) {
 		
+		Game game = Game.getInstance();
+		
 		//Try to deselect the player
 		RealPlayer realPlayer = null;
 		try {
@@ -73,7 +75,23 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 		
 		// This clic is it in order to build a tower ?
 		if (realPlayer.isBuildingTower()) {
-			realPlayer.buyTower(realPlayer, "GunTower", event.getX(), event.getY());
+			int numArea = game.getMapManager().getNumAreaAtPosition(event.getX(), event.getY());
+			
+			if (numArea == -1) {
+				System.out.println("C'est une zone de plaine !");
+			}
+			else if(numArea >= 0 && numArea < game.getBaseManager().getBases().size()) {
+				Base baseArea = game.getBaseManager().getBases().get(numArea);
+				if (baseArea.getPlayer().equals(realPlayer)) {
+					realPlayer.buyTower(realPlayer, "GunTower", event.getX(), event.getY());
+				}
+				else {
+					System.out.println("C'est pas ta zone !");
+				}
+			}
+			else {
+				System.out.println("Problem with the index in map");
+			}
 			
 		}
 		

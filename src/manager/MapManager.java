@@ -7,10 +7,10 @@ import java.util.Scanner;
 
 import javax.vecmath.Vector2f;
 
+import window.AppliWindow;
 import exceptions.MapFileException;
 import game.Game;
 import game.base.Base;
-import game.player.Player;
 import game.player.RealPlayer;
 
 public class MapManager {
@@ -43,6 +43,16 @@ public class MapManager {
 
 	public void setMap(int[][] map) {
 		this.map = map;
+	}
+	
+	public int getNumAreaAtPosition(int x, int y) {
+		int widthWindow = AppliWindow.getInstance().getWidth();
+		int heightWindow = AppliWindow.getInstance().getHeight();
+		
+		int xMap = x * this.widthMap / widthWindow;
+		int yMap = y * this.heightMap / heightWindow ;
+		
+		return this.map[xMap][yMap];
 	}
 
 	// ------------------ constructor ---------------------
