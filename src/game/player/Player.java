@@ -85,9 +85,9 @@ public abstract class Player implements Runnable {
 	 *  Buy the given tower (how to know which one ?)
 	 * 
 	 */
-	public void buyTower(String type, Tower tower) {
-		BuyTower command = new BuyTower(this, tower);
-		Engine.getInstance().getCommands().add(command);
+	public void buyTower(Player player, String type, int x, int y) {
+		BuyTower buyTower = new BuyTower(player, type, x, y);
+		Engine.getInstance().getCommands().add(buyTower);
 	}
 	
 	/**

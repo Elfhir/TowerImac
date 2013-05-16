@@ -313,7 +313,7 @@ public class AppliWindow extends JFrame {
 		panelIAPlayers.setBackground(Color.BLACK);
 		
 		// we loop on each player
-		for(Player p: Game.getInstance().getPlayerManager().getPlayers()) {
+		for(final Player p: Game.getInstance().getPlayerManager().getPlayers()) {
 			
 			// if it is the RealPlayer, we fill the panelRealPlayer
 			if(p instanceof RealPlayer) {
@@ -325,6 +325,19 @@ public class AppliWindow extends JFrame {
 				panelInfoRealPlayer.setBackground(null);
 				
 				JPanel panelAvailableBases = new JPanel();
+				
+				
+				JButton buttonGunTower = new JButton("GunTower");
+				buttonGunTower.addActionListener(new ActionListener() {
+										
+				public void actionPerformed(ActionEvent e) {
+					((RealPlayer)p).setBuildingTower(true);
+						System.out.println("build GunTower" + ((RealPlayer)p).isBuildingTower());
+					}
+				});
+				panelAvailableBases.add(buttonGunTower);
+				
+				panelInfoRealPlayer.add(panelAvailableBases);
 				
 //				// Doesn't work for the moment !! Need to be fixed.
 //				for (String s: Game.getInstance().getTowerManager().getAvailableTowerTypes()) {

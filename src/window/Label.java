@@ -1,9 +1,11 @@
 package window;
 
+import engine.Engine;
 import exceptions.RealPlayerException;
 import game.Game;
 import game.base.Base;
-import game.player.Player;
+import game.player.RealPlayer;
+import game.tower.GunTower;
 
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -17,6 +19,8 @@ import javax.swing.Icon;
 import javax.swing.JLabel;
 
 import window.graphic.GraphicElement;
+
+import commands.market.BuyTower;
 
 public class Label extends JLabel implements Accessible, MouseListener, KeyListener, MouseMotionListener{
 
@@ -48,10 +52,11 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 
 	@Override
 	public void mouseClicked(MouseEvent event) {
+		
 		//Try to deselect the player
-		Player realPlayer = null;
+		RealPlayer realPlayer = null;
 		try {
-			realPlayer = Game.getInstance().getPlayerManager().getRealPlayer();
+			realPlayer = (RealPlayer) Game.getInstance().getPlayerManager().getRealPlayer();
 		} catch (RealPlayerException e) {
 
 			e.printStackTrace();
@@ -64,6 +69,15 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 		// Click on the map make disappear the line
 		AppliWindow.getInstance().getLine().setDisplayed(false);
 		AppliWindow.getInstance().getLine().displayLine(0, 0, 0, 0);
+		
+		
+		// This clic is it in order to build a tower ?
+		if (realPlayer.isBuildingTower()) {
+			realPlayer.buyTower(realPlayer, "GunTower", event.getX(), event.getY());
+			
+		}
+		
+		
 	}
 
 	@Override

@@ -8,6 +8,18 @@ import java.awt.Color;
 
 public class RealPlayer extends Player {
 	
+	private boolean isBuildingTower;
+	
+	public boolean isBuildingTower() {
+		return isBuildingTower;
+	}
+
+
+	public void setBuildingTower(boolean isBuildingTower) {
+		this.isBuildingTower = isBuildingTower;
+	}
+
+
 	@Override
 	public void run() {
 		while (Game.getInstance().isRunning()) {
