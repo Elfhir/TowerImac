@@ -45,7 +45,8 @@ public class AppliWindow extends JFrame {
 	
 	private JPanel panelInfoRealPlayer;
 	private JPanel panelInfoIAPlayers;
-	
+	private JPanel panelTmpBase;
+
 	private Label image;
 	private Line line;
 	private Label pause;
@@ -68,6 +69,14 @@ public class AppliWindow extends JFrame {
 
 	public void setPanelInfoIAPlayers(JPanel panelInfoIAPlayers) {
 		this.panelInfoIAPlayers = panelInfoIAPlayers;
+	}
+	
+	public JPanel getPanelTmpBase() {
+		return panelTmpBase;
+	}
+
+	public void setPanelTmpBase(JPanel panelTmpBase) {
+		this.panelTmpBase = panelTmpBase;
 	}
 
 	public boolean isBuildToolsVisible() {
@@ -613,6 +622,10 @@ public class AppliWindow extends JFrame {
 		buildBases();
 		// Add a line
 		buildLine(0, 0, getWidth(), getHeight());
+		
+		this.buildPanelTmpBase();
+		
+		
 		buildInfoPlayers();
 //		buildAgents();
 //		buildTowers();
@@ -642,6 +655,18 @@ public class AppliWindow extends JFrame {
 		buildGame("game.xml", "testMap");
 
 		return content;
+	}
+	
+	/**
+	 * Builds the panel temporarily displayed when a base is being created (on mouseMoved).
+	 * By default, this panel is not visible.
+	 */
+	private void buildPanelTmpBase() {
+		this.panelTmpBase = new JPanel();
+		this.panelTmpBase.setBounds(10, 10, 30, 30);
+		this.panelTmpBase.setBackground(Color.RED);
+		this.panelTmpBase.setVisible(false);
+		this.content.add(panelTmpBase);
 	}
 
 	/**

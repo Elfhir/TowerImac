@@ -17,6 +17,7 @@ import java.awt.event.MouseMotionListener;
 import javax.accessibility.Accessible;
 import javax.swing.Icon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import window.graphic.GraphicElement;
 
@@ -82,7 +83,7 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 			}
 			else if(numArea >= 0 && numArea < game.getBaseManager().getBases().size()) {
 				Base baseArea = game.getBaseManager().getBases().get(numArea);
-				if (baseArea.getPlayer().equals(realPlayer)) {
+				if (realPlayer.equals(baseArea.getPlayer())) {
 					realPlayer.buyTower(realPlayer, "GunTower", event.getX(), event.getY());
 				}
 				else {
@@ -92,15 +93,15 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 			else {
 				System.out.println("Problem with the index in map");
 			}
-			
+		
 		}
 		
-		
+		realPlayer.setBuildingTower(false);
+		AppliWindow.getInstance().getPanelTmpBase().setVisible(false);
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent event) {
-		//System.out.println("MOUSE EXITS THE BASE");
 	}
 
 	@Override
@@ -128,7 +129,7 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println("X : "+e.getX()+" Y : "+e.getY());
+		System.out.println("MousePressed X : "+e.getX()+" Y : "+e.getY());
 	}
 
 	@Override
@@ -141,8 +142,37 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent e) {
-		System.out.println("X : "+e.getX()+" Y : "+e.getY());
+	public void mouseMoved(MouseEvent event) {
+		//System.out.println("MouseMoved X : "+e.getX()+" Y : "+e.getY());
+		try {
+			Game game = Game.getInstance();
+			RealPlayer realPlayer = (RealPlayer)game.getPlayerManager().getRealPlayer();
+
+			if (realPlayer.isBuildingTower()) {
+				boolean acceptBuildTower = false;
+				
+				int numArea = game.getMapManager().getNumAreaAtPosition(event.getX(), event.getY());
+				
+				if(numArea >= 0 && numArea < game.getBaseManager().getBases().size()) {
+					Base baseArea = game.getBaseManager().getBases().get(numArea);
+					if (realPlayer.equals(baseArea.getPlayer())) {
+						acceptBuildTower = true;
+					}
+				}
+				
+				if (acceptBuildTower) {
+					JPanel panelTmpBase = AppliWindow.getInstance().getPanelTmpBase();
+					panelTmpBase.setBounds(event.getX(), event.getY(), 30, 30);
+					panelTmpBase.setVisible(true);
+				}
+				else {
+					JPanel panelTmpBase = AppliWindow.getInstance().getPanelTmpBase();
+					panelTmpBase.setVisible(false);
+				}
+			}
+		} catch (RealPlayerException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	// ----------------------------------------- KeyListener--------------------------
@@ -165,36 +195,42 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 		super();
 		this.graph = new GraphicElement();
 		addMouseListener(this);
+		addMouseMotionListener(this);
 	}
 
 	public Label(Icon image, int horizontalAlignment) {
 		super(image, horizontalAlignment);
 		this.graph = new GraphicElement();
 		addMouseListener(this);
+		addMouseMotionListener(this);
 	}
 
 	public Label(Icon image) {
 		super(image);
 		this.graph = new GraphicElement();
 		addMouseListener(this);
+		addMouseMotionListener(this);
 	}
 
 	public Label(String text, Icon icon, int horizontalAlignment) {
 		super(text, icon, horizontalAlignment);
 		this.graph = new GraphicElement();
 		addMouseListener(this);
+		addMouseMotionListener(this);
 	}
 
 	public Label(String text, int horizontalAlignment) {
 		super(text, horizontalAlignment);
 		this.graph = new GraphicElement();
 		addMouseListener(this);
+		addMouseMotionListener(this);
 	}
 
 	public Label(String text) {
 		super(text);
 		this.graph = new GraphicElement();
 		addMouseListener(this);
+		addMouseMotionListener(this);
 	}
 
 
