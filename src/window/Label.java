@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import window.graphic.GraphicElement;
+import window.panel.PanelTmpBase;
 
 import commands.market.BuyTower;
 
@@ -143,7 +144,7 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 
 	@Override
 	public void mouseMoved(MouseEvent event) {
-		//System.out.println("MouseMoved X : "+e.getX()+" Y : "+e.getY());
+		
 		try {
 			Game game = Game.getInstance();
 			RealPlayer realPlayer = (RealPlayer)game.getPlayerManager().getRealPlayer();
@@ -161,12 +162,13 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 				}
 				
 				if (acceptBuildTower) {
-					JPanel panelTmpBase = AppliWindow.getInstance().getPanelTmpBase();
+					PanelTmpBase panelTmpBase = AppliWindow.getInstance().getPanelTmpBase();
 					panelTmpBase.setBounds(event.getX(), event.getY(), 30, 30);
 					panelTmpBase.setVisible(true);
+					System.out.println("MouseMoved X : "+event.getX()+" Y : "+event.getY());
 				}
 				else {
-					JPanel panelTmpBase = AppliWindow.getInstance().getPanelTmpBase();
+					PanelTmpBase panelTmpBase = AppliWindow.getInstance().getPanelTmpBase();
 					panelTmpBase.setVisible(false);
 				}
 			}

@@ -1,6 +1,5 @@
 package application;
 
-import window.Panel;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,8 +16,10 @@ import javax.swing.SwingUtilities;
 import org.jdom2.JDOMException;
 
 import exceptions.MapFileException;
+import exceptions.RealPlayerException;
 
 import window.AppliWindow;
+import window.panel.Panel;
 
 public class Launcher {
 
@@ -68,6 +69,8 @@ public class Launcher {
 								} catch (JDOMException e) {
 									e.printStackTrace();
 								} catch (IOException e) {
+									e.printStackTrace();
+								} catch (RealPlayerException e) {
 									e.printStackTrace();
 								}
 							}

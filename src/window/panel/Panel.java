@@ -1,4 +1,4 @@
-package window;
+package window.panel;
 
 import game.Game;
 
@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
+
+import window.AppliWindow;
 
 public class Panel extends JPanel implements KeyListener{
 
