@@ -28,7 +28,7 @@ public class IAPlayer extends Player {
 		Random rand = new Random();
 		rand.setSeed(System.currentTimeMillis());
 		
-		while (Game.getInstance().isRunning()) {
+		while (!this.getIsDead()) {
 			
 			int value = (int)(Math.random() * 10);
 			

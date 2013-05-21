@@ -8,7 +8,6 @@ import game.Game;
 import game.player.Player;
 import game.player.RealPlayer;
 import game.tower.GunTower;
-import game.tower.Tower;
 
 
 public class BuyTower extends Command {

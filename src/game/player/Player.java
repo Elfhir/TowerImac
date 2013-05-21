@@ -51,6 +51,17 @@ public abstract class Player implements Runnable {
 	public Base getSelectedBases() {
 		return selectedBases;
 	}
+	
+	public boolean getIsDead() {
+		for(Base b : Game.getInstance().getBaseManager().getBases()) {
+			if(b.getPlayer() != null) {
+				if(b.getPlayer().equals(this)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 
 	public void setSelectedBases(Base selectedBases) {
 		this.selectedBases = selectedBases;

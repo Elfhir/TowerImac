@@ -4,9 +4,9 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
-public class PanelTmpBase extends JPanel {
+public class PanelTmpTower extends JPanel {
 	
-	public PanelTmpBase() {
+	public PanelTmpTower() {
 		super();
 		this.setBounds(10, 10, 30, 30);
 		this.setBackground(Color.RED);

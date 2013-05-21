@@ -20,7 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import window.graphic.GraphicElement;
-import window.panel.PanelTmpBase;
+import window.panel.PanelTmpTower;
 
 import commands.market.BuyTower;
 
@@ -98,7 +98,7 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 		}
 		
 		realPlayer.setBuildingTower(false);
-		AppliWindow.getInstance().getPanelTmpBase().setVisible(false);
+		AppliWindow.getInstance().getPanelTmpTower().setVisible(false);
 	}
 
 	@Override
@@ -162,14 +162,14 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 				}
 				
 				if (acceptBuildTower) {
-					PanelTmpBase panelTmpBase = AppliWindow.getInstance().getPanelTmpBase();
-					panelTmpBase.setBounds(event.getX(), event.getY(), 30, 30);
-					panelTmpBase.setVisible(true);
+					PanelTmpTower panelTmpTower = AppliWindow.getInstance().getPanelTmpTower();
+					panelTmpTower.setBounds(event.getX(), event.getY(), 30, 30);
+					panelTmpTower.setVisible(true);
 					System.out.println("MouseMoved X : "+event.getX()+" Y : "+event.getY());
 				}
 				else {
-					PanelTmpBase panelTmpBase = AppliWindow.getInstance().getPanelTmpBase();
-					panelTmpBase.setVisible(false);
+					PanelTmpTower panelTmpTower = AppliWindow.getInstance().getPanelTmpTower();
+					panelTmpTower.setVisible(false);
 				}
 			}
 		} catch (RealPlayerException e1) {
