@@ -130,8 +130,8 @@ public class LineCursor extends JComponent implements MouseMotionListener{
 	}
 
 	public void displayFirstPoint(Base b) {
-		int xBase = (int) b.getX();
-		int yBase = (int) b.getY();
+		int xBase = (int) b.getX() + AppliWindow.getInstance().getTilesSize()/2;
+		int yBase = (int) b.getY() + AppliWindow.getInstance().getTilesSize()/2;
 		System.out.println("LC x "+xBase+" ; y "+yBase);
 		AppliWindow.getInstance().getLineCursor().setDisplayed(true);
 		AppliWindow.getInstance().getLineCursor().displayLine(xBase, yBase, xBase, yBase);

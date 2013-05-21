@@ -133,16 +133,16 @@ public class Line extends JComponent implements MouseListener{
 	}
 
 	public void displayFirstPoint(Base b) {
-		int xBase = (int) b.getX();
-		int yBase = (int) b.getY();
+		int xBase = (int) b.getX() + AppliWindow.getInstance().getTilesSize()/2;
+		int yBase = (int) b.getY() + AppliWindow.getInstance().getTilesSize()/2;
 		System.out.println("x "+xBase+" ; y "+yBase);
 		AppliWindow.getInstance().getLine().setDisplayed(true);
 		AppliWindow.getInstance().getLine().displayLine(xBase, yBase, xBase, yBase);
 	}
 
 	public void displayLastPointAttacked(Base b) {
-		int aBase = (int) b.getX();
-		int bBase = (int) b.getY();
+		int aBase = (int) b.getX() + AppliWindow.getInstance().getTilesSize()/2;
+		int bBase = (int) b.getY() + AppliWindow.getInstance().getTilesSize()/2;
 		System.out.println("a "+aBase+" ; b "+bBase);
 		this.setColor(new Color(200,0,0));
 		AppliWindow.getInstance().getLine().setDisplayed(true);
@@ -150,8 +150,8 @@ public class Line extends JComponent implements MouseListener{
 	}
 
 	public void displayLastPointDeplacement(Base b) {
-		int aBase = (int) b.getX();
-		int bBase = (int) b.getY();
+		int aBase = (int) b.getX() + AppliWindow.getInstance().getTilesSize()/2;
+		int bBase = (int) b.getY() + AppliWindow.getInstance().getTilesSize()/2;
 		System.out.println("a "+aBase+" ; b "+bBase);
 		this.setColor(new Color(0,200,0));
 		AppliWindow.getInstance().getLine().setDisplayed(true);
