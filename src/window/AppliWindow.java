@@ -719,7 +719,7 @@ public class AppliWindow extends JFrame {
 	 * @param y2 Coordinates of second point of the line
 	 */
 	public void buildLine(int x1, int y1, int x2, int y2) {
-		Line line1 = new Line(x1, y1, x2, y2);
+		Line line1 = new Line(x1, y1, x2, y2, new Color(200, 0, 0));
 		
 		content.setLayout(null);
 		line1.setVisible(true);
