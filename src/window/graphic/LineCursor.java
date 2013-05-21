@@ -5,18 +5,14 @@ import game.base.Base;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JComponent;
 
 import window.AppliWindow;
 
-public class Line extends JComponent implements MouseListener{
+public class LineCursor extends JComponent implements MouseMotionListener{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4956143461428611393L;
 	private int x1,x2,y1,y2;
 	private boolean displayed;
 	private Color color;
@@ -69,17 +65,18 @@ public class Line extends JComponent implements MouseListener{
 	public void setColor(Color color) {
 		this.color = color;
 	}
-
+	
 	/**
-	 * A simple Line, joining two point
+	 * A simple LineCursor, joining two points ; the second point will follow the mouse cursor
 	 * 
 	 * @param x1   Coordinates of the first point (last-1 base we leave) - integer
 	 * @param y1   Coordinates of the first point (last-1 base we leave) - integer
 	 * @param x2   Coordinates of the second point (last base we leave)  - integer
 	 * @param y2   Coordinates of the second point (last base we leave)  - integer
-	 * @param c		Color of the line
+	 * @param c		Color of the LineCursor
 	 */
-	public Line(int x1, int y1, int x2, int y2, Color c) {
+	public LineCursor(int x1, int y1, int x2, int y2, Color c) {
+		super();
 		this.x1 = x1;
 		this.y1 = y1;
 		this.x2 = x2;
@@ -87,7 +84,7 @@ public class Line extends JComponent implements MouseListener{
 		this.color = c;
 		this.displayed = false;
 	}
-
+	
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
@@ -111,7 +108,7 @@ public class Line extends JComponent implements MouseListener{
 	}
 
 	/**
-	 * Set only coordinates for the last point of Line and repaint
+	 * Set only coordinates for the last point of LineCursor and repaint
 	 * @param xMouse where the mouse is
 	 * @param yMouse where the mouse is
 	 */
@@ -122,7 +119,7 @@ public class Line extends JComponent implements MouseListener{
 	}
 
 	/**
-	 * Set only coordinates for the first point of Line and repaint
+	 * Set only coordinates for the first point of LineCursor and repaint
 	 * @param x from the Base Clicked
 	 * @param y from the Base Clicked
 	 */
@@ -135,54 +132,25 @@ public class Line extends JComponent implements MouseListener{
 	public void displayFirstPoint(Base b) {
 		int xBase = (int) b.getX() + AppliWindow.getInstance().getTilesSize()/2;
 		int yBase = (int) b.getY() + AppliWindow.getInstance().getTilesSize()/2;
-		System.out.println("x "+xBase+" ; y "+yBase);
-		AppliWindow.getInstance().getLine().setDisplayed(true);
-		AppliWindow.getInstance().getLine().displayLine(xBase, yBase, xBase, yBase);
+		System.out.println("LC x "+xBase+" ; y "+yBase);
+		AppliWindow.getInstance().getLineCursor().setDisplayed(true);
+		AppliWindow.getInstance().getLineCursor().displayLine(xBase, yBase, xBase, yBase);
 	}
 
-	public void displayLastPointAttacked(Base b) {
-		int aBase = (int) b.getX() + AppliWindow.getInstance().getTilesSize()/2;
-		int bBase = (int) b.getY() + AppliWindow.getInstance().getTilesSize()/2;
-		System.out.println("a "+aBase+" ; b "+bBase);
-		this.setColor(new Color(200,0,0));
-		AppliWindow.getInstance().getLine().setDisplayed(true);
-		AppliWindow.getInstance().getLine().displayLineLastPoint(aBase, bBase);
-	}
-
-	public void displayLastPointDeplacement(Base b) {
-		int aBase = (int) b.getX() + AppliWindow.getInstance().getTilesSize()/2;
-		int bBase = (int) b.getY() + AppliWindow.getInstance().getTilesSize()/2;
-		System.out.println("a "+aBase+" ; b "+bBase);
+	public void displayLastPoint(int xM, int yM) {
+		System.out.println("LC a "+xM+" ; b "+yM);
 		this.setColor(new Color(0,200,0));
-		AppliWindow.getInstance().getLine().setDisplayed(true);
-		AppliWindow.getInstance().getLine().displayLineLastPoint(aBase, bBase);
+		AppliWindow.getInstance().getLineCursor().setDisplayed(true);
+		AppliWindow.getInstance().getLineCursor().displayLineLastPoint(xM, yM);
 	}
 
-	// -------------------------------------------- MouseListener ---------------
-
+	// ----------------------------------------- MouseMotionListener ----------------------------------
 	@Override
-	public void mouseClicked(MouseEvent event) {
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-
+	public void mouseDragged(MouseEvent arg0) {
 	}
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-
+	public void mouseMoved(MouseEvent arg0) {
 	}
 
 }

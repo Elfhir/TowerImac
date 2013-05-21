@@ -175,6 +175,21 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 		} catch (RealPlayerException e1) {
 			e1.printStackTrace();
 		}
+		
+		try {
+			if(Game.getInstance().getPlayerManager().getRealPlayer().getSelectedBases() != null) {	
+				int x = (int) Game.getInstance().getPlayerManager().getRealPlayer().getSelectedBases().getPosition().getX() + AppliWindow.getInstance().getTilesSize()/2;
+				int y = (int) Game.getInstance().getPlayerManager().getRealPlayer().getSelectedBases().getPosition().getY() + AppliWindow.getInstance().getTilesSize()/2;
+				AppliWindow.getInstance().getLineCursor().displayLine(x, y, event.getX(), event.getY());
+			}
+			else {
+				AppliWindow.getInstance().getLineCursor().displayLine(0,0,0,0);
+			}
+		} catch (RealPlayerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	// ----------------------------------------- KeyListener--------------------------
