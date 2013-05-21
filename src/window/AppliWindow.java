@@ -19,6 +19,7 @@ import javax.vecmath.Vector2f;
 import org.jdom2.JDOMException;
 
 import window.graphic.Line;
+import window.graphic.LineCursor;
 import window.panel.Panel;
 import window.panel.PanelInfoIAPlayers;
 import window.panel.PanelInfoRealPlayer;
@@ -50,6 +51,7 @@ public class AppliWindow extends JFrame {
 
 	private Label image;
 	private Line line;
+	private LineCursor lineCursor;
 	private Label pause;
 	private JButton resumeGame;
 	private JButton exitGame;
@@ -185,6 +187,14 @@ public class AppliWindow extends JFrame {
 
 	public void setLine(Line line) {
 		this.line = line;
+	}
+	
+	public LineCursor getLineCursor() {
+		return lineCursor;
+	}
+
+	public void setLineCursor(LineCursor lineCursor) {
+		this.lineCursor = lineCursor;
 	}
 
 	/**
@@ -467,6 +477,7 @@ public class AppliWindow extends JFrame {
 		buildBases();
 		// Add a line
 		buildLine(0, 0, getWidth(), getHeight());
+		buildLineCursor(0, 0, getWidth(), getHeight());
 		buildInfoPlayers();
 //		buildAgents();
 //		buildTowers();
@@ -711,7 +722,7 @@ public class AppliWindow extends JFrame {
 	}
 	
 	/**
-	 * Build a LineLabel which will ve opaque (?) except the line (?)
+	 * Build a Line which will be opaque except the line
 	 * 
 	 * @param x1 Coordinates of first point of the line
 	 * @param y1 Coordinates of first point of the line
@@ -730,7 +741,28 @@ public class AppliWindow extends JFrame {
 		this.setLine(line1);
 		content.add(line1);
 	}
-
+	
+	/**
+	 * Build a LineCursor which will be opaque except the lineCursor
+	 * It will follow the mouse cursor !
+	 * 
+	 * @param x1 Coordinates of first point of the lineCursor
+	 * @param y1 Coordinates of first point of the lineCursor
+	 * @param x2 Coordinates of second point of the lineCursor
+	 * @param y2 Coordinates of second point of the lineCursor
+	 */
+	public void buildLineCursor(int x1, int y1, int x2, int y2) {
+		LineCursor lineCursor = new LineCursor(x1, y1, x2, y2, new Color(0, 150, 250));
+		
+		content.setLayout(null);
+		lineCursor.setVisible(true);
+		lineCursor.setBounds(x1, y1, Math.abs(x2-x1), Math.abs(y2-y1));
+		lineCursor.setLayout(null);
+		lineCursor.setBorder(null);
+		lineCursor.displayLine(0, 0, 0, 0);
+		this.setLineCursor(lineCursor);
+		content.add(lineCursor);
+	}
 
 
 }
