@@ -3,9 +3,19 @@ package game.tower;
 import game.Situable;
 import game.player.Player;
 
+import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.vecmath.Vector2f;
 
-public abstract class Tower implements Situable {
+import window.AppliWindow;
+
+public abstract class Tower extends JButton implements Situable {
 
 	protected float cadence;
 	protected float radiusAreaOfAction;
@@ -30,7 +40,7 @@ public abstract class Tower implements Situable {
 	public Tower(float x, float y, float cadence, float radiusAreaOfAction, int sellPrice, int buyingPrice, int upgradePrice, int might, Player owner) {
 		this(cadence, radiusAreaOfAction, sellPrice, buyingPrice, upgradePrice, might, owner);
 		this.setPosition(x, y);
-		
+		AppliWindow.getInstance().getContent().add(this);
 	}
 
 
