@@ -638,6 +638,9 @@ public class AppliWindow extends JFrame {
 			b.setVisible(false);
 		}
 		line.setVisible(false);
+		lineCursor.setVisible(false);
+		panelInfoRealPlayer.setVisible(false);
+		panelInfoIAPlayers.setVisible(false);
 	}
 
 	/**
@@ -649,6 +652,9 @@ public class AppliWindow extends JFrame {
 			b.setVisible(true);
 		}
 		line.setVisible(true);
+		lineCursor.setVisible(true);
+		panelInfoRealPlayer.setVisible(true);
+		panelInfoIAPlayers.setVisible(true);
 	}
 	
 	/**
