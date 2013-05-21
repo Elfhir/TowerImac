@@ -22,7 +22,7 @@ import window.graphic.Line;
 import window.panel.Panel;
 import window.panel.PanelInfoIAPlayers;
 import window.panel.PanelInfoRealPlayer;
-import window.panel.PanelTmpBase;
+import window.panel.PanelTmpTower;
 import exceptions.ClickedByRealPlayerException;
 import exceptions.MapFileException;
 import exceptions.RealPlayerException;
@@ -46,7 +46,7 @@ public class AppliWindow extends JFrame {
 	
 	private PanelInfoRealPlayer panelInfoRealPlayer;
 	private PanelInfoIAPlayers panelInfoIAPlayers;
-	private PanelTmpBase panelTmpBase = new PanelTmpBase();
+	private PanelTmpTower panelTmpTower = new PanelTmpTower();
 
 	private Label image;
 	private Line line;
@@ -72,12 +72,12 @@ public class AppliWindow extends JFrame {
 		this.panelInfoIAPlayers = panelInfoIAPlayers;
 	}
 	
-	public PanelTmpBase getPanelTmpBase() {
-		return panelTmpBase;
+	public PanelTmpTower getPanelTmpTower() {
+		return panelTmpTower;
 	}
 
-	public void setPanelTmpBase(PanelTmpBase panelTmpBase) {
-		this.panelTmpBase = panelTmpBase;
+	public void setPanelTmpTower(PanelTmpTower panelTmpTower) {
+		this.panelTmpTower = panelTmpTower;
 	}
 
 	public int getWidth() {
@@ -310,7 +310,7 @@ public class AppliWindow extends JFrame {
 		
 		// and we add the temporarily panel displayed when a base is being created (on mouseMoved).
 		// By default, this panel is not visible.
-		content.add(panelTmpBase);
+		content.add(panelTmpTower);
 		
 	}
 	
