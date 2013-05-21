@@ -54,12 +54,11 @@ public abstract class Player implements Runnable {
 	
 	public boolean getIsDead() {
 		for(Base b : Game.getInstance().getBaseManager().getBases()) {
-			if(b.getPlayer() != null) {
-				if(b.getPlayer().equals(this)) {
-					return false;
-				}
+			if(this.equals(b.getPlayer())) {
+				return false;
 			}
 		}
+		System.out.println("Le joueur : "+this.getName()+" vient d'être écarté de la partie !");
 		return true;
 	}
 
