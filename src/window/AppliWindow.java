@@ -22,6 +22,7 @@ import window.graphic.Line;
 import window.panel.Panel;
 import window.panel.PanelInfoIAPlayers;
 import window.panel.PanelInfoRealPlayer;
+import window.panel.PanelLoseOrWin;
 import window.panel.PanelTmpTower;
 import exceptions.ClickedByRealPlayerException;
 import exceptions.MapFileException;
@@ -46,6 +47,7 @@ public class AppliWindow extends JFrame {
 	
 	private PanelInfoRealPlayer panelInfoRealPlayer;
 	private PanelInfoIAPlayers panelInfoIAPlayers;
+	private PanelLoseOrWin lose;
 	private PanelTmpTower panelTmpTower = new PanelTmpTower();
 
 	private Label image;
@@ -307,6 +309,7 @@ public class AppliWindow extends JFrame {
 		// finally we add the two panels (panelRealPlayer and panelIAPlayers) to the window
 		content.add(panelRealPlayer);
 		content.add(panelIAPlayers);
+		content.add(lose);
 		
 		// and we add the temporarily panel displayed when a base is being created (on mouseMoved).
 		// By default, this panel is not visible.
@@ -352,6 +355,14 @@ public class AppliWindow extends JFrame {
 				panelInfoIAPlayers.updateComponent(indexIAPlayer, p, nbTotalBases, nbBasesPlayer);
 				++indexIAPlayer;
 			}
+		}
+		try {
+			if(Game.getInstance().getPlayerManager().getRealPlayer().getIsDead()) {
+				lose.setVisible(true);
+			}
+		} catch (RealPlayerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
@@ -699,6 +710,7 @@ public class AppliWindow extends JFrame {
 		
 		this.panelInfoIAPlayers =  new PanelInfoIAPlayers();
 		this.panelInfoRealPlayer = new PanelInfoRealPlayer();
+		this.lose = new PanelLoseOrWin();
 		
 		buildWindow(title, resize); // On initialise notre fenetre (We initiate the window)
 		
