@@ -107,7 +107,7 @@ public class Line extends JComponent implements MouseListener{
 		this.setY1(y);
 		this.setX2(xMouse);
 		this.setY2(yMouse);
-		this.repaint();
+		//this.repaint();
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class Line extends JComponent implements MouseListener{
 	public void displayLineLastPoint(int xMouse, int yMouse) {
 		this.setX2(xMouse);
 		this.setY2(yMouse);
-		this.repaint();
+		//this.repaint();
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class Line extends JComponent implements MouseListener{
 	public void displayLineFirstPoint(int x, int y) {
 		this.setX1(x);
 		this.setY1(y);
-		this.repaint();
+		//this.repaint();
 	}
 
 	public void displayFirstPoint(Base b) {

@@ -1,13 +1,23 @@
 package commands.market;
 
-import javax.vecmath.Vector2f;
-
-import commands.Command;
+import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
 
 import game.Game;
 import game.player.Player;
 import game.player.RealPlayer;
 import game.tower.GunTower;
+
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.vecmath.Vector2d;
+import javax.vecmath.Vector2f;
+
+import window.AppliWindow;
+
+import commands.Command;
 
 
 public class BuyTower extends Command {
@@ -25,6 +35,26 @@ public class BuyTower extends Command {
 		if (this.player instanceof RealPlayer) {
 			((RealPlayer)this.player).setBuildingTower(false);
 		}
+		
+		
+		gt.setBorder(BorderFactory.createLineBorder(Color.black));
+		gt.setContentAreaFilled(false);
+		gt.setBounds((int)gt.getPosition().x, (int)gt.getPosition().y, 40, 40);
+		gt.setOpaque(true);
+		try
+		{
+			gt.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
+			gt.setBackground(Color.RED);
+
+		}
+		catch (IOException e1)
+		{
+			
+		}
+		
+		AppliWindow.getInstance().getContent().add(gt);
+		//AppliWindow.getInstance().getContent().validate();
+		
 		System.out.println(Game.getInstance().getTowerManager());
 	}
 	
