@@ -125,7 +125,7 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 			}
 		}
 		// If break in previous for ; the mouse is leaving the Label for Background, i.e enters a Base
-		System.out.println("MOUSE ENTERS THE BASE "+xBase+" "+yBase+" "+aBase+" "+bBase);
+		//System.out.println("MOUSE ENTERS THE BASE "+xBase+" "+yBase+" "+aBase+" "+bBase);
 	}
 
 	@Override

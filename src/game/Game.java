@@ -100,6 +100,9 @@ public class Game {
 	
 	public void initGame(String xmlFileName, String mapFileName) throws MapFileException, JDOMException, IOException {
  		
+		// Nettoie les élèments des listes pour pouvoir recréer après.
+		this.clearGame();
+		
 		// we create the game from the XML file
  		XmlReader.createGame(this, xmlFileName);
  		
@@ -116,6 +119,17 @@ public class Game {
  		System.out.println(Game.getInstance().getMapManager());
 	}
 	
+	/**
+	 * Pour nettoyer les élèments de Jeu
+	 */
+	private void clearGame() {
+		this.playerManager.getPlayers().clear();
+ 		this.baseManager.getBases().clear();
+ 		this.agentManager.getAgents().clear();
+ 		this.towerManager.getTowers().clear();
+ 		this.running = true;
+	}
+
 	public void start() {
 
 		Engine.getInstance().start();

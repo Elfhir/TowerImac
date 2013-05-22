@@ -28,7 +28,7 @@ public class IAPlayer extends Player {
 		Random rand = new Random();
 		rand.setSeed(System.currentTimeMillis());
 		
-		while (!this.getIsDead()) {
+		while ((this.getIsDead() == false) || (Game.getInstance().isRunning() == true)) {
 			
 			int value = (int)(Math.random() * 10);
 			
@@ -46,21 +46,25 @@ public class IAPlayer extends Player {
 				// Si je n'ai pas de base selected :
 				if(this.getSelectedBases() == null) {
 					//On crée la liste de toutes les bases de l'IA au moment présent
-					ArrayList<Base> IAbases = new ArrayList<Base>();
+					ArrayList<Base> iaBases = new ArrayList<Base>();
 					// Seulement ses bases
 					for(Base b : Game.getInstance().getBaseManager().getBases()) {
 						if(b.getPlayer() != null) {
 							if(b.getPlayer().getName() == this.getName()) {
-								IAbases.add(b);
+								iaBases.add(b);
 							}
 						}
 					}
 					// On tire un nombre entier aléatoire entre 0 et le total de ses bases 
-					int nb = rand.nextInt(IAbases.size());
-					Base base1 = IAbases.get(nb);
-					//On ajoute la commande dans la file de commande
-					SelectBase command1 = new SelectBase(this, base1);
-					Engine.getInstance().getCommands().add(command1);
+					if( iaBases.size() <= 0) {
+						break;
+					} else {
+						int nb = rand.nextInt(iaBases.size());
+						Base base1 = iaBases.get(nb);
+						//On ajoute la commande dans la file de commande
+						SelectBase command1 = new SelectBase(this, base1);
+						Engine.getInstance().getCommands().add(command1);
+					}
 				}
 				// Si j'ai déjà une base selected :
 				else {
@@ -72,34 +76,38 @@ public class IAPlayer extends Player {
 				// Je veux faire un déplacement
 				
 				//On crée la liste de toutes les bases de l'IA au moment présent
-				ArrayList<Base> IAbases = new ArrayList<Base>();
+				ArrayList<Base> iaBases = new ArrayList<Base>();
 				// Seulement ses bases
 				for(Base b : Game.getInstance().getBaseManager().getBases()) {
 					if(b.getPlayer() != null) {
 						if(b.getPlayer().getName() == this.getName()) {
-							IAbases.add(b);
+							iaBases.add(b);
 						}
 						// On retire celle déjà sélectionnée (même s'il y a un test plus tard)
 						if(b.getPlayer().getSelectedBases() == b) {
-							IAbases.remove(b);
+							iaBases.remove(b);
 						}
 					}
 				}
 				// On tire un nombre entier aléatoire entre 0 et le total de ses bases 
-				int nb = rand.nextInt(IAbases.size());
-				Base base1 = IAbases.get(nb);
-				
-				// Si j'ai déjà un base sélectionnée, je fais mon déplacement
-				if(this.getSelectedBases() != null) {
-					//On ajoute la commande Move dans la file de commande
-					Move command1 = new Move(this, this.getSelectedBases(), base1);
-					Engine.getInstance().getCommands().add(command1);
-				}
-				// Si je n'ai pas de base sélectionnée, je selectionne ma base
-				else {
-					//On ajoute la commande SelectHisBase dans la file de commande
-					SelectBase command1 = new SelectBase(this, base1);
-					Engine.getInstance().getCommands().add(command1);
+				if( iaBases.size() <= 0) {
+					break;
+				} else {
+					int nb = rand.nextInt(iaBases.size());
+					Base base1 = iaBases.get(nb);
+					
+					// Si j'ai déjà un base sélectionnée, je fais mon déplacement
+					if(this.getSelectedBases() != null) {
+						//On ajoute la commande Move dans la file de commande
+						Move command1 = new Move(this, this.getSelectedBases(), base1);
+						Engine.getInstance().getCommands().add(command1);
+					}
+					// Si je n'ai pas de base sélectionnée, je selectionne ma base
+					else {
+						//On ajoute la commande SelectHisBase dans la file de commande
+						SelectBase command1 = new SelectBase(this, base1);
+						Engine.getInstance().getCommands().add(command1);
+					}
 				}
 				break; // ------------------------------------------------------------------------------------------
 			
@@ -120,58 +128,66 @@ public class IAPlayer extends Player {
 							}
 						}
 					}
-					// On tire un nombre entier aléatoire entre 0 et le total des bases ennemis 
-					nb = rand.nextInt(ennemiBases.size());
-					base1 = ennemiBases.get(nb);
-					//On ajoute la commande Attack dans la file de commande
-					AttackBase command1 = new AttackBase(this, this.getSelectedBases(), base1);
-					if(base1.getPlayer() == null) {
-						System.out.println(this.getName()+" envoie ses troupes sur une base neutre");
+					// On tire un nombre entier aléatoire entre 0 et le total des bases ennemis
+					if( ennemiBases.size() <= 0) {
+						break;
 					} else {
-						System.out.println(this.getName()+" envoie ses troupes sur une base de "+base1.getPlayer().getName());
+						int nb = rand.nextInt(ennemiBases.size());
+						Base base1 = ennemiBases.get(nb);
+						//On ajoute la commande Attack dans la file de commande
+						AttackBase command1 = new AttackBase(this, this.getSelectedBases(), base1);
+						if(base1.getPlayer() == null) {
+							System.out.println(this.getName()+" envoie ses troupes sur une base neutre");
+						} else {
+							System.out.println(this.getName()+" envoie ses troupes sur une base de "+base1.getPlayer().getName());
+						}
+						Engine.getInstance().getCommands().add(command1);
 					}
-					Engine.getInstance().getCommands().add(command1);
 				}
 				// Si je n'ai pas de base selectionnée, je selectionne ma base
 				else {
 					//On crée la liste de toutes les bases de l'IA au moment présent
-					IAbases = new ArrayList<Base>();
+					iaBases = new ArrayList<Base>();
 					// Seulement ses bases
 					for(Base b : Game.getInstance().getBaseManager().getBases()) {
 						if(b.getPlayer() != null) {
 							if(b.getPlayer().getName() == this.getName()) {
-								IAbases.add(b);
+								iaBases.add(b);
 							}
 						}
 					}
-					// On tire un nombre entier aléatoire entre 0 et le total de ses bases 
-					nb = rand.nextInt(IAbases.size());
-					base1 = IAbases.get(nb);
-					//On ajoute la commande dans la file de commande
-					SelectBase command1 = new SelectBase(this, base1);
-					Engine.getInstance().getCommands().add(command1);
+					// On tire un nombre entier aléatoire entre 0 et le total de ses bases
+					if( iaBases.size() <= 0) {
+						break;
+					} else {
+						int nb = rand.nextInt(iaBases.size());
+						Base base1 = iaBases.get(nb);
+						//On ajoute la commande dans la file de commande
+						SelectBase command1 = new SelectBase(this, base1);
+						Engine.getInstance().getCommands().add(command1);
+					}
 				}
 				break; // ------------------------------------------------------------------------------------------
 				
 			// Old case with ClickedByIAPlayer
 			/*case 4: // 1 Clic virtuel
 				//On crée la liste de toutes les bases de l'IA au moment présent
-				ArrayList<Base> IAbases = new ArrayList<Base>();
+				ArrayList<Base> iaBases = new ArrayList<Base>();
 				// Seulement ses bases
 				for(Base b : Game.getInstance().getBaseManager().getBases()) {
 					if(b.getPlayer() != null) {
 						if(b.getPlayer().getName() == this.getName()) {
-							IAbases.add(b);
+							iaBases.add(b);
 						}
 						// On retire celle déjà sélectionnée
 						if(b.getPlayer().getSelectedBases() == b) {
-							IAbases.remove(b);
+							iaBases.remove(b);
 						}
 					}
 				}
 				// On tire un nombre entier aléatoire entre 0 et le total de ses bases 
-				int nb = rand.nextInt(IAbases.size());
-				Base base1 = IAbases.get(nb);
+				int nb = rand.nextInt(iaBases.size());
+				Base base1 = iaBases.get(nb);
 				//On ajoute la commande dans la file de commande
 				ClickedByIAPlayer command1 = new ClickedByIAPlayer(this, base1);
 				Engine.getInstance().getCommands().add(command1);
@@ -185,8 +201,8 @@ public class IAPlayer extends Player {
 			int maxTimeDecision = 1000;
 			int minTimeDecision = 1000;
 			if(this.getDifficulty() == 1) {
-				maxTimeDecision = 4000;
-				minTimeDecision = 1700;
+				maxTimeDecision = 3000;
+				minTimeDecision = 1200;
 			}
 			else if(this.getDifficulty() == 2) {
 				maxTimeDecision = 3000;

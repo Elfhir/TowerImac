@@ -10,6 +10,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.swing.SwingConstants;
 
+import window.AppliWindow;
+import application.Launcher;
+
 import commands.Command;
 
 /**
@@ -82,14 +85,13 @@ public class Engine implements Runnable {
 			try {
 				if(Game.getInstance().getPlayerManager().getRealPlayer().getIsDead()) {
 					System.out.println("La partie est terminée, vous êtes éliminé !");
-					Game.getInstance().setRunning(false);
 					// Les autres joueurs ne continuent pas la partie tout seul.
 					for(Player p : Game.getInstance().getPlayerManager().getPlayers()) {
 						p.setIsDead(true);
 					}
+					Game.getInstance().setRunning(false);
 				}
 			} catch (RealPlayerException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
@@ -104,7 +106,6 @@ public class Engine implements Runnable {
 				e.printStackTrace();
 			}
 		}
-		
 	}
 	
 	
@@ -134,7 +135,6 @@ public class Engine implements Runnable {
 	
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 	}
 

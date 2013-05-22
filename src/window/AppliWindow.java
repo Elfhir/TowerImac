@@ -18,6 +18,8 @@ import javax.vecmath.Vector2f;
 
 import org.jdom2.JDOMException;
 
+import application.Launcher;
+
 import window.graphic.Line;
 import window.graphic.LineCursor;
 import window.panel.Panel;
@@ -366,14 +368,16 @@ public class AppliWindow extends JFrame {
 				++indexIAPlayer;
 			}
 		}
+		
 		try {
 			if(Game.getInstance().getPlayerManager().getRealPlayer().getIsDead()) {
 				lose.setVisible(true);
+				
 			}
 		} catch (RealPlayerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 	
 	/**
@@ -495,7 +499,8 @@ public class AppliWindow extends JFrame {
 //		//...
 		
 		game.start();
-
+		
+		
 
 	}
 
