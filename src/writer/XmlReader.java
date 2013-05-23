@@ -59,8 +59,8 @@ public class XmlReader {
 		createTowers(game, towersElement);
 		
 		// Creation of the agents from the Element "agents"
-		Element agentsElement = root.getChild("agents");
-		createAgents(game, agentsElement);
+		/*Element agentsElement = root.getChild("agents");
+		createAgents(game, agentsElement);*/
 
 	}
 	
@@ -167,7 +167,7 @@ public class XmlReader {
 	 * @see #createTowers(Game, Element)
 	 */
 	public static void createAgents(Game game, Element agentsElement) {
-		List<Element> agents = agentsElement.getChildren("agent");
+		/*List<Element> agents = agentsElement.getChildren("agent");
 		Iterator<Element> i = agents.iterator();
 		while (i.hasNext()) {
 			Element agentElement = (Element)i.next();
@@ -178,7 +178,7 @@ public class XmlReader {
 			
 			//At commit 9b0f500 It was : game.getAgentManager().addAgent(agent); I choose to cast, but ?
 			game.getAgentManager().addAgent((GroupAgent) agent);
-		}
+		}*/
 	}
 	
 	

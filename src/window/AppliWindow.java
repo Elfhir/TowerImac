@@ -1,6 +1,7 @@
 package window;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -42,7 +43,7 @@ public class AppliWindow extends JFrame {
 	private int width;
 	private int height;
 	
-	private Panel content;
+	private static Panel content;
 	
 	
 	private PanelInfoRealPlayer panelInfoRealPlayer;
@@ -98,15 +99,15 @@ public class AppliWindow extends JFrame {
 		this.height = height;
 	}
 
-	public Panel getContent() {
-		return this.content;
+	public static Panel getContent() {
+		return content;
 	}
 
-	public void setContent(Panel content) {
-		this.content = content;
+	public void setContent(Panel newContent) {
+		content = newContent;
 	}
 
-	public int getTilesSize() {
+	public static int getTilesSize() {
 		return 50;
 	}
 
@@ -266,23 +267,17 @@ public class AppliWindow extends JFrame {
 			content.add(base);
 
 		}
+		
 	}
 	
-	private void buildGroupAgent() {
+	public static void addGroupAgent(Base source, Base destination) {
+		
 		Game game = Game.getInstance();
-
-		for(GroupAgent groupAgent: game.getAgentManager().getAgents()){
-			JLabel groupe = new JLabel();
-			groupe.setBounds((int)groupAgent.getPosition().x, (int)groupAgent.getPosition().y, getTilesSize(), getTilesSize());
-			groupe.setOpaque(true);
-			groupe.setBackground(groupAgent.getPlayer().getColor());
-			groupe.setSize(groupAgent.GroupSize(),groupAgent.GroupSize());
-			try {
-				groupe.setIcon(new ImageIcon(ImageIO.read(new File("design/groupe.jpeg"))));
-			} catch (IOException e2) {
-				System.err.println("Error ! Loading GroupAgent image");
-			}
-		}
+		
+		int nbAgentTosend = source.getNbAgents()/2;
+		GroupAgent groupAgent = new GroupAgent(nbAgentTosend, source, destination);
+		content.add(groupAgent);
+		game.getAgentManager().addAgent(groupAgent);
 	}
 
 	/**
@@ -500,7 +495,7 @@ public class AppliWindow extends JFrame {
 	 */
 	private Panel buildContentPane(int width, int height) throws MapFileException, JDOMException, IOException, RealPlayerException {
 
-		this.content = new Panel();
+		content = new Panel();
 
 		content.setLayout(null);
 		content.setBackground(Color.GRAY);
@@ -523,7 +518,7 @@ public class AppliWindow extends JFrame {
 		}
 
 		this.getImage().setBounds(0, 0, getWidth(), getHeight());
-		this.content.add(this.image);
+		content.add(this.image);
 
 	}
 
@@ -655,7 +650,7 @@ public class AppliWindow extends JFrame {
 	 * Give to the content the Focus (requestFocusInWindow())
 	 */
 	public void giveFocusToPanel() {
-		this.content.requestFocusInWindow();
+		content.requestFocusInWindow();
 	}
 	
 	/* 

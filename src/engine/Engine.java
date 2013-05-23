@@ -1,12 +1,17 @@
 package engine;
 
 import game.Game;
+import game.agent.Agent;
+import game.agent.GroupAgent;
 import game.base.Base;
 
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.swing.SwingConstants;
+
+import window.AppliWindow;
 
 import commands.Command;
 
@@ -37,6 +42,7 @@ public class Engine implements Runnable {
 	@Override
 	public void run() {
 		while (Game.getInstance().isRunning()) {
+			
 			// We get the current time at the beginning of the main loop
 			long currentTime1 = Calendar.getInstance().getTimeInMillis() - initialTime;
 			
@@ -77,6 +83,12 @@ public class Engine implements Runnable {
 				}
 			}
 			
+			// Moove and handle units
+			for(Iterator<GroupAgent> it = Game.getInstance().getAgentManager().getAgents().iterator(); it.hasNext();) {
+				GroupAgent groupAgent = it.next();
+				groupAgent.moveOneStep();
+			}
+			
 			// Le Thread se relance toutes les 30 fois par seconde.
 			long waiting = 1000/30 - ((Calendar.getInstance().getTimeInMillis()-initialTime) - currentTime1);
 			if(waiting < 0) {
@@ -115,11 +127,6 @@ public class Engine implements Runnable {
 	{
 		return EngineHolder.instance;
 	}
-	
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

@@ -1,22 +1,21 @@
 package game.base;
 
-import javax.swing.JButton;
-import javax.vecmath.Vector2f;
-
-import time.TimerGame;
-import time.Timerable;
-import window.AppliWindow;
-
-import commands.attack.AttackBase;
-import commands.selection.Move;
-import commands.selection.SelectBase;
-
 import engine.Engine;
 import exceptions.ClickedByRealPlayerException;
 import exceptions.RealPlayerException;
 import game.Game;
 import game.Situable;
 import game.player.Player;
+
+import javax.swing.JButton;
+import javax.vecmath.Vector2f;
+
+import time.Timerable;
+import window.AppliWindow;
+
+import commands.attack.AttackBase;
+import commands.selection.Move;
+import commands.selection.SelectBase;
 
 public class Base extends JButton implements Situable, Timerable{
 	
@@ -184,6 +183,7 @@ public class Base extends JButton implements Situable, Timerable{
 			
 			// if the players are different : it's an attack !
 			if(!selectedBases.getPlayer().equals(this.getPlayer())) {
+				
 				AttackBase attackCommand = new AttackBase(realPlayer, selectedBases, this);
 				Engine.getInstance().getCommands().add(attackCommand);
 				
@@ -303,13 +303,4 @@ public class Base extends JButton implements Situable, Timerable{
 		this.nbAgents = nbAgents;
 		this.momentOfTheLastGeneration = 0.0f;
 	}
-	
-	@SuppressWarnings("unused")
-	public static void main(String[] args) {
-		
-	}
-
-
-
-
 }

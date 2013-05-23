@@ -126,7 +126,7 @@ public class IAPlayer extends Player {
 					//On ajoute la commande Attack dans la file de commande
 					AttackBase command1 = new AttackBase(this, this.getSelectedBases(), base1);
 					if(base1.getPlayer() == null) {
-						System.out.println(this.getName()+" envoie ses troupes sur une base neutre");
+						//System.out.println(this.getName()+" envoie ses troupes sur une base neutre");
 					} else {
 						System.out.println(this.getName()+" envoie ses troupes sur une base de "+base1.getPlayer().getName());
 					}
