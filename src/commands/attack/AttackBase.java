@@ -21,7 +21,9 @@ public class AttackBase extends Command{
 
 	@Override
 	public void doCommand() {
-		
+		if(!(this.player.equals(this.baseOrigin.getPlayer()))) {
+			return;
+		}
 		baseOrigin.setBackground(this.player.getColor().brighter());
 		int nbSentAgents = baseOrigin.getNbAgents() / 2;
 		

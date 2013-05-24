@@ -18,15 +18,14 @@ import javax.vecmath.Vector2f;
 
 import org.jdom2.JDOMException;
 
-import application.Launcher;
-
 import window.graphic.Line;
 import window.graphic.LineCursor;
 import window.panel.Panel;
 import window.panel.PanelInfoIAPlayers;
 import window.panel.PanelInfoRealPlayer;
-import window.panel.PanelLoseOrWin;
+import window.panel.PanelLose;
 import window.panel.PanelTmpTower;
+import window.panel.PanelWin;
 import exceptions.ClickedByRealPlayerException;
 import exceptions.MapFileException;
 import exceptions.RealPlayerException;
@@ -50,7 +49,8 @@ public class AppliWindow extends JFrame {
 	
 	private PanelInfoRealPlayer panelInfoRealPlayer;
 	private PanelInfoIAPlayers panelInfoIAPlayers;
-	private PanelLoseOrWin lose;
+	private PanelLose MenuLose;
+	private PanelWin MenuWin;
 	private PanelTmpTower panelTmpTower = new PanelTmpTower();
 
 	private Label image;
@@ -216,7 +216,7 @@ public class AppliWindow extends JFrame {
 		setSize(this.width, this.height);
 		setLocationRelativeTo(null); // null => The window is centered on the screen
 		setResizable(resize); // Resizable window
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // The application musts close when we click on the cross
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // The application musts cMenuLoseOrWin when we click on the cross
 		setContentPane(buildContentPane(width, height));
 		this.addKeyListenerToPanel(this.getContent());
 
@@ -321,7 +321,8 @@ public class AppliWindow extends JFrame {
 		// finally we add the two panels (panelRealPlayer and panelIAPlayers) to the window
 		content.add(panelRealPlayer);
 		content.add(panelIAPlayers);
-		content.add(lose);
+		content.add(MenuLose);
+		content.add(MenuWin);
 		
 		// and we add the temporarily panel displayed when a base is being created (on mouseMoved).
 		// By default, this panel is not visible.
@@ -368,11 +369,23 @@ public class AppliWindow extends JFrame {
 				++indexIAPlayer;
 			}
 		}
+		int nbPlayerDead = 0;
+		for(Player p : Game.getInstance().getPlayerManager().getPlayers()) {
+			if(p instanceof RealPlayer) {
+				
+			}
+			else if(p.getIsDead() == true) {
+				nbPlayerDead++;
+			}
+		}
+		if(nbPlayerDead == (Game.getInstance().getPlayerManager().getPlayers().size()-1)) {
+			MenuWin.setVisible(true);
+		}
+		nbPlayerDead = 0;
 		
 		try {
 			if(Game.getInstance().getPlayerManager().getRealPlayer().getIsDead()) {
-				lose.setVisible(true);
-				
+				MenuLose.setVisible(true);
 			}
 		} catch (RealPlayerException e) {
 			e.printStackTrace();
@@ -611,7 +624,7 @@ public class AppliWindow extends JFrame {
 			}
 		});
 
-		// The application musts close when we click
+		// The application musts cMenuLoseOrWin when we click
 		exitGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {			
 				System.exit(0); 
@@ -732,7 +745,8 @@ public class AppliWindow extends JFrame {
 		
 		this.panelInfoIAPlayers =  new PanelInfoIAPlayers();
 		this.panelInfoRealPlayer = new PanelInfoRealPlayer();
-		this.lose = new PanelLoseOrWin();
+		this.MenuLose = new PanelLose();
+		this.MenuWin = new PanelWin();
 		
 		buildWindow(title, resize); // On initialise notre fenetre (We initiate the window)
 		
