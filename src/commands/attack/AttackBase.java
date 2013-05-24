@@ -1,5 +1,6 @@
 package commands.attack;
 
+import window.AppliWindow;
 import commands.Command;
 
 import game.Game;
@@ -25,26 +26,28 @@ public class AttackBase extends Command{
 			return;
 		}
 		baseOrigin.setBackground(this.player.getColor().brighter());
-		int nbSentAgents = baseOrigin.getNbAgents() / 2;
+		
+		AppliWindow.addGroupAgent(baseOrigin, baseDestination);
+		int nbAgentToSend = baseOrigin.getNbAgents()/2;
 		
 		System.out.println("case : Attack !!");
 		//managed by Engine (FIFO of commands) 
 		
 		// The number of agents in the Base attacked decrease !
 		int lastSurvivor = baseDestination.getNbAgents();
-		baseDestination.deleteAgents(nbSentAgents);
+		baseDestination.deleteAgents(nbAgentToSend);
 		
 		// Enemy Base is taken !! Add the Agents not dead to the taken Base too !
 		if(baseDestination.getNbAgents() == 0) {
 			for(Base b : Game.getInstance().getBaseManager().getBases()) {
 				if(b.equals(baseDestination)) {
-					b.changePlayer(baseOrigin.getPlayer(), nbSentAgents - lastSurvivor);
+					b.changePlayer(baseOrigin.getPlayer(), nbAgentToSend - lastSurvivor);
 				}
 			}
 		}
 		
 		// The number of Agents in our selected Base decrease !
-		baseOrigin.deleteAgents(nbSentAgents);
+		baseOrigin.deleteAgents(nbAgentToSend);
 		this.player.setSelectedBases(null);
 		//baseCurrent.setBackground(this.IACurrent.getColor().brighter());
 		

@@ -2,6 +2,8 @@ package commands.selection;
 
 import game.base.Base;
 import game.player.Player;
+import window.AppliWindow;
+
 import commands.Command;
 
 public class Move extends Command {
@@ -21,11 +23,14 @@ public class Move extends Command {
 	public void doCommand() {
 		
 		baseOrigin.setBackground(this.player.getColor().brighter());
+		
 		// Le nombre d'agent prêt à s'envoyer
 		int nbSentAgents = baseOrigin.getNbAgents() / 2;
 		
 		System.out.println("3rd case : Move !!");
 
+		
+		
 		if(!baseOrigin.equals(baseDestination)) {
 			//The number of Agent in the base where we move increase !
 			baseDestination.addAgents(nbSentAgents);

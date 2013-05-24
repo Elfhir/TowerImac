@@ -3,20 +3,19 @@ package game.agent;
 import game.Situable;
 import game.player.Player;
 
+import javax.swing.JPanel;
 import javax.vecmath.Vector2f;
 
-
-import time.TimerGame;
 import time.Timerable;
 
-public class Agent implements Situable, Timerable{
+public abstract class Agent extends JPanel implements Situable, Timerable{
 	
 	private int PV;
-	private int speed;
+	protected int speed;
 	private int strength;
 	private int stamina;
 	private boolean moving;
-	private Vector2f position;
+	protected Vector2f position;
 	private Player player;
 	
 	public int getPV() {
@@ -67,6 +66,8 @@ public class Agent implements Situable, Timerable{
 	public void setPosition(float x, float y) {
 		position.x = x;
 		position.y = y;
+		this.setLocation((int)x, (int)y);
+		this.repaint();
 	}
 	
 	public int getStrength() {
@@ -228,7 +229,7 @@ public class Agent implements Situable, Timerable{
 	public Agent() {
 		this(false, 0, 0, 0, 0, new Vector2f(0,0), null);
 	}
-	
+	/*
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
@@ -240,10 +241,6 @@ public class Agent implements Situable, Timerable{
 		
 		TimerGame tg = new TimerGame(1000, 0, 0, 0, a1, dest);
 		
-		
-		
-		
-	}
-
+	}*/
 
 }

@@ -128,6 +128,7 @@ public class IAPlayer extends Player {
 							}
 						}
 					}
+
 					// On tire un nombre entier aléatoire entre 0 et le total des bases ennemis
 					if( ennemiBases.size() <= 0) {
 						break;
