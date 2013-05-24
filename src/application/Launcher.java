@@ -76,7 +76,7 @@ public class Launcher {
 							}
 						});
 						//We hide the menu starter
-						startMenu.setVisible(false);
+						startMenu.dispose();
 					}
 				});
 				

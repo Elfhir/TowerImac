@@ -21,6 +21,7 @@ public abstract class Player implements Runnable {
 	private String name;
 	private Base selectedBases;
 	private Color teamColor;
+	private boolean isDead;
 	
 	//----------------------------------------------accessors----------------
 	
@@ -54,14 +55,19 @@ public abstract class Player implements Runnable {
 	
 	public boolean getIsDead() {
 		for(Base b : Game.getInstance().getBaseManager().getBases()) {
-			if(b.getPlayer() != null) {
-				if(b.getPlayer().equals(this)) {
-					return false;
-				}
+			if(this.equals(b.getPlayer())) {
+				return false;
 			}
 		}
-		return true;
+		System.out.println("Le joueur : "+this.getName()+" vient d'être écarté de la partie !");
+		this.isDead = true;
+		return this.isDead;
 	}
+	
+	public void setIsDead(boolean Dead) {
+		this.isDead = Dead;
+	}
+
 
 	public void setSelectedBases(Base selectedBases) {
 		this.selectedBases = selectedBases;
@@ -151,6 +157,7 @@ public abstract class Player implements Runnable {
 		this.name = name;
 		this.bank = bank;
 		this.teamColor = color;
+		this.isDead = false;
 	}
 	
 	public Player(String name, Color color) {

@@ -104,7 +104,7 @@ public class LineCursor extends JComponent implements MouseMotionListener{
 		this.setY1(y);
 		this.setX2(xMouse);
 		this.setY2(yMouse);
-		this.repaint();
+		//this.repaint();
 	}
 
 	/**
@@ -115,7 +115,8 @@ public class LineCursor extends JComponent implements MouseMotionListener{
 	public void displayLineLastPoint(int xMouse, int yMouse) {
 		this.setX2(xMouse);
 		this.setY2(yMouse);
-		this.repaint();
+		//this.repaint();
+
 	}
 
 	/**
@@ -126,12 +127,12 @@ public class LineCursor extends JComponent implements MouseMotionListener{
 	public void displayLineFirstPoint(int x, int y) {
 		this.setX1(x);
 		this.setY1(y);
-		this.repaint();
+		//this.repaint();
 	}
 
 	public void displayFirstPoint(Base b) {
-		int xBase = (int) b.getX();
-		int yBase = (int) b.getY();
+		int xBase = (int) b.getX() + AppliWindow.getInstance().getTilesSize()/2;
+		int yBase = (int) b.getY() + AppliWindow.getInstance().getTilesSize()/2;
 		System.out.println("LC x "+xBase+" ; y "+yBase);
 		AppliWindow.getInstance().getLineCursor().setDisplayed(true);
 		AppliWindow.getInstance().getLineCursor().displayLine(xBase, yBase, xBase, yBase);

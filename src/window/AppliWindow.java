@@ -19,11 +19,14 @@ import javax.vecmath.Vector2f;
 
 import org.jdom2.JDOMException;
 
+import application.Launcher;
+
 import window.graphic.Line;
 import window.graphic.LineCursor;
 import window.panel.Panel;
 import window.panel.PanelInfoIAPlayers;
 import window.panel.PanelInfoRealPlayer;
+import window.panel.PanelLoseOrWin;
 import window.panel.PanelTmpTower;
 import exceptions.ClickedByRealPlayerException;
 import exceptions.MapFileException;
@@ -48,6 +51,7 @@ public class AppliWindow extends JFrame {
 	
 	private PanelInfoRealPlayer panelInfoRealPlayer;
 	private PanelInfoIAPlayers panelInfoIAPlayers;
+	private PanelLoseOrWin lose;
 	private PanelTmpTower panelTmpTower = new PanelTmpTower();
 
 	private Label image;
@@ -312,6 +316,7 @@ public class AppliWindow extends JFrame {
 		// finally we add the two panels (panelRealPlayer and panelIAPlayers) to the window
 		content.add(panelRealPlayer);
 		content.add(panelIAPlayers);
+		content.add(lose);
 		
 		// and we add the temporarily panel displayed when a base is being created (on mouseMoved).
 		// By default, this panel is not visible.
@@ -358,6 +363,16 @@ public class AppliWindow extends JFrame {
 				++indexIAPlayer;
 			}
 		}
+		
+		try {
+			if(Game.getInstance().getPlayerManager().getRealPlayer().getIsDead()) {
+				lose.setVisible(true);
+				
+			}
+		} catch (RealPlayerException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	/**
@@ -479,7 +494,8 @@ public class AppliWindow extends JFrame {
 //		//...
 		
 		game.start();
-
+		
+		
 
 	}
 
@@ -633,6 +649,9 @@ public class AppliWindow extends JFrame {
 			b.setVisible(false);
 		}
 		line.setVisible(false);
+		lineCursor.setVisible(false);
+		panelInfoRealPlayer.setVisible(false);
+		panelInfoIAPlayers.setVisible(false);
 	}
 
 	/**
@@ -644,6 +663,9 @@ public class AppliWindow extends JFrame {
 			b.setVisible(true);
 		}
 		line.setVisible(true);
+		lineCursor.setVisible(true);
+		panelInfoRealPlayer.setVisible(true);
+		panelInfoIAPlayers.setVisible(true);
 	}
 	
 	/**
@@ -705,6 +727,7 @@ public class AppliWindow extends JFrame {
 		
 		this.panelInfoIAPlayers =  new PanelInfoIAPlayers();
 		this.panelInfoRealPlayer = new PanelInfoRealPlayer();
+		this.lose = new PanelLoseOrWin();
 		
 		buildWindow(title, resize); // On initialise notre fenetre (We initiate the window)
 		
