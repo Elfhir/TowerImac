@@ -661,6 +661,9 @@ public class AppliWindow extends JFrame {
 		for (Base b : Game.getInstance().getBaseManager().getBases()) {
 			b.setVisible(false);
 		}
+		for(GroupAgent a : Game.getInstance().getAgentManager().getAgents()){
+			a.setVisible(false);
+		}
 		line.setVisible(false);
 		lineCursor.setVisible(false);
 		panelInfoRealPlayer.setVisible(false);
@@ -674,6 +677,9 @@ public class AppliWindow extends JFrame {
 		image.setVisible(true);
 		for (Base b : Game.getInstance().getBaseManager().getBases()) {
 			b.setVisible(true);
+		}
+		for(GroupAgent a : Game.getInstance().getAgentManager().getAgents()){
+			a.setVisible(true);
 		}
 		line.setVisible(true);
 		lineCursor.setVisible(true);
