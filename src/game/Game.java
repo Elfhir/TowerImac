@@ -123,7 +123,7 @@ public class Game {
 	/**
 	 * Pour nettoyer les élèments de Jeu
 	 */
-	private void clearGame() {
+	public void clearGame() {
 		this.playerManager.getPlayers().clear();
  		this.baseManager.getBases().clear();
  		this.agentManager.getAgents().clear();

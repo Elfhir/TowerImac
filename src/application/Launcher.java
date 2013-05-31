@@ -88,8 +88,45 @@ public class Launcher {
 				content.add(quitGame);
 				
 				quitGame.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {			
+					public void actionPerformed(ActionEvent e) {
 						System.exit(0); // The application musts close when we click
+					}
+				});
+				
+				JButton options = new JButton("1 adv");
+				options.setBounds(200, 260, 80, 15);
+				options.setBackground(new Color(108,116,212));
+				options.setBorderPainted(false);
+				content.add(options);
+				
+				options.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						Options option1 = new Options(1);
+					}
+				});
+				JButton options2 = new JButton("2 adv");
+				options2.setBounds(281, 260, 80, 15);
+				options2.setBackground(new Color(108,116,212));
+				options2.setBorderPainted(false);
+				content.add(options2);
+				
+				options2.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						Options option2 = new Options(2);
+					}
+				});
+				JButton options3 = new JButton("3 adv");
+				options3.setBounds(200, 276, 80, 15);
+				options3.setBackground(new Color(108,116,212));
+				options3.setBorderPainted(false);
+				content.add(options3);
+				
+				options3.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						Options option3 = new Options(3);
 					}
 				});
 			}

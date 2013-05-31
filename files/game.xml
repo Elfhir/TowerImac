@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game>
   <players>
-    <player name="Michel" money="50" type="RealPlayer" color="-65281" />
-    <player name="Jean-Luc" money="50" type="IAPlayer" color="-1677216" />
-    <player name="Patrick" money="50" type="IAPlayer" color="-16711936" />
-    <player name="Germaine" money="50" type="IAPlayer" color="-14336" />
+    <player name="Michel" money="50.0" type="RealPlayer" color="-65281" />
+    <player name="Jean-Luc" money="50.0" type="IAPlayer" color="-16776961" />
   </players>
   <bases>
-    <base id="0" x="50.0" y="100.0" player="Michel" nbAgents="200" might="6" />
-    <base id="1" x="500.0" y="450.0" player="Jean-Luc" nbAgents="5" might="3" />
-    <base id="2" x="30.0" y="380.0" player="Jean-Luc" nbAgents="2" might="3" />
-    <base id="3" x="80.0" y="280.0" nbAgents="15" might="5" />
-    <base id="4" x="430.0" y="180.0" player="Germaine" nbAgents="5" might="3" />
-    <base id="5" x="750.0" y="185.0" player="Germaine" nbAgents="5" might="7" />
-    <base id="6" x="550.0" y="185.0" player="Patrick" nbAgents="5" might="3" />
-    <base id="7" x="550.0" y="285.0" player="Patrick" nbAgents="6" might="4" />
-    <base id="8" x="550.0" y="385.0" player="Patrick" nbAgents="7" might="2" />
+    <base id="0" x="50.0" y="100.0" nbAgents="10" might="2" />
+    <base id="1" x="500.0" y="450.0" nbAgents="5" might="3" />
+    <base player="Michel" id="2" x="30.0" y="380.0" nbAgents="10" might="2" />
+    <base id="3" x="80.0" y="280.0" nbAgents="5" might="3" />
+    <base id="4" x="430.0" y="180.0" nbAgents="10" might="2" />
+    <base id="5" x="750.0" y="185.0" nbAgents="5" might="3" />
+    <base player="Jean-Luc" id="6" x="600.0" y="285.0" nbAgents="10" might="2" />
+    <base id="7" x="350.0" y="385.0" nbAgents="5" might="3" />
+    <base id="8" x="550.0" y="385.0" nbAgents="10" might="2" />
   </bases>
   <towers />
   <agents />

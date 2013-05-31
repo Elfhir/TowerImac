@@ -1,12 +1,10 @@
 package window;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -270,7 +268,6 @@ public class AppliWindow extends JFrame {
 			});
 
 			content.add(base);
-
 		}
 		
 	}
@@ -381,109 +378,13 @@ public class AppliWindow extends JFrame {
 		
 		try {
 			if(Game.getInstance().getPlayerManager().getRealPlayer().getIsDead()) {
+				content.add(MenuLose);
 				MenuLose.setVisible(true);
 			}
 		} catch (RealPlayerException e) {
 			e.printStackTrace();
 		}
 		
-	}
-	
-	/**
-	 * Add JPanel Tiles where there is nothing else.
-	 * In a bulk, it adds square, the same as Base, but with nothing to do on it.
-	 * Just as a map, a game map.
-	 * 
-	 * Still need a more random disposition of Tiles.
-	 * @deprecated The map is no more built with Tiles
-	 */
-	@Deprecated
-	public void buildTiles() {
-
-		Game game = Game.getInstance();
-
-		// How many tiles
-		int tilesToBuild = this.getNumOfTile() - game.getBaseManager().getBases().size();
-
-		// Tab of the Base coords where to not draw tiles (2D integers)
-		int tab[][] = new int[game.getBaseManager().getBases().size()][game.getBaseManager().getBases().size()];
-
-		// Initialize the tab with the good coordinates
-		for(int k = 0; k<tab.length; ++k) {
-			tab[k][0] = (int) game.getBaseManager().getBases().get(k).getPosition().x;
-			tab[k][1] = (int) game.getBaseManager().getBases().get(k).getPosition().y;
-		}
-
-		// ArrayList of Vector2f where to build.
-		ArrayList<Vector2f> tabOfWhereToBuild = new ArrayList<Vector2f>(tilesToBuild);
-
-		// Creating all the ArrayList of Vector2f for Tiles, even the bad one
-		for(int i = 0; i<getNumOfTileWidth(); ++i) {
-			for(int j = 0; j<getNumOfTileHeight(); ++j) {	
-				tabOfWhereToBuild.add(new Vector2f(i, j));
-			}	
-		}
-
-		// DEBUG : tous les vecteurs dans l'ordre.
-		for(int i = 0; i<this.getNumOfTile(); ++i) {
-			System.out.println(tabOfWhereToBuild.get(i));
-		}
-
-		// Remove the bad one and add what we wanted. That's the better way I find after 4h of trying it, deal with it =D
-		for(int k=0; k<tab.length; ++k) {
-			tabOfWhereToBuild.remove( ( tab[k][1] +  tab[k][0]*(getNumOfTileHeight()) ) -k );
-			tabOfWhereToBuild.add(new Vector2f(tab[k][0], tab[k][1]));
-			System.out.println("Current index of the Tiles : "+ ( tab[k][1] +  tab[k][0]*(getNumOfTileHeight()) -k ) );
-			System.out.println("Tiles'coordinates : ("+tab[k][0]+"; "+tab[k][1]+") ");
-		}	
-
-		for(int k = 0; k < tilesToBuild; ++k) {
-			JButton pan = new JButton();
-			pan.setBorder(BorderFactory.createLineBorder(Color.black));
-			pan.setContentAreaFilled(false);
-			pan.setBounds(0, 0, 1, 1);
-			try
-			{	
-				//Stupid random =D
-				if(k==5 || k==6 || k==7 || k==8 || k==9 )
-					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
-				else if(k==18 || k==19 || k==20 || k==30)
-					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
-				else if(k==180 || k==181 || k==182 || k==183 || k==184 )
-					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
-				else if(k==170 || k==171 || k==172 || k==160 )
-					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
-				else if(k==46 || k==58 || k==70 || k==82 || k==94 || k==106 )
-					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
-				else if(k==59 || k==71 || k==72 || k==83 || k==84 || k==85 || k==95 )
-					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
-				else if(k==69 || k==83 || k==93 || k==105 || k==117 || k==129 )
-					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
-				else if(k==79 ||k==80 ||k==81 ||k==92||k==104 ||k==116|| k==105 ||k==91 ||k==90)
-					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock2-tile.png"))));
-
-
-				else if(k==39 || k==51 || k == 120|| k == 125)
-					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/pit1-tile.png"))));
-
-				else if(k==45 || k==57 || k==69 || k==81 || k==93 || k==105 )
-					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/gravel-tile.png"))));
-				else if(k==20 || k==21 || k==17|| k==16 || k==4|| k==169 || k==179 || k==173 || k==155 || k==156 || k==161)
-					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/gravel-tile.png"))));
-
-				else
-					pan.setIcon(new ImageIcon(ImageIO.read(new File("design/rock1-tile.png"))));
-			}
-			catch (IOException e1)
-			{
-				System.err.println("Failed to load Tiles image!");
-			}
-			/*
-			c.gridx = (int)tabOfWhereToBuild.get(k).getX();
-			c.gridy = (int)tabOfWhereToBuild.get(k).getY();
-			 */
-		}
-
 	}
 
 
