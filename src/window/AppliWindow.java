@@ -35,6 +35,7 @@ import game.agent.GroupAgent;
 import game.base.Base;
 import game.player.Player;
 import game.player.RealPlayer;
+import game.tower.Tower;
 /**
  * Singleton
  *
@@ -664,6 +665,9 @@ public class AppliWindow extends JFrame {
 		for(GroupAgent a : Game.getInstance().getAgentManager().getAgents()){
 			a.setVisible(false);
 		}
+		for(Tower t : Game.getInstance().getTowerManager().getTowers()) {
+			t.setVisible(false);
+		}
 		line.setVisible(false);
 		lineCursor.setVisible(false);
 		panelInfoRealPlayer.setVisible(false);
@@ -680,6 +684,9 @@ public class AppliWindow extends JFrame {
 		}
 		for(GroupAgent a : Game.getInstance().getAgentManager().getAgents()){
 			a.setVisible(true);
+		}
+		for(Tower t : Game.getInstance().getTowerManager().getTowers()) {
+			t.setVisible(true);
 		}
 		line.setVisible(true);
 		lineCursor.setVisible(true);
