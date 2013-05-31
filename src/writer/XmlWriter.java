@@ -1,7 +1,6 @@
 package writer;
 
 import game.Game;
-import game.agent.Agent;
 import game.base.Base;
 import game.player.IAPlayer;
 import game.player.Player;
@@ -92,13 +91,15 @@ public class XmlWriter {
 			Attribute id = new Attribute("id", String.valueOf(base.getId()));
 			Attribute x = new Attribute("x", String.valueOf(base.getPosition().x));
 			Attribute y = new Attribute("y", String.valueOf(base.getPosition().y));
-			Attribute player = new Attribute("player", base.getPlayer().getName());
+			if(base.getPlayer() != null) {
+				Attribute player = new Attribute("player", base.getPlayer().getName());
+				baseElement.setAttribute(player);
+			}
 			Attribute nbAgents = new Attribute("nbAgents", String.valueOf(base.getNbAgents()));
 			Attribute might = new Attribute("might", String.valueOf(base.getMight()));
 			baseElement.setAttribute(id);
 			baseElement.setAttribute(x);
 			baseElement.setAttribute(y);
-			baseElement.setAttribute(player);
 			baseElement.setAttribute(nbAgents);
 			baseElement.setAttribute(might);
 			
