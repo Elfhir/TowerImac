@@ -99,11 +99,14 @@ public class Engine implements Runnable {
 				e1.printStackTrace();
 			}
 			
-			// Moove and handle units
+			// Move and handle units
 			for(Iterator<GroupAgent> it = Game.getInstance().getAgentManager().getAgents().iterator(); it.hasNext();) {
 				GroupAgent groupAgent = it.next();
 				groupAgent.moveOneStep();
 			}
+			
+			// Players get progressively more money
+			Game.getInstance().economicalEvolution(0.05F);
 			
 			// Le Thread se relance toutes les 30 fois par seconde.
 			long waiting = 1000/30 - ((Calendar.getInstance().getTimeInMillis()-initialTime) - currentTime1);

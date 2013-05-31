@@ -38,7 +38,7 @@ public class PanelInfoIAPlayers extends JPanel {
 		StringBuilder sb = new StringBuilder("<html>");
 		sb.append(player.getName());
 		sb.append("<br /> $");
-		sb.append(player.getBank().getMoney());
+		sb.append(String.format("%.0f", player.getBank().getMoney()));
 		sb.append(" | ");
 		sb.append(nbBasesPlayer);
 		sb.append("/");
@@ -48,4 +48,6 @@ public class PanelInfoIAPlayers extends JPanel {
 		// we change the text of the label
 		label.setText(sb.toString());	
 	}
+	
+	
 }

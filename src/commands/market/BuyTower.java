@@ -54,8 +54,8 @@ public class BuyTower extends Command {
 		
 		AppliWindow.getInstance().getContent().add(gt);
 		//AppliWindow.getInstance().getContent().validate();
-		
-		System.out.println(Game.getInstance().getTowerManager());
+		AppliWindow.getInstance().giveFocusToPanel();
+		//System.out.println(Game.getInstance().getTowerManager());
 	}
 	
 	public BuyTower(Player player, String typeTower, int x, int y) {

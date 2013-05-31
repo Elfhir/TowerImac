@@ -138,7 +138,7 @@ public class PanelInfoRealPlayer extends JPanel {
 		
 		StringBuilder sb = new StringBuilder(player.getName());
 		sb.append(" : $");
-		sb.append(player.getBank().getMoney());
+		sb.append(String.format("%.0f", player.getBank().getMoney()));
 		sb.append(" | ");
 		sb.append(nbBasesPlayer);
 		sb.append("/");
