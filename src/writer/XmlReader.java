@@ -84,7 +84,7 @@ public class XmlReader {
 			
 			String name = playerElement.getAttributeValue("name");
 			String type = playerElement.getAttributeValue("type");
-			int money = Integer.parseInt(playerElement.getAttributeValue("money"));
+			float money = Float.parseFloat(playerElement.getAttributeValue("money"));
 			String color = playerElement.getAttributeValue("color");
 			Color c = new Color(Integer.parseInt(color));
 			
