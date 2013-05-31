@@ -8,6 +8,7 @@ import engine.Engine;
 import exceptions.MapFileException;
 import game.player.Player;
 
+import window.AppliWindow;
 import writer.XmlReader;
 
 import manager.AgentManager;
@@ -139,6 +140,18 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Evolution of the money of all players, bases on a wealth coefficient,
+	 * multiply the number of base (the more you had, the more you get)
+	 * @param wealth	coefficient x player.getNbBases();
+	 */
+	public void economicalEvolution(float wealth) {
+		for(Player p : Game.getInstance().getPlayerManager().getPlayers()) {
+			p.getBank().setMoney(p.getBank().getMoney() + (wealth*p.getNbBases()/5));
+		}
+		AppliWindow.getInstance().updateInfoPlayers();
+	}
+	
 	/* 
 	 * 
 	 ************    Holder class : for the Singleton pattern implementation   ******************
@@ -171,9 +184,4 @@ public class Game {
 		return sb.toString();
 	}
 
-	public static void main(String[] args) {
-		
-	}
-	
-	
 }

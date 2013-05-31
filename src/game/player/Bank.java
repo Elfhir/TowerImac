@@ -2,18 +2,18 @@ package game.player;
 
 public class Bank {
 	
-	private int money;
+	private float money;
 	
 
-	public int getMoney() {
+	public float getMoney() {
 		return money;
 	}
 
-	public void setMoney(int money) {
+	public void setMoney(float money) {
 		this.money = money;
 	}
 
-	
+	// --------------------------------------- toString ----------------------------
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("");
@@ -23,15 +23,10 @@ public class Bank {
 		return sb.toString();
 	}
 	
-	// ---------------------------------------ctor--------------------------
-	public Bank(int money) {
+	// ---------------------------------------constructor--------------------------
+	public Bank(float money) {
 		super();
 		this.money = money;
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
