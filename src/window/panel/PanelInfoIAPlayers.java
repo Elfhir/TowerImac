@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 public class PanelInfoIAPlayers extends JPanel {
 	
-	private int widthPanelIAPlayer = 250;
+	private int widthPanelIAPlayer = 290;
 	private int heightPanelIAPlayer = 40;
 	
 	public PanelInfoIAPlayers() {
