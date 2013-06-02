@@ -25,6 +25,8 @@ public class GroupAgent extends Agent {
 	private Base baseDestination;
 	private Vector2f vectorDirector;
 	//private BufferedImage image;
+	
+	
 
 	public GroupAgent(int nbInitialAgent, Base source, Base destination) throws IOException{
 		super(true, 10, 10, 15, 15, new Vector2f(source.getPositionCenter().x, source.getPositionCenter().y), null);
@@ -50,6 +52,34 @@ public class GroupAgent extends Agent {
 			e.printStackTrace();
 		}	
 		*/	
+	}
+
+	public Base getBaseOrigin() {
+		return baseOrigin;
+	}
+
+	public void setBaseOrigin(Base baseOrigin) {
+		this.baseOrigin = baseOrigin;
+	}
+
+	public Base getBaseDestination() {
+		return baseDestination;
+	}
+
+	public void setBaseDestination(Base baseDestination) {
+		this.baseDestination = baseDestination;
+	}
+
+	public Vector2f getVectorDirector() {
+		return vectorDirector;
+	}
+
+	public void setVectorDirector(Vector2f vectorDirector) {
+		this.vectorDirector = vectorDirector;
+	}
+
+	public void setNbAgent(int nbAgent) {
+		this.nbAgent = nbAgent;
 	}
 
 	/**

@@ -6,15 +6,13 @@ import game.agent.Agent;
 import game.agent.GroupAgent;
 import game.base.Base;
 import game.player.Player;
+import game.tower.Tower;
 
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.swing.SwingConstants;
-
-import window.AppliWindow;
-import application.Launcher;
 
 import commands.Command;
 
@@ -36,7 +34,6 @@ public class Engine implements Runnable {
 	
 	/**
 	 * Start a new Thread, like start() method in Engine.
-	 * Not sure if very good to do it like this, but it seems to work.
 	 */
 	public void restart(){
 		new Thread(this).start();
@@ -44,33 +41,47 @@ public class Engine implements Runnable {
 		
 	@Override
 	public void run() {
-		while (Game.getInstance().isRunning()) {
+		Game game = Game.getInstance();
+		
+		while (game.isRunning()) {
 			
 			// We get the current time at the beginning of the main loop
 			long currentTime1 = Calendar.getInstance().getTimeInMillis() - initialTime;
 			
 			while(!commands.isEmpty()) {
-				//This is the defilage
+				//This is the "defilage"
 				Command command = commands.remove();
 				command.doCommand();
-				
+			}
+			
+			// The towers attack !!
+			for(Tower t: game.getTowerManager().getTowers()) {
+				// we loop on each agent in the game
+				for(GroupAgent a: game.getAgentManager().getAgents()) {
+					// if the agent is attacking a base of the owner of the base
+					if (t.getOwner().equals(a.getBaseDestination().getPlayer()) && !t.getOwner().equals(a.getBaseOrigin().getPlayer())) {
+						System.out.println("Tower Attack !!!!");
+					}
+					else {
+						System.out.println("Pas d'attaque tower");
+					}
+				}
 			}
 			// We get again the current time at the end of the defilage
 			long currentTime2 = Calendar.getInstance().getTimeInMillis() - initialTime;
 			
 			// We run through all the Collection of Bases
-			for(Base baseCurrent : Game.getInstance().getBaseManager().getBases()) {
+			for(Base baseCurrent : game.getBaseManager().getBases()) {
 				// We display the data for the agents for each base.
 				baseCurrent.setText(""+baseCurrent.getNbAgents()+"");
 				baseCurrent.setVerticalTextPosition(SwingConstants.CENTER);
 				baseCurrent.setHorizontalTextPosition(SwingConstants.CENTER);
 				
-				//System.out.println(currentTime+"\n");
 				
 				//Test for generation
 				float periodOfGeneration = 10000/(baseCurrent.getMight()); // on peut modifier, c'est empirique...
 				if((currentTime2 - baseCurrent.getMomentOfTheLastGeneration()) < periodOfGeneration) {
-					// if the ellapsed time between the moment of the last generation and the current time is inferior
+					// if the elapsed time between the moment of the last generation and the current time is inferior
 					// to the period of generation, we do nothing for the bases
 				}
 				else {
@@ -87,36 +98,37 @@ public class Engine implements Runnable {
 			}
 			// The Real Player die if he has 0 base.
 			try {
-				if(Game.getInstance().getPlayerManager().getRealPlayer().getIsDead()) {
+				if(game.getPlayerManager().getRealPlayer().getIsDead()) {
 					System.out.println("La partie est terminée, vous êtes éliminé !");
-					// Les autres joueurs ne continuent pas la partie tout seul.
+					// Other players don't continue the game alone
 					for(Player p : Game.getInstance().getPlayerManager().getPlayers()) {
 						p.setIsDead(true);
 					}
-					Game.getInstance().setRunning(false);
+					game.setRunning(false);
 				}
 			} catch (RealPlayerException e1) {
 				e1.printStackTrace();
 			}
 			
+			
+			
 			// Move and handle units
-			for(Iterator<GroupAgent> it = Game.getInstance().getAgentManager().getAgents().iterator(); it.hasNext();) {
+			for(Iterator<GroupAgent> it = game.getAgentManager().getAgents().iterator(); it.hasNext();) {
 				GroupAgent groupAgent = it.next();
 				groupAgent.moveOneStep();
 			}
 			
 			// Players get progressively more money
-			Game.getInstance().economicalEvolution(0.05F);
+			game.economicalEvolution(0.05F);
 			
-			// Le Thread se relance toutes les 30 fois par seconde.
+			// The game is updated with 30 fps
 			long waiting = 1000/30 - ((Calendar.getInstance().getTimeInMillis()-initialTime) - currentTime1);
-			if(waiting < 0) {
-				waiting = 0;
-			}
-			try {
-				Thread.sleep(waiting);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			if(waiting > 0) {
+				try {
+					Thread.sleep(waiting);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
