@@ -17,6 +17,8 @@ import javax.vecmath.Vector2f;
 
 import org.jdom2.JDOMException;
 
+import application.Launcher;
+
 import window.graphic.Line;
 import window.graphic.LineCursor;
 import window.panel.Panel;
@@ -376,15 +378,16 @@ public class AppliWindow extends JFrame {
 		}
 		nbPlayerDead = 0;
 		
-		try {
-			if(Game.getInstance().getPlayerManager().getRealPlayer().getIsDead()) {
-				content.add(MenuLose);
-				MenuLose.setVisible(true);
+		if(!Launcher.modeSpectateur) {
+			try {
+				if(Game.getInstance().getPlayerManager().getRealPlayer().getIsDead()) {
+					content.add(MenuLose);
+					MenuLose.setVisible(true);
+				}
+			} catch (RealPlayerException e) {
+				System.out.println("Mode Spectateur !");
 			}
-		} catch (RealPlayerException e) {
-			e.printStackTrace();
 		}
-		
 	}
 
 

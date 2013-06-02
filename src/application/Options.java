@@ -6,6 +6,8 @@ import java.util.Random;
 
 import javax.vecmath.Vector2f;
 
+import exceptions.RealPlayerException;
+
 import writer.XmlWriter;
 
 import game.Game;
@@ -36,6 +38,15 @@ public class Options {
 		Player germaine = new IAPlayer("Germaine", Color.ORANGE);
 		
 		switch(this.getAdversaireNumber()) {
+		
+		case 0 :
+			game.getPlayerManager().addPlayer(jean_luc);
+			game.getPlayerManager().addPlayer(patrick);
+			game.getPlayerManager().addPlayer(germaine);
+			
+			attributeBases();
+			
+			break;
 		
 		case 1 :
 			game.getPlayerManager().addPlayer(michel);
@@ -86,15 +97,19 @@ public class Options {
 		Random rand = new Random();
 		rand.setSeed(System.currentTimeMillis());
 		
+		
 		ArrayList<Player> listTemp = new ArrayList<Player>();
-		for(int a = 0; a <= 9; ++a) {
-			try {
-				listTemp.add(a, game.getPlayerManager().getPlayers().get(rand.nextInt(4 + this.getAdversaireNumber())));
+		do {
+			listTemp.clear();
+			for(int a = 0; a <= 9; ++a) {
+				try {
+					listTemp.add(a, game.getPlayerManager().getPlayers().get(rand.nextInt(3 + this.getAdversaireNumber())));
+				}
+				catch(IndexOutOfBoundsException e) {
+					listTemp.add(a, null);
+				}
 			}
-			catch(IndexOutOfBoundsException e) {
-				listTemp.add(a, null);
-			}
-		}
+		} while(!(listTemp.containsAll(game.getPlayerManager().getPlayers())));
 		
 		Base base0 = new Base(0, 2, listTemp.get(0), new Vector2f(50, 100), 10);
 		Base base1 = new Base(1, 3, listTemp.get(1), new Vector2f(500, 450), 5);
@@ -116,7 +131,12 @@ public class Options {
 		game.getBaseManager().addBase(base7);
 		game.getBaseManager().addBase(base8);
 		
+		try {
+			game.getPlayerManager().getRealPlayer();
+		} catch(RealPlayerException e) {
+			game.getPlayerManager().addPlayer(new RealPlayer("Michel", Color.MAGENTA));
+		}
+		
 		listTemp.clear();
 	}
-
 }

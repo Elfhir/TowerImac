@@ -8,8 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
 import javax.swing.JWindow;
 import javax.swing.SwingUtilities;
 
@@ -22,7 +24,9 @@ import window.AppliWindow;
 import window.panel.Panel;
 
 public class Launcher {
-
+	
+	public static boolean modeSpectateur = false;
+	
 	public static void main(String[] args) {
 		
 // Une JWindow pour le Menu:
@@ -93,20 +97,22 @@ public class Launcher {
 					}
 				});
 				
-				JButton options = new JButton("1 adv");
-				options.setBounds(200, 260, 80, 15);
-				options.setBackground(new Color(108,116,212));
-				options.setBorderPainted(false);
-				content.add(options);
+				// Je veux une partie avec un seul adversaire
+				final JRadioButton options1 = new JRadioButton("1 adv");
+				options1.setBounds(190, 260, 90, 15);
+				options1.setBackground(new Color(108,116,212));
+				options1.setBorderPainted(false);
+				content.add(options1);
 				
-				options.addActionListener(new ActionListener() {
+				options1.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
 						Options option1 = new Options(1);
 					}
 				});
-				JButton options2 = new JButton("2 adv");
-				options2.setBounds(281, 260, 80, 15);
+				// Je veux une partie avec deux adversaires
+				final JRadioButton options2 = new JRadioButton("2 adv");
+				options2.setBounds(281, 260, 90, 15);
 				options2.setBackground(new Color(108,116,212));
 				options2.setBorderPainted(false);
 				content.add(options2);
@@ -117,8 +123,9 @@ public class Launcher {
 						Options option2 = new Options(2);
 					}
 				});
-				JButton options3 = new JButton("3 adv");
-				options3.setBounds(200, 276, 80, 15);
+				// Je veux une partie avec trois adversaires
+				final JRadioButton options3 = new JRadioButton("3 adv");
+				options3.setBounds(190, 276, 90, 15);
 				options3.setBackground(new Color(108,116,212));
 				options3.setBorderPainted(false);
 				content.add(options3);
@@ -129,6 +136,27 @@ public class Launcher {
 						Options option3 = new Options(3);
 					}
 				});
+				
+				// Je veux visionner une partie en mode spectateur
+				final JRadioButton options0 = new JRadioButton("spectateur");
+				options0.setBounds(281, 276, 90, 15);
+				options0.setBackground(new Color(108,116,212));
+				options0.setBorderPainted(false);
+				content.add(options0);
+				
+				options0.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						Options option0 = new Options(0);
+						Launcher.modeSpectateur = true;
+					}
+				});
+				
+				ButtonGroup groupOptions = new ButtonGroup();
+			    groupOptions.add(options0);
+			    groupOptions.add(options1);
+			    groupOptions.add(options2);
+			    groupOptions.add(options3);
 			}
 		});
 	}

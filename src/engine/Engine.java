@@ -2,7 +2,6 @@ package engine;
 
 import exceptions.RealPlayerException;
 import game.Game;
-import game.agent.Agent;
 import game.agent.GroupAgent;
 import game.base.Base;
 import game.player.Player;
@@ -13,7 +12,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.swing.SwingConstants;
 
-import window.AppliWindow;
 import application.Launcher;
 
 import commands.Command;
@@ -86,17 +84,19 @@ public class Engine implements Runnable {
 				}
 			}
 			// The Real Player die if he has 0 base.
-			try {
-				if(Game.getInstance().getPlayerManager().getRealPlayer().getIsDead()) {
-					System.out.println("La partie est terminée, vous êtes éliminé !");
-					// Les autres joueurs ne continuent pas la partie tout seul.
-					for(Player p : Game.getInstance().getPlayerManager().getPlayers()) {
-						p.setIsDead(true);
+			if(!Launcher.modeSpectateur) {
+				try {
+					if(Game.getInstance().getPlayerManager().getRealPlayer().getIsDead()) {
+						System.out.println("La partie est terminée, vous êtes éliminé !");
+						// Les autres joueurs ne continuent pas la partie tout seul.
+						for(Player p : Game.getInstance().getPlayerManager().getPlayers()) {
+							p.setIsDead(true);
+						}
+						Game.getInstance().setRunning(false);
 					}
-					Game.getInstance().setRunning(false);
+				} catch (RealPlayerException e1) {
+					e1.printStackTrace();
 				}
-			} catch (RealPlayerException e1) {
-				e1.printStackTrace();
 			}
 			
 			// Move and handle units
