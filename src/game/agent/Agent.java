@@ -1,15 +1,23 @@
 package game.agent;
 
+import java.io.File;
+import java.io.IOException;
+
 import game.Situable;
 import game.player.Player;
 
-import javax.swing.JPanel;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.vecmath.Vector2f;
 
 import time.Timerable;
+import window.Label;
 
-public abstract class Agent extends JPanel implements Situable, Timerable{
+public abstract class Agent extends JLabel implements Situable, Timerable{
 	
+	private static final long serialVersionUID = 1591504544865674942L;
 	private int PV;
 	protected int speed;
 	private int strength;
@@ -216,7 +224,8 @@ public abstract class Agent extends JPanel implements Situable, Timerable{
 	}
 
 	//--------------------------------------------------constructor-----------------------
-	public Agent(boolean moving, int PV, int speed, int stamina, int strength, Vector2f position, Player player) {
+	public Agent(boolean moving, int PV, int speed, int stamina, int strength, Vector2f position, Player player) throws IOException {
+		super(new ImageIcon(ImageIO.read(new File("design/groupe.jpeg"))), JLabel.CENTER);
 		this.moving = moving;
 		this.PV = PV;
 		this.speed = speed;
@@ -224,9 +233,11 @@ public abstract class Agent extends JPanel implements Situable, Timerable{
 		this.strength = strength;
 		this.position = position;
 		this.player = player;
+		this.setVisible(true);
+		this.setBounds(0, 0, 150, 150);
 	}
 	
-	public Agent() {
+	public Agent() throws IOException {
 		this(false, 0, 0, 0, 0, new Vector2f(0,0), null);
 	}
 	/*

@@ -64,6 +64,11 @@ public class Base extends JButton implements Situable, Timerable{
 		position.y = y;
 	}
 	
+	public Vector2f getPositionCenter() {
+		int size = AppliWindow.getTilesSize();
+		return new Vector2f(position.x + size/2, position.y + size/2);
+	}
+	
 	public void setNbAgents(int agents) {
 		agents = (agents <= 0) ? 0 : agents;
 		this.nbAgents = agents;

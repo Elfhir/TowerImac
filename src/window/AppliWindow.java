@@ -19,6 +19,7 @@ import org.jdom2.JDOMException;
 
 import application.Launcher;
 
+import window.graphic.LabelAgents;
 import window.graphic.Line;
 import window.graphic.LineCursor;
 import window.panel.Panel;
@@ -58,6 +59,7 @@ public class AppliWindow extends JFrame {
 	private Label image;
 	private Line line;
 	private LineCursor lineCursor;
+	private LabelAgents labelAgent;
 	private Label pause;
 	private JButton resumeGame;
 	private JButton exitGame;
@@ -203,6 +205,14 @@ public class AppliWindow extends JFrame {
 		this.lineCursor = lineCursor;
 	}
 
+	public LabelAgents getLabelAgent() {
+		return labelAgent;
+	}
+
+	public void setLabelAgent(LabelAgents labelAgent) {
+		this.labelAgent = labelAgent;
+	}
+
 	/**
 	 * Builds the window of the application
 	 * @param width		The width of the window
@@ -279,8 +289,14 @@ public class AppliWindow extends JFrame {
 		Game game = Game.getInstance();
 		
 		int nbAgentTosend = source.getNbAgents()/2;
-		GroupAgent groupAgent = new GroupAgent(nbAgentTosend, source, destination);
-		content.add(groupAgent);
+		GroupAgent groupAgent = null;
+		try {
+			groupAgent = new GroupAgent(nbAgentTosend, source, destination);
+		} catch (IOException e) {
+			System.out.println("failed "+e);
+			e.printStackTrace();
+		}
+		AppliWindow.getInstance().getLabelAgent().add(groupAgent);
 		game.getAgentManager().addAgent(groupAgent);
 	}
 
@@ -401,13 +417,14 @@ public class AppliWindow extends JFrame {
 	 */
 	private void buildGame(String xmlFileName, String mapFileName) throws MapFileException, JDOMException, IOException, RealPlayerException {
 		Game game = Game.getInstance();
+		buildLabelAgents(0, 0, getWidth(), getHeight());
 		game.initGame(xmlFileName, mapFileName);
 		buildBases();
 		// Add a line
 		buildLine(0, 0, getWidth(), getHeight());
 		buildLineCursor(0, 0, getWidth(), getHeight());
 		buildInfoPlayers();
-//		buildAgents();
+		
 //		buildTowers();
 //		//...
 		
@@ -713,5 +730,25 @@ public class AppliWindow extends JFrame {
 		content.add(lineCursor);
 	}
 
-
+	/**
+	 * Build a Line which will be opaque except the line
+	 * 
+	 * @param x1 Coordinates of first point of the line
+	 * @param y1 Coordinates of first point of the line
+	 * @param x2 Coordinates of second point of the line
+	 * @param y2 Coordinates of second point of the line
+	 */
+	public void buildLabelAgents(int x1, int y1, int x2, int y2) {
+		LabelAgents l = new LabelAgents();
+		
+		content.setLayout(null);
+		l.setVisible(true);
+		l.setBounds(x1, y1, Math.abs(x2-x1), Math.abs(y2-y1));
+		l.setLayout(null);
+		l.setBorder(null);
+	
+		this.setLabelAgent(l);
+		content.add(l);
+	}
+	
 }
