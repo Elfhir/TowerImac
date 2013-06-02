@@ -2,6 +2,7 @@ package game.agent;
 
 import game.Game;
 import game.base.Base;
+import game.player.Player;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -23,10 +24,10 @@ public class GroupAgent extends Agent {
 	private Base baseOrigin;
 	private Base baseDestination;
 	private Vector2f vectorDirector;
-	private BufferedImage image;
+	//private BufferedImage image;
 
-	public GroupAgent(int nbInitialAgent, Base source, Base destination){
-
+	public GroupAgent(int nbInitialAgent, Base source, Base destination) throws IOException{
+		super(true, 10, 10, 15, 15, new Vector2f(source.getPosition().x, source.getPosition().y), null);
 		this.nbAgent = nbInitialAgent;
 		this.baseOrigin = source;
 		this.baseDestination = destination;
@@ -41,12 +42,14 @@ public class GroupAgent extends Agent {
 		this.setPreferredSize(dim);
 		this.setMinimumSize(dim);
 		this.setMaximumSize(dim);
-
+		
+		/*
 		try {
 			this.image = ImageIO.read(new File("design/groupe.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
-		}		
+		}	
+		*/	
 	}
 
 	/**
@@ -92,6 +95,7 @@ public class GroupAgent extends Agent {
 			this.setPosition(x, y);
 		}
 		else{
+			this.setVisible(false);
 			return;
 		}
 	}

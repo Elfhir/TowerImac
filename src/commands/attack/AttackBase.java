@@ -30,7 +30,7 @@ public class AttackBase extends Command{
 		AppliWindow.addGroupAgent(baseOrigin, baseDestination);
 		int nbAgentToSend = baseOrigin.getNbAgents()/2;
 		
-		System.out.println("case : Attack !!");
+		System.out.println("Nicolas cage : Attack !!");
 		//managed by Engine (FIFO of commands) 
 		
 		// The number of agents in the Base attacked decrease !
@@ -53,6 +53,7 @@ public class AttackBase extends Command{
 		
 		// Now that we have moved or attacked, we deselect the base !
 		this.player.setSelectedBases(null);
+		
 		
 	}
 

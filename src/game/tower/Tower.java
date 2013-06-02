@@ -131,6 +131,7 @@ public abstract class Tower extends JButton implements Situable {
 		
 	}
 
+
 	public String toString(String type) {
 		StringBuilder sb = new StringBuilder("Tower [type=");
 		sb.append(type);
