@@ -27,11 +27,11 @@ public class GroupAgent extends Agent {
 	//private BufferedImage image;
 
 	public GroupAgent(int nbInitialAgent, Base source, Base destination) throws IOException{
-		super(true, 10, 10, 15, 15, new Vector2f(source.getPosition().x, source.getPosition().y), null);
+		super(true, 10, 10, 15, 15, new Vector2f(source.getPositionCenter().x, source.getPositionCenter().y), null);
 		this.nbAgent = nbInitialAgent;
 		this.baseOrigin = source;
 		this.baseDestination = destination;
-		this.position = new Vector2f(source.getPosition().x, source.getPosition().y);
+		this.position = new Vector2f(source.getPositionCenter().x, source.getPositionCenter().y);
 		this.speed = 1;
 		this.computeVectorDirector();
 
@@ -57,8 +57,8 @@ public class GroupAgent extends Agent {
 	 */
 	private void computeVectorDirector() {
 		this.vectorDirector = new Vector2f();
-		this.vectorDirector.x = this.baseDestination.getPosition().x-baseOrigin.getPosition().x;
-		this.vectorDirector.y = baseDestination.getPosition().y-baseOrigin.getPosition().y;
+		this.vectorDirector.x = this.baseDestination.getPositionCenter().x - baseOrigin.getPositionCenter().x;
+		this.vectorDirector.y = baseDestination.getPositionCenter().y - baseOrigin.getPositionCenter().y;
 		this.vectorDirector.normalize();
 	}
 
@@ -83,13 +83,15 @@ public class GroupAgent extends Agent {
 
 	public void moveOneStep(){
 
-		int radiusBase = baseDestination.getMight();
+		//int radiusBase = baseDestination.getMight();
+		int sizeBase = AppliWindow.getTilesSize() / 2;
 		int distX  = 0, distY = 0;
 
-		distX = (int) Math.abs(this.position.getX() - baseDestination.getPosition().getX());
-		distY = (int) Math.abs(this.position.getY() - baseDestination.getPosition().getY());
+		distX = (int) Math.min(Math.abs(this.position.x - baseDestination.getPosition().x), Math.abs(this.position.x - baseDestination.getPosition().x - sizeBase));
+		distY = (int) Math.min(Math.abs(this.position.y - baseDestination.getPosition().y), Math.abs(this.position.y - baseDestination.getPosition().y - sizeBase));
 		
-		if(distX > radiusBase && distY > radiusBase) {
+		//if(distX > radiusBase && distY > radiusBase) {
+		if(distX > 0 && distY > 0) {
 			float x = this.position.x + this.vectorDirector.x * this.speed;
 			float y = this.position.y += this.vectorDirector.y * this.speed;
 			this.setPosition(x, y);
