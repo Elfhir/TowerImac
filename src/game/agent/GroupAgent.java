@@ -113,15 +113,12 @@ public class GroupAgent extends Agent {
 
 	public void moveOneStep(){
 
-		//int radiusBase = baseDestination.getMight();
-		int sizeBase = AppliWindow.getTilesSize() / 2;
-		int distX  = 0, distY = 0;
-
-		distX = (int) Math.min(Math.abs(this.position.x - baseDestination.getPosition().x), Math.abs(this.position.x - baseDestination.getPosition().x - sizeBase));
-		distY = (int) Math.min(Math.abs(this.position.y - baseDestination.getPosition().y), Math.abs(this.position.y - baseDestination.getPosition().y - sizeBase));
+		int sizeBase = AppliWindow.getTilesSize();
 		
-		//if(distX > radiusBase && distY > radiusBase) {
-		if(distX > 0 && distY > 0) {
+		boolean agentArrived = ((this.position.x > baseDestination.getPosition().x) && (this.position.x < baseDestination.getPosition().x + sizeBase)) &&
+				((this.position.y > baseDestination.getPosition().y) && (this.position.y < baseDestination.getPosition().y + sizeBase));
+		
+		if(!agentArrived) {
 			float x = this.position.x + this.vectorDirector.x * this.speed;
 			float y = this.position.y += this.vectorDirector.y * this.speed;
 			this.setPosition(x, y);
