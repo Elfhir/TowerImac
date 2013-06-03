@@ -30,6 +30,7 @@ public class BuyTower extends Command {
 		// Si le joueur peut se le permettre ?
 		if(player.getBank().getMoney() > 50.0f) {
 			GunTower gt = new GunTower(this.position.x, this.position.y, this.player);
+			System.out.println("x "+this.position.x+"y "+this.position.y);
 			Game.getInstance().getTowerManager().addTower(gt);
 			
 			if (this.player instanceof RealPlayer) {
