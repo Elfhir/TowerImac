@@ -12,7 +12,6 @@ import game.tower.GunTower;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.vecmath.Vector2d;
 import javax.vecmath.Vector2f;
 
 import window.AppliWindow;
@@ -28,34 +27,45 @@ public class BuyTower extends Command {
 	
 	@Override
 	public void doCommand() {
-		
-		GunTower gt = new GunTower(this.position.x, this.position.y, this.player);
-		Game.getInstance().getTowerManager().addTower(gt);
-		
-		if (this.player instanceof RealPlayer) {
-			((RealPlayer)this.player).setBuildingTower(false);
-		}
-		
-		
-		gt.setBorder(BorderFactory.createLineBorder(Color.black));
-		gt.setContentAreaFilled(false);
-		gt.setBounds((int)gt.getPosition().x, (int)gt.getPosition().y, 40, 40);
-		gt.setOpaque(true);
-		try
-		{
-			gt.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
-			gt.setBackground(Color.RED);
-
-		}
-		catch (IOException e1)
-		{
+		// Si le joueur peut se le permettre ?
+		if(player.getBank().getMoney() > 50.0f) {
+			GunTower gt = new GunTower(this.position.x, this.position.y, this.player);
+			Game.getInstance().getTowerManager().addTower(gt);
 			
+			if (this.player instanceof RealPlayer) {
+				((RealPlayer)this.player).setBuildingTower(false);
+			}
+			
+			
+			gt.setBorder(BorderFactory.createLineBorder(Color.black));
+			gt.setContentAreaFilled(false);
+			gt.setBounds((int)gt.getPosition().x, (int)gt.getPosition().y, 40, 40);
+			gt.setOpaque(true);
+			try
+			{
+				gt.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
+				gt.setBackground(Color.RED);
+	
+			}
+			catch (IOException e1)
+			{
+				
+			}
+			
+			AppliWindow.getInstance().getContent().add(gt);
+			//AppliWindow.getInstance().getContent().validate();
+			AppliWindow.getInstance().giveFocusToPanel();
+			//System.out.println(Game.getInstance().getTowerManager());
+			
+			for(Player p : Game.getInstance().getPlayerManager().getPlayers()) {
+				if(this.player.equals(p)) {
+					p.getBank().setMoney(p.getBank().getMoney() - 50.0f);
+				}
+			}
+			
+		} else {
+			System.out.println("Out of Money sorry, poor !");
 		}
-		
-		AppliWindow.getInstance().getContent().add(gt);
-		//AppliWindow.getInstance().getContent().validate();
-		AppliWindow.getInstance().giveFocusToPanel();
-		//System.out.println(Game.getInstance().getTowerManager());
 	}
 	
 	public BuyTower(Player player, String typeTower, int x, int y) {
