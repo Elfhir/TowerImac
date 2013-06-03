@@ -1,19 +1,33 @@
 package commands.attack;
 
-import game.agent.Agent;
+import game.Game;
+import game.agent.GroupAgent;
+
 import commands.Command;
 
 public class AttackAgent extends Command{
 	
-	Agent enemy;
-
-	public AttackAgent(Agent enemy) {
-		this.enemy = enemy;
+	private GroupAgent agent;
+	private int might;
+	
+	public AttackAgent(GroupAgent agent, int might) {
+		super();
+		this.agent = agent;
+		this.might = might;
 	}
 
 	@Override
 	public void doCommand() {
-		System.out.println(this+" do something");	
+		
+		int survivors = agent.getNbAgent() - might;
+		if (survivors>0) {
+			agent.setNbAgent(survivors);
+			
+		}
+		else {
+			Game.getInstance().getAgentManager().getAgents().remove(agent);
+			this.agent.setVisible(false);
+		}
 	}
 
 }

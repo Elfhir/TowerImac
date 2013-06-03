@@ -9,8 +9,8 @@ import commands.Command;
 
 public class AttackBase extends Command{
 	
-	Base base;
-	GroupAgent groupAgent;
+	private Base base;
+	private GroupAgent groupAgent;
 	
 	public AttackBase(Base base, GroupAgent groupAgent) {
 		super();

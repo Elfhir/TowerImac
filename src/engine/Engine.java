@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import application.Launcher;
 
 import commands.Command;
+import commands.attack.AttackAgent;
 
 /**
  * Singleton
@@ -66,7 +67,12 @@ public class Engine implements Runnable {
 						if (tower.getOwner().equals(agent.getBaseDestination().getPlayer()) && !tower.getOwner().equals(agent.getBaseOrigin().getPlayer())) {
 							long currentTime2 = Calendar.getInstance().getTimeInMillis() - initialTime;
 							if (currentTime2 - tower.getMomentOfLastShot() >= tower.getCadence()) {
+								
+								
 								System.out.println("Tower Attack !!!!");
+								AttackAgent shotCommand = new AttackAgent(agent, tower.getMight());
+								Engine.getInstance().getCommands().add(shotCommand);
+								
 								tower.setMomentOfLastShot(currentTime2);
 							}
 						}
