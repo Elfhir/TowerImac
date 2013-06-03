@@ -1,60 +1,48 @@
 package commands.attack;
 
 import window.AppliWindow;
-import commands.Command;
-
 import game.Game;
+import game.agent.GroupAgent;
 import game.base.Base;
-import game.player.Player;
+
+import commands.Command;
 
 public class AttackBase extends Command{
 	
-	Player player;
-	Base baseOrigin;
-	Base baseDestination;
+	Base base;
+	GroupAgent groupAgent;
 	
-	public AttackBase(Player player, Base baseOrigin, Base baseDestination) {
+	public AttackBase(Base base, GroupAgent groupAgent) {
 		super();
-		this.player = player;
-		this.baseOrigin = baseOrigin;
-		this.baseDestination = baseDestination;
+		this.base = base;
+		this.groupAgent = groupAgent;
 	}
 
 	@Override
 	public void doCommand() {
-		if(!(this.player.equals(this.baseOrigin.getPlayer()))) {
-			return;
+		
+		// if it's the same player : it's just a move between 2 bases of the same player
+		if (groupAgent.getPlayer().equals(base.getPlayer())) {
+			base.addAgents(groupAgent.getNbAgent());
 		}
-		baseOrigin.setBackground(this.player.getColor().brighter());
 		
-		AppliWindow.addGroupAgent(baseOrigin, baseDestination);
-		int nbAgentToSend = baseOrigin.getNbAgents()/2;
-		
-		System.out.println("Nicolas cage : Attack !!");
-		//managed by Engine (FIFO of commands) 
-		
-		// The number of agents in the Base attacked decrease !
-		int lastSurvivor = baseDestination.getNbAgents();
-		baseDestination.deleteAgents(nbAgentToSend);
-		
-		// Enemy Base is taken !! Add the Agents not dead to the taken Base too !
-		if(baseDestination.getNbAgents() == 0) {
-			for(Base b : Game.getInstance().getBaseManager().getBases()) {
-				if(b.equals(baseDestination)) {
-					b.changePlayer(baseOrigin.getPlayer(), nbAgentToSend - lastSurvivor);
-				}
+		// else if the players are different : it's an attack !
+		else {
+			// The number of agents in the Base attacked decrease !
+			int lastSurvivor = base.getNbAgents();
+			base.deleteAgents(groupAgent.getNbAgent());
+			
+			// Enemy Base is taken !! Add the Agents not dead to the taken Base too !
+			if(base.getNbAgents() == 0) {
+					base.changePlayer(groupAgent.getPlayer(), groupAgent.getNbAgent() - lastSurvivor);
 			}
-		}
+		}	
 		
-		// The number of Agents in our selected Base decrease !
-		baseOrigin.deleteAgents(nbAgentToSend);
-		this.player.setSelectedBases(null);
-		//baseCurrent.setBackground(this.IACurrent.getColor().brighter());
-		
-		// Now that we have moved or attacked, we deselect the base !
-		this.player.setSelectedBases(null);
-		
-		
-	}
+		Game.getInstance().getAgentManager().getAgents().remove(groupAgent);
+		this.groupAgent.setVisible(false);
+	
+		// Display the Line because it sets the second point of it as the Attacked Base
+		AppliWindow.getInstance().getLine().displayLastPointDeplacement(base);
 
+	}
 }

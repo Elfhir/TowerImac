@@ -183,27 +183,10 @@ public class Base extends JButton implements Situable, Timerable{
 		}
 		
 		// 3rd case : the realPlayer has an other base selected : agents can go from the selected base to current one ! (and we deselect the base)
-		// This can be an attack to an enemy base or just a move to an other owned base
 		else {
 			
-			// if the players are different : it's an attack !
-			if(!selectedBases.getPlayer().equals(this.getPlayer())) {
-				
-				AttackBase attackCommand = new AttackBase(realPlayer, selectedBases, this);
-				Engine.getInstance().getCommands().add(attackCommand);
-				
-				// Display the Line because it sets the second point of it as the Attacked Base
-				AppliWindow.getInstance().getLine().displayLastPointAttacked(this);
-			} 
-			
-			// else if it's the same player : it's just a move between 2 bases of the same player
-			else {
-				Move moveCommand = new Move(realPlayer, selectedBases, this);
-				Engine.getInstance().getCommands().add(moveCommand);
-				
-				// Display the Line because it sets the second point of it as the Attacked Base
-				AppliWindow.getInstance().getLine().displayLastPointDeplacement(this);
-			}	
+			Move moveCommand = new Move(realPlayer, selectedBases, this);
+			Engine.getInstance().getCommands().add(moveCommand);
 		}
 		
 		System.out.println("J'ai cliqué sur la base numéro "+this.getId());

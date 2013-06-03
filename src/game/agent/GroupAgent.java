@@ -1,20 +1,17 @@
 package game.agent;
 
-import game.Game;
+import engine.Engine;
 import game.base.Base;
 import game.player.Player;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.vecmath.Vector2f;
 
 import window.AppliWindow;
+
+import commands.attack.AttackBase;
 
 //import javax.swing.JLabel;
 
@@ -28,13 +25,14 @@ public class GroupAgent extends Agent {
 	
 	
 
-	public GroupAgent(int nbInitialAgent, Base source, Base destination) throws IOException{
-		super(true, 10, 10, 15, 15, new Vector2f(source.getPositionCenter().x, source.getPositionCenter().y), null);
+	public GroupAgent(int nbInitialAgent, Base source, Base destination, Player player) throws IOException{
+		super(true, 10, 10, 15, 15, new Vector2f(source.getPositionCenter().x, source.getPositionCenter().y), player);
 		this.nbAgent = nbInitialAgent;
 		this.baseOrigin = source;
 		this.baseDestination = destination;
 		this.position = new Vector2f(source.getPositionCenter().x, source.getPositionCenter().y);
 		this.speed = 1;
+		this.player = player;
 		this.computeVectorDirector();
 
 		this.setBackground(source.getPlayer().getColor());
@@ -124,7 +122,9 @@ public class GroupAgent extends Agent {
 			this.setPosition(x, y);
 		}
 		else{
-			this.setVisible(false);
+			
+			AttackBase attackCommand = new AttackBase(baseDestination, this);
+			Engine.getInstance().getCommands().add(attackCommand);
 			return;
 		}
 	}

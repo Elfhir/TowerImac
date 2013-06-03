@@ -284,21 +284,6 @@ public class AppliWindow extends JFrame {
 		
 	}
 	
-	public static void addGroupAgent(Base source, Base destination) {
-		
-		Game game = Game.getInstance();
-		
-		int nbAgentTosend = source.getNbAgents()/2;
-		GroupAgent groupAgent = null;
-		try {
-			groupAgent = new GroupAgent(nbAgentTosend, source, destination);
-		} catch (IOException e) {
-			System.out.println("failed "+e);
-			e.printStackTrace();
-		}
-		AppliWindow.getInstance().getLabelAgent().add(groupAgent);
-		game.getAgentManager().addAgent(groupAgent);
-	}
 
 	/**
 	 * 

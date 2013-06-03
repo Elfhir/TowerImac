@@ -18,13 +18,13 @@ import window.Label;
 public abstract class Agent extends JLabel implements Situable, Timerable{
 	
 	private static final long serialVersionUID = 1591504544865674942L;
-	private int PV;
+	protected int PV;
 	protected int speed;
-	private int strength;
-	private int stamina;
-	private boolean moving;
+	protected int strength;
+	protected int stamina;
+	protected boolean moving;
 	protected Vector2f position;
-	private Player player;
+	protected Player player;
 	
 	public int getPV() {
 		return PV;
