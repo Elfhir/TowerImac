@@ -1,15 +1,9 @@
 package game.tower;
 
 import game.Situable;
+import game.agent.Agent;
 import game.player.Player;
 
-import java.awt.Color;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.vecmath.Vector2f;
 
@@ -25,6 +19,7 @@ public abstract class Tower extends JButton implements Situable {
 	protected int might;
 	protected Player owner;
 	protected Vector2f position;
+	protected long momentOfLastShot;
 	
 	public Tower(float cadence, float radiusAreaOfAction, int sellPrice, int buyingPrice, int upgradePrice, int might, Player owner) {
 		super();
@@ -130,6 +125,23 @@ public abstract class Tower extends JButton implements Situable {
 		}
 		
 	}
+	
+	public long getMomentOfLastShot() {
+		return this.momentOfLastShot;
+	}
+	
+	public void setMomentOfLastShot(long momentOfLastShot) {
+		this.momentOfLastShot = momentOfLastShot;
+	}
+	
+	/**
+	 * @param agent	 	the agent to shot
+	 * @return if this tower can reach and shot an agent
+	 */
+	public boolean canShot(Agent agent) {
+		double distance = Math.sqrt(Math.pow(this.position.x - agent.getPosition().x, 2) + Math.pow(this.position.y - agent.getPosition().y, 2));
+		return distance < this.getRadiusAreaOfAction();
+	}
 
 
 	public String toString(String type) {
@@ -154,7 +166,5 @@ public abstract class Tower extends JButton implements Situable {
 		sb.append("]");
 		return sb.toString();
 	}
-	
-	
 	
 }

@@ -55,21 +55,26 @@ public class Engine implements Runnable {
 				command.doCommand();
 			}
 			
+			
 			// The towers attack !!
-			for(Tower t: game.getTowerManager().getTowers()) {
+			for(Tower tower: game.getTowerManager().getTowers()) {
 				// we loop on each agent in the game
-				for(GroupAgent a: game.getAgentManager().getAgents()) {
-					// if the agent is attacking a base of the owner of the base
-					if (t.getOwner().equals(a.getBaseDestination().getPlayer()) && !t.getOwner().equals(a.getBaseOrigin().getPlayer())) {
-						System.out.println("Tower Attack !!!!");
-					}
-					else {
-						System.out.println("Pas d'attaque tower");
+				for(GroupAgent agent: game.getAgentManager().getAgents()) {
+					//if the agent is in the area of the tower
+					if(tower.canShot(agent)) {
+						// if the agent is attacking a base of the owner of the base
+						if (tower.getOwner().equals(agent.getBaseDestination().getPlayer()) && !tower.getOwner().equals(agent.getBaseOrigin().getPlayer())) {
+							long currentTime2 = Calendar.getInstance().getTimeInMillis() - initialTime;
+							if (currentTime2 - tower.getMomentOfLastShot() >= tower.getCadence()) {
+								System.out.println("Tower Attack !!!!");
+								tower.setMomentOfLastShot(currentTime2);
+							}
+						}
 					}
 				}
 			}
 			// We get again the current time at the end of the defilage
-			long currentTime2 = Calendar.getInstance().getTimeInMillis() - initialTime;
+			long currentTime3 = Calendar.getInstance().getTimeInMillis() - initialTime;
 			
 			// We run through all the Collection of Bases
 			for(Base baseCurrent : game.getBaseManager().getBases()) {
@@ -81,7 +86,7 @@ public class Engine implements Runnable {
 				
 				//Test for generation
 				float periodOfGeneration = 10000/(baseCurrent.getMight()); // on peut modifier, c'est empirique...
-				if((currentTime2 - baseCurrent.getMomentOfTheLastGeneration()) < periodOfGeneration) {
+				if((currentTime3 - baseCurrent.getMomentOfTheLastGeneration()) < periodOfGeneration) {
 					// if the elapsed time between the moment of the last generation and the current time is inferior
 					// to the period of generation, we do nothing for the bases
 				}
