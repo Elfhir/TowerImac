@@ -1,18 +1,19 @@
 package commands.market;
 
-import java.awt.Color;
-import java.io.File;
-import java.io.IOException;
-
 import game.Game;
 import game.player.Player;
 import game.player.RealPlayer;
 import game.tower.GunTower;
 
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.vecmath.Vector2d;
 import javax.vecmath.Vector2f;
 
 import window.AppliWindow;
@@ -45,11 +46,11 @@ public class BuyTower extends Command {
 		{
 			gt.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
 			gt.setBackground(Color.RED);
-
 		}
+			
 		catch (IOException e1)
 		{
-			
+			System.out.println(e1);
 		}
 		
 		AppliWindow.getInstance().getContent().add(gt);

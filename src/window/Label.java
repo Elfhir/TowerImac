@@ -80,7 +80,7 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 			int numArea = game.getMapManager().getNumAreaAtPosition(event.getX(), event.getY());
 			
 			if (numArea == -1) {
-				System.out.println("C'est une zone de plaine !");
+				//System.out.println("C'est une zone de plaine !");
 			}
 			else if(numArea >= 0 && numArea < game.getBaseManager().getBases().size()) {
 				Base baseArea = game.getBaseManager().getBases().get(numArea);
@@ -88,7 +88,7 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 					realPlayer.buyTower(realPlayer, "GunTower", event.getX(), event.getY());
 				}
 				else {
-					System.out.println("C'est pas ta zone !");
+					//System.out.println("C'est pas ta zone !");
 				}
 			}
 			else {
@@ -130,7 +130,6 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println("MousePressed X : "+e.getX()+" Y : "+e.getY());
 	}
 
 	@Override
@@ -165,7 +164,6 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 					PanelTmpTower panelTmpTower = AppliWindow.getInstance().getPanelTmpTower();
 					panelTmpTower.setBounds(event.getX(), event.getY(), 30, 30);
 					panelTmpTower.setVisible(true);
-					System.out.println("MouseMoved X : "+event.getX()+" Y : "+event.getY());
 				}
 				else {
 					PanelTmpTower panelTmpTower = AppliWindow.getInstance().getPanelTmpTower();
@@ -195,7 +193,6 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 	// ----------------------------------------- KeyListener--------------------------
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println("Key aa: "+e.getKeyChar());
 	}
 
 	@Override
