@@ -24,8 +24,8 @@ public class GunTower extends Tower {
 
 	public enum Version {
 		NORMAL(0, 0, 50, 30),
-		SUPER(10, 10, 30, 20),
-		CHUCKNORRIS(25, 30, 80, 50);
+		SUPER(10, 10, 80, 20),
+		CHUCKNORRIS(25, 30, Integer.MAX_VALUE, 50);
 		
 		private float extraCadence;
 		private float extraRadius;

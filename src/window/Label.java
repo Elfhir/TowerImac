@@ -84,7 +84,8 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 				final JPopupMenu menu = new JPopupMenu();
 				
 				// item to upgrade the tower
-			    JMenuItem item = new JMenuItem("Upgrade tower (-$"+tower.getUpgradePrice()+")");
+				String price = (tower.getUpgradePrice() < Integer.MAX_VALUE) ? "-$"+tower.getUpgradePrice() : "impossible!";
+			    JMenuItem item = new JMenuItem("Upgrade tower ("+price+")");
 			    item.addActionListener(new ActionListener() {
 					
 					@Override
