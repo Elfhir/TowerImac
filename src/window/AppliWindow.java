@@ -106,7 +106,7 @@ public class AppliWindow extends JFrame {
 		this.height = height;
 	}
 
-	public static Panel getContent() {
+	public Panel getContent() {
 		return content;
 	}
 

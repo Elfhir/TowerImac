@@ -1,28 +1,29 @@
 package window;
 
-import engine.Engine;
 import exceptions.RealPlayerException;
 import game.Game;
 import game.base.Base;
 import game.player.RealPlayer;
-import game.tower.GunTower;
+import game.tower.Tower;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.accessibility.Accessible;
 import javax.swing.Icon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 
 import window.graphic.GraphicElement;
 import window.panel.PanelTmpTower;
-
-import commands.market.BuyTower;
 
 public class Label extends JLabel implements Accessible, MouseListener, KeyListener, MouseMotionListener{
 
@@ -65,6 +66,51 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 
 			e.printStackTrace();
 		}
+		
+		int x = event.getX();
+		int y = event.getY();
+		
+		// This click is it a click on an existing tower ?
+		for(Tower tower: Game.getInstance().getTowerManager().getTowers()) {
+			float tx = tower.getPosition().x;
+			float ty = tower.getPosition().y;
+			if ( tower.getOwner().equals(realPlayer) && (x>= tx && x < tx + 40) && (y>= ty && y < ty + 40) ) {
+				
+				final JPopupMenu menu = new JPopupMenu();
+				
+				// item to upgrade the tower
+			    JMenuItem item = new JMenuItem("Upgrade tower (-$"+tower.getUpgradePrice()+")");
+			    item.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						System.out.println("updrade tower");
+						
+					}
+				});
+			    menu.add(item);
+			    
+			    // item to sell the tower
+			    JMenuItem item2 = new JMenuItem("Sell tower (+$"+tower.getSellPrice()+")");
+			    item.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						System.out.println("sell tower");
+						
+					}
+				});
+			    menu.add(item2);
+			    
+			    menu.show(event.getComponent(), x, y);
+			    
+
+			    
+				return;
+			}
+		}
+
+		
 		if(realPlayer.getSelectedBases() != null) {
 			realPlayer.getSelectedBases().setBackground(realPlayer.getColor().brighter());
 		}
@@ -85,7 +131,7 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 			else if(numArea >= 0 && numArea < game.getBaseManager().getBases().size()) {
 				Base baseArea = game.getBaseManager().getBases().get(numArea);
 				if (realPlayer.equals(baseArea.getPlayer())) {
-					realPlayer.buyTower(realPlayer, "GunTower", event.getX(), event.getY());
+					realPlayer.buyTower(realPlayer, "GunTower", x, y);
 				}
 				else {
 					//System.out.println("C'est pas ta zone !");

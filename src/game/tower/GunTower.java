@@ -1,5 +1,7 @@
 package game.tower;
 
+import java.awt.event.MouseEvent;
+
 import javax.vecmath.Vector2f;
 
 import game.Game;
@@ -72,6 +74,6 @@ public class GunTower extends Tower {
 		game.getTowerManager().addTower(gunTower);
 		
 		System.out.println(gunTower);
-	}	
+	}
 	
 }

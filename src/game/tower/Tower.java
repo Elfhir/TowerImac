@@ -11,8 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
+import javax.swing.JPanel;
 import javax.vecmath.Vector2f;
 
 import window.AppliWindow;
@@ -43,6 +42,9 @@ public abstract class Tower extends JButton implements Situable {
 	public Tower(float x, float y, float cadence, float radiusAreaOfAction, int sellPrice, int buyingPrice, int upgradePrice, int might, Player owner) {
 		this(cadence, radiusAreaOfAction, sellPrice, buyingPrice, upgradePrice, might, owner);
 		this.setPosition(x, y);
+		
+		
+		
 		AppliWindow.getInstance().getContent().add(this);
 	}
 

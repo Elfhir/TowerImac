@@ -36,6 +36,7 @@ public class BuyTower extends Command {
 			System.out.println("x "+this.position.x+"y "+this.position.y);
 			Game.getInstance().getTowerManager().addTower(gt);
 			
+
 			if (this.player instanceof RealPlayer) {
 				((RealPlayer)this.player).setBuildingTower(false);
 			}
@@ -53,7 +54,7 @@ public class BuyTower extends Command {
 			}
 			catch (IOException e1)
 			{
-				
+				System.out.println(e1);
 			}
 			
 			AppliWindow.getInstance().getContent().add(gt);
