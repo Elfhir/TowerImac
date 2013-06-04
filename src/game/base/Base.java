@@ -17,7 +17,7 @@ import commands.attack.AttackBase;
 import commands.selection.Move;
 import commands.selection.SelectBase;
 
-public class Base extends JButton implements Situable, Timerable{
+public class Base extends JButton implements Situable, Timerable {
 	
 	private int id;
 	private int might;

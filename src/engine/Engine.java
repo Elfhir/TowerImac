@@ -52,8 +52,10 @@ public class Engine implements Runnable {
 			
 			while(!commands.isEmpty()) {
 				//This is the "defilage"
-				Command command = commands.remove();
-				command.doCommand();
+				synchronized(this) {
+					Command command = commands.remove();
+					command.doCommand();
+				}
 			}
 			
 			

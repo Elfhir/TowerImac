@@ -5,24 +5,29 @@ import exceptions.RealPlayerException;
 import game.Game;
 import game.base.Base;
 import game.player.RealPlayer;
-import game.tower.GunTower;
+import game.tower.Tower;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.accessibility.Accessible;
 import javax.swing.Icon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+
+import commands.market.SellTower;
+import commands.market.UpgradeTower;
 
 import window.graphic.GraphicElement;
 import window.panel.PanelTmpTower;
-
-import commands.market.BuyTower;
 
 public class Label extends JLabel implements Accessible, MouseListener, KeyListener, MouseMotionListener{
 
@@ -64,7 +69,55 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 		} catch (RealPlayerException e) {
 
 			e.printStackTrace();
+			return;
 		}
+		
+		int x = event.getX();
+		int y = event.getY();
+		
+		// This click is it a click on an existing tower ?
+		for(final Tower tower: Game.getInstance().getTowerManager().getTowers()) {
+			float tx = tower.getPosition().x;
+			float ty = tower.getPosition().y;
+			if ( tower.getOwner().equals(realPlayer) && (x>= tx && x < tx + 40) && (y>= ty && y < ty + 40) ) {
+				
+				final JPopupMenu menu = new JPopupMenu();
+				
+				// item to upgrade the tower
+				String price = (tower.getUpgradePrice() < Integer.MAX_VALUE) ? "-$"+tower.getUpgradePrice() : "impossible!";
+			    JMenuItem item = new JMenuItem("Upgrade tower ("+price+")");
+			    item.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						// need to implement UpgradeTower
+						UpgradeTower command = new UpgradeTower(tower);
+						Engine.getInstance().getCommands().add(command);
+					}
+				});
+			    menu.add(item);
+			    
+			    // item to sell the tower
+			    JMenuItem item2 = new JMenuItem("Sell tower (+$"+tower.getSellPrice()+")");
+			    item2.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						SellTower command = new SellTower(tower);
+						Engine.getInstance().getCommands().add(command);
+					}
+				});
+			    menu.add(item2);
+			    
+			    menu.show(event.getComponent(), x, y);
+			    
+
+			    
+				return;
+			}
+		}
+
+		
 		if(realPlayer.getSelectedBases() != null) {
 			realPlayer.getSelectedBases().setBackground(realPlayer.getColor().brighter());
 		}
@@ -80,15 +133,15 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 			int numArea = game.getMapManager().getNumAreaAtPosition(event.getX(), event.getY());
 			
 			if (numArea == -1) {
-				System.out.println("C'est une zone de plaine !");
+				//System.out.println("C'est une zone de plaine !");
 			}
 			else if(numArea >= 0 && numArea < game.getBaseManager().getBases().size()) {
 				Base baseArea = game.getBaseManager().getBases().get(numArea);
 				if (realPlayer.equals(baseArea.getPlayer())) {
-					realPlayer.buyTower(realPlayer, "GunTower", event.getX(), event.getY());
+					realPlayer.buyTower(realPlayer, "GunTower", x, y);
 				}
 				else {
-					System.out.println("C'est pas ta zone !");
+					//System.out.println("C'est pas ta zone !");
 				}
 			}
 			else {
@@ -130,7 +183,6 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println("MousePressed X : "+e.getX()+" Y : "+e.getY());
 	}
 
 	@Override
@@ -165,7 +217,6 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 					PanelTmpTower panelTmpTower = AppliWindow.getInstance().getPanelTmpTower();
 					panelTmpTower.setBounds(event.getX(), event.getY(), 30, 30);
 					panelTmpTower.setVisible(true);
-					System.out.println("MouseMoved X : "+event.getX()+" Y : "+event.getY());
 				}
 				else {
 					PanelTmpTower panelTmpTower = AppliWindow.getInstance().getPanelTmpTower();
@@ -195,7 +246,6 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 	// ----------------------------------------- KeyListener--------------------------
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println("Key aa: "+e.getKeyChar());
 	}
 
 	@Override

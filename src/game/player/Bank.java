@@ -12,6 +12,10 @@ public class Bank {
 	public void setMoney(float money) {
 		this.money = money;
 	}
+	
+	public void addMoney(int money) {
+		this.money += money;
+	}
 
 	// --------------------------------------- toString ----------------------------
 	@Override
@@ -28,5 +32,6 @@ public class Bank {
 		super();
 		this.money = money;
 	}
+
 
 }

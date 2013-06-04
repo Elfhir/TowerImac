@@ -36,8 +36,6 @@ public class Panel extends JPanel implements KeyListener{
 		switch (e.getKeyChar()) {
 		case 'p':
 			
-			System.out.println("Key : "+e.getKeyChar());
-			
 			// Retour au jeu
 			if(window.isPauseStatus()) {
 				window.hidePause();

@@ -4,6 +4,10 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.vecmath.Vector2f;
+
+import window.AppliWindow;
+
 
 import commands.attack.AttackBase;
 import commands.selection.Move;
@@ -39,8 +43,16 @@ public class IAPlayer extends Player {
 			case 1:
 				doRandomAction("se brosse les dents !");
 				break;
+			case 6:
+			case 7:
+			case 8:
+			case 9:
 			case 2:
-				upgradeTower(null);
+				int xrand = rand.nextInt(AppliWindow.getInstance().getWidth());
+				int yrand = rand.nextInt(AppliWindow.getInstance().getHeight());
+				// Je veux poser une tour ici xrand , yrand meme si je ne peux pas, je ne suis pas très intelligent
+				this.buyTower(this, "GunTower", xrand, yrand);
+				
 				break;
 			case 3: // -------------------------------------------------------------------------------------------
 				// Si je n'ai pas de base selected :
