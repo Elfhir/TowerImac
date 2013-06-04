@@ -8,19 +8,17 @@ import game.tower.Tower;
 
 public class UpgradeTower extends Command {
 	
-	Player player;
 	Tower tower;
 	
 	@Override
 	public void doCommand() {
 		// tower.upgrade();
-		System.out.println(player.getName() + " améliore la tour : " + tower);
+		System.out.println(tower.getOwner().getName() + " améliore la tour : " + tower);
 		
 	}
 	
-	public UpgradeTower(Player player, Tower tower) {
+	public UpgradeTower(Tower tower) {
 		super();
-		this.player = player;
 		this.tower = tower;
 	}
 }

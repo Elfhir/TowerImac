@@ -111,8 +111,8 @@ public abstract class Player implements Runnable {
 	 *  Sell the given tower (how to know which one ?)
 	 * 	Sold = money !
 	 */
-	public void sellTower(String type, Tower tower) {
-		SellTower command = new SellTower(this, tower);
+	public void sellTower(Tower tower) {
+		SellTower command = new SellTower(tower);
 		Engine.getInstance().getCommands().add(command);
 	}
 	
@@ -121,7 +121,7 @@ public abstract class Player implements Runnable {
 	 *  upgrade = less money !
 	 */
 	public void upgradeTower(Tower tower) {
-		UpgradeTower command = new UpgradeTower(this, tower);
+		UpgradeTower command = new UpgradeTower(tower);
 		Engine.getInstance().getCommands().add(command);
 	}
 	

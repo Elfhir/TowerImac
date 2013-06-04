@@ -1,5 +1,6 @@
 package window;
 
+import engine.Engine;
 import exceptions.RealPlayerException;
 import game.Game;
 import game.base.Base;
@@ -21,6 +22,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+
+import commands.market.SellTower;
+import commands.market.UpgradeTower;
 
 import window.graphic.GraphicElement;
 import window.panel.PanelTmpTower;
@@ -65,13 +69,14 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 		} catch (RealPlayerException e) {
 
 			e.printStackTrace();
+			return;
 		}
 		
 		int x = event.getX();
 		int y = event.getY();
 		
 		// This click is it a click on an existing tower ?
-		for(Tower tower: Game.getInstance().getTowerManager().getTowers()) {
+		for(final Tower tower: Game.getInstance().getTowerManager().getTowers()) {
 			float tx = tower.getPosition().x;
 			float ty = tower.getPosition().y;
 			if ( tower.getOwner().equals(realPlayer) && (x>= tx && x < tx + 40) && (y>= ty && y < ty + 40) ) {
@@ -84,20 +89,21 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 					
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						System.out.println("updrade tower");
-						
+						// need to implement UpgradeTower
+						UpgradeTower command = new UpgradeTower(tower);
+						Engine.getInstance().getCommands().add(command);
 					}
 				});
 			    menu.add(item);
 			    
 			    // item to sell the tower
 			    JMenuItem item2 = new JMenuItem("Sell tower (+$"+tower.getSellPrice()+")");
-			    item.addActionListener(new ActionListener() {
+			    item2.addActionListener(new ActionListener() {
 					
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						System.out.println("sell tower");
-						
+						SellTower command = new SellTower(tower);
+						Engine.getInstance().getCommands().add(command);
 					}
 				});
 			    menu.add(item2);
