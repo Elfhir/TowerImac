@@ -66,7 +66,7 @@ public class Launcher {
 								try {
 									// AppliWindow is a Singleton
 									window = AppliWindow.getInstance();
-									window.init("Tower-IMAC-Nano Prout !", 800, 600, true, "design/testMapGrille.png");
+									window.init("Tower-IMAC-Nano Prout !", 800, 600, true, "design/map2.png");
 									window.setVisible(true); // And we make it visible
 								} catch (MapFileException e) {
 									e.printStackTrace();

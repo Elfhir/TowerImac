@@ -436,7 +436,7 @@ public class AppliWindow extends JFrame {
 		content.setLayout(null);
 		content.setBackground(Color.GRAY);
 
-		buildGame("game.xml", "testMap");
+		buildGame("game.xml", "map");
 
 		return content;
 	}
