@@ -9,9 +9,7 @@ import game.player.Player;
 
 public class GunTower extends Tower {
 	
-	private Version version;
-	
-	
+	private Version version;	
 	
 	public Version getVersion() {
 		return version;

@@ -50,12 +50,18 @@ public class PanelInfoRealPlayer extends JPanel {
 		
 		JPanel panelAvailableBases = new JPanel();
 		
-		JButton buttonGunTower = new JButton("GunTower");
+		JButton buttonGunTower = new JButton("GunTower (-$50)");
 		buttonGunTower.addActionListener(new ActionListener() {
 								
 		public void actionPerformed(ActionEvent e) {
-			realPlayer.setBuildingTower(true);
+			if (realPlayer.getBank().getMoney() >= 50) {
+				realPlayer.setBuildingTower(true);
 			}
+			else {
+				System.out.println("You don't have enough money !");
+			}
+			
+		}
 		});
 		panelAvailableBases.add(buttonGunTower);
 		
