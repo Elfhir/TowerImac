@@ -435,9 +435,13 @@ public class AppliWindow extends JFrame {
 
 		content.setLayout(null);
 		content.setBackground(Color.GRAY);
-
-		buildGame("game.xml", "map");
-
+		
+		if(Launcher.customGame) {
+			buildGame("GameCustom.xml", "map");
+		} else {
+			buildGame("game.xml", "map");
+		}
+		
 		return content;
 	}
 	

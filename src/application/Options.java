@@ -85,7 +85,7 @@ public class Options {
 			
 			break;
 		}
-		XmlWriter.createXmlFile(game);
+		XmlWriter.createXmlFile(game, "GameCustom");
 	}
 	
 	/**

@@ -27,8 +27,8 @@ public class XmlWriter {
 	 * @see	Game
 	 * @see	XmlReader
 	 */
-	public static void createXmlFile(Game game) {
-		Element gameElement = new Element("game");
+	public static void createXmlFile(Game game, String name) {
+		Element gameElement = new Element(name);
 		Document document = new Document(gameElement);
 		if(game != null){
 			gameElement.addContent(getPlayersElement(game));
@@ -36,7 +36,7 @@ public class XmlWriter {
 			gameElement.addContent(getTowersElement(game));
 			gameElement.addContent(getAgentsElement(game));
 		}
-		saveFile("files/game.xml", document);
+		saveFile("files/"+name+".xml", document);
 	}
 	
 	/**
@@ -195,7 +195,7 @@ public class XmlWriter {
 		game.getBaseManager().addBase(new Base(3, 5, jean_luc, new Vector2f(30, 380), 5));
 		game.getBaseManager().addBase(new Base(4, 5, jean_luc, new Vector2f(430, 180), 5));
 		game.getBaseManager().addBase(new Base(5, 5, jean_luc, new Vector2f(750, 185), 5));
-		XmlWriter.createXmlFile(game);
+		XmlWriter.createXmlFile(game, "game");
 		
 	}
 

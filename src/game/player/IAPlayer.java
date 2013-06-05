@@ -288,7 +288,10 @@ public class IAPlayer extends Player {
 	
 	public IAPlayer(String name, Bank bank, Color color) {
 		super(name, bank, color);
-		this.difficulty = 1;
+		Random rand = new Random();
+		rand.setSeed(System.currentTimeMillis());
+		// difficulté entre 1 et 3
+		this.difficulty = rand.nextInt(3) + 1;
 	}
 	
 	public IAPlayer(String name, Color color) {
