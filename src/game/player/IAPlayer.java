@@ -2,11 +2,15 @@ package game.player;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
 
 import javax.vecmath.Vector2f;
 
+import manager.MapManager;
+
 import window.AppliWindow;
+import window.panel.PanelTmpTower;
 
 
 import commands.attack.AttackBase;
@@ -34,7 +38,7 @@ public class IAPlayer extends Player {
 		
 		while ((this.getIsDead() == false) || (Game.getInstance().isRunning() == true)) {
 			
-			int value = (int)(Math.random() * 10);
+			int value = (int)(Math.random() * 15);
 			
 			switch(value) {
 			/*case 0:
@@ -48,10 +52,35 @@ public class IAPlayer extends Player {
 			case 8:
 			case 9:
 			case 2:
-				int xrand = rand.nextInt(AppliWindow.getInstance().getWidth());
-				int yrand = rand.nextInt(AppliWindow.getInstance().getHeight());
-				// Je veux poser une tour ici xrand , yrand meme si je ne peux pas, je ne suis pas très intelligent
-				this.buyTower(this, "GunTower", xrand, yrand);
+				// Je veux poser une tour sur une de mes zones : je regarde et retiens tous les endroits disponibles
+				
+				LinkedList<Integer[]> availableAreas = new LinkedList<Integer[]>();
+				MapManager mapManager = Game.getInstance().getMapManager();
+				
+				for(int j=0; j < mapManager.getHeightMap(); ++j) {
+					for(int i=0; i < mapManager.getHeightMap(); ++i) {
+						
+						int numArea = mapManager.getMap()[i][j];
+						
+						if(numArea >= 0 && numArea < Game.getInstance().getBaseManager().getBases().size()) {
+							Base baseArea = Game.getInstance().getBaseManager().getBases().get(numArea);
+							// si la zone est disponible pour moi je l'ajoute à la liste
+							if (this.equals(baseArea.getPlayer())) {
+								Integer[] position = {i, j};
+								availableAreas.add(position);
+							}
+						}
+					}
+				}
+				
+				// si on a trouvé au moins une zone disponible on en prend une au hasard et on construit la base dessus (si l'argent le permet)
+				if (availableAreas.size() != 0) {
+					int randIndex = rand.nextInt(availableAreas.size());
+					int randX = (availableAreas.get(randIndex)[0] * AppliWindow.getInstance().getWidth()) / mapManager.getWidthMap();
+					int randY = (availableAreas.get(randIndex)[1] * AppliWindow.getInstance().getHeight()) / mapManager.getHeightMap();
+					
+					this.buyTower(this, "GunTower", randX, randY);
+				}
 				
 				break;
 			case 3: // -------------------------------------------------------------------------------------------
