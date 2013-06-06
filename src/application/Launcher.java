@@ -26,6 +26,7 @@ import window.panel.Panel;
 public class Launcher {
 	
 	public static boolean modeSpectateur = false;
+	public static boolean customGame = false;
 	
 	public static void main(String[] args) {
 		
@@ -108,6 +109,7 @@ public class Launcher {
 					public void actionPerformed(ActionEvent e) {
 						
 						Options option1 = new Options(1);
+						Launcher.customGame = true;
 					}
 				});
 				// Je veux une partie avec deux adversaires
@@ -121,6 +123,7 @@ public class Launcher {
 					public void actionPerformed(ActionEvent e) {
 						
 						Options option2 = new Options(2);
+						Launcher.customGame = true;
 					}
 				});
 				// Je veux une partie avec trois adversaires
@@ -134,6 +137,7 @@ public class Launcher {
 					public void actionPerformed(ActionEvent e) {
 						
 						Options option3 = new Options(3);
+						Launcher.customGame = true;
 					}
 				});
 				
@@ -148,6 +152,7 @@ public class Launcher {
 					public void actionPerformed(ActionEvent e) {
 						
 						Options option0 = new Options(0);
+						Launcher.customGame = true;
 						Launcher.modeSpectateur = true;
 					}
 				});

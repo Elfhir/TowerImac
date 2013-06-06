@@ -5,15 +5,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
-import javax.vecmath.Vector2f;
 
 import manager.MapManager;
 
 import window.AppliWindow;
-import window.panel.PanelTmpTower;
 
-
-import commands.attack.AttackBase;
 import commands.selection.Move;
 import commands.selection.SelectBase;
 
@@ -242,13 +238,20 @@ public class IAPlayer extends Player {
 			// We create 2 variables, elle corresponde aux bornes du temps de décisions des IA
 			int maxTimeDecision = 1000;
 			int minTimeDecision = 1000;
+			// Easy
 			if(this.getDifficulty() == 1) {
-				maxTimeDecision = 3000;
-				minTimeDecision = 1200;
+				maxTimeDecision = 3500;
+				minTimeDecision = 2000;
 			}
+			// Middle
 			else if(this.getDifficulty() == 2) {
 				maxTimeDecision = 3000;
 				minTimeDecision = 1500;
+			}
+			// Hard
+			else if(this.getDifficulty() == 3) {
+				maxTimeDecision = 2500;
+				minTimeDecision = 1000;
 			}
 			
 			int waitingForNewDecision = (int) (rand.nextFloat()*(maxTimeDecision - minTimeDecision) + minTimeDecision);
@@ -285,12 +288,18 @@ public class IAPlayer extends Player {
 	
 	public IAPlayer(String name, Bank bank, Color color) {
 		super(name, bank, color);
-		this.difficulty = 1;
+		Random rand = new Random();
+		rand.setSeed(System.currentTimeMillis());
+		// difficulté entre 1 et 3
+		this.difficulty = rand.nextInt(3) + 1;
 	}
 	
 	public IAPlayer(String name, Color color) {
 		super(name, color);
-		this.difficulty = 1;
+		Random rand = new Random();
+		rand.setSeed(System.currentTimeMillis());
+		// difficulté entre 1 et 3
+		this.difficulty = rand.nextInt(3) + 1;
 	}
 	
 	public IAPlayer() {
