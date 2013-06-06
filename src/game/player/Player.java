@@ -152,7 +152,7 @@ public abstract class Player implements Runnable {
 	public abstract String getInfosPlayer();
 		
 		
-	//----------------------------------------------ctor----------------
+	//----------------------------------------------constructor----------------
 	public Player(String name, Bank bank, Color color) {
 		this.name = name;
 		this.bank = bank;

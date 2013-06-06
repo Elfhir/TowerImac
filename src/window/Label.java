@@ -11,14 +11,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.accessibility.Accessible;
 import javax.swing.Icon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -158,11 +156,16 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 	public void mouseEntered(MouseEvent event) {
 	}
 
+	/**
+	 * Not used, but it can show in where the Mouse leaves the Label, i.e when it enters
+	 * the Bases.
+	 * 
+	 * @deprecated
+	 */
 	@Override
+	@Deprecated
 	public void mouseExited(MouseEvent event) {
 		
-		int xBase = 0, yBase = 0;
-		int aBase = 0, bBase = 0;
 		int radiusBase = AppliWindow.getInstance().getTilesSize();
 		int xM = event.getX(), yM = event.getY();
 		int distX  = 0, distY = 0;
@@ -177,8 +180,6 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 				return;
 			}
 		}
-		// If break in previous for ; the mouse is leaving the Label for Background, i.e enters a Base
-		//System.out.println("MOUSE ENTERS THE BASE "+xBase+" "+yBase+" "+aBase+" "+bBase);
 	}
 
 	@Override

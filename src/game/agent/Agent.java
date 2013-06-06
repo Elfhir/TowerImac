@@ -7,13 +7,11 @@ import game.Situable;
 import game.player.Player;
 
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.vecmath.Vector2f;
 
 import time.Timerable;
-import window.Label;
 
 public abstract class Agent extends JLabel implements Situable, Timerable{
 	
@@ -164,20 +162,14 @@ public abstract class Agent extends JLabel implements Situable, Timerable{
 
 	@Override
 	public void runTimer() {
-		// example
-		//System.out.println(this);
 	}
 	
 	@Override
 	public void runTimer(Timerable t) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override
 	public void runTimer(boolean b) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	/**
@@ -240,14 +232,14 @@ public abstract class Agent extends JLabel implements Situable, Timerable{
 	public Agent() throws IOException {
 		this(false, 0, 0, 0, 0, new Vector2f(0,0), null);
 	}
+	
 	/*
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-		
-		
+	
 		Agent a1 = new Agent(true, 10, 5, 0, 0, new Vector2f(0.0f, 0.0f), null);
 		//Agent a2 = new Agent(true, 6, 5, 0, 0, new Vector2f(2.0f, 2.0f), null);
-		
+
 		Vector2f dest = new Vector2f(2.0f, 3.0f);
 		
 		TimerGame tg = new TimerGame(1000, 0, 0, 0, a1, dest);

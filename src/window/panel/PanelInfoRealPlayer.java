@@ -1,11 +1,9 @@
 package window.panel;
 
-import game.Game;
 import game.player.Player;
 import game.player.RealPlayer;
 
 import java.awt.Color;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -19,6 +17,7 @@ import window.AppliWindow;
 
 public class PanelInfoRealPlayer extends JPanel {
 	
+	private static final long serialVersionUID = 8438028753538578123L;
 	private int widthPanelRealPlayer = 200;
 	private int heightPanelRealPlayer = 100;
 	private int visibleHeightPanelRealPlayer = 40;
@@ -68,24 +67,6 @@ public class PanelInfoRealPlayer extends JPanel {
 		this.setBackground(Color.RED);
 		this.add(panelAvailableBases);
 		
-//		// Doesn't work for the moment !! Need to be fixed.
-//		for (String s: Game.getInstance().getTowerManager().getAvailableTowerTypes()) {
-//			Class cls;
-//			try {
-//				cls = Class.forName(s);
-//				Tower clsInstance = (Tower) cls.newInstance();
-//				System.out.println(clsInstance);
-//			} catch (ClassNotFoundException e) {
-//				e.printStackTrace();
-//			} catch (InstantiationException e) {
-//				e.printStackTrace();
-//			} catch (IllegalAccessException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		
-		//AppliWindow.getInstance().add(this);
-		
 		// add actionListener to show or hide the panel
 		this.addMouseListener(new MouseListener() {
 			
@@ -103,7 +84,6 @@ public class PanelInfoRealPlayer extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				// TODO Auto-generated method stub
 				if(isBuildToolsVisible() ==  true) {
 					hidePanel();
 				}
@@ -114,26 +94,18 @@ public class PanelInfoRealPlayer extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
 			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 		});
 

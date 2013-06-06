@@ -2,6 +2,14 @@ package time;
 
 import javax.vecmath.Vector2f;
 
+
+/**
+ * This class was suppose to do some task periodically, but Thread or Runnable Classes seems better
+ * 
+ * @author thanhliem
+ * @deprecated
+ */
+@Deprecated
 public class Clock implements Timerable {
 	
 	int seconds;
@@ -107,7 +115,6 @@ public class Clock implements Timerable {
 		
 	}
 
-
 	public static void main(String[] args) {
 		
 		/* Calling timeChange() on an instance of Clock emulate a clock. 
@@ -119,11 +126,5 @@ public class Clock implements Timerable {
 			test.timeChange();
 			System.out.println(test);
 		}
-		
-
 	}
-
-
-
-
 }

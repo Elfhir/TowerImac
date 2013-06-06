@@ -20,7 +20,7 @@ import window.AppliWindow;
 
 import commands.Command;
 
-
+@SuppressWarnings("unused")
 public class BuyTower extends Command {
 	
 	private Player player;

@@ -9,10 +9,15 @@ import javax.swing.*;
 import javax.vecmath.Vector2f;
 
 
-// Not sure if extending JFrame is useful, useless, or an error, or don't matter
-// Needed for setDefaultCloser, title and maybe ActionListener
-// See constructor line 82
+/**
+ * 
+ * @author thanhliem
+ * @deprecated
+ */
+@Deprecated
 public class TimerGame extends JFrame {
+	
+	
 	private static final long serialVersionUID = 4728920536811198811L;
 
 	protected Timer timer;
@@ -43,7 +48,7 @@ public class TimerGame extends JFrame {
 		return "TimerGame [timer=" + timer + ", clock=" + clock + "]";
 	}
 
-	// --------------------------------------------------------ctor---------------------
+	// --------------------------------------------------------constructor------------------------
 	// default
 	public TimerGame(int delay) throws HeadlessException{
 		super();
@@ -168,9 +173,7 @@ public class TimerGame extends JFrame {
 	public static void main(String[] args)
 	{	  
 		Clock clock = new Clock(0, 0, 0);
-		
 		TimerGame tg = new TimerGame(1000, 0, 0, 0, clock);
-		
 	}
 
 }

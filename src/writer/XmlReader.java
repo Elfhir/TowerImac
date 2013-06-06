@@ -2,7 +2,6 @@ package writer;
 
 import game.Game;
 import game.agent.Agent;
-import game.agent.GroupAgent;
 import game.base.Base;
 import game.player.Bank;
 import game.player.IAPlayer;
@@ -107,6 +106,7 @@ public class XmlReader {
 	 * @see #createAgents(Game, Element)
 	 * @see #createTowers(Game, Element)
 	 */
+	@SuppressWarnings("unused")
 	public static void createBases(Game game, Element basesElement) {
 		List<Element> bases = basesElement.getChildren("base");
 		Iterator<Element> i = bases.iterator();
@@ -144,6 +144,7 @@ public class XmlReader {
 	 * @see #createAgents(Game, Element)
 	 * @see #createBases(Game, Element)
 	 */
+	@SuppressWarnings("unused")
 	public static void createTowers(Game game, Element towersElement) {
 		List<Element> towers = towersElement.getChildren("tower");
 		Iterator<Element> i = towers.iterator();
@@ -180,9 +181,7 @@ public class XmlReader {
 			game.getAgentManager().addAgent((GroupAgent) agent);
 		}*/
 	}
-	
-	
-	
+
 	public static void main(String[] args) {
 		
 		Game game = Game.getInstance();

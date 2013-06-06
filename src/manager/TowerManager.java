@@ -32,8 +32,5 @@ public class TowerManager {
 		this.availableTowerTypes = new ArrayList<String>();
 		this.availableTowerTypes.add("game.tower.GunTower");
 	}
-	
-	public static void main(String[] args) {
 		
-	}	
 }

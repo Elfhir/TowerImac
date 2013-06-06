@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
-
 import manager.MapManager;
 
 import window.AppliWindow;
@@ -37,9 +36,7 @@ public class IAPlayer extends Player {
 			int value = (int)(Math.random() * 15);
 			
 			switch(value) {
-			/*case 0:
-				placeTower("TourEiffel", new Vector2f(2, 5));
-				break;*/
+			
 			case 1:
 				doRandomAction("se brosse les dents !");
 				break;

@@ -4,20 +4,14 @@ import game.Situable;
 import game.agent.Agent;
 import game.player.Player;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.vecmath.Vector2f;
 
 import window.AppliWindow;
 
 public abstract class Tower extends JButton implements Situable {
 
+	private static final long serialVersionUID = -7064237725017475083L;
 	protected float cadence;
 	protected float radiusAreaOfAction;
 	protected int sellPrice;
@@ -42,8 +36,6 @@ public abstract class Tower extends JButton implements Situable {
 	public Tower(float x, float y, float cadence, float radiusAreaOfAction, int sellPrice, int buyingPrice, int upgradePrice, int might, Player owner) {
 		this(cadence, radiusAreaOfAction, sellPrice, buyingPrice, upgradePrice, might, owner);
 		this.setPosition(x, y);
-		
-		
 		
 		AppliWindow.getInstance().getContent().add(this);
 	}

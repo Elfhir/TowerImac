@@ -118,6 +118,7 @@ public class XmlWriter {
 	 * @see #getBasesElement(Game)
 	 * @see #getTowersElement(Game)
 	 */
+	@SuppressWarnings("unused")
 	public static Element getAgentsElement(Game game) {
 		/* Players */
 		Element agentsElement = new Element("agents");
@@ -143,6 +144,7 @@ public class XmlWriter {
 	 * @see #getBasesElement(Game)
 	 * @see #getPlayersElement(Game)
 	 */
+	@SuppressWarnings("unused")
 	public static Element getTowersElement(Game game) {
 		/* Players */
 		Element towersElement = new Element("towers");

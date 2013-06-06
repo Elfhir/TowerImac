@@ -1,6 +1,5 @@
 package commands.selection;
 
-import window.AppliWindow;
 import game.base.Base;
 import game.player.IAPlayer;
 import commands.Command;

@@ -4,14 +4,12 @@ import game.base.Base;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JComponent;
 
 import window.AppliWindow;
 
-public class Line extends JComponent implements MouseListener{
+public class Line extends JComponent {
 
 	/**
 	 * 
@@ -158,31 +156,5 @@ public class Line extends JComponent implements MouseListener{
 		AppliWindow.getInstance().getLine().displayLineLastPoint(aBase, bBase);
 	}
 
-	// -------------------------------------------- MouseListener ---------------
-
-	@Override
-	public void mouseClicked(MouseEvent event) {
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-
-	}
 
 }

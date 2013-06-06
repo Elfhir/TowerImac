@@ -1,8 +1,6 @@
 package game.player;
 
 import game.Game;
-import game.base.Base;
-
 import java.awt.Color;
 
 
@@ -24,12 +22,10 @@ public class RealPlayer extends Player {
 	public void run() {
 		while (Game.getInstance().isRunning()) {
 			
-			
 			try {
 				Thread.sleep(100);
 			}
 			catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

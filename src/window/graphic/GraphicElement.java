@@ -38,297 +38,214 @@ public class GraphicElement extends Graphics2D {
 
 	@Override
 	public void addRenderingHints(Map<?, ?> arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void clip(Shape arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void draw(Shape arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void drawGlyphVector(GlyphVector arg0, float arg1, float arg2) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
-	public boolean drawImage(Image arg0, AffineTransform arg1,
-			ImageObserver arg2) {
-		// TODO Auto-generated method stub
+	public boolean drawImage(Image arg0, AffineTransform arg1, ImageObserver arg2) {
 		return false;
 	}
 
 	@Override
-	public void drawImage(BufferedImage arg0, BufferedImageOp arg1, int arg2,
-			int arg3) {
-		// TODO Auto-generated method stub
-
+	public void drawImage(BufferedImage arg0, BufferedImageOp arg1, int arg2, int arg3) {
 	}
 
 	@Override
 	public void drawRenderableImage(RenderableImage arg0, AffineTransform arg1) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void drawRenderedImage(RenderedImage arg0, AffineTransform arg1) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void drawString(String arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void drawString(String arg0, float arg1, float arg2) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void drawString(AttributedCharacterIterator arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
-	public void drawString(AttributedCharacterIterator arg0, float arg1,
-			float arg2) {
-		// TODO Auto-generated method stub
-
+	public void drawString(AttributedCharacterIterator arg0, float arg1, float arg2) {
 	}
 
 	@Override
 	public void fill(Shape arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public Color getBackground() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Composite getComposite() {
-		// TODO Auto-generated method stub
+	public Composite getComposite() { 
 		return null;
 	}
 
 	@Override
-	public GraphicsConfiguration getDeviceConfiguration() {
-		// TODO Auto-generated method stub
+	public GraphicsConfiguration getDeviceConfiguration() { 
 		return null;
 	}
 
 	@Override
-	public FontRenderContext getFontRenderContext() {
-		// TODO Auto-generated method stub
+	public FontRenderContext getFontRenderContext() { 
 		return null;
 	}
 
 	@Override
-	public Paint getPaint() {
-		// TODO Auto-generated method stub
+	public Paint getPaint() { 
 		return null;
 	}
 
 	@Override
 	public Object getRenderingHint(Key arg0) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public RenderingHints getRenderingHints() {
-		// TODO Auto-generated method stub
+	public RenderingHints getRenderingHints() { 
 		return null;
 	}
 
 	@Override
 	public Stroke getStroke() {
-		// TODO Auto-generated method stub
+		 
 		return null;
 	}
 
 	@Override
-	public AffineTransform getTransform() {
-		// TODO Auto-generated method stub
+	public AffineTransform getTransform() { 
 		return null;
 	}
 
 	@Override
-	public boolean hit(Rectangle arg0, Shape arg1, boolean arg2) {
-		// TODO Auto-generated method stub
+	public boolean hit(Rectangle arg0, Shape arg1, boolean arg2) { 
 		return false;
 	}
 
 	@Override
 	public void rotate(double arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void rotate(double arg0, double arg1, double arg2) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void scale(double arg0, double arg1) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void setBackground(Color arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void setComposite(Composite arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void setPaint(Paint arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void setRenderingHint(Key arg0, Object arg1) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void setRenderingHints(Map<?, ?> arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void setStroke(Stroke arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void setTransform(AffineTransform arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void shear(double arg0, double arg1) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void transform(AffineTransform arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void translate(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void translate(double arg0, double arg1) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void clearRect(int x, int y, int width, int height) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void clipRect(int x, int y, int width, int height) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void copyArea(int x, int y, int width, int height, int dx, int dy) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public Graphics create() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void drawArc(int x, int y, int width, int height, int startAngle,
-			int arcAngle) {
-		// TODO Auto-generated method stub
-
+	public void drawArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
 	}
 
 	@Override
-	public boolean drawImage(Image img, int x, int y, ImageObserver observer) {
-		// TODO Auto-generated method stub
+	public boolean drawImage(Image img, int x, int y, ImageObserver observer) { 
 		return false;
 	}
 
 	@Override
-	public boolean drawImage(Image img, int x, int y, Color bgcolor,
-			ImageObserver observer) {
-		// TODO Auto-generated method stub
+	public boolean drawImage(Image img, int x, int y, Color bgcolor, ImageObserver observer) {
 		return false;
 	}
 
 	@Override
-	public boolean drawImage(Image img, int x, int y, int width, int height,
-			ImageObserver observer) {
-		// TODO Auto-generated method stub
+	public boolean drawImage(Image img, int x, int y, int width, int height, ImageObserver observer) {
 		return false;
 	}
 
 	@Override
-	public boolean drawImage(Image img, int x, int y, int width, int height,
-			Color bgcolor, ImageObserver observer) {
-		// TODO Auto-generated method stub
+	public boolean drawImage(Image img, int x, int y, int width, int height, Color bgcolor, ImageObserver observer) {
 		return false;
 	}
 
 	@Override
 	public boolean drawImage(Image img, int dx1, int dy1, int dx2, int dy2,
 			int sx1, int sy1, int sx2, int sy2, ImageObserver observer) {
-		// TODO Auto-generated method stub
+		 
 		return false;
 	}
 
@@ -336,139 +253,100 @@ public class GraphicElement extends Graphics2D {
 	public boolean drawImage(Image img, int dx1, int dy1, int dx2, int dy2,
 			int sx1, int sy1, int sx2, int sy2, Color bgcolor,
 			ImageObserver observer) {
-		// TODO Auto-generated method stub
+		 
 		return false;
 	}
 	
-	/**
-	 * 
-	 */
-	
 	public void drawLine(int x1, int y1, int x2, int y2) {
-		
 	}
 
 	@Override
-	public void drawOval(int x, int y, int width, int height) {
-		// TODO Auto-generated method stub
-
+	public void drawOval(int x, int y, int width, int height) {	
 	}
 
 	@Override
 	public void drawPolygon(int[] xPoints, int[] yPoints, int nPoints) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void drawPolyline(int[] xPoints, int[] yPoints, int nPoints) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void drawRoundRect(int x, int y, int width, int height,
 			int arcWidth, int arcHeight) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void fillArc(int x, int y, int width, int height, int startAngle,
 			int arcAngle) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void fillOval(int x, int y, int width, int height) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void fillPolygon(int[] xPoints, int[] yPoints, int nPoints) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void fillRect(int x, int y, int width, int height) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void fillRoundRect(int x, int y, int width, int height,
 			int arcWidth, int arcHeight) {
-		// TODO Auto-generated method stub
-
+	
 	}
 
 	@Override
-	public Shape getClip() {
-		// TODO Auto-generated method stub
+	public Shape getClip() { 
 		return null;
 	}
 
 	@Override
-	public Rectangle getClipBounds() {
-		// TODO Auto-generated method stub
+	public Rectangle getClipBounds() { 
 		return null;
 	}
 
 	@Override
-	public Color getColor() {
-		// TODO Auto-generated method stub
+	public Color getColor() { 
 		return null;
 	}
 
 	@Override
-	public Font getFont() {
-		// TODO Auto-generated method stub
+	public Font getFont() { 
 		return null;
 	}
 
 	@Override
-	public FontMetrics getFontMetrics(Font f) {
-		// TODO Auto-generated method stub
+	public FontMetrics getFontMetrics(Font f) { 
 		return null;
 	}
 
 	@Override
 	public void setClip(Shape clip) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void setClip(int x, int y, int width, int height) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void setColor(Color c) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void setFont(Font font) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void setPaintMode() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void setXORMode(Color c1) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

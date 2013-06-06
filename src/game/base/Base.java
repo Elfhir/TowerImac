@@ -13,12 +13,12 @@ import javax.vecmath.Vector2f;
 import time.Timerable;
 import window.AppliWindow;
 
-import commands.attack.AttackBase;
 import commands.selection.Move;
 import commands.selection.SelectBase;
 
 public class Base extends JButton implements Situable, Timerable {
 	
+	private static final long serialVersionUID = 841373612217969356L;
 	private int id;
 	private int might;
 	private Player player;
@@ -65,7 +65,7 @@ public class Base extends JButton implements Situable, Timerable {
 	}
 	
 	public Vector2f getPositionCenter() {
-		int size = AppliWindow.getTilesSize();
+		int size = AppliWindow.getInstance().getTilesSize();
 		return new Vector2f(position.x + size/2, position.y + size/2);
 	}
 	
@@ -120,7 +120,6 @@ public class Base extends JButton implements Situable, Timerable {
 	public void deleteAgents(int nbComingAgents) {
 		if(nbComingAgents >= this.nbAgents) {
 			this.nbAgents = 0;
-			// It will need to be improved : when the coming agents are superior than the current agents, then the base change of player (and some agents stay).
 		}
 		else {
 			this.nbAgents -= nbComingAgents; 
@@ -166,9 +165,7 @@ public class Base extends JButton implements Situable, Timerable {
 			}
 			// if he selects one of his base : we add the command selection
 			else if((this.getPlayer().getName() == realPlayer.getName())) {
-//				realPlayer.setSelectedBases(this);
-//				this.setBackground(realPlayer.getColor().darker());
-//				System.out.println("1st case : Base from "+this.getPlayer().getName()+" selected!");
+
 				SelectBase selectionCommand = new SelectBase(realPlayer, this);
 				Engine.getInstance().getCommands().add(selectionCommand);
 				
@@ -235,14 +232,10 @@ public class Base extends JButton implements Situable, Timerable {
 
 	@Override
 	public void runTimer(Timerable t) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void runTimer(Vector2f v) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override

@@ -4,15 +4,15 @@ import game.base.Base;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+
 
 import javax.swing.JComponent;
 
 import window.AppliWindow;
 
-public class LineCursor extends JComponent implements MouseMotionListener{
+public class LineCursor extends JComponent{
 
+	private static final long serialVersionUID = 2626511106820838202L;
 	private int x1,x2,y1,y2;
 	private boolean displayed;
 	private Color color;
@@ -115,8 +115,6 @@ public class LineCursor extends JComponent implements MouseMotionListener{
 	public void displayLineLastPoint(int xMouse, int yMouse) {
 		this.setX2(xMouse);
 		this.setY2(yMouse);
-		//this.repaint();
-
 	}
 
 	/**
@@ -127,7 +125,6 @@ public class LineCursor extends JComponent implements MouseMotionListener{
 	public void displayLineFirstPoint(int x, int y) {
 		this.setX1(x);
 		this.setY1(y);
-		//this.repaint();
 	}
 
 	public void displayFirstPoint(Base b) {
@@ -145,13 +142,6 @@ public class LineCursor extends JComponent implements MouseMotionListener{
 		AppliWindow.getInstance().getLineCursor().displayLineLastPoint(xM, yM);
 	}
 
-	// ----------------------------------------- MouseMotionListener ----------------------------------
-	@Override
-	public void mouseDragged(MouseEvent arg0) {
-	}
 
-	@Override
-	public void mouseMoved(MouseEvent arg0) {
-	}
 
 }

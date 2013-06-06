@@ -12,8 +12,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.vecmath.Vector2f;
 
 import org.jdom2.JDOMException;
 
@@ -114,7 +112,7 @@ public class AppliWindow extends JFrame {
 		content = newContent;
 	}
 
-	public static int getTilesSize() {
+	public int getTilesSize() {
 		return 50;
 	}
 

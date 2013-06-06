@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 public class PanelInfoIAPlayers extends JPanel {
 	
+	private static final long serialVersionUID = -6992006436315699274L;
 	private int widthPanelIAPlayer = 290;
 	private int heightPanelIAPlayer = 40;
 	
@@ -48,6 +49,5 @@ public class PanelInfoIAPlayers extends JPanel {
 		// we change the text of the label
 		label.setText(sb.toString());	
 	}
-	
-	
+
 }

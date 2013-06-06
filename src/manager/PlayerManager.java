@@ -50,6 +50,7 @@ public class PlayerManager {
 		}
 		return playerFound;
 	}
+	
 	/**
 	 * Provide an IAPlayer, based on its index in the players array of the PlayerManager.
 	 * If it's a RealPlayer, another one is getting
@@ -81,10 +82,5 @@ public class PlayerManager {
 		this.players = new ArrayList<Player>();
 	}
 	
-//	public void launchIA() {
-//		for(Player p : players) {
-//			p.start();
-//		}
-//	}
 	
 }

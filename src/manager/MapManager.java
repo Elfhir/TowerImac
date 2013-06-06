@@ -108,6 +108,7 @@ public class MapManager {
 	 * @throws FileNotFoundException
 	 * @throws MapFileException 
 	 */
+	@SuppressWarnings("resource")
 	public void setMapFromFile(String fileName) throws FileNotFoundException, MapFileException {
 		
 		Scanner scanner = new Scanner(new File("files/"+fileName));
@@ -206,12 +207,8 @@ public class MapManager {
 						this.map[i][j] = nearestBase;
 					}
 				}
-				
 			}
 		}
-		
-		
-		
 	}
 	
 	public static void main(String[] args) throws MapFileException, FileNotFoundException {
@@ -238,12 +235,5 @@ public class MapManager {
 		mapManager.calculateAreas(widthWindow, heightWindow);
 		System.out.println(mapManager);
 		
-		// AAAAAAAAAAWWWWWWWW YYYYYYYYEEEEEEEEAAAAAAAAAAA !!!!!!!!!!!!!!!!
-		
-		
-
 	}
-
-	
-
 }

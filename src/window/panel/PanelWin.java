@@ -21,7 +21,8 @@ import window.AppliWindow;
 import application.Launcher;
 
 public class PanelWin extends JPanel{
-
+	
+	private static final long serialVersionUID = -4257546153337749375L;
 	private int widthPanelWin = 615;
 	private int heightPanelWin = 65;
 	
@@ -30,6 +31,7 @@ public class PanelWin extends JPanel{
 		buildPanel();
 	}
 	
+	@SuppressWarnings("unused")
 	public void buildPanel() {
 		this.setBounds(150, 250, widthPanelWin, heightPanelWin);
 		this.setVisible(false);

@@ -3,7 +3,6 @@ package commands.selection;
 import game.Game;
 import game.base.Base;
 import game.player.Player;
-import window.AppliWindow;
 
 import commands.Command;
 

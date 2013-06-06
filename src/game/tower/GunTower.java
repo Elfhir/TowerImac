@@ -1,14 +1,10 @@
 package game.tower;
 
-import java.awt.event.MouseEvent;
-
-import javax.vecmath.Vector2f;
-
-import game.Game;
 import game.player.Player;
 
 public class GunTower extends Tower {
 	
+	private static final long serialVersionUID = -8782275432848249067L;
 	private Version version;	
 	
 	public Version getVersion() {

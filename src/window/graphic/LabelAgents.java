@@ -21,7 +21,4 @@ public class LabelAgents extends JLabel {
 	public LabelAgents() {
 		super();
 	}
-	
-	
-
 }

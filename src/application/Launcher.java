@@ -28,6 +28,7 @@ public class Launcher {
 	public static boolean modeSpectateur = false;
 	public static boolean customGame = false;
 	
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
 // Une JWindow pour le Menu:
@@ -121,6 +122,7 @@ public class Launcher {
 				
 				options2.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						
 						
 						Options option2 = new Options(2);
 						Launcher.customGame = true;

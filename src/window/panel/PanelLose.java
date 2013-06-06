@@ -22,6 +22,7 @@ import game.player.Player;
 
 public class PanelLose extends JPanel{
 	
+	private static final long serialVersionUID = -1031783861852942710L;
 	private int widthPanelLose = 350;
 	private int heightPanelLose = 55;
 	
@@ -30,6 +31,7 @@ public class PanelLose extends JPanel{
 		buildPanel();
 	}
 	
+	@SuppressWarnings("unused")
 	public void buildPanel() {
 		this.setBounds(250, 250, widthPanelLose, heightPanelLose);
 		this.setVisible(false);
