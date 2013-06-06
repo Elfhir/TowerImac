@@ -36,17 +36,25 @@ public class PanelInfoIAPlayers extends JPanel {
 		JLabel label = (JLabel) panel.getComponent(0);
 		
 		StringBuilder sb = new StringBuilder("<html>");
-		sb.append(player.getName());
-		sb.append("<br /> $");
-		sb.append(String.format("%.0f", player.getBank().getMoney()));
-		sb.append(" | ");
-		sb.append(nbBasesPlayer);
-		sb.append("/");
-		sb.append(nbTotalBases);
-		sb.append("</html>");
-		
-		// we change the text of the label
-		label.setText(sb.toString());	
+		if(player.getIsDead()) {
+			sb.append(player.getName());
+			sb.append("<br />");
+			sb.append("XdeadX");
+			label.setText(sb.toString());
+		}
+		else {
+			sb.append(player.getName());
+			sb.append("<br /> $");
+			sb.append(String.format("%.0f", player.getBank().getMoney()));
+			sb.append(" | ");
+			sb.append(nbBasesPlayer);
+			sb.append("/");
+			sb.append(nbTotalBases);
+			sb.append("</html>");
+			
+			// we change the text of the label
+			label.setText(sb.toString());
+		}
 	}
 	
 	
