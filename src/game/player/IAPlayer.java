@@ -271,6 +271,7 @@ public class IAPlayer extends Player {
 		int nbTotalBases = Game.getInstance().getBaseManager().getBases().size();
 				
 		StringBuilder sb = new StringBuilder("<html>");
+		
 		sb.append(this.getName());
 		sb.append("<br /> $");
 		sb.append(this.getBank().getMoney());
