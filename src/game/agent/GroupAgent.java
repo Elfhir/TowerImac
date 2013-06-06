@@ -32,8 +32,12 @@ public class GroupAgent extends Agent {
 		this.computeVectorDirector();
 
 		this.setBackground(source.getPlayer().getColor());
-
-		Dimension dim = new Dimension(this.nbAgent, this.nbAgent);
+		Dimension dim;
+		if(this.nbAgent < 7) {
+			dim = new Dimension(28, 28);
+		} else {
+			dim = new Dimension(this.nbAgent*4, this.nbAgent*4);
+		}
 		this.setSize(dim);
 		this.setPreferredSize(dim);
 		this.setMinimumSize(dim);
