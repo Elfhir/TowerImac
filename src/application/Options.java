@@ -32,7 +32,7 @@ public class Options {
 		// How many enemies ?
 		this.adversaireNumber = adv;
 		
-		Player michel = new RealPlayer("Michel", Color.MAGENTA);
+		Player michel = new RealPlayer("Michel", Color.RED);
 		Player jean_luc = new IAPlayer("Jean-Luc", Color.BLUE);
 		Player patrick = new IAPlayer("Patrick", Color.GREEN);
 		Player germaine = new IAPlayer("Germaine", Color.ORANGE);

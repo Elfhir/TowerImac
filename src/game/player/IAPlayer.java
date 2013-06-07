@@ -9,12 +9,14 @@ import manager.MapManager;
 
 import window.AppliWindow;
 
+import commands.market.UpgradeTower;
 import commands.selection.Move;
 import commands.selection.SelectBase;
 
 import engine.Engine;
 import game.Game;
 import game.base.Base;
+import game.tower.Tower;
 
 
 public class IAPlayer extends Player {
@@ -39,10 +41,29 @@ public class IAPlayer extends Player {
 			switch(value) {
 			
 			case 1:
-				doRandomAction("se brosse les dents !");
-				break;
 			case 6:
 			case 7:
+				ArrayList<Tower> listTemp = new ArrayList<Tower>();
+				if(Game.getInstance().getTowerManager().getTowers() != null) {
+					for(Tower t : Game.getInstance().getTowerManager().getTowers()) {
+						if(this.equals(t.getOwner())) {
+							listTemp.add(t);
+						}
+					}
+					if( listTemp.size() <= 0) {
+						break;
+					}
+					if(listTemp != null) {
+						int idTowerRand = rand.nextInt(listTemp.size());
+						
+						// Commande pour upgrader une tour choisi aléatoire.
+						UpgradeTower commandUp = new UpgradeTower(listTemp.get(idTowerRand));
+						Engine.getInstance().getCommands().add(commandUp);
+						System.out.println("Ce player : "+this.getName()+" a upgradé une tourelle !");
+					}
+				}
+				listTemp.clear();
+				break;
 			case 8:
 			case 9:
 			case 2:
