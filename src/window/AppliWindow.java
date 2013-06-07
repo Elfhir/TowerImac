@@ -30,6 +30,7 @@ import exceptions.ClickedByRealPlayerException;
 import exceptions.MapFileException;
 import exceptions.RealPlayerException;
 import game.Game;
+import game.Theme;
 import game.agent.GroupAgent;
 import game.base.Base;
 import game.player.Player;
@@ -246,7 +247,7 @@ public class AppliWindow extends JFrame {
 			base.setOpaque(true);
 			try
 			{
-				base.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
+				base.setIcon(new ImageIcon(ImageIO.read(new File(Theme.pathImageBase))));
 				if(base.hasPlayer()) {
 					base.setBackground(base.getPlayer().getColor());
 				}

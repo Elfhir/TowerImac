@@ -3,6 +3,7 @@ package window.panel;
 import exceptions.MapFileException;
 import exceptions.RealPlayerException;
 import game.Game;
+import game.Theme;
 import game.player.Player;
 
 import java.awt.Color;
@@ -52,7 +53,7 @@ public class PanelWin extends JPanel{
 						try {
 							// AppliWindow is a Singleton
 							window = AppliWindow.getInstance();
-							window.init("Tower-IMAC-Nano Prout !", 800, 600, true, "design/map2.png");
+							window.init("Tower-IMAC-Nano Prout !", 800, 600, true, Theme.pathImageMap);
 							window.setVisible(true); // And we make it visible
 						} catch (MapFileException e) {
 							e.printStackTrace();

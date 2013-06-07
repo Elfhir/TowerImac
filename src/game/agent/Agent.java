@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import game.Situable;
+import game.Theme;
 import game.player.Player;
 
 import javax.imageio.ImageIO;
@@ -218,7 +219,8 @@ public abstract class Agent extends JLabel implements Situable, Timerable{
 
 	//--------------------------------------------------constructor-----------------------
 	public Agent(boolean moving, int PV, int speed, int stamina, int strength, Vector2f position, Player player) throws IOException {
-		super(new ImageIcon(ImageIO.read(new File("design/unites_"+(new Random().nextInt(10)+1)+".png"))), JLabel.CENTER);
+		//super(new ImageIcon(ImageIO.read(new File("design/unites_"+(new Random().nextInt(10)+1)+".png"))), JLabel.CENTER);
+		super(new ImageIcon(ImageIO.read(new File(Theme.pathImageUnite+(new Random().nextInt(10)+1)+".png"))), JLabel.CENTER);
 		this.moving = moving;
 		this.PV = PV;
 		this.speed = speed;

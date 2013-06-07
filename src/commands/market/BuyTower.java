@@ -1,6 +1,7 @@
 package commands.market;
 
 import game.Game;
+import game.Theme;
 import game.player.Player;
 import game.player.RealPlayer;
 import game.tower.GunTower;
@@ -48,7 +49,7 @@ public class BuyTower extends Command {
 			gt.setOpaque(true);
 			try
 			{
-				gt.setIcon(new ImageIcon(ImageIO.read(new File("design/cercle2.png"))));
+				gt.setIcon(new ImageIcon(ImageIO.read(new File(Theme.pathImageTower))));
 				gt.setBackground(Color.RED);
 	
 			}

@@ -19,6 +19,7 @@ import org.jdom2.JDOMException;
 
 import exceptions.MapFileException;
 import exceptions.RealPlayerException;
+import game.Theme;
 
 import window.AppliWindow;
 import window.panel.Panel;
@@ -68,7 +69,7 @@ public class Launcher {
 								try {
 									// AppliWindow is a Singleton
 									window = AppliWindow.getInstance();
-									window.init("Tower-IMAC-Nano Prout !", 800, 600, true, "design/map2.png");
+									window.init("Tower-IMAC Carlotta Towa", 800, 600, true, Theme.pathImageMap);
 									window.setVisible(true); // And we make it visible
 								} catch (MapFileException e) {
 									e.printStackTrace();
