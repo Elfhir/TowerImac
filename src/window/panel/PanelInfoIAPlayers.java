@@ -17,6 +17,9 @@ public class PanelInfoIAPlayers extends JPanel {
 		super();
 	}
 	
+	/**
+	 * Builds the PanelInfoIAPlayers for the first time
+	 */
 	public void buildPanel(int widthWindow, int heightWindow, Player player) {
 		this.setBounds(widthWindow - widthPanelIAPlayer, heightWindow - heightPanelIAPlayer, widthPanelIAPlayer, heightPanelIAPlayer);
 		this.setVisible(true);
@@ -30,6 +33,9 @@ public class PanelInfoIAPlayers extends JPanel {
 		this.add(panel);
 	}
 	
+	/**
+	 * Updates the infos in the PanelInfoIAPlayers
+	 */
 	public void updateComponent(int indexIAPlayer, Player player, int nbTotalBases, int nbBasesPlayer) {
 		// the panel of the player
 		JPanel panel = (JPanel) this.getComponent(indexIAPlayer);

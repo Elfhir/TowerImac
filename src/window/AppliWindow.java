@@ -627,7 +627,10 @@ public class AppliWindow extends JFrame {
 //		private boolean pauseStatus;
 	}
 	
-	
+	/**
+	 * 
+	 * Holder class for the Singleton
+	 */
 	private static class AppliWindowHolder
 	{		
 		// unique instance, not preinitialized

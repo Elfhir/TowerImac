@@ -36,6 +36,9 @@ public class PanelInfoRealPlayer extends JPanel {
 		super();
 	}
 	
+	/**
+	 * Builds the PanelInfoRealPlayer for the first time
+	 */
 	public void buildPanel(int widthWindow, final int heightWindow, final RealPlayer realPlayer) {
 		
 		this.setBounds(0, heightWindow - visibleHeightPanelRealPlayer, widthPanelRealPlayer, heightPanelRealPlayer);
@@ -111,6 +114,9 @@ public class PanelInfoRealPlayer extends JPanel {
 
 	}
 	
+	/**
+	 * Updates the infos in the PanelInfoRealPlayer
+	 */
 	public void update(Player player, int nbTotalBases, int nbBasesPlayer) {
 		
 		
