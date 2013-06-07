@@ -30,7 +30,13 @@ public class AgentManager {
 		this.agents = new LinkedList<GroupAgent>();
 	}
 	
-	
+	/**
+	 * Adds a GroupAgent to the list of agents
+	 * @param nbAgents		The number of agents to send
+	 * @param source	The base from where the agents come from
+	 * @param destination	The base to where the agents are going
+	 * @param player	The player owning the agents
+	 */
 	public void addGroupAgent(int nbAgents, Base source, Base destination, Player player) {
 		
 		Game game = Game.getInstance();

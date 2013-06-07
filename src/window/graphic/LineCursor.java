@@ -130,13 +130,11 @@ public class LineCursor extends JComponent{
 	public void displayFirstPoint(Base b) {
 		int xBase = (int) b.getX() + AppliWindow.getInstance().getTilesSize()/2;
 		int yBase = (int) b.getY() + AppliWindow.getInstance().getTilesSize()/2;
-		System.out.println("LC x "+xBase+" ; y "+yBase);
 		AppliWindow.getInstance().getLineCursor().setDisplayed(true);
 		AppliWindow.getInstance().getLineCursor().displayLine(xBase, yBase, xBase, yBase);
 	}
 
 	public void displayLastPoint(int xM, int yM) {
-		System.out.println("LC a "+xM+" ; b "+yM);
 		this.setColor(new Color(0,200,0));
 		AppliWindow.getInstance().getLineCursor().setDisplayed(true);
 		AppliWindow.getInstance().getLineCursor().displayLineLastPoint(xM, yM);

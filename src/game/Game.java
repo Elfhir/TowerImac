@@ -110,14 +110,9 @@ public class Game {
  		// we set the map grill from the mapFile
  		Game.getInstance().getMapManager().setMapFromFile(mapFileName);
  		
- 		System.out.println("initial map :");
- 		System.out.println(Game.getInstance().getMapManager());
- 		
  		// we calculate the areas of each base
  		Game.getInstance().getMapManager().calculateAreas(800, 600); // need to be improved
  		
- 		System.out.println("calculated map :");
- 		System.out.println(Game.getInstance().getMapManager());
 	}
 	
 	/**
@@ -130,7 +125,10 @@ public class Game {
  		this.towerManager.getTowers().clear();
  		this.running = true;
 	}
-
+	
+	/**
+	 * Starts the Threads of the Engine and of all the players
+	 */
 	public void start() {
 
 		Engine.getInstance().start();
