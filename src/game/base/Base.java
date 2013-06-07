@@ -63,6 +63,9 @@ public class Base extends JButton implements Situable, Timerable {
 		position.y = y;
 	}
 	
+	/**
+	 * @return the position of the center of the Base
+	 */
 	public Vector2f getPositionCenter() {
 		int size = AppliWindow.getInstance().getTilesSize();
 		return new Vector2f(position.x + size/2, position.y + size/2);
@@ -85,17 +88,11 @@ public class Base extends JButton implements Situable, Timerable {
 		this.momentOfTheLastGeneration = momentOfTheLastGeneration;
 	}
 
-	public void attackBase(Base enemy){
-		System.out.println("Attack !\n");
-		
-		int maxAgent = (int) Math.max(this.getNbAgents()*0.5f, enemy.getNbAgents());
-		for(int i = 0; i < maxAgent; ++i) {
-			// whoever had a LinkedList<Agent> should use attackAgent() here.
-			
-		}
-		return;
-	}
-	
+	/**
+	 * Changes the player of the base following an attack
+	 * @param newPlayer		The new player of the base
+	 * @param nbAgentsToAdd		the number of enemy agents remaining in the base
+	 */
 	public void changePlayer(Player newPlayer, int nbAgentsToAdd) {
 		this.addAgents(nbAgentsToAdd);
 		this.setPlayer(newPlayer);
@@ -103,10 +100,16 @@ public class Base extends JButton implements Situable, Timerable {
 		AppliWindow.getInstance().updateInfoPlayers();
 	}
 	
+	/**
+	 * Generates a new agent
+	 */
 	public void generateAgent() {
 		this.setNbAgents(this.getNbAgents() + 1);
 	}
 	
+	/**
+	 * Deletes an agent
+	 */
 	public void deleteAgent() {
 		if(this.getNbAgents() <= 0) return;
 		this.setNbAgents(this.getNbAgents() - 1);
@@ -126,7 +129,7 @@ public class Base extends JButton implements Situable, Timerable {
 	}
 	
 	/**
-	 * Add a specific number of agents in the base.
+	 * Adds a specific number of agents in the base.
 	 * @param nbSentAgents The number of agents to add to the base
 	 */
 	public void addAgents(int nbComingAgents) {

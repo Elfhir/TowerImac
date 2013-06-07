@@ -17,7 +17,7 @@ import time.Timerable;
 public abstract class Agent extends JLabel implements Situable, Timerable{
 	
 	private static final long serialVersionUID = 1591504544865674942L;
-	protected int PV;
+	protected int pv;
 	protected int speed;
 	protected int strength;
 	protected int stamina;
@@ -26,11 +26,11 @@ public abstract class Agent extends JLabel implements Situable, Timerable{
 	protected Player player;
 	
 	public int getPV() {
-		return PV;
+		return pv;
 	}
 
 	public void setPV(int PV) {
-		this.PV = PV;
+		this.pv = PV;
 	}
 
 	public int getSpeed() {
@@ -126,7 +126,7 @@ public abstract class Agent extends JLabel implements Situable, Timerable{
 	}
 	
 	/**
-	* move in a linear mode. Not pathfinding yet
+	* move in a linear mode.
 	*
 	*@param	to	Vector2f of destination
 	*@param	how	String of how to move
@@ -138,16 +138,8 @@ public abstract class Agent extends JLabel implements Situable, Timerable{
 	public boolean move(Vector2f to, String how) {
 		if(how == "straight") {
 			
-			// sqrt(x²+y²)
-			//float distance = (float) Math.sqrt((to.getX()-this.getPosition().getX())*(to.getX()-this.getPosition().getX()) +
-			//									(to.getY() - this.getPosition().getY())*(to.getY()-this.getPosition().getY()));
-			//float increment = (float) (0.1*distance);
-			
 			float increment = 0.2f;
 			
-			// slope and y-intercept
-			//float a = ( to.getY()-this.getPosition().getY() ) / ( to.getX()-this.getPosition().getX() );
-			//float b = this.getPosition().getY() - a*this.getPosition().getX();
 			// parametric equation
 			float X = (float) (this.getPosition().getX() + increment*(to.getX() - this.getPosition().getX()));
 			float Y = (float) (this.getPosition().getY() + increment*(to.getY() - this.getPosition().getY()));
@@ -157,7 +149,7 @@ public abstract class Agent extends JLabel implements Situable, Timerable{
 			this.setPosition(newPosition);
 			return true;
 		}
-		else return false;
+		return false;
 	}
 	
 
@@ -196,7 +188,7 @@ public abstract class Agent extends JLabel implements Situable, Timerable{
 	public String toString() {
 		StringBuilder sb = new StringBuilder("");
 		sb.append("PV ");
-		sb.append(this.PV);
+		sb.append(this.pv);
 		sb.append("\n");
 		sb.append("speed: ");
 		sb.append(this.speed);
@@ -220,7 +212,7 @@ public abstract class Agent extends JLabel implements Situable, Timerable{
 	public Agent(boolean moving, int PV, int speed, int stamina, int strength, Vector2f position, Player player) throws IOException {
 		super(new ImageIcon(ImageIO.read(new File("design/unites_"+(new Random().nextInt(10)+1)+".png"))), JLabel.CENTER);
 		this.moving = moving;
-		this.PV = PV;
+		this.pv = PV;
 		this.speed = speed;
 		this.stamina = stamina;
 		this.strength = strength;
@@ -234,17 +226,5 @@ public abstract class Agent extends JLabel implements Situable, Timerable{
 		this(false, 0, 0, 0, 0, new Vector2f(0,0), null);
 	}
 	
-	/*
-	@SuppressWarnings("unused")
-	public static void main(String[] args) {
-	
-		Agent a1 = new Agent(true, 10, 5, 0, 0, new Vector2f(0.0f, 0.0f), null);
-		//Agent a2 = new Agent(true, 6, 5, 0, 0, new Vector2f(2.0f, 2.0f), null);
-
-		Vector2f dest = new Vector2f(2.0f, 3.0f);
-		
-		TimerGame tg = new TimerGame(1000, 0, 0, 0, a1, dest);
-		
-	}*/
 
 }

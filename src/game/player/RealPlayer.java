@@ -63,17 +63,4 @@ public class RealPlayer extends Player {
 		return sb.toString();
 	}
 	
-	
-	/*
-	 *  
-	 ********************* MAIN ********************
-	 * 
-	 */
-	public static void main(String[] args) {
-		Bank bank = new Bank(50);
-		Player michel = new RealPlayer("Michel", bank, Color.MAGENTA);
-		System.out.println(michel);
-		
-		michel.start();
-	}
 }

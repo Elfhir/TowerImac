@@ -50,17 +50,18 @@ public abstract class Player implements Runnable {
 		return selectedBases;
 	}
 	
+	/**
+	 * Checks if the player still has bases and returns if he is dead or not
+	 * @return if the player had lost all his bases
+	 */
 	public boolean getIsDead() {
-		for(Base b : Game.getInstance().getBaseManager().getBases()) {
-			if(b.getPlayer() == null) {
-				continue;
-			}
-			if(this.equals(b.getPlayer())) {
-				return false;
-			}
+		
+		if (this.getNbBases() == 0) {
+			this.isDead = true;
+			return true;
 		}
-		this.isDead = true;
-		return this.isDead;
+		return false;
+	
 	}
 	
 	public void setIsDead(boolean Dead) {
@@ -94,7 +95,7 @@ public abstract class Player implements Runnable {
 	
 	
 	/**
-	 *  Buy the given tower
+	 *  Buy the given tower (by adding the command in the Engine)
 	 * 
 	 */
 	public void buyTower(Player player, String type, int x, int y) {
@@ -103,8 +104,7 @@ public abstract class Player implements Runnable {
 	}
 	
 	/**
-	 *  Sell the given tower
-	 * 	Sold = money !
+	 *  Sell the given tower (by adding the command in the Engine)
 	 */
 	public void sellTower(Tower tower) {
 		SellTower command = new SellTower(tower);
@@ -112,8 +112,7 @@ public abstract class Player implements Runnable {
 	}
 	
 	/**
-	 * 	The tower improves its skills !
-	 *  upgrade = less money !
+	 * 	The tower improves its skills ! (by adding the command in the Engine)
 	 */
 	public void upgradeTower(Tower tower) {
 		UpgradeTower command = new UpgradeTower(tower);
