@@ -50,6 +50,9 @@ public class IAPlayer extends Player {
 							listTemp.add(t);
 						}
 					}
+					if( listTemp.size() <= 0) {
+						break;
+					}
 					if(listTemp != null) {
 						int idTowerRand = rand.nextInt(listTemp.size());
 						
@@ -59,6 +62,7 @@ public class IAPlayer extends Player {
 						System.out.println("Ce player : "+this.getName()+" a upgradé une tourelle !");
 					}
 				}
+				listTemp.clear();
 				break;
 			case 8:
 			case 9:
