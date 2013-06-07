@@ -7,6 +7,7 @@ import game.base.Base;
 import game.player.Player;
 import game.tower.Tower;
 
+import java.awt.Color;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -87,6 +88,7 @@ public class Engine implements Runnable {
 			// We run through all the Collection of Bases
 			for(Base baseCurrent : game.getBaseManager().getBases()) {
 				// We display the data for the agents for each base.
+				baseCurrent.setForeground(new Color(255,255,255));
 				baseCurrent.setText(""+baseCurrent.getNbAgents()+"");
 				baseCurrent.setVerticalTextPosition(SwingConstants.CENTER);
 				baseCurrent.setHorizontalTextPosition(SwingConstants.CENTER);

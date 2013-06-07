@@ -12,6 +12,7 @@ import game.Game;
 import game.base.Base;
 import game.tower.Tower;
 
+@SuppressWarnings("unused")
 public abstract class Player implements Runnable {
 	
 	private Bank bank;
