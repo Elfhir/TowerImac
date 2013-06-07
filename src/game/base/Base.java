@@ -1,7 +1,6 @@
 package game.base;
 
 import engine.Engine;
-import exceptions.ClickedByRealPlayerException;
 import exceptions.RealPlayerException;
 import game.Game;
 import game.Situable;
@@ -141,7 +140,7 @@ public class Base extends JButton implements Situable, Timerable {
 	 * @throws RealPlayerException  
 	 * @throws ClickedByRealPlayerException 
 	 */
-	public void clicked() throws RealPlayerException, ClickedByRealPlayerException {
+	public void clicked() throws RealPlayerException {
 		
 		Player realPlayer = null;
 		try {

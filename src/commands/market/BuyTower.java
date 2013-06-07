@@ -29,13 +29,14 @@ public class BuyTower extends Command {
 	
 	@Override
 	public void doCommand() {
-
-		// If the player can allow it ?
-		if(player.getBank().getMoney() > 50.0f) {
-			GunTower gt = new GunTower(this.position.x, this.position.y, this.player);
-			System.out.println("x "+this.position.x+"y "+this.position.y);
-			Game.getInstance().getTowerManager().addTower(gt);
+		
+		GunTower gt = new GunTower(this.position.x, this.position.y, this.player);
+		
+		// Can the player allow it ?
+		if(player.getBank().getMoney() > gt.getBuyingPrice()) {
 			
+			// we add the tower to the game
+			Game.getInstance().getTowerManager().addTower(gt);	
 
 			if (this.player instanceof RealPlayer) {
 				((RealPlayer)this.player).setBuildingTower(false);
@@ -57,16 +58,12 @@ public class BuyTower extends Command {
 				System.out.println(e1);
 			}
 			
+			// we add the tower to the window
 			AppliWindow.getInstance().getContent().add(gt);
-			//AppliWindow.getInstance().getContent().validate();
 			AppliWindow.getInstance().giveFocusToPanel();
-			//System.out.println(Game.getInstance().getTowerManager());
 			
-			for(Player p : Game.getInstance().getPlayerManager().getPlayers()) {
-				if(this.player.equals(p)) {
-					p.getBank().setMoney(p.getBank().getMoney() - 50.0f);
-				}
-			}
+			// we remove the money
+			this.player.getBank().setMoney(this.player.getBank().getMoney() - gt.getBuyingPrice());
 			
 		} else {
 			System.out.println("Out of Money sorry, poor !");

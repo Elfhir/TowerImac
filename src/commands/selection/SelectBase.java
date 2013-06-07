@@ -20,7 +20,7 @@ public class SelectBase extends Command {
 		
 		this.player.setSelectedBases(baseSelected);
 		baseSelected.setBackground(this.player.getColor().darker());
-		System.out.println("1st case : Base from "+baseSelected.getPlayer().getName()+" selected!");
+		//System.out.println("Base from "+baseSelected.getPlayer().getName()+" selected!");
 	}
 
 }

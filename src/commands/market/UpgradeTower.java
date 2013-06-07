@@ -24,6 +24,7 @@ public class UpgradeTower extends Command {
 			System.out.println("version: "+  ((GunTower) tower).getVersion());
 			
 			GunTower.Version version = ((GunTower) tower).getVersion();
+			// we switch the current version to know which version to set
 			switch (version) {
 			case NORMAL:
 				System.out.println("on passe à SUPER");
@@ -40,10 +41,7 @@ public class UpgradeTower extends Command {
 				break;
 			}
 		}
-		else if (tower instanceof GelTower)  {
-			// ...
-		}
-		
+
 	}
 	
 	public UpgradeTower(Tower tower) {

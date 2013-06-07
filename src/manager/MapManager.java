@@ -1,17 +1,13 @@
 package manager;
 
-import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
-import javax.vecmath.Vector2f;
 
 import window.AppliWindow;
 import exceptions.MapFileException;
 import game.Game;
 import game.base.Base;
-import game.player.RealPlayer;
 
 public class MapManager {
 	
@@ -45,6 +41,9 @@ public class MapManager {
 		this.map = map;
 	}
 	
+	/**
+	 * @return the value of the map at the index corresponding to the position (x,y) in the window
+	 */
 	public int getNumAreaAtPosition(int x, int y) {
 		int widthWindow = AppliWindow.getInstance().getWidth();
 		int heightWindow = AppliWindow.getInstance().getHeight();
@@ -211,29 +210,4 @@ public class MapManager {
 		}
 	}
 	
-	public static void main(String[] args) throws MapFileException, FileNotFoundException {
-		
-		RealPlayer p1 = new RealPlayer("michel", Color.MAGENTA);
-		Game.getInstance().getPlayerManager().addPlayer(p1);
-		
-		int widthWindow = 1000;
-		int heightWindow = 1000;
-		
-		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(300, 300)));
-		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(500, 800)));
-		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(100, 600)));
-		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(10, 50)));
-		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(500, 500)));
-		Game.getInstance().getBaseManager().addBase(new Base(10, p1, new Vector2f(1000, 1000)));
-		
-		
-		MapManager mapManager = new MapManager();
-		mapManager.setMapFromFile("testMap");
-		System.out.println(mapManager);
-		
-		// area calculation
-		mapManager.calculateAreas(widthWindow, heightWindow);
-		System.out.println(mapManager);
-		
-	}
 }

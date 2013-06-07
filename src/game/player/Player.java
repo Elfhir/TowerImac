@@ -2,13 +2,10 @@ package game.player;
 
 import java.awt.Color;
 
-import javax.vecmath.Vector2f;
-
 import commands.market.BuyTower;
 import commands.market.SellTower;
 import commands.market.UpgradeTower;
 import commands.attack.DoRandomAction;
-import commands.selection.PlaceTower;
 
 import engine.Engine;
 import game.Game;
@@ -95,13 +92,9 @@ public abstract class Player implements Runnable {
 	
 	//----------------------------------------------actions (tests)----------------
 	
-	public void placeTower(String type, Vector2f position) {
-		PlaceTower command = new PlaceTower(this, type, position);
-		Engine.getInstance().getCommands().add(command);
-	}
 	
 	/**
-	 *  Buy the given tower (how to know which one ?)
+	 *  Buy the given tower
 	 * 
 	 */
 	public void buyTower(Player player, String type, int x, int y) {
@@ -110,7 +103,7 @@ public abstract class Player implements Runnable {
 	}
 	
 	/**
-	 *  Sell the given tower (how to know which one ?)
+	 *  Sell the given tower
 	 * 	Sold = money !
 	 */
 	public void sellTower(Tower tower) {

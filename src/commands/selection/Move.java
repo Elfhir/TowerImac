@@ -31,6 +31,7 @@ public class Move extends Command {
 		baseOrigin.deleteAgents(nbSentAgents);
 		this.player.setSelectedBases(null);
 		
+		// we add the agents
 		Game.getInstance().getAgentManager().addGroupAgent(nbSentAgents, baseOrigin, baseDestination, player);
 		
 	}
