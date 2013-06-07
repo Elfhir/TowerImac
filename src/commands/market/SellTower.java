@@ -13,7 +13,9 @@ public class SellTower extends Command {
 	
 	@Override
 	public void doCommand() {
+		// we add the money to the player
 		tower.getOwner().getBank().addMoney(tower.getSellPrice());
+		// and we remove the tower
 		Game.getInstance().getTowerManager().getTowers().remove(tower);
 		AppliWindow.getInstance().getContent().remove(tower);
 	}

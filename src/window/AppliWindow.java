@@ -26,7 +26,6 @@ import window.panel.PanelInfoRealPlayer;
 import window.panel.PanelLose;
 import window.panel.PanelTmpTower;
 import window.panel.PanelWin;
-import exceptions.ClickedByRealPlayerException;
 import exceptions.MapFileException;
 import exceptions.RealPlayerException;
 import game.Game;
@@ -271,8 +270,6 @@ public class AppliWindow extends JFrame {
 						
 					} catch (RealPlayerException e1) {
 						System.err.println("Error with RealPlayer : can't manage the click.");
-					} catch (ClickedByRealPlayerException e2) {
-						e2.printStackTrace();
 					}
 
 				}
@@ -631,7 +628,10 @@ public class AppliWindow extends JFrame {
 //		private boolean pauseStatus;
 	}
 	
-	
+	/**
+	 * 
+	 * Holder class for the Singleton
+	 */
 	private static class AppliWindowHolder
 	{		
 		// unique instance, not preinitialized

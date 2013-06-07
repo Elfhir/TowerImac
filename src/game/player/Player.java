@@ -2,13 +2,10 @@ package game.player;
 
 import java.awt.Color;
 
-import javax.vecmath.Vector2f;
-
 import commands.market.BuyTower;
 import commands.market.SellTower;
 import commands.market.UpgradeTower;
 import commands.attack.DoRandomAction;
-import commands.selection.PlaceTower;
 
 import engine.Engine;
 import game.Game;
@@ -53,17 +50,18 @@ public abstract class Player implements Runnable {
 		return selectedBases;
 	}
 	
+	/**
+	 * Checks if the player still has bases and returns if he is dead or not
+	 * @return if the player had lost all his bases
+	 */
 	public boolean getIsDead() {
-		for(Base b : Game.getInstance().getBaseManager().getBases()) {
-			if(b.getPlayer() == null) {
-				continue;
-			}
-			if(this.equals(b.getPlayer())) {
-				return false;
-			}
+		
+		if (this.getNbBases() == 0) {
+			this.isDead = true;
+			return true;
 		}
-		this.isDead = true;
-		return this.isDead;
+		return false;
+	
 	}
 	
 	public void setIsDead(boolean Dead) {
@@ -95,13 +93,9 @@ public abstract class Player implements Runnable {
 	
 	//----------------------------------------------actions (tests)----------------
 	
-	public void placeTower(String type, Vector2f position) {
-		PlaceTower command = new PlaceTower(this, type, position);
-		Engine.getInstance().getCommands().add(command);
-	}
 	
 	/**
-	 *  Buy the given tower (how to know which one ?)
+	 *  Buy the given tower (by adding the command in the Engine)
 	 * 
 	 */
 	public void buyTower(Player player, String type, int x, int y) {
@@ -110,8 +104,7 @@ public abstract class Player implements Runnable {
 	}
 	
 	/**
-	 *  Sell the given tower (how to know which one ?)
-	 * 	Sold = money !
+	 *  Sell the given tower (by adding the command in the Engine)
 	 */
 	public void sellTower(Tower tower) {
 		SellTower command = new SellTower(tower);
@@ -119,8 +112,7 @@ public abstract class Player implements Runnable {
 	}
 	
 	/**
-	 * 	The tower improves its skills !
-	 *  upgrade = less money !
+	 * 	The tower improves its skills ! (by adding the command in the Engine)
 	 */
 	public void upgradeTower(Tower tower) {
 		UpgradeTower command = new UpgradeTower(tower);

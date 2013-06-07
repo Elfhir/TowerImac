@@ -79,7 +79,7 @@ public class GunTower extends Tower {
 	
 	public GunTower(float x, float y, Player owner) {
 		// x, y, cadence, radiusAreaOfAction, sellPrice, buyingPrice, upgradePrice, might, owner
-		super(x, y, 10, 10, 50, 100, 80, 5, owner);
+		super(x, y, 10, 10, 50, 50, 80, 5, owner);
 		this.version = Version.NORMAL;
 	}
 	

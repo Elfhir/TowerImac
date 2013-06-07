@@ -4,13 +4,9 @@ import game.Game;
 import game.base.Base;
 import game.player.IAPlayer;
 import game.player.Player;
-import game.player.RealPlayer;
 import game.tower.Tower;
 
-import java.awt.Color;
 import java.io.FileOutputStream;
-
-import javax.vecmath.Vector2f;
 
 import org.jdom2.Attribute;
 import org.jdom2.Document;
@@ -173,32 +169,6 @@ public class XmlWriter {
 			xmlOutputter.output(document, new FileOutputStream(fileName));
 		}
 		catch(java.io.IOException e){}
-	}
-	
-	
-	public static void main(String[] args) {
-		
-		//Create THE game and all datas
-		Game game = Game.getInstance();
-		
-		Player michel = new RealPlayer("Michel", Color.MAGENTA);
-		Player jean_luc = new IAPlayer("Jean-Luc", Color.BLACK);
-		Player patrick = new IAPlayer("Patrick", Color.GREEN);
-		Player germaine = new IAPlayer("Germaine", Color.ORANGE);
-		
-		game.getPlayerManager().addPlayer(michel);
-		game.getPlayerManager().addPlayer(jean_luc);
-		game.getPlayerManager().addPlayer(patrick);
-		game.getPlayerManager().addPlayer(germaine);
-		
-		game.getBaseManager().addBase(new Base(0, 5, michel, new Vector2f(50, 100), 5));
-		game.getBaseManager().addBase(new Base(1, 5, jean_luc, new Vector2f(500, 450), 5));
-		game.getBaseManager().addBase(new Base(2, 5, jean_luc, new Vector2f(30, 380), 5));
-		game.getBaseManager().addBase(new Base(3, 5, jean_luc, new Vector2f(30, 380), 5));
-		game.getBaseManager().addBase(new Base(4, 5, jean_luc, new Vector2f(430, 180), 5));
-		game.getBaseManager().addBase(new Base(5, 5, jean_luc, new Vector2f(750, 185), 5));
-		XmlWriter.createXmlFile(game, "game");
-		
 	}
 
 }

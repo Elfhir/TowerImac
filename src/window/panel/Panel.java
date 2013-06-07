@@ -10,13 +10,8 @@ import javax.swing.JPanel;
 
 import window.AppliWindow;
 
-public class Panel extends JPanel implements KeyListener{
+public class Panel extends JPanel implements KeyListener{	
 
-	// LList of Base extends JButton ?
-	
-	/**
-	 * Il le faut à chaque fois
-	 */
 	private static final long serialVersionUID = -1788677938220552169L;
 	
 	public Panel() {

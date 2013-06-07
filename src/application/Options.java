@@ -29,7 +29,7 @@ public class Options {
 		Game game = Game.getInstance();
 		game.clearGame();
 		
-		// How many ennemis ?
+		// How many enemies ?
 		this.adversaireNumber = adv;
 		
 		Player michel = new RealPlayer("Michel", Color.MAGENTA);

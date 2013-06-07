@@ -182,21 +182,4 @@ public class XmlReader {
 		}*/
 	}
 
-	public static void main(String[] args) {
-		
-		Game game = Game.getInstance();
-		
-		try {
-			createGame(game, "game.xml");
-		} catch (JDOMException e) {
-			System.out.println("Error ! the game.xml is corrupted !");
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("Error ! the game.xml file doesn't exist !");
-			e.printStackTrace();
-		}
-		
-		System.out.println(game);
-	}
-
 }
