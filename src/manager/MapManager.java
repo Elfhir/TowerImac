@@ -45,11 +45,20 @@ public class MapManager {
 	 * @return the value of the map at the index corresponding to the position (x,y) in the window
 	 */
 	public int getNumAreaAtPosition(int x, int y) {
+		
+		if (y > 660) {
+			return -1;
+		}
+		
 		int widthWindow = AppliWindow.getInstance().getWidth();
 		int heightWindow = AppliWindow.getInstance().getHeight();
 		
 		int xMap = x * this.widthMap / widthWindow;
 		int yMap = y * this.heightMap / heightWindow ;
+		
+		if(xMap<0 || xMap >= this.widthMap || yMap < 0 || yMap >= this.heightMap) {
+			return -1;
+		}
 		
 		return this.map[xMap][yMap];
 	}

@@ -205,7 +205,7 @@ public class Label extends JLabel implements Accessible, MouseListener, KeyListe
 			if (realPlayer.isBuildingTower()) {
 				boolean acceptBuildTower = false;
 				
-				int numArea = game.getMapManager().getNumAreaAtPosition(event.getX(), event.getY());
+				int numArea = game.getMapManager().getNumAreaAtPosition(event.getX(), event.getY() + 80);
 				
 				if(numArea >= 0 && numArea < game.getBaseManager().getBases().size()) {
 					Base baseArea = game.getBaseManager().getBases().get(numArea);
