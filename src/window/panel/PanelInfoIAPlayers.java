@@ -11,7 +11,7 @@ public class PanelInfoIAPlayers extends JPanel {
 	
 	private static final long serialVersionUID = -6992006436315699274L;
 	private int widthPanelIAPlayer = 290;
-	private int heightPanelIAPlayer = 40;
+	private int heightPanelIAPlayer = 90;
 	
 	public PanelInfoIAPlayers() {
 		super();

@@ -69,7 +69,7 @@ public class Launcher {
 								try {
 									// AppliWindow is a Singleton
 									window = AppliWindow.getInstance();
-									window.init("Tower-IMAC Carlotta Towa", 800, 600, true, Theme.pathImageMap);
+									window.init("Tower-IMAC Carlotta Towa", 800, 700, true, Theme.pathImageMap);
 									window.setVisible(true); // And we make it visible
 								} catch (MapFileException e) {
 									e.printStackTrace();
