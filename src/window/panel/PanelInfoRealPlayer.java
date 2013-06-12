@@ -19,8 +19,8 @@ public class PanelInfoRealPlayer extends JPanel {
 	
 	private static final long serialVersionUID = 8438028753538578123L;
 	private int widthPanelRealPlayer = 200;
-	private int heightPanelRealPlayer = 100;
-	private int visibleHeightPanelRealPlayer = 70;
+	private int heightPanelRealPlayer = 160;
+	private int visibleHeightPanelRealPlayer = 100;
 	
 	private boolean buildToolsVisible = false;
 	

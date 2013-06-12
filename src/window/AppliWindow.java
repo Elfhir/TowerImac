@@ -453,6 +453,7 @@ public class AppliWindow extends JFrame {
 			e.printStackTrace();
 		}
 
+		this.getImage().setVerticalAlignment(JLabel.TOP);
 		this.getImage().setBounds(0, 0, getWidth(), getHeight());
 		content.add(this.image);
 
